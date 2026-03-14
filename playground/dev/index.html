@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        h1, h2 { font-family: 'Archivo Black', sans-serif; }
+        body { 
+            font-family: 'JetBrains Mono', monospace; 
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-white antialiased">
+
+    <nav class="border-b border-white/10 px-6 py-6 flex justify-between items-center sticky top-0 bg-[#0A0A0A]/80 backdrop-blur-xl z-50">
+        <div class="text-xl font-bold tracking-tighter flex items-center gap-2">
+            <div class="w-3 h-3 bg-[#00FF41] rounded-full animate-pulse"></div>
+            VAPOR.SYS
+        </div>
+        <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-widest font-bold">
+            <a href="#" class="hover:text-[#00FF41] transition-colors">[ Hardware ]</a>
+            <a href="#" class="hover:text-[#00FF41] transition-colors">[ Modules ]</a>
+            <a href="#" class="hover:text-[#00FF41] transition-colors">[ Link ]</a>
+        </div>
+        <button class="border border-[#00FF41] text-[#00FF41] px-4 py-1 text-[10px] uppercase font-bold hover:bg-[#00FF41] hover:text-black transition-all">
+            Terminal_Cart
+        </button>
+    </nav>
+
+    <section class="py-32 px-6 flex flex-col items-center text-center">
+        <div class="inline-block border border-white/20 px-4 py-1 mb-8">
+            <span class="text-[10px] uppercase tracking-[0.3em] opacity-60">Status: Operational // 2026</span>
+        </div>
+        <h1 class="text-6xl md:text-9xl uppercase italic tracking-tighter mb-8 leading-none">
+            NEXT GEN <br> <span class="text-[#00FF41] drop-shadow-[0_0_15px_rgba(0,255,65,0.5)]">UTILITY.</span>
+        </h1>
+        <p class="max-w-xl opacity-50 text-xs md:text-sm leading-relaxed mb-12 uppercase">
+            High-performance tools for the digital frontier. Engineered for speed. Optimized for the grid.
+        </p>
+        <div class="flex gap-4">
+            <button class="bg-white text-black px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#00FF41] transition-all">
+                Access Shop
+            </button>
+            <button class="border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest hover:border-white transition-all">
+                Whitepaper
+            </button>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
+            <div class="bg-[#0A0A0A] p-10 group cursor-pointer hover:bg-white/5 transition-colors">
+                <div class="aspect-square bg-white/5 mb-8 flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 border border-[#00FF41]/0 group-hover:border-[#00FF41]/50 transition-all"></div>
+                    <span class="text-[10px] opacity-20 group-hover:opacity-100 transition-opacity">IMG_01</span>
+                </div>
+                <div class="flex justify-between items-end">
+                    <div>
+                        <p class="text-[10px] text-[#00FF41] mb-2 font-bold">// CORE_UNIT</p>
+                        <h3 class="text-xl font-bold uppercase">Neural Link v.1</h3>
+                    </div>
+                    <p class="text-sm opacity-50">$899.00</p>
+                </div>
+            </div>
+
+            <div class="bg-[#0A0A0A] p-10 group cursor-pointer hover:bg-white/5 transition-colors border-l border-white/10">
+                <div class="aspect-square bg-white/5 mb-8 flex items-center justify-center relative">
+                     <span class="text-[10px] opacity-20">IMG_02</span>
+                </div>
+                <div class="flex justify-between items-end">
+                    <div>
+                        <p class="text-[10px] text-[#00FF41] mb-2 font-bold">// PERIPHERAL</p>
+                        <h3 class="text-xl font-bold uppercase">Glow Keypad</h3>
+                    </div>
+                    <p class="text-sm opacity-50">$150.00</p>
+                </div>
+            </div>
+
+            <div class="bg-[#0A0A0A] p-10 group cursor-pointer hover:bg-white/5 transition-colors border-l border-white/10">
+                <div class="aspect-square bg-white/5 mb-8 flex items-center justify-center relative">
+                     <span class="text-[10px] opacity-20">IMG_03</span>
+                </div>
+                <div class="flex justify-between items-end">
+                    <div>
+                        <p class="text-[10px] text-[#00FF41] mb-2 font-bold">// ACCESSORY</p>
+                        <h3 class="text-xl font-bold uppercase">Glass Case</h3>
+                    </div>
+                    <p class="text-sm opacity-50">$45.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 border-t border-white/10">
+    
+    <div class="space-y-4">
+        <div class="aspect-square bg-white/5 border border-[#00FF41]/20 flex items-center justify-center relative overflow-hidden group">
+            <div class="absolute top-4 left-4 text-[10px] text-[#00FF41] font-mono">SCANNING_IMAGE...</div>
+            <span class="text-xs opacity-20 group-hover:text-[#00FF41] group-hover:opacity-100 transition-all">PRIMARY_VIEW.EXE</span>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+            <div class="aspect-square bg-white/5 border border-white/5 flex items-center justify-center text-[8px] opacity-20">DATA_01</div>
+            <div class="aspect-square bg-white/5 border border-white/5 flex items-center justify-center text-[8px] opacity-20">DATA_02</div>
+            <div class="aspect-square bg-white/5 border border-white/5 flex items-center justify-center text-[8px] opacity-20">DATA_03</div>
+        </div>
+    </div>
+
+    <div class="lg:sticky lg:top-32 h-fit space-y-8">
+        <div>
+            <span class="text-[#00FF41] text-[10px] tracking-[0.3em] font-bold">// CLASSIFIED / HARDWARE</span>
+            <h1 class="text-5xl uppercase italic tracking-tighter mt-2 mb-4">Neural Link v.1</h1>
+            <p class="text-2xl font-mono text-white/90">$899.00 <span class="text-[10px] text-[#00FF41] animate-pulse">● LIVE</span></p>
+        </div>
+
+        <div class="border-y border-white/10 py-8">
+            <h4 class="text-[10px] uppercase tracking-widest text-[#00FF41] mb-4">Core_Description</h4>
+            <p class="text-sm leading-relaxed opacity-60 font-mono">
+                Direct-to-cortex synchronization module. Optimized for zero-latency data streaming and cognitive enhancement. Encased in medical-grade titanium.
+            </p>
+        </div>
+
+        <div class="space-y-6">
+            <button class="w-full bg-[#00FF41] text-black py-5 text-xs font-bold uppercase tracking-[0.4em] hover:shadow-[0_0_20px_rgba(0,255,65,0.4)] transition-all">
+                Initialize_Purchase
+            </button>
+            
+            <details class="group border-b border-white/5 pb-4">
+                <summary class="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase font-bold tracking-widest text-white/40 group-open:text-[#00FF41]">
+                    Hardware_Manifest
+                    <span class="group-open:rotate-180 transition-transform">▼</span>
+                </summary>
+                <div class="mt-4 text-[11px] font-mono opacity-50 leading-relaxed uppercase">
+                    - 4nm Synapse Processor<br>
+                    - End-to-end Bio-Encryption<br>
+                    - Sub-dermal Haptic Feedback
+                </div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-6 py-20 border-y border-white/10">
+    <div class="flex flex-col lg:flex-row gap-12">
+        
+        <aside class="w-full lg:w-72 space-y-8">
+            <div class="border-l-4 border-[#00FF41] pl-6">
+                <h2 class="text-2xl font-bold uppercase italic">User_Root</h2>
+                <p class="text-[10px] opacity-40 font-mono">ACCESS_LEVEL: ADMIN</p>
+            </div>
+            <nav class="flex flex-col gap-4 text-[10px] font-bold uppercase tracking-widest">
+                <a href="#" class="text-[#00FF41]">[ Orders ]</a>
+                <a href="#" class="opacity-40 hover:opacity-100">[ Security ]</a>
+                <a href="#" class="opacity-40 hover:opacity-100">[ Wallet ]</a>
+                <a href="#" class="opacity-40 hover:text-red-500">[ Logout ]</a>
+            </nav>
+        </aside>
+
+        <div class="flex-1 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white/5 border border-white/10 p-8 relative group">
+                    <div class="absolute top-0 right-0 w-2 h-2 bg-[#00FF41] m-2"></div>
+                    <h4 class="text-[10px] uppercase text-[#00FF41] mb-6">Active_Session</h4>
+                    <p class="text-xs font-mono mb-2">Order #VPR-7701</p>
+                    <p class="text-[10px] opacity-40 uppercase">Status: In_Transit // 4 Nodes Away</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-8">
+                    <h4 class="text-[10px] uppercase text-white/40 mb-6">Shipping_Node</h4>
+                    <p class="text-xs font-mono leading-relaxed uppercase">
+                        Sector 7-G<br>
+                        District_9, Neon City<br>
+                        SYS_88210
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-4xl mx-auto px-6 py-20">
+    <div class="flex flex-col lg:flex-row gap-16">
+        
+        <div class="flex-1 space-y-10">
+            <h2 class="text-xl font-bold uppercase italic border-b border-[#00FF41]/20 pb-4">Terminal_Checkout</h2>
+            
+            <div class="space-y-6">
+                <div class="relative">
+                    <label class="absolute -top-2 left-4 bg-[#0A0A0A] px-2 text-[9px] text-[#00FF41] uppercase">Input_Email</label>
+                    <input type="text" class="w-full bg-transparent border border-white/20 px-6 py-4 text-xs font-mono focus:border-[#00FF41] outline-none transition-colors">
+                </div>
+                <div class="relative">
+                    <label class="absolute -top-2 left-4 bg-[#0A0A0A] px-2 text-[9px] text-[#00FF41] uppercase">Credit_Hash</label>
+                    <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" class="w-full bg-transparent border border-white/20 px-6 py-4 text-xs font-mono focus:border-[#00FF41] outline-none transition-colors">
+                </div>
+            </div>
+
+            <button class="w-full group relative overflow-hidden bg-white text-black py-5 text-[10px] font-bold uppercase tracking-[0.5em] hover:text-[#00FF41]">
+                <span class="relative z-10">Execute_Order</span>
+                <div class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform"></div>
+            </button>
+        </div>
+
+        <div class="w-full lg:w-80 bg-white/5 border border-white/10 p-8 font-mono">
+            <h3 class="text-[10px] uppercase text-[#00FF41] mb-8 font-bold">// TOTAL_OUTPUT</h3>
+            <div class="space-y-4 text-[11px] uppercase">
+                <div class="flex justify-between">
+                    <span>Subtotal</span>
+                    <span>899.00</span>
+                </li>
+                <div class="flex justify-between text-[#00FF41]">
+                    <span>Shipping</span>
+                    <span>0.00</span>
+                </li>
+                <div class="flex justify-between border-t border-white/20 pt-6 text-lg font-bold">
+                    <span>Total</span>
+                    <span class="text-[#00FF41]">$899.00</span>
+                </div>
+            </div>
+            <div class="mt-10 text-[8px] opacity-30 leading-relaxed uppercase">
+                Encrypted with VAPOR_SHIELD 2.0. Your identity remains anonymous throughout this transaction.
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <footer class="border-t border-white/10 p-12 text-center">
+        <div class="text-[10px] uppercase tracking-[0.5em] opacity-30">
+            End of Line // Vapor Systems © 2026
+        </div>
+    </footer>
+
+</body>
+</html>

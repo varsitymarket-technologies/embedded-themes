@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAF9F6; color: #1C1C1C; }
+        .gold-border { border-color: #AF9460; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="border-b border-black/5 px-12 py-10 flex justify-between items-center">
+        <div class="text-[10px] uppercase tracking-[0.4em] opacity-60 hidden md:block">Paris / London / NY</div>
+        <div class="text-3xl tracking-[0.2em] uppercase font-bold">Palais</div>
+        <div class="flex items-center gap-10 text-[10px] uppercase tracking-[0.3em]">
+            <a href="#" class="hover:opacity-40 transition-opacity">Account</a>
+            <a href="#" class="bg-[#1C1C1C] text-white px-6 py-2 rounded-full">Bag [0]</a>
+        </div>
+    </nav>
+
+    <section class="max-w-7xl mx-auto px-6 py-24 text-center border-b border-black/5">
+        <span class="text-[10px] uppercase tracking-[0.6em] mb-8 block opacity-50 italic">— La Collection Privée —</span>
+        <h1 class="text-6xl md:text-9xl font-normal leading-tight mb-12 italic">The Art of <br> Persistence.</h1>
+        <div class="flex justify-center gap-8">
+            <button class="border-b border-black py-2 text-[10px] uppercase tracking-[0.4em] hover:text-[#AF9460] hover:border-[#AF9460] transition-all">Shop Heritage</button>
+            <button class="border-b border-black py-2 text-[10px] uppercase tracking-[0.4em] hover:text-[#AF9460] hover:border-[#AF9460] transition-all">Our Story</button>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-32">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-20">
+            <div class="text-center group cursor-pointer">
+                <div class="p-12 border border-black/5 bg-white mb-8 group-hover:gold-border transition-colors duration-500">
+                    <div class="aspect-[3/4] bg-[#F2F0EB] flex items-center justify-center italic opacity-20 text-xs">Exhibition_Asset_01</div>
+                </div>
+                <h3 class="text-2xl mb-2">No. 07 Oud & Santal</h3>
+                <p class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-6 italic">Parfum / 100ml</p>
+                <span class="text-sm tracking-widest">$320.00</span>
+            </div>
+
+            <div class="text-center group cursor-pointer">
+                <div class="p-12 border border-black/5 bg-white mb-8 group-hover:gold-border transition-colors duration-500">
+                    <div class="aspect-[3/4] bg-[#F2F0EB] flex items-center justify-center italic opacity-20 text-xs">Exhibition_Asset_02</div>
+                </div>
+                <h3 class="text-2xl mb-2">Ivory Silk Scarf</h3>
+                <p class="text-[10px] uppercase tracking-[0.3em] opacity-40 mb-6 italic">Hand-rolled / Lyon</p>
+                <span class="text-sm tracking-widest">$185.00</span>
+            </div>
+            
+            </div>
+    </section>
+
+    <section class="bg-white py-40 px-6 border-y border-black/5">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+            <div class="relative p-1">
+                <div class="absolute inset-0 border border-[#AF9460] translate-x-4 translate-y-4 -z-10"></div>
+                <div class="aspect-square bg-[#FAF9F6] flex items-center justify-center italic opacity-20">Main_Detail_View</div>
+            </div>
+            <div>
+                <h2 class="text-5xl mb-8 leading-tight">A Symphony of Rare Elements.</h2>
+                <div class="space-y-6 text-sm leading-relaxed opacity-70 mb-12">
+                    <p>Sourced from the high plateaus of the East, our No. 07 combines the smokiness of aged Oud with the creamy warmth of Mysore Sandalwood.</p>
+                    <p>Each bottle is hand-numbered and sealed with a traditional wax stamp in our atelier.</p>
+                </div>
+                <button class="w-full bg-[#1C1C1C] text-white py-6 text-[10px] uppercase tracking-[0.5em] hover:bg-[#AF9460] transition-colors">
+                    Acquire Selection — $320.00
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-6 py-40">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl mb-4 italic">The Checkout</h2>
+            <div class="w-12 h-px bg-[#AF9460] mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-32">
+            <div class="space-y-12">
+                <div class="border-b border-black/10 pb-4">
+                    <label class="text-[9px] uppercase tracking-[0.4em] opacity-40 block mb-2">Client Identity</label>
+                    <p class="text-sm italic">hastings.archive@palais.luxury</p>
+                </div>
+                <div class="border-b border-black/10 pb-4">
+                    <label class="text-[9px] uppercase tracking-[0.4em] opacity-40 block mb-2">Mailing Registry</label>
+                    <p class="text-sm leading-relaxed italic">The Grand Suite, 44 Regent St.<br>London, W1B 5RA</p>
+                </div>
+            </div>
+
+            <div class="bg-[#FAF9F6] border border-black/5 p-10">
+                <h3 class="text-xs uppercase tracking-[0.4em] mb-10 text-center">Your Order</h3>
+                <div class="space-y-6 text-xs mb-10">
+                    <div class="flex justify-between border-b border-black/5 pb-4">
+                        <span>No. 07 Oud & Santal</span>
+                        <span>$320.00</span>
+                    </div>
+                    <div class="flex justify-between border-b border-black/5 pb-4 italic">
+                        <span>Bespoke Wrapping</span>
+                        <span>Complimentary</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold pt-4 tracking-tighter">
+                        <span>TOTAL</span>
+                        <span>$320.00</span>
+                    </div>
+                </div>
+                <button class="w-full border border-black py-4 text-[10px] uppercase tracking-[0.5em] hover:bg-black hover:text-white transition-all">
+                    Finalize Acquisition
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-black/5">
+        <div class="text-[9px] uppercase tracking-[0.6em] opacity-30">
+            Est. 1924 — Palais House — All Rights Reserved
+        </div>
+    </footer>
+
+</body>
+</html>

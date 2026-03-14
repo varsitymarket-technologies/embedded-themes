@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #E5E0D8; color: #3E3A35; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="p-8 flex justify-between items-center uppercase tracking-[0.3em] text-[10px] font-semibold">
+        <div class="text-lg tracking-[0.5em]">Solis</div>
+        <div class="hidden md:flex gap-12">
+            <a href="#" class="hover:opacity-50">Collection</a>
+            <a href="#" class="hover:opacity-50">Spaces</a>
+            <a href="#" class="hover:opacity-50">Journal</a>
+        </div>
+        <div class="flex gap-8">
+            <span>Search</span>
+            <span>Bag (0)</span>
+        </div>
+    </nav>
+
+    <section class="h-[80vh] grid grid-cols-1 md:grid-cols-2">
+        <div class="flex flex-col justify-center px-12 md:px-24 border-r border-[#3E3A35]/10">
+            <span class="text-[10px] uppercase tracking-[0.4em] mb-6 opacity-60">Volume 04 / 2026</span>
+            <h1 class="text-6xl md:text-8xl font-light leading-none tracking-tighter mb-12">Sculpted <br> by Light.</h1>
+            <button class="w-fit border border-[#3E3A35] px-12 py-4 text-[10px] uppercase tracking-[0.3em] hover:bg-[#3E3A35] hover:text-[#E5E0D8] transition-all">
+                The Summer Edit
+            </button>
+        </div>
+        <div class="bg-[#DAD4CB] flex items-center justify-center p-12">
+             <div class="w-full h-full bg-[#CEC7BC] shadow-2xl overflow-hidden relative group">
+                <div class="absolute inset-0 flex items-center justify-center italic opacity-20 uppercase tracking-widest text-xs">Featured_Object_01</div>
+             </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-8 py-32">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+            <div class="group">
+                <div class="aspect-[4/5] bg-[#DAD4CB] mb-8 relative overflow-hidden">
+                    <div class="w-full h-full bg-[#CEC7BC] transform group-hover:scale-105 transition-transform duration-700"></div>
+                </div>
+                <h3 class="text-xs uppercase tracking-[0.2em] mb-2">Travertine Plinth</h3>
+                <p class="text-sm opacity-60 mb-6 italic">Natural Stone / Honed Finish</p>
+                <p class="text-lg font-light">$1,200.00</p>
+            </div>
+            </div>
+    </section>
+
+    <section class="bg-[#DAD4CB] py-32 px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
+            <div class="lg:col-span-7">
+                <div class="aspect-square bg-[#CEC7BC] shadow-lg"></div>
+            </div>
+            <div class="lg:col-span-5 flex flex-col justify-center">
+                <h2 class="text-4xl font-light tracking-tighter uppercase mb-6">The Ochre Vessel</h2>
+                <p class="text-sm leading-relaxed mb-10 opacity-80">
+                    A study in form and shadow. This vessel is hand-poured using a custom concrete blend infused with desert minerals. No two pieces catch the light the same way.
+                </p>
+                <div class="border-y border-[#3E3A35]/10 py-8 mb-10">
+                    <div class="flex justify-between text-[10px] uppercase tracking-widest mb-4">
+                        <span>Dimensions</span>
+                        <span class="opacity-50">12" x 12" x 18"</span>
+                    </div>
+                    <div class="flex justify-between text-[10px] uppercase tracking-widest">
+                        <span>Lead Time</span>
+                        <span class="opacity-50">4-6 Weeks</span>
+                    </div>
+                </div>
+                <button class="bg-[#3E3A35] text-[#E5E0D8] py-5 text-[10px] uppercase tracking-[0.4em] hover:bg-[#C58B6D] transition-colors">
+                    Add to Collection
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-8 py-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+            <div class="space-y-12">
+                <h3 class="text-xs uppercase tracking-[0.4em] border-b border-[#3E3A35] pb-4">Personal Details</h3>
+                <div class="space-y-8">
+                    <div class="flex flex-col">
+                        <label class="text-[9px] uppercase tracking-widest opacity-40 mb-2">Full Name</label>
+                        <p class="text-sm border-b border-[#3E3A35]/10 pb-2">Julian Solis</p>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="text-[9px] uppercase tracking-widest opacity-40 mb-2">Delivery Node</label>
+                        <p class="text-sm border-b border-[#3E3A35]/10 pb-2">77 Dune Road, Santa Fe, NM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#CEC7BC]/30 p-12">
+                <h3 class="text-xs uppercase tracking-[0.4em] mb-12 text-center">Checkout Summary</h3>
+                <div class="space-y-6 text-sm mb-12">
+                    <div class="flex justify-between border-b border-[#3E3A35]/5 pb-4">
+                        <span>Subtotal</span>
+                        <span>$1,200.00</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-lg pt-4 tracking-tighter">
+                        <span>Total</span>
+                        <span>$1,200.00</span>
+                    </div>
+                </div>
+                <button class="w-full bg-[#C58B6D] text-white py-5 text-[10px] uppercase tracking-[0.4em] shadow-xl hover:-translate-y-1 transition-all">
+                    Finalize Order
+                </button>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
