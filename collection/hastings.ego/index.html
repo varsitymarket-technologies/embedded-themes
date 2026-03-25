@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e(__SITE_TITLE__)</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Hastings Ego</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="example/css2.css" rel="stylesheet">
     <style>
         :root {
-            --color-background: e(__DESIGN_COLOR_BACKGROUND__);
-            --color-text: e(__DESIGN_COLOR_TEXT__);
-            --color-primary: e(__DESIGN_COLOR_PRIMARY__); /* A modern, vibrant green */
-            --color-surface: e(__DESIGN_COLOR_SURFACE__);
+            --color-background: BLACK;
+            --color-text: WHITE;
+            --color-primary: #ed1b24; /* A modern, vibrant green */
+            --color-surface: #1F1B1B ?>;
             --color-border: #333333;
             --font-heading: 'Anton', sans-serif;
             --font-body: 'Poppins', sans-serif;
@@ -480,7 +480,7 @@
             align-items: center;
             height: 400px;
             min-height: 105px;
-            background-image: url(e(__ABOUT_BACKGROUNG_IMAGE__););
+            background-image: url(bg.jpg);
             background-size: cover;
             background-position: center;
             overflow: hidden;
@@ -518,33 +518,33 @@
 <body>
 
     <header class="main-header">
-        <div class="logo" data-view="shop"><img style="max-width:4rem;" src="e(__SITE_LOGO__)"></div>
+        <div class="logo" data-view="shop-view"><img style="max-width:4rem;" src="example/157944600.png"></div>
         <nav class="main-nav">
-            <a class="nav-link" data-view="shop">Shop</a>
+            <a class="nav-link active" data-view="shop">Shop</a>
             <a class="nav-link" data-view="about">About Us</a>
             <a class="nav-link" data-view="contact">Contact</a>
             <a data-view="cart" class="nav-link" id="cart-indicator">
                 Bag
                 <span id="cart-count">0</span>
             </a>
-            <a  class="nav-link" data-view="account">Account</a>
+            <a class="nav-link" data-view="account">Account</a>
         </nav>
         <div onclick="open_menu();" class="main-nav-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
         </div>
     </header>
 
     <div id="myNav" class="menu-overlay" style="width: 0%;">
             <a class="closebtn" onclick="close_menu();">×</a>
             <div class="overlay-content">
-                <img onclick="close_menu();" data-view="shop" src="e(__SITE_LOGO__)" style="width:20vh; height:auto; margin:auto; ">
+                <img onclick="close_menu();" data-view="shop" src="example/157944600.png" style="width:20vh; height:auto; margin:auto; ">
             <a></a>
 
-            <a class="nav-link sesedesedwsedwdd" onclick="close_menu();" data-view="shop">
+            <a class="nav-link sesedesedwsedwdd active" onclick="close_menu();" data-view="shop">
                 <span>Shop</span>
             </a>
 
-            <a class="nav-link sesedesedwsedwdd active" onclick="close_menu();" data-view="about">
+            <a class="nav-link sesedesedwsedwdd" onclick="close_menu();" data-view="about">
                 <span>About Us</span>
             </a>
 
@@ -553,7 +553,7 @@
                 <span>Contact Us</span>
             </a>
 
-            <a class="nav-link sesedesedwsedwdd" onclick="close_menu();" data-view="contact">
+            <a class="nav-link sesedesedwsedwdd" onclick="close_menu();" data-view="cart">
                 <span>
                     Bag
                 </span>
@@ -567,11 +567,33 @@
             <br>
             <a style="margin:0.4rem"></a>
             <br>
-            <p style="font-size:9px; padding: 0rem 0px 8rem 0px">Powered by VARSITYMARKET <span style="font-size: 8px; font-weight: 800;">technologies<span></span></span></p>
+            <p style="font-size:9px; padding: 0rem 0px 8rem 0px">Powered by <span style="font-size: 8px; font-weight: 800;">VMTECH<span></span></span></p>
     </div>
  </div>
 
-    <main id="app-root" class="container"></main>
+    <main id="app-root" class="container">
+            <div class="container">
+                <div class="shop-header">
+                    <h1>Hasting's Ego</h1>
+                    <p>
+                        We strive to help your business operate in the 
+vast digital world. Unlock new oportunities with our tech venture, 
+embrace our tech Trend.
+                        
+                    </p>
+                </div>
+                <div class="shop-controls">
+                    <input type="search" id="search-bar" placeholder="Search for products...">
+                    <!-- Filter controls can be added here -->
+                </div>
+                <div class="js-grid" id="product-grid"><div class="product-card"><img src="example/img20-2.webp" alt="Air Jordan 4 Retro “Black Cat” Sneakers"><div class="product-card-info"><h3>Air Jordan 4 Retro “Black Cat” Sneakers</h3><p>R2000.00</p></div></div><div class="product-card"><img src="example/Nike-Air-Max-Plus-Deadpool-5.webp" alt="Nike Air Max Plus Deadpool"><div class="product-card-info"><h3>Nike Air Max Plus Deadpool</h3><p>R2800.00</p></div></div><div class="product-card"><img src="example/img06-6.webp" alt="Nike Air Max Plus Drift Black Anthracite"><div class="product-card-info"><h3>Nike Air Max Plus Drift Black Anthracite</h3><p>R2400.00</p></div></div><div class="product-card"><img src="example/img07-10.webp" alt="Nike Air Force 1 Low ’07 White Sneakers"><div class="product-card-info"><h3>Nike Air Force 1 Low ’07 White Sneakers</h3><p>R1499.00</p></div></div></div>
+            </div>
+        </main>
+
+    <main style="display:none;">
+
+    </main>
+
 
     <div>
         <template id="tpl-contact">
@@ -580,15 +602,15 @@
                 <form class="js-contact-form" id="login-form">
                     <div class="form-group">
                         <label for="login-email">Name</label>
-                        <input type="email" id="login-email" required>
+                        <input type="email" id="login-email" required="">
                     </div>
                     <div class="form-group">
                         <label for="login-email">Email</label>
-                        <input type="email" id="login-email" required>
+                        <input type="email" id="login-email" required="">
                     </div>
                     <div class="form-group">
                         <label for="login-email">Subject</label>
-                        <input type="text" id="login-email" required>
+                        <input type="text" id="login-email" required="">
                     </div>
                     <div class="form-group">
                         <label for="login-email">Description</label>
@@ -602,8 +624,13 @@
         <template id="tpl-shop">
             <div class="container">
                 <div class="shop-header">
-                    <h1>e(__SHOP_INTRO__)</h1>
-                    <p>e(__SHOP_DESCRIPTION__)</p>
+                    <h1>Hasting's Ego</h1>
+                    <p>
+                        We strive to help your business operate in the 
+vast digital world. Unlock new oportunities with our tech venture, 
+embrace our tech Trend.
+                        
+                    </p>
                 </div>
                 <div class="shop-controls">
                     <input type="search" id="search-bar" placeholder="Search for products...">
@@ -615,7 +642,7 @@
 
         <template id="tpl-product">
             <div id="product-detail-view">
-                <button class="btn js-back" style="margin-bottom:20px;">&larr; Back</button>
+                <button class="btn js-back" style="margin-bottom:20px;">← Back</button>
                 <div class="container">
                     <div class="product-image-gallery">
                         <img src="" class="js-img">
@@ -634,7 +661,7 @@
         <template id="tpl-about">
             <div class="hero-nav">
                 <div class="hero-nav__inner">
-                    <h1>e(__SHOP_INTRO__)</h1>
+                    <h1>Hasting's Ego</h1>
                 </div>
             </div>
             <br>
@@ -652,11 +679,11 @@
                     <form class="js-login-form" id="login-form">
                         <div class="form-group">
                             <label for="login-email">Email</label>
-                            <input  class="js-email" type="email" id="login-email" required>
+                            <input class="js-email" type="email" id="login-email" required="">
                         </div>
                         <div class="form-group">
                             <label for="login-password">Password</label>
-                            <input  class="js-pass" type="password" id="login-password" required>
+                            <input class="js-pass" type="password" id="login-password" required="">
                         </div>
                         <button type="submit" class="btn">Login</button>
                         <button type="button" class="btn btn-dark">Create Account</button>
@@ -682,25 +709,25 @@
                         <form id="checkout-form" class="js-billing-form">
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" required="">
                             </div>
                             <h3>Shipping Address</h3>
                             <div class="form-group">
                                 <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" required="">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" id="address" name="address" required>
+                                <input type="text" id="address" name="address" required="">
                             </div>
                             <div class="form-group">
                                 <label for="city">City</label>
-                                <input type="text" id="city" name="city" required>
+                                <input type="text" id="city" name="city" required="">
                             </div>
                             <h3>Payment Details</h3>
                             <div class="form-group">
                                 <label for="card-number">Card Number</label>
-                                <input type="text" id="card-number" name="card-number" placeholder="•••• •••• •••• ••••" required>
+                                <input type="text" id="card-number" name="card-number" placeholder="•••• •••• •••• ••••" required="">
                             </div>
                             <!-- More payment fields can be added here -->
                         </form>
@@ -712,7 +739,7 @@
                         </div>
                         <div id="cart-total">
                             <span>Total</span>
-                            <span id="total-price">e(__SYSTEM_CURRENCY__) 0.00</span>
+                            <span id="total-price">R 0.00</span>
                         </div>
                         <button class="btn" style="width: 100%; margin-top: 30px;">Place Order</button>
                     </div>
@@ -727,15 +754,6 @@
         <p>Powered By VMTECH</p>
     </footer>
 
-    <script>
-        window.StoreConfig = {
-            apiLink: "e(__SYSTEM_API__)", // We will link this up next
-            currency: "e(__SYSTEM_CURRENCY__)",
-            storeID: "e(__SYSTEM_CURRENCY__)",
-            storePubKey: "e(__SYSTEM_CURRENCY__)"
-        };
-    </script>
-    <script src="store.js" defer></script>
 
     <script>
                                     function open_menu() {
@@ -772,5 +790,6 @@
 }
 heroShinker();
     </script>
-</body>
-</html>
+
+
+</body></html>
