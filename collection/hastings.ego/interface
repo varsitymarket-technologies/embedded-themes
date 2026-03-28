@@ -735,7 +735,7 @@
             storePubKey: "e(__SYSTEM_CURRENCY__)"
         };
     </script>
-    <script src="store.js" defer></script>
+    <script src="https://theme.varsitymarket.tech/plugin/store.js" defer></script>
 
     <script>
                                     function open_menu() {
