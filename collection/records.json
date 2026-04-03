@@ -5,5 +5,8 @@
   },"hastings.ego": {
     "hash": "v1.0.0.2",
     "files": ["interface","autofill.json","poster.png"]
+  },"austin": {
+    "hash": "v1.0.0.3",
+    "files": ["interface","autofill.json","poster.png"]
   }
 }

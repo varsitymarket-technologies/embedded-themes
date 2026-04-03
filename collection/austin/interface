@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Austin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Customizing Tailwind for the Verdant Theme
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        verdant: {
+                            dark: '#1A2F22',   // Forest Green
+                            light: '#E6EBE7',  // Soft Sage Background
+                            cream: '#FDFCF8',  // Off-white paper
+                            accent: '#648268'  // Muted Green
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #FDFCF8; color: #1A2F22; }
+        ::-webkit-scrollbar { height: 4px; width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #648268; border-radius: 10px; }
+        .fade-enter { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen selection:bg-verdant-accent selection:text-white">
+
+    <div class="fixed top-4 left-0 right-0 z-50 px-4 md:px-6">
+        <nav class="max-w-7xl mx-auto bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-verdant-dark/5 px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-serif font-semibold tracking-wide text-verdant-dark flex items-center gap-2">
+                <svg class="w-6 h-6 text-verdant-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22c4-4 8-9.5 8-14a8 8 0 00-16 0c0 4.5 4 10 8 14zm0-17a3 3 0 110 6 3 3 0 010-6z"/></svg>
+                Austin
+            </a>
+            
+            <ul class="hidden md:flex space-x-8 text-sm font-medium text-verdant-dark/80">
+                <li><a href="#shop" class="hover:text-verdant-accent transition-colors">Botanicals</a></li>
+                <li><a href="#about" class="hover:text-verdant-accent transition-colors">Our Roots</a></li>
+            </ul>
+
+            <div class="flex items-center space-x-6">
+                <a href="#search" class="hidden md:block text-sm hover:text-verdant-accent"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></a>
+                <a href="#auth" class="hidden md:block text-sm hover:text-verdant-accent"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg></a>
+                <a href="#cart" class="text-sm font-medium flex items-center gap-2 bg-verdant-light px-4 py-2 rounded-full hover:bg-verdant-accent hover:text-white transition-all">
+                    Cart <span class="bg-verdant-dark text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full js-cart-count">0</span>
+                </a>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-verdant-dark">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-verdant-cream z-40 hidden flex-col justify-center items-center space-y-8 text-3xl font-serif text-verdant-dark">
+        <a href="#shop" class="hover:text-verdant-accent js-mobile-link">Shop Botanicals</a>
+        <a href="#search" class="hover:text-verdant-accent js-mobile-link">Search</a>
+        <a href="#auth" class="hover:text-verdant-accent js-mobile-link">Account</a>
+        <a href="#about" class="hover:text-verdant-accent js-mobile-link">Our Roots</a>
+        <button id="mobile-close-btn" class="absolute top-8 right-8 text-sm font-sans uppercase tracking-widest text-verdant-dark/50 hover:text-verdant-dark">Close</button>
+    </div>
+
+    <main id="app-root" class="flex-grow fade-enter mt-28"></main>
+
+    <footer class="mt-auto px-6 py-16 bg-verdant-dark text-verdant-light">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-sm">
+            <div>
+                <h3 class="font-serif text-2xl mb-4">AUSTIN.</h3>
+                <p class="opacity-70 leading-relaxed pr-10">Cultivating connection between human spaces and the natural world.</p>
+            </div>
+            <div class="flex flex-col space-y-3 opacity-80">
+                <a href="#shop" class="hover:text-white transition-colors">Shop All</a>
+                <a href="#about" class="hover:text-white transition-colors">Care Guides</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact Support</a>
+            </div>
+            <div class="flex flex-col space-y-3 opacity-80">
+                <p>Sign up for botanical insights.</p>
+                <div class="flex border-b border-verdant-light/30 pb-2 mt-2">
+                    <input type="email" placeholder="Email address" class="bg-transparent focus:outline-none w-full placeholder-verdant-light/50">
+                    <button class="font-medium hover:text-white">Join</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <template id="tpl-home">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 pb-20">
+            <div class="bg-verdant-light rounded-[3rem] p-10 md:p-24 flex flex-col items-center text-center relative overflow-hidden">
+                <div class="relative z-10 max-w-2xl">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-verdant-accent mb-6 block">New Arrivals</span>
+                    <h1 class="text-5xl md:text-7xl font-serif text-verdant-dark mb-8 leading-tight">Breathe Life Into Your Space.</h1>
+                    <p class="text-verdant-dark/70 text-lg mb-10 leading-relaxed">Curated indoor botanicals, artisan ceramics, and organic apothecary goods for the mindful home.</p>
+                    <a href="#shop" class="inline-block bg-verdant-dark text-white px-10 py-4 rounded-full font-medium hover:bg-verdant-accent transition-colors shadow-lg hover:shadow-xl">
+                        Shop Collection
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-shop">
+        <div class="max-w-7xl mx-auto px-6 py-10">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-serif mb-4 js-collection-title">All Botanicals</h1>
+                <span class="text-sm text-verdant-dark/50 js-collection-count"></span>
+            </header>
+            
+            <ul class="flex overflow-x-auto space-x-3 pb-6 mb-8 scrollbar-hide justify-start md:justify-center js-category-list"></ul>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 js-product-grid"></div>
+        </div>
+    </template>
+    
+    <template id="tpl-category-item">
+        <li class="shrink-0 whitespace-nowrap px-6 py-2 rounded-full border border-verdant-dark/10 text-sm font-medium cursor-pointer transition-all hover:border-verdant-accent hover:text-verdant-accent js-cat-link"></li>
+    </template>
+
+    <template id="tpl-product-card">
+        <a href="#" class="group block js-prod-link">
+            <div class="aspect-[4/5] bg-verdant-light rounded-2xl mb-5 overflow-hidden relative transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-xl">
+                <div class="w-full h-full flex items-center justify-center text-xs font-serif italic text-verdant-dark/30 js-img-placeholder"></div>
+            </div>
+            <div class="text-center px-2">
+                <h3 class="text-lg font-serif text-verdant-dark mb-1 js-title"></h3>
+                <p class="text-sm font-medium text-verdant-accent js-price"></p>
+            </div>
+        </a>
+    </template>
+
+    <template id="tpl-product">
+        <section class="max-w-7xl mx-auto px-6 py-10 lg:py-20 flex flex-col-reverse lg:flex-row gap-16">
+            <div class="flex-1 flex flex-col justify-center">
+                <nav class="flex items-center text-xs font-medium text-verdant-dark/50 mb-8 uppercase tracking-wider">
+                    <a href="#shop" class="hover:text-verdant-accent">Shop</a> 
+                    <span class="mx-3 border-t border-verdant-dark/20 w-8"></span> 
+                    <span class="js-detail-cat text-verdant-accent"></span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-serif text-verdant-dark mb-4 js-detail-title"></h1>
+                <p class="text-2xl text-verdant-accent font-serif italic mb-10 js-detail-price"></p>
+                <p class="text-verdant-dark/70 leading-relaxed mb-12 text-lg js-detail-desc"></p>
+                
+                <div class="flex gap-4">
+                    <button class="flex-1 bg-verdant-dark text-white py-4 rounded-full font-medium hover:bg-verdant-accent transition-colors shadow-lg js-add-btn">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <div class="mt-12 pt-8 border-t border-verdant-dark/10 text-sm text-verdant-dark/60">
+                    <p class="mb-2 flex items-center gap-2"><svg class="w-4 h-4 text-verdant-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Ethically Sourced</p>
+                    <p class="flex items-center gap-2"><svg class="w-4 h-4 text-verdant-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg> Nationwide Carbon-Neutral Shipping</p>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="bg-verdant-light rounded-[2rem] aspect-square lg:aspect-[3/4] flex items-center justify-center text-sm font-serif italic text-verdant-dark/20 js-detail-img"></div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-cart">
+        <section class="max-w-4xl mx-auto px-6 py-10 min-h-[60vh]">
+            <h1 class="text-4xl font-serif text-center mb-12">Your Cart</h1>
+            <div class="js-cart-container"></div>
+        </section>
+    </template>
+
+    <template id="tpl-cart-empty">
+        <div class="text-center py-20 bg-verdant-light/50 rounded-3xl">
+            <svg class="w-16 h-16 mx-auto text-verdant-dark/20 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <p class="text-lg text-verdant-dark/60 mb-8 font-serif italic">Your cart is feeling a bit empty.</p>
+            <a href="#shop" class="inline-block bg-verdant-dark text-white px-8 py-3 rounded-full hover:bg-verdant-accent transition-colors">Shop Botanicals</a>
+        </div>
+    </template>
+
+    <template id="tpl-cart-layout">
+        <div class="bg-white rounded-3xl shadow-sm border border-verdant-dark/5 p-6 md:p-10">
+            <div class="space-y-6 js-cart-items mb-10"></div>
+            <div class="border-t border-verdant-dark/10 pt-8">
+                <div class="flex justify-between text-verdant-dark/60 mb-2">
+                    <span>Subtotal</span>
+                    <span class="js-cart-subtotal"></span>
+                </div>
+                <div class="flex justify-between text-2xl font-serif text-verdant-dark mb-8">
+                    <span>Total</span>
+                    <span class="js-cart-total"></span>
+                </div>
+                <a href="#checkout" class="block text-center w-full bg-verdant-dark text-white py-4 rounded-full font-medium hover:bg-verdant-accent transition-colors shadow-md">Proceed to Checkout</a>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-cart-item">
+        <div class="flex items-center gap-6 group">
+            <div class="w-24 h-24 bg-verdant-light rounded-xl flex-shrink-0 flex items-center justify-center text-[10px] text-verdant-dark/30 js-item-img"></div>
+            <div class="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-serif text-lg text-verdant-dark js-item-title"></h3>
+                    <span class="text-sm font-medium text-verdant-accent js-item-price"></span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center bg-verdant-light rounded-full p-1">
+                        <button class="w-8 h-8 rounded-full flex items-center justify-center text-verdant-dark hover:bg-white transition-colors js-qty-sub">−</button>
+                        <span class="w-8 text-center text-sm font-medium js-item-qty">1</span>
+                        <button class="w-8 h-8 rounded-full flex items-center justify-center text-verdant-dark hover:bg-white transition-colors js-qty-add">+</button>
+                    </div>
+                    <button class="text-sm text-red-400 hover:text-red-600 transition-colors js-item-remove">Remove</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-checkout">
+        <section class="max-w-2xl mx-auto px-6 py-20 min-h-[70vh]">
+            <h1 class="text-3xl font-serif text-center mb-10">Secure Checkout</h1>
+            <form class="space-y-8 bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-verdant-dark/5 js-checkout-form">
+                <div>
+                    <h2 class="text-sm font-bold text-verdant-dark uppercase tracking-wider mb-6 border-b border-verdant-light pb-2">Shipping Details</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" required placeholder="First Name" class="bg-verdant-light/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-verdant-accent">
+                        <input type="text" required placeholder="Last Name" class="bg-verdant-light/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-verdant-accent">
+                        <input type="email" required placeholder="Email Address" class="col-span-2 bg-verdant-light/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-verdant-accent">
+                        <input type="text" required placeholder="Street Address" class="col-span-2 bg-verdant-light/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-verdant-accent">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-verdant-dark text-white py-4 rounded-full font-medium hover:bg-verdant-accent transition-colors shadow-md">Complete Order</button>
+            </form>
+        </section>
+    </template>
+
+    <template id="tpl-search">
+        <div class="max-w-4xl mx-auto px-6 py-20 min-h-[60vh]">
+            <div class="relative">
+                <svg class="absolute left-6 top-1/2 -translate-y-1/2 w-8 h-8 text-verdant-dark/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" placeholder="Search botanicals..." class="w-full bg-white border border-verdant-dark/10 rounded-full py-6 pl-20 pr-8 text-2xl font-serif focus:outline-none focus:ring-2 focus:ring-verdant-accent js-search-input shadow-sm">
+            </div>
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 js-search-results"></div>
+        </div>
+    </template>
+
+    <template id="tpl-success">
+        <div class="max-w-2xl mx-auto px-6 py-32 text-center min-h-[60vh]">
+            <div class="w-24 h-24 bg-verdant-light text-verdant-accent rounded-full flex items-center justify-center mx-auto mb-8">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h1 class="text-4xl font-serif mb-4">Your Order is Rooted.</h1>
+            <p class="text-verdant-dark/60 mb-10">We are carefully preparing your botanicals for journey.</p>
+            <a href="#shop" class="bg-verdant-dark text-white px-8 py-3 rounded-full hover:bg-verdant-accent transition-colors">Return to Shop</a>
+        </div>
+    </template>
+
+    <template id="tpl-auth">
+        <div class="max-w-md mx-auto px-6 py-20 min-h-[60vh]">
+            <div class="bg-white p-10 rounded-3xl shadow-sm border border-verdant-dark/5">
+                <h2 class="text-3xl font-serif text-center mb-8">Welcome Back</h2>
+                <form class="space-y-6 js-auth-form">
+                    <input type="email" placeholder="Email" required class="w-full bg-verdant-light/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-verdant-accent">
+                    <input type="password" placeholder="Password" required class="w-full bg-verdant-light/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-verdant-accent">
+                    <button type="submit" class="w-full bg-verdant-dark text-white py-4 rounded-full font-medium hover:bg-verdant-accent transition-colors shadow-md">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-account">
+        <div class="max-w-4xl mx-auto px-6 py-20 min-h-[60vh]">
+            <h2 class="text-4xl font-serif mb-10">My Sanctuary</h2>
+            <div class="bg-white p-10 rounded-3xl shadow-sm border border-verdant-dark/5">
+                <p class="text-verdant-dark/60 mb-8 italic">No previous orders found.</p>
+                <button class="text-sm font-medium text-red-500 hover:text-red-700 js-logout">Sign Out</button>
+            </div>
+        </div>
+    </template>
+    
+    <template id="tpl-static">
+        <div class="max-w-3xl mx-auto px-6 py-20 text-center min-h-[60vh]">
+            <h1 class="text-4xl md:text-5xl font-serif mb-8 js-static-title"></h1>
+            <p class="text-lg leading-relaxed text-verdant-dark/70 js-static-content"></p>
+        </div>
+    </template>
+
+    <script>
+        // --- 1. NEW THEMATIC DATABASE ---
+        const DB = {
+            currency: 'e(__SYSTEM_API__)',
+            categories: ['All', 'Indoor Plants', 'Ceramics', 'Apothecary', 'Tools'],
+            products: [
+                { id: 1, title: 'Ficus Elastica', price: 45, category: 'Indoor Plants', img: 'FICUS_PLANT', desc: 'A stunning Rubber Tree with deep burgundy leaves. Easy to care for and perfect for bright indirect light.' },
+                { id: 2, title: 'Monstera Deliciosa', price: 60, category: 'Indoor Plants', img: 'MONSTERA', desc: 'The classic Swiss Cheese plant. Fast-growing and provides an instant tropical feel to any room.' },
+                { id: 3, title: 'Terracotta Planter', price: 35, category: 'Ceramics', img: 'PLANTER', desc: 'Hand-thrown unglazed terracotta. Provides excellent aeration for plant roots.' },
+                { id: 4, title: 'Neem Oil Serum', price: 18, category: 'Apothecary', img: 'NEEM_BOTTLE', desc: 'Cold-pressed organic neem oil blended with peppermint. The ultimate natural leaf shine and protector.' },
+                { id: 5, title: 'Brass Pruning Shears', price: 42, category: 'Tools', img: 'SHEARS', desc: 'Solid brass Japanese-style pruning scissors. Keeps your plants neatly manicured.' },
+                { id: 6, title: 'Olive Tree', price: 110, category: 'Indoor Plants', img: 'OLIVE_TREE', desc: 'A Mediterranean classic adapted for indoor living. Requires bright, sunny windows.' }
+            ]
+        };
+
+        // --- 2. CORE APPLICATION CLASS (Identical functionality) ---
+        class StoreEngine {
+            constructor() {
+                this.root = document.getElementById('app-root');
+                this.cart = JSON.parse(localStorage.getItem('verdant_cart')) || [];
+                this.isLoggedIn = localStorage.getItem('verdant_auth') === 'true';
+                
+                this.initLayout();
+                this.initRouter();
+                this.updateCartCount();
+            }
+
+            initLayout() {
+                const mobBtn = document.getElementById('mobile-menu-btn');
+                const mobMenu = document.getElementById('mobile-menu');
+                const mobClose = document.getElementById('mobile-close-btn');
+                
+                const toggle = () => mobMenu.classList.toggle('hidden');
+                
+                mobBtn.onclick = toggle;
+                mobClose.onclick = toggle;
+                document.querySelectorAll('.js-mobile-link').forEach(link => link.onclick = toggle);
+            }
+
+            showToast(msg) {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'bg-verdant-dark text-white px-6 py-3 rounded-full text-sm shadow-xl transition-all duration-300 transform translate-y-10 opacity-0';
+                toast.textContent = msg;
+                container.appendChild(toast);
+                
+                requestAnimationFrame(() => toast.classList.remove('translate-y-10', 'opacity-0'));
+                setTimeout(() => {
+                    toast.classList.add('translate-y-10', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 2500);
+            }
+
+            initRouter() {
+                window.addEventListener('hashchange', () => this.route());
+                this.route();
+            }
+
+            route() {
+                const hash = window.location.hash.slice(1) || 'home';
+                const parts = hash.split('/');
+                const view = parts[0];
+                const id = parts[1];
+
+                this.root.classList.remove('fade-enter');
+                void this.root.offsetWidth;
+                this.root.classList.add('fade-enter');
+                window.scrollTo(0, 0);
+
+                switch(view) {
+                    case 'shop': this.renderShop(id); break;
+                    case 'product': this.renderProduct(id); break;
+                    case 'cart': this.renderCart(); break;
+                    case 'checkout': this.renderCheckout(); break;
+                    case 'success': this.renderSuccess(); break;
+                    case 'auth': this.isLoggedIn ? this.renderAccount() : this.renderTemplate('tpl-auth', this.bindAuth); break;
+                    case 'search': this.renderSearch(); break;
+                    case 'about': this.renderStatic('Our Roots', 'Founded on the principle that humans thrive when surrounded by nature. We partner with sustainable nurseries to bring life into your home.'); break;
+                    default: this.renderTemplate('tpl-home'); break;
+                }
+            }
+
+            renderTemplate(templateId, callback = null) {
+                const tpl = document.getElementById(templateId);
+                if (!tpl) return;
+                this.root.innerHTML = '';
+                this.root.appendChild(tpl.content.cloneNode(true));
+                if (callback) callback.call(this, this.root);
+            }
+
+            renderShop(activeCategory = 'All') {
+                activeCategory = decodeURI(activeCategory);
+                this.renderTemplate('tpl-shop', (view) => {
+                    const list = view.querySelector('.js-category-list');
+                    const grid = view.querySelector('.js-product-grid');
+                    const catTpl = document.getElementById('tpl-category-item');
+                    const prodTpl = document.getElementById('tpl-product-card');
+
+                    // Categories Logic
+                    DB.categories.forEach(cat => {
+                        const li = catTpl.content.cloneNode(true);
+                        const link = li.querySelector('.js-cat-link');
+                        link.textContent = cat;
+                        if(cat === activeCategory) {
+                            link.classList.add('bg-verdant-dark', 'text-white');
+                            link.classList.remove('hover:text-verdant-accent');
+                        }
+                        link.onclick = () => window.location.hash = `shop/${cat}`;
+                        list.appendChild(li);
+                    });
+
+                    // Product Grid Logic
+                    const filtered = activeCategory === 'All' ? DB.products : DB.products.filter(p => p.category === activeCategory);
+                    view.querySelector('.js-collection-title').textContent = activeCategory;
+                    view.querySelector('.js-collection-count').textContent = `${filtered.length} Items Available`;
+
+                    filtered.forEach(p => {
+                        const card = prodTpl.content.cloneNode(true);
+                        card.querySelector('.js-prod-link').href = `#product/${p.id}`;
+                        card.querySelector('.js-title').textContent = p.title;
+                        card.querySelector('.js-price').textContent = `${DB.currency}${p.price}`;
+                        card.querySelector('.js-img-placeholder').textContent = p.img;
+                        grid.appendChild(card);
+                    });
+                });
+            }
+
+            renderProduct(id) {
+                const product = DB.products.find(p => p.id == id);
+                if (!product) return window.location.hash = 'shop';
+
+                this.renderTemplate('tpl-product', (view) => {
+                    view.querySelector('.js-detail-title').textContent = product.title;
+                    view.querySelector('.js-detail-price').textContent = `${DB.currency}${product.price}`;
+                    view.querySelector('.js-detail-cat').textContent = product.category;
+                    view.querySelector('.js-detail-desc').textContent = product.desc;
+                    view.querySelector('.js-detail-img').textContent = product.img;
+
+                    view.querySelector('.js-add-btn').onclick = () => {
+                        this.cartAdd(product);
+                        this.showToast(`${product.title} added to cart`);
+                    };
+                });
+            }
+
+            renderCart() {
+                if (this.cart.length === 0) {
+                    this.renderTemplate('tpl-cart-empty', (emptyView) => {
+                        this.renderTemplate('tpl-cart', (mainView) => {
+                            mainView.querySelector('.js-cart-container').appendChild(emptyView);
+                        });
+                    });
+                    return;
+                }
+
+                this.renderTemplate('tpl-cart', (mainView) => {
+                    const container = mainView.querySelector('.js-cart-container');
+                    const layoutTpl = document.getElementById('tpl-cart-layout').content.cloneNode(true);
+                    const listContainer = layoutTpl.querySelector('.js-cart-items');
+                    const itemTpl = document.getElementById('tpl-cart-item');
+                    
+                    let total = 0;
+
+                    this.cart.forEach((item, index) => {
+                        total += (item.price * item.qty);
+                        const row = itemTpl.content.cloneNode(true);
+                        
+                        row.querySelector('.js-item-title').textContent = item.title;
+                        row.querySelector('.js-item-price').textContent = `${DB.currency}${item.price}`;
+                        row.querySelector('.js-item-qty').textContent = item.qty;
+                        row.querySelector('.js-item-img').textContent = item.img;
+
+                        row.querySelector('.js-qty-add').onclick = () => this.cartUpdate(index, 1);
+                        row.querySelector('.js-qty-sub').onclick = () => this.cartUpdate(index, -1);
+                        row.querySelector('.js-item-remove').onclick = () => {
+                            this.cart.splice(index, 1);
+                            this.cartSave();
+                            this.renderCart();
+                        };
+
+                        listContainer.appendChild(row);
+                    });
+
+                    layoutTpl.querySelector('.js-cart-subtotal').textContent = `${DB.currency}${total.toFixed(2)}`;
+                    layoutTpl.querySelector('.js-cart-total').textContent = `${DB.currency}${total.toFixed(2)}`;
+                    container.appendChild(layoutTpl);
+                });
+            }
+
+            renderCheckout() {
+                if(this.cart.length === 0) return window.location.hash = 'cart';
+                this.renderTemplate('tpl-checkout', (view) => {
+                    view.querySelector('.js-checkout-form').onsubmit = (e) => {
+                        e.preventDefault();
+                        this.cart = []; 
+                        this.cartSave();
+                        window.location.hash = 'success';
+                    };
+                });
+            }
+
+            renderSearch() {
+                this.renderTemplate('tpl-search', (view) => {
+                    const input = view.querySelector('.js-search-input');
+                    const results = view.querySelector('.js-search-results');
+                    const prodTpl = document.getElementById('tpl-product-card');
+
+                    input.oninput = (e) => {
+                        const query = e.target.value.toLowerCase();
+                        results.innerHTML = '';
+                        if(query.length < 2) return;
+
+                        const hits = DB.products.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+                        hits.forEach(p => {
+                            const card = prodTpl.content.cloneNode(true);
+                            card.querySelector('.js-prod-link').href = `#product/${p.id}`;
+                            card.querySelector('.js-title').textContent = p.title;
+                            card.querySelector('.js-price').textContent = `${DB.currency}${p.price}`;
+                            card.querySelector('.js-img-placeholder').textContent = p.img;
+                            results.appendChild(card);
+                        });
+                    };
+                });
+            }
+
+            renderAccount() {
+                this.renderTemplate('tpl-account', (view) => {
+                    view.querySelector('.js-logout').onclick = () => {
+                        this.isLoggedIn = false;
+                        localStorage.removeItem('verdant_auth');
+                        window.location.hash = 'home';
+                        this.showToast("Signed Out");
+                    };
+                });
+            }
+
+            renderSuccess() { this.renderTemplate('tpl-success'); }
+            
+            renderStatic(title, content) {
+                this.renderTemplate('tpl-static', (view) => {
+                    view.querySelector('.js-static-title').textContent = title;
+                    view.querySelector('.js-static-content').textContent = content;
+                });
+            }
+
+            bindAuth(view) {
+                view.querySelector('.js-auth-form').onsubmit = (e) => {
+                    e.preventDefault();
+                    this.isLoggedIn = true;
+                    localStorage.setItem('verdant_auth', 'true');
+                    window.location.hash = 'account';
+                    this.showToast("Signed In Successfully");
+                };
+            }
+
+            // Cart Data Mutators
+            cartAdd(product) {
+                const existing = this.cart.find(item => item.id === product.id);
+                if (existing) { existing.qty += 1; } 
+                else { this.cart.push({ ...product, qty: 1 }); }
+                this.cartSave();
+            }
+
+            cartUpdate(index, amount) {
+                this.cart[index].qty += amount;
+                if (this.cart[index].qty <= 0) this.cart.splice(index, 1);
+                this.cartSave();
+                this.renderCart(); 
+            }
+
+            cartSave() {
+                localStorage.setItem('verdant_cart', JSON.stringify(this.cart));
+                this.updateCartCount();
+            }
+
+            updateCartCount() {
+                const count = this.cart.reduce((sum, item) => sum + item.qty, 0);
+                document.querySelectorAll('.js-cart-count').forEach(el => el.textContent = count);
+            }
+        }
+
+        // --- 3. BOOTSTRAP ---
+        document.addEventListener('DOMContentLoaded', () => { window.App = new StoreEngine(); });
+    </script>
+</body>
+</html>
