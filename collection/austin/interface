@@ -299,7 +299,7 @@
     <script>
         // --- 1. NEW THEMATIC DATABASE ---
         const DB = {
-            currency: 'e(__SYSTEM_API__)',
+            currency: 'e(__SYSTEM_CURRENCY__)',
             categories: ['All', 'Indoor Plants', 'Ceramics', 'Apothecary', 'Tools'],
             products: [
                 { id: 1, title: 'Ficus Elastica', price: 45, category: 'Indoor Plants', img: 'FICUS_PLANT', desc: 'A stunning Rubber Tree with deep burgundy leaves. Easy to care for and perfect for bright indirect light.' },
