@@ -11,7 +11,10 @@
   },"starved.hustla": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
-  },"Mashala": {
+  },"mashala": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
+  },"corselle": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
   }
