@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EROS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vlt: {
+                            carbon: '#0A0A0A',
+                            steel: '#1A1A1A',
+                            safety: '#FF4D00', // Industrial Orange
+                            cyan: '#00F0FF',
+                            ghost: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    fontFamily: {
+                        tech: ['"Syncopate"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; }
+        
+        /* Grid Overlay Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .fade-enter { animation: scanIn 0.4s ease-out forwards; }
+        @keyframes scanIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        
+        .hidden { display: none !important; }
+
+        /* Industrial Button Glitch */
+        .vlt-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        .vlt-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 77, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        .vlt-btn:active { transform: translateY(0); }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #FF4D00; }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl">
+        <div class="bg-vlt-steel/80 backdrop-blur-xl border border-white/10 px-6 py-4 flex justify-between items-center shadow-2xl">
+            <a href="#home" class="font-tech text-xl tracking-tighter text-vlt-safety">EROS</a>
+            
+            <ul class="hidden md:flex space-x-8 text-[10px] font-bold tracking-[0.2em] uppercase">
+                <li><a href="#shop" class="hover:text-vlt-safety transition-colors">Storage Inventory</a></li>
+                <li><a href="#search" class="hover:text-vlt-safety transition-colors">Locate</a></li>
+            </ul>
+
+            <div class="flex items-center space-x-6">
+                <a href="#cart" class="text-[10px] font-bold tracking-widest border border-vlt-safety px-4 py-2 hover:bg-vlt-safety hover:text-vlt-carbon transition-all">
+                    SYSTEM_BAG (<span class="js-cart-count">0</span>)
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-vlt-safety">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M12 12h8M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app-root" class="flex-grow pt-32 fade-enter"></main>
+
+    <footer class="mt-20 border-t border-white/5 bg-vlt-carbon px-8 py-16">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="space-y-4">
+                <p class="font-tech text-xs tracking-widest opacity-50">EROS</p>
+                <div class="text-[9px] uppercase tracking-widest text-white/30 space-y-1">
+                    <p>Sub-Level 4, Industrial Sector</p>
+                    <p>Verified Hardware Distribution</p>
+                </div>
+            </div>
+            <div class="flex flex-col space-y-2 text-[10px] uppercase font-bold text-vlt-safety">
+                <a href="#about" class="hover:underline">Security_Policy</a>
+                <a href="#shipping" class="hover:underline">Global_Transit</a>
+            </div>
+            <p class="text-[9px] text-white/20 uppercase tracking-widest self-end">Protocol: VM_TECH_CORE_v3.1</p>
+        </div>
+    </footer>
+
+    <div id="toast-container" class="fixed bottom-8 left-8 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <template id="tpl-home">
+        <div class="max-w-7xl mx-auto px-8 py-20 text-center">
+            <div class="mb-20 space-y-6">
+                <h1 class="font-tech text-5xl md:text-8xl tracking-tighter leading-none">
+                    INSPIRING <br> <span class="text-vlt-safety">APPAREL.</span>
+                </h1>
+                <p class="text-[10px] uppercase tracking-[0.5em] text-white/40">Hardware   Apparel   Storage</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 js-featured-grid"></div>
+        </div>
+    </template>
+
+    <template id="tpl-shop">
+        <div class="max-w-7xl mx-auto px-8 py-12">
+            <header class="mb-16 border-l-4 border-vlt-safety pl-6 py-2">
+                <h2 class="font-tech text-3xl uppercase tracking-tighter js-collection-title">Inventory_Index</h2>
+                <p class="text-[10px] text-white/30 uppercase tracking-[0.2em] mt-2">Active items: <span class="js-collection-count"></span></p>
+            </header>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 js-product-grid border border-white/10"></div>
+        </div>
+    </template>
+
+    <template id="tpl-product-card">
+        <a href="#" class="group relative bg-vlt-carbon p-6 hover:bg-vlt-steel transition-all js-prod-link">
+            <div class="aspect-square bg-vlt-ghost flex items-center justify-center text-[8px] text-vlt-safety/30 js-img-placeholder mb-6 border border-white/5"></div>
+            <div class="space-y-4">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-xs font-bold uppercase tracking-widest js-title"></h3>
+                    <span class="text-[10px] text-vlt-safety js-price"></span>
+                </div>
+                <div class="flex justify-between items-center text-[8px] text-white/30 uppercase tracking-widest">
+                    <span class="js-category"></span>
+                    <span class="border border-white/10 px-2 py-0.5">READY_SHIP</span>
+                </div>
+            </div>
+        </a>
+    </template>
+
+    <template id="tpl-product">
+        <section class="max-w-7xl mx-auto px-8 py-10 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/10 border border-white/10">
+            <div class="bg-vlt-carbon p-12 flex items-center justify-center min-h-[500px]">
+                <div class="w-full aspect-square bg-vlt-ghost flex items-center justify-center text-[10px] text-vlt-safety js-detail-img"></div>
+            </div>
+            <div class="bg-vlt-carbon p-12 space-y-12">
+                <div>
+                    <span class="text-[10px] text-vlt-safety font-bold tracking-[0.3em] uppercase block mb-4 js-detail-cat"></span>
+                    <h1 class="font-tech text-4xl uppercase tracking-tighter mb-4 js-detail-title"></h1>
+                    <p class="text-xl text-vlt-safety font-bold js-detail-price"></p>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="text-[9px] uppercase tracking-widest text-white/40 border-b border-white/10 pb-2">Technical Description</p>
+                    <p class="text-xs leading-loose text-white/70 js-detail-desc"></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 text-[9px] uppercase font-bold tracking-widest">
+                    <div class="border border-white/10 p-4">
+                        <p class="text-white/30 mb-2">Artifact_ID</p>
+                        <p>#VLT-8829-X</p>
+                    </div>
+                    <div class="border border-white/10 p-4">
+                        <p class="text-white/30 mb-2">Composition</p>
+                        <p>Tech_Synthetic</p>
+                    </div>
+                </div>
+
+                <button class="w-full bg-vlt-safety text-vlt-carbon py-5 font-tech text-sm tracking-widest uppercase vlt-btn js-add-btn">
+                    Initialize_Transfer
+                </button>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-cart">
+        <section class="max-w-4xl mx-auto px-8 py-20">
+            <h1 class="font-tech text-2xl uppercase mb-12 flex items-center gap-4">
+                <span class="w-3 h-3 bg-vlt-safety animate-pulse"></span> Transfer_Queue
+            </h1>
+            <div class="js-cart-container border border-white/10"></div>
+        </section>
+    </template>
+
+    <template id="tpl-cart-empty">
+        <div class="p-20 text-center bg-vlt-steel/50">
+            <p class="text-[10px] uppercase tracking-[0.5em] text-white/30 mb-8">Queue Status: Empty</p>
+            <a href="#shop" class="text-vlt-safety font-bold border-b border-vlt-safety pb-1">REBOOT_SHOP</a>
+        </div>
+    </template>
+
+    <template id="tpl-cart-layout">
+        <div class="divide-y divide-white/10 js-cart-items"></div>
+        <div class="p-10 bg-vlt-steel flex flex-col items-end space-y-8">
+            <div class="flex justify-between w-full md:w-1/2">
+                <span class="text-[10px] uppercase tracking-widest font-bold text-white/40">Queue_Total</span>
+                <span class="text-xl font-bold js-cart-total text-vlt-safety"></span>
+            </div>
+            <a href="#checkout" class="w-full md:w-1/2 text-center bg-white text-vlt-carbon py-5 text-[10px] font-tech tracking-widest">EXECUTE_CHECKOUT</a>
+        </div>
+    </template>
+
+    <template id="tpl-cart-item">
+        <div class="flex gap-8 items-center p-8 bg-vlt-carbon group">
+            <div class="w-20 h-20 bg-vlt-ghost flex-shrink-0 flex items-center justify-center text-[8px] text-vlt-safety js-item-img"></div>
+            <div class="flex-grow">
+                <h3 class="text-xs font-bold uppercase tracking-widest js-item-title"></h3>
+                <p class="text-[10px] text-white/30 js-item-price"></p>
+            </div>
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4 text-xs font-bold border border-white/10 px-4 py-2">
+                    <button class="js-qty-sub text-vlt-safety hover:text-white transition-colors">−</button>
+                    <span class="js-item-qty text-white">1</span>
+                    <button class="js-qty-add text-vlt-safety hover:text-white transition-colors">+</button>
+                </div>
+                <button class="text-[10px] font-bold text-red-500/50 hover:text-red-500 js-item-remove">PURGE</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-checkout">
+        <section class="max-w-2xl mx-auto px-8 py-24">
+            <div class="border border-vlt-safety/30 p-12 bg-vlt-steel/50">
+                <h1 class="font-tech text-xl text-center mb-16 uppercase">Verification_Protocol</h1>
+                <form class="space-y-10 js-checkout-form">
+                    <div class="space-y-6">
+                        <input type="email" placeholder="IDENTITY_EMAIL" required class="w-full bg-vlt-carbon border border-white/10 p-4 text-xs focus:border-vlt-safety outline-none">
+                        <input type="text" placeholder="GIVEN_NAME" required class="w-full bg-vlt-carbon border border-white/10 p-4 text-xs focus:border-vlt-safety outline-none">
+                        <input type="text" placeholder="STREET_ADDRESS_TARGET" required class="w-full bg-vlt-carbon border border-white/10 p-4 text-xs focus:border-vlt-safety outline-none">
+                    </div>
+                    <button type="submit" class="w-full bg-vlt-safety text-vlt-carbon py-5 font-tech text-sm tracking-widest">PLACE_ORDER_COMMAND</button>
+                </form>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-success">
+        <div class="max-w-2xl mx-auto px-8 py-40 text-center">
+            <div class="w-20 h-20 border-2 border-vlt-safety flex items-center justify-center mx-auto mb-10">
+                <div class="w-10 h-10 bg-vlt-safety animate-ping opacity-20"></div>
+            </div>
+            <h1 class="font-tech text-3xl mb-6">TRANSMISSION_COMPLETE.</h1>
+            <p class="text-[10px] text-white/40 uppercase tracking-[0.3em] leading-loose">The artifact is in transit. Monitor your encrypted channel for updates.</p>
+        </div>
+    </template>
+
+    <script>
+        const DB = {
+            currency: '¤ ',
+            categories: ['Apparel', 'Hardware', 'Storage'],
+            products: [
+                { id: 1, title: 'VLT-01 Cargo Shell', price: 340, category: 'Apparel', img: 'SHELL_01_BLK', desc: 'Water-resistant hardshell with modular chest rig compatibility. Magnetic seam closures. Internal heat regulation.' },
+                { id: 2, title: 'Tactical Drive   1TB', price: 180, category: 'Hardware', img: 'DRV_04_CYAN', desc: 'Shockproof carbon fiber chassis. Biometric encryption layer. High-speed localized data transfer.' },
+                { id: 3, title: 'Modular Carry System', price: 120, category: 'Storage', img: 'MCS_09_UTL', desc: 'Lasercut webbing for external expansion. 15L capacity with dedicated laptop isolation zone.' },
+                { id: 4, title: 'Signal Jammer Beanie', price: 55, category: 'Apparel', img: 'BEA_02_ORNG', desc: 'Silver-lined fabric to block RFID scanning. Heavyweight industrial knit. Safety orange visibility.' },
+                { id: 5, title: 'Field Monitor Core', price: 490, category: 'Hardware', img: 'MON_08_CRT', desc: 'Augmented reality heads-up display integration. Lightweight titanium frame. 12hr battery life.' }
+            ]
+        };
+
+        class StoreEngine {
+            constructor() {
+                this.root = document.getElementById('app-root');
+                this.cart = JSON.parse(localStorage.getItem('vlt_cart')) || [];
+                this.initRouter();
+                this.updateCartCount();
+            }
+
+            showToast(msg) {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'bg-vlt-safety text-vlt-carbon px-6 py-4 text-[9px] font-bold tracking-widest uppercase border-r-8 border-white/50 shadow-2xl transition-all duration-300 transform -translate-x-10 opacity-0';
+                toast.textContent = `[SYSTEM]: ${msg}`;
+                container.appendChild(toast);
+                requestAnimationFrame(() => toast.classList.remove('-translate-x-10', 'opacity-0'));
+                setTimeout(() => {
+                    toast.classList.add('-translate-x-10', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            initRouter() {
+                window.addEventListener('hashchange', () => this.route());
+                this.route();
+            }
+
+            route() {
+                const hash = window.location.hash.slice(1) || 'home';
+                const [view, id] = hash.split('/');
+                this.root.classList.remove('fade-enter');
+                void this.root.offsetWidth;
+                this.root.classList.add('fade-enter');
+                window.scrollTo(0, 0);
+
+                switch(view) {
+                    case 'shop': this.renderShop(); break;
+                    case 'product': this.renderProduct(id); break;
+                    case 'cart': this.renderCart(); break;
+                    case 'checkout': this.renderCheckout(); break;
+                    case 'success': this.renderSuccess(); break;
+                    default: this.renderTemplate('tpl-home', this.renderHomeGrid); break;
+                }
+            }
+
+            renderTemplate(templateId, callback = null) {
+                const tpl = document.getElementById(templateId);
+                this.root.innerHTML = '';
+                this.root.appendChild(tpl.content.cloneNode(true));
+                if (callback) callback.call(this, this.root);
+            }
+
+            renderHomeGrid(view) {
+                const grid = view.querySelector('.js-featured-grid');
+                const prodTpl = document.getElementById('tpl-product-card');
+                DB.products.slice(0, 3).forEach(p => {
+                    const card = prodTpl.content.cloneNode(true);
+                    card.querySelector('.js-prod-link').href = `#product/${p.id}`;
+                    card.querySelector('.js-title').textContent = p.title;
+                    card.querySelector('.js-category').textContent = p.category;
+                    card.querySelector('.js-price').textContent = `${DB.currency}${p.price}`;
+                    card.querySelector('.js-img-placeholder').textContent = ` ${p.img}`;
+                    grid.appendChild(card);
+                });
+            }
+
+            renderShop() {
+                this.renderTemplate('tpl-shop', (view) => {
+                    const grid = view.querySelector('.js-product-grid');
+                    const prodTpl = document.getElementById('tpl-product-card');
+                    view.querySelector('.js-collection-count').textContent = DB.products.length;
+
+                    DB.products.forEach(p => {
+                        const card = prodTpl.content.cloneNode(true);
+                        card.querySelector('.js-prod-link').href = `#product/${p.id}`;
+                        card.querySelector('.js-title').textContent = p.title;
+                        card.querySelector('.js-category').textContent = p.category;
+                        card.querySelector('.js-price').textContent = `${DB.currency}${p.price}`;
+                        card.querySelector('.js-img-placeholder').textContent = ` ${p.img}`;
+                        grid.appendChild(card);
+                    });
+                });
+            }
+
+            renderProduct(id) {
+                const product = DB.products.find(p => p.id == id);
+                if (!product) return;
+                this.renderTemplate('tpl-product', (view) => {
+                    view.querySelector('.js-detail-title').textContent = product.title;
+                    view.querySelector('.js-detail-price').textContent = `${DB.currency}${product.price}`;
+                    view.querySelector('.js-detail-cat').textContent = product.category;
+                    view.querySelector('.js-detail-desc').textContent = product.desc;
+                    view.querySelector('.js-detail-img').textContent = `FILE_PATH: ${product.img}.EXE`;
+                    view.querySelector('.js-add-btn').onclick = () => {
+                        this.cartAdd(product);
+                        this.showToast(`ARTIFACT_CACHED: ${product.title}`);
+                    };
+                });
+            }
+
+            renderCart() {
+                if (this.cart.length === 0) {
+                    this.renderTemplate('tpl-cart', v => v.querySelector('.js-cart-container').appendChild(document.getElementById('tpl-cart-empty').content.cloneNode(true)));
+                    return;
+                }
+                this.renderTemplate('tpl-cart', (mainView) => {
+                    const container = mainView.querySelector('.js-cart-container');
+                    const layout = document.getElementById('tpl-cart-layout').content.cloneNode(true);
+                    const list = layout.querySelector('.js-cart-items');
+                    let total = 0;
+
+                    this.cart.forEach((item, index) => {
+                        total += (item.price * item.qty);
+                        const row = document.getElementById('tpl-cart-item').content.cloneNode(true);
+                        row.querySelector('.js-item-title').textContent = item.title;
+                        row.querySelector('.js-item-price').textContent = `${DB.currency}${item.price}`;
+                        row.querySelector('.js-item-qty').textContent = item.qty;
+                        row.querySelector('.js-item-img').textContent = item.img;
+                        row.querySelector('.js-qty-add').onclick = () => this.cartUpdate(index, 1);
+                        row.querySelector('.js-qty-sub').onclick = () => this.cartUpdate(index, -1);
+                        row.querySelector('.js-item-remove').onclick = () => { this.cart.splice(index, 1); this.cartSave(); this.renderCart(); };
+                        list.appendChild(row);
+                    });
+                    layout.querySelector('.js-cart-total').textContent = `${DB.currency}${total.toFixed(2)}`;
+                    container.appendChild(layout);
+                });
+            }
+
+            renderCheckout() {
+                this.renderTemplate('tpl-checkout', (view) => {
+                    view.querySelector('.js-checkout-form').onsubmit = (e) => {
+                        e.preventDefault();
+                        this.cart = []; this.cartSave(); window.location.hash = 'success';
+                    };
+                });
+            }
+
+            renderSuccess() { this.renderTemplate('tpl-success'); }
+
+            cartAdd(product) {
+                const existing = this.cart.find(item => item.id === product.id);
+                if (existing) { existing.qty += 1; } else { this.cart.push({ ...product, qty: 1 }); }
+                this.cartSave();
+            }
+
+            cartUpdate(index, amount) {
+                this.cart[index].qty += amount;
+                if (this.cart[index].qty <= 0) this.cart.splice(index, 1);
+                this.cartSave(); this.renderCart(); 
+            }
+
+            cartSave() {
+                localStorage.setItem('vlt_cart', JSON.stringify(this.cart));
+                this.updateCartCount();
+            }
+
+            updateCartCount() {
+                const count = this.cart.reduce((sum, item) => sum + item.qty, 0);
+                document.querySelectorAll('.js-cart-count').forEach(el => el.textContent = count);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { window.App = new StoreEngine(); });
+    </script>
+</body>
+</html>
