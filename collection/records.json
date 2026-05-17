@@ -23,5 +23,8 @@
   },"ourchieve": {
     "hash": "v1.0.1.3",
     "files": ["interface","poster.png"]
+  },"oasis": {
+    "hash": "v1.0.1.1",
+    "files": ["interface","poster.png"]
   }
 }
