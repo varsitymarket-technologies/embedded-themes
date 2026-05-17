@@ -20,5 +20,8 @@
   },"eros": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
+  },"ourchieve": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
   }
 }
