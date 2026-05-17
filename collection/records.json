@@ -17,6 +17,9 @@
   },"mono": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
+  },"terra": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
   },"corselle": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
