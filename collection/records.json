@@ -23,11 +23,32 @@
   },"terra": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
+  },"aura": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
   },"corselle": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
   },"eros": {
-    "hash": "v1.0.1.4",
+    "hash": "v1.0.2.4",
+    "files": ["interface","poster.png"]
+  },"imara": {
+    "hash": "v1.0.0.1",
+    "files": ["interface","poster.png"]
+  },"kinetic": {
+    "hash": "v1.0.0.1",
+    "files": ["interface","poster.png"]
+  },"linus": {
+    "hash": "v1.0.0.1",
+    "files": ["interface","poster.png"]
+  },"lucid": {
+    "hash": "v1.0.0.1",
+    "files": ["interface","poster.png"]
+  },"makhesa": {
+    "hash": "v1.0.0.1",
+    "files": ["interface","poster.png"]
+  },"mono": {
+    "hash": "v1.0.0.1",
     "files": ["interface","poster.png"]
   },"ourchieve": {
     "hash": "v1.0.1.3",
