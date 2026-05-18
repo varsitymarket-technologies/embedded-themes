@@ -5,6 +5,15 @@
   },"kinetic": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
+  },"pvt": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
+  },"crown": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
+  },"revenge": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
   },"terra": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
