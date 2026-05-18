@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTV STUDIO | Urban Armor</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-raw: #0A0A0A;
+            --bg-surface: #121212;
+            --text-clean: #FFFFFF;
+            --text-dim: #707070;
+            --bg-volt: #CCFF00;
+            --border-heavy: #222222;
+        }
+        
+        body { 
+            font-family: 'Space Mono', monospace; 
+            background-color: var(--bg-raw); 
+            color: var(--text-clean); 
+            -webkit-font-smoothing: antialiased;
+        }
+        .font-impact { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+        
+        .view-section { display: none; }
+        .view-section.active { display: block; animation: glitchedFade 0.4s steps(4, end) forwards; }
+        
+        @keyframes glitchedFade {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Industrial Inputs */
+        .PTV-input { 
+            border: 2px solid var(--border-heavy); 
+            background-color: #000000;
+            color: var(--text-clean);
+            border-radius: 0px;
+            padding: 16px;
+            font-size: 13px;
+            transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .PTV-input:focus { 
+            outline: none; 
+            border-color: var(--bg-volt);
+        }
+        
+        /* Tactical Buttons */
+        .btn-volt {
+            background-color: var(--bg-volt);
+            color: #000000;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
+            border-radius: 0px;
+        }
+        .btn-volt:hover {
+            background-color: #FFFFFF;
+            box-shadow: 0 0 15px var(--bg-volt);
+        }
+
+        .btn-black-ops {
+            border: 2px solid var(--border-heavy);
+            background-color: transparent;
+            color: var(--text-clean);
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            border-radius: 0px;
+        }
+        .btn-black-ops:hover {
+            border-color: #FFFFFF;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        /* Custom Scrollbar styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-raw); }
+        ::-webkit-scrollbar-thumb { background: var(--border-heavy); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--bg-volt); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#CCFF00] selection:text-black">
+
+    <div class="bg-[var(--bg-volt)] text-black text-center py-2 text-xs font-bold tracking-tight uppercase px-4 flex items-center justify-center gap-6 overflow-hidden">
+        <span>[DROP 04 / NEO-METROPOLIS ARCHIVE OUT NOW]</span>
+        <span class="hidden md:inline">• PTV GLOBAL UNDERGROUND LOGISTICS ENABLED</span>
+        <span class="hidden lg:inline">• QUANTITIES CRITICALLY LIMITED</span>
+    </div>
+
+    <header class="sticky top-0 bg-[var(--bg-raw)]/95 backdrop-blur-md z-40 border-b-2 border-[var(--border-heavy)]">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-bold uppercase tracking-wider">
+                <a href="#shop" onclick="app.router.navigate('shop')" class="hover:text-[var(--bg-volt)] transition-colors">/The_Drop</a>
+                <a href="#about" onclick="app.router.navigate('about')" class="hover:text-[var(--bg-volt)] transition-colors">/Manifesto</a>
+            </nav>
+
+            <a href="#home" onclick="app.router.navigate('home')" class="text-center group">
+                <span class="font-impact text-4xl tracking-tighter text-[var(--text-clean)] block group-hover:text-[var(--bg-volt)] transition-colors">PTV STUDIO</span>
+            </a>
+
+            <div class="flex items-center space-x-6">
+                <button class="hover:text-[var(--bg-volt)] transition-colors" onclick="app.ui.toggleSearchOverlay()" aria-label="Search Inventory">
+                    <i data-lucide="terminal" class="w-5 h-5"></i>
+                </button>
+                <button class="hover:text-[var(--bg-volt)] transition-colors flex items-center relative" onclick="app.ui.toggleCartDrawer()" aria-label="Open Inventory Box">
+                    <i data-lucide="package" class="w-5 h-5"></i>
+                    <span id="global-cart-count" class="absolute -top-2 -right-2 text-[10px] bg-[var(--bg-volt)] text-black w-4.5 h-4.5 flex items-center justify-center opacity-0 transition-opacity font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <section id="view-home" class="view-section active">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <div class="relative w-full h-[72vh] min-h-[500px] bg-neutral-900 border-2 border-[var(--border-heavy)] overflow-hidden flex items-end">
+                    <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover object-center filter grayscale contrast-125 mix-blend-luminosity" alt="Streetwear Editorial Background">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                    
+                    <div class="relative z-10 p-6 md:p-12 w-full max-w-3xl">
+                        <span class="text-xs font-bold uppercase tracking-widest text-[var(--bg-volt)] px-2 py-1 bg-black border border-[var(--border-heavy)] inline-block mb-4">SYSTEM DROP: LOCALLY CONSTRUCTED</span>
+                        <h1 class="font-impact text-5xl sm:text-7xl leading-[0.85] text-white mb-6">ARMOR FOR THE SOUL.</h1>
+                        <p class="text-[var(--text-dim)] text-xs sm:text-sm leading-relaxed mb-8 max-w-md font-mono">PTV loops subcultural energy from Yaba and Braamfontein straight into high-grade utility garments. Designed without compromise. Issued in sets.</p>
+                        <button onclick="app.router.navigate('shop')" class="px-8 py-4 btn-volt text-xs font-bold">
+                            Initialize Cargo Access
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 my-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="border-2 border-[var(--border-heavy)] p-6 bg-[var(--bg-surface)]">
+                    <div class="text-[var(--bg-volt)] font-bold mb-2">// 01 / HIGH DENSITY TECH</div>
+                    <p class="text-[var(--text-dim)] text-xs leading-relaxed">Heavyweight raw cotton components and custom tactical hardware matrices assembled to secure prolonged product architecture.</p>
+                </div>
+                <div class="border-2 border-[var(--border-heavy)] p-6 bg-[var(--bg-surface)]">
+                    <div class="text-[var(--bg-volt)] font-bold mb-2">// 02 / ZERO INTERMEDIARY</div>
+                    <p class="text-[var(--text-dim)] text-xs leading-relaxed">Direct pipeline ecosystem fueling modern underground designers and localized manufacturing spaces across West and Southern Africa.</p>
+                </div>
+                <div class="border-2 border-[var(--border-heavy)] p-6 bg-[var(--bg-surface)]">
+                    <div class="text-[var(--bg-volt)] font-bold mb-2">// 03 / FINITE DISPERSAL</div>
+                    <p class="text-[var(--text-dim)] text-xs leading-relaxed">Once allocations hit structural depletion bounds, blueprints are immediately digitalized or permanently archived. No re-prints.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-shop" class="view-section max-w-7xl mx-auto px-4 py-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline mb-8 border-b-2 border-[var(--border-heavy)] pb-4 gap-4">
+                <div>
+                    <h2 class="font-impact text-3xl">ACTIVE ALLOCATIONS</h2>
+                    <p class="text-[var(--text-dim)] text-xs mt-1">Filter catalog parameters to isolate tactical configurations.</p>
+                </div>
+                <select id="catalog-sort" onchange="app.store.sortCatalog(this.value)" class="bg-black border-2 border-[var(--border-heavy)] p-2 text-xs font-bold uppercase tracking-wider text-[var(--bg-volt)] focus:outline-none cursor-pointer">
+                    <option value="featured">SYS_DEFAULT_SORT</option>
+                    <option value="price-low">PRICE_VAL // MIN</option>
+                    <option value="price-high">PRICE_VAL // MAX</option>
+                </select>
+            </div>
+
+            <div id="shop-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                </div>
+        </section>
+
+        <section id="view-product" class="view-section max-w-7xl mx-auto px-4 py-8">
+            <div id="product-detail-target" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                </div>
+        </section>
+
+        <section id="view-about" class="view-section max-w-4xl mx-auto px-4 py-16 text-left">
+            <span class="text-[var(--bg-volt)] text-xs font-bold block mb-2">// MISSION PROTOCOL: RADICAL GENERATION</span>
+            <h2 class="font-impact text-4xl sm:text-5xl mb-6">WE ARE THE SYSTEM UPGRADE.</h2>
+            <div class="space-y-6 text-[var(--text-dim)] text-xs sm:text-sm leading-relaxed font-mono">
+                <p>PTV operates as a premium brutalist streetwear framework focused on decentralizing apparel trade routes. We stand as a platform for radical youth enterprise, ensuring 100% trace-integrity back to independent production nodes in Lagos, Johannesburg, and Nairobi.</p>
+                <p>By routing high-velocity capsule sales capital straight to our operational units, we support tech-literacy programs and sustainable fabrication environments across the continent. This is not fast fashion. This is urban infrastructure.</p>
+            </div>
+            <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="border border-[var(--border-heavy)] p-4 bg-black text-center"><div class="font-impact text-2xl text-[var(--text-clean)]">94%</div><div class="text-[9px] text-[var(--text-dim)] uppercase mt-1">Direct Return Margins</div></div>
+                <div class="border border-[var(--border-heavy)] p-4 bg-black text-center"><div class="font-impact text-2xl text-[var(--bg-volt)]">04</div><div class="text-[9px] text-[var(--text-dim)] uppercase mt-1">Active Hub Cities</div></div>
+                <div class="border border-[var(--border-heavy)] p-4 bg-black text-center"><div class="font-impact text-2xl text-[var(--text-clean)]">14oz</div><div class="text-[9px] text-[var(--text-dim)] uppercase mt-1">Min Denim Spec</div></div>
+                <div class="border border-[var(--border-heavy)] p-4 bg-black text-center"><div class="font-impact text-2xl text-[var(--bg-volt)]">100%</div><div class="text-[9px] text-[var(--text-dim)] uppercase mt-1">Independent Led</div></div>
+            </div>
+        </section>
+
+        <section id="view-checkout" class="view-section max-w-5xl mx-auto px-4 py-8">
+            <h2 class="font-impact text-3xl mb-8 tracking-tighter">DECRYPT SECURE PORTAL</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <div class="lg:col-span-7">
+                    <div class="flex items-center space-x-4 text-xs font-bold uppercase mb-6 bg-[var(--bg-surface)] p-3 border border-[var(--border-heavy)]">
+                        <span id="step-nav-1" class="text-[var(--bg-volt)]">01_LOGISTICS</span>
+                        <span class="text-[var(--text-dim)]">/</span>
+                        <span id="step-nav-2" class="text-[var(--text-dim)]">02_TRANCHE_AUTH</span>
+                    </div>
+
+                    <form id="checkout-form" onsubmit="app.checkout.handleStepSubmit(event)" class="space-y-4 flex flex-col">
+                        <div id="checkout-step-container" class="space-y-4 min-h-[220px]"></div>
+                        <div class="flex justify-between items-center pt-4 border-t border-[var(--border-heavy)]">
+                            <a href="#shop" onclick="app.router.navigate('shop')" class="text-xs uppercase text-[var(--text-dim)] hover:text-white">Abort Transaction</a>
+                            <button type="submit" class="px-8 py-4 btn-volt text-xs font-bold">
+                                Execute Sequence
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="lg:col-span-5 bg-[var(--bg-surface)] p-6 border-2 border-[var(--border-heavy)] h-fit">
+                    <h3 class="font-impact text-xl mb-4 text-white">BOX CONTENT LEDGER</h3>
+                    <div id="checkout-summary-items" class="space-y-3 max-h-[220px] overflow-y-auto mb-4 border-b border-[var(--border-heavy)] pb-4"></div>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between text-[var(--text-dim)]"><span>Subtotal Val</span><span id="chk-sub">$0.00</span></div>
+                        <div class="flex justify-between text-[var(--text-dim)]"><span>Freight Priority</span><span class="text-[var(--bg-volt)]">COMPLIMENTARY</span></div>
+                        <div class="flex justify-between items-center pt-4 text-sm font-bold border-t-2 border-[var(--border-heavy)] text-white">
+                            <span>AGGREGATE DUE</span>
+                            <span id="chk-total" class="text-base text-[var(--bg-volt)]">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 pointer-events-none opacity-0 transition-opacity duration-300" onclick="app.ui.toggleCartDrawer()">
+        <div class="absolute right-0 top-0 h-full w-full max-w-[440px] bg-black border-l-2 border-[var(--border-heavy)] flex flex-col justify-between pointer-events-auto transform translate-x-full transition-transform duration-400 ease-out" onclick="event.stopPropagation()">
+            
+            <div class="p-6 border-b-2 border-[var(--border-heavy)] flex items-center justify-between bg-[var(--bg-surface)]">
+                <div>
+                    <h3 class="font-impact text-2xl tracking-tight">CONTAINER INDEX</h3>
+                    <p class="text-[10px] text-[var(--bg-volt)] uppercase tracking-wider">Tactical Wardrobe Allocations</p>
+                </div>
+                <button onclick="app.ui.toggleCartDrawer()" class="text-[var(--text-dim)] hover:text-white border border-[var(--border-heavy)] p-2 hover:border-white transition-colors">
+                    <i data-lucide="chevrons-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+            
+            <div id="cart-drawer-items" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
+            
+            <div class="p-6 bg-[var(--bg-surface)] border-t-2 border-[var(--border-heavy)]">
+                <div class="flex justify-between items-baseline mb-4 font-mono">
+                    <span class="text-xs uppercase text-[var(--text-dim)]">ESTIMATED EXTRADITION</span>
+                    <span id="cart-drawer-subtotal" class="font-impact text-2xl text-[var(--bg-volt)]">$0.00</span>
+                </div>
+                <button onclick="app.checkout.initiateCheckout()" class="w-full py-4 btn-volt text-xs font-bold">
+                    Secure Processing Route
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-overlay" class="fixed inset-0 bg-black/98 z-50 hidden flex-col justify-start pt-24 px-4 transition-all">
+        <button onclick="app.ui.toggleSearchOverlay()" class="absolute top-6 right-6 text-[var(--text-dim)] hover:text-[var(--bg-volt)] border border-[var(--border-heavy)] p-3">
+            <i data-lucide="slash" class="w-5 h-5"></i>
+        </button>
+        <div class="w-full max-w-2xl mx-auto flex flex-col">
+            <label for="live-search-input" class="text-[10px] text-[var(--bg-volt)] mb-2 font-mono uppercase tracking-widest">>> ENTER PARAMETER QUERY LOGIC</label>
+            <input type="text" id="live-search-input" oninput="app.store.handleSearch(this.value)" placeholder="SEARCH DENIM, VESTS, SYSTEM ORIGINS..." class="w-full bg-black border-2 border-[var(--border-heavy)] p-4 font-mono text-xl text-white focus:outline-none focus:border-[var(--bg-volt)] placeholder:text-neutral-800">
+            <div id="search-results-output" class="mt-6 space-y-2 max-h-[55vh] overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <div id="toast-notif" class="fixed bottom-6 right-6 bg-black border-2 border-[var(--bg-volt)] text-white text-xs font-mono py-4 px-6 rounded-none shadow-2xl z-50 opacity-0 translate-y-4 transition-all duration-300 pointer-events-none flex items-center gap-3">
+        <span class="text-[var(--bg-volt)] font-bold">>></span>
+        <span id="toast-notif-message">System Node Configured.</span>
+    </div>
+
+    <footer class="bg-black border-t-2 border-[var(--border-heavy)] pt-16 pb-8 text-xs font-mono text-[var(--text-dim)]">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+            <div class="md:col-span-5 space-y-4">
+                <span class="font-impact text-3xl tracking-tighter text-white block">PTV STUDIO</span>
+                <p class="leading-relaxed max-w-sm text-neutral-500">Continuous drop network serving high-density structural streetwear patterns globally. Made hyper-functional, tracing urban aesthetics to the bone.</p>
+            </div>
+            <div class="md:col-span-3 space-y-2">
+                <h4 class="text-[var(--bg-volt)] uppercase font-bold text-[10px] mb-3">// ARCHIVE NODES</h4>
+                <a href="#shop" onclick="app.router.navigate('shop')" class="block hover:text-white transition-colors">Capsules Archive</a>
+                <a href="#" class="block hover:text-white transition-colors">Direct Manufacturing Logs</a>
+                <a href="#" class="block hover:text-white transition-colors">Hardware Supply Protocol</a>
+            </div>
+            <div class="md:col-span-4 space-y-4">
+                <h4 class="text-neutral-400 uppercase font-bold text-[10px] mb-1">// SECURE INTEL FEED</h4>
+                <form onsubmit="event.preventDefault(); app.ui.triggerToast('INTEL COMM NETWORK SIGNED.');" class="flex border-2 border-[var(--border-heavy)] bg-[var(--bg-surface)] p-1">
+                    <input type="email" placeholder="ENTER ADDR PROMPT" required class="flex-grow bg-transparent text-xs p-2 text-white focus:outline-none placeholder:text-neutral-700">
+                    <button type="submit" class="bg-[var(--border-heavy)] text-white px-4 text-[10px] font-bold hover:bg-[var(--bg-volt)] hover:text-black transition-all">CONNECT</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-[var(--border-heavy)] flex flex-col sm:flex-row justify-between items-center text-[10px] text-neutral-600 gap-4">
+            <p>&copy; 2026 PTV MATRIX DEPLOYMENTS. SYSTEM SECURED.</p>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white">OPERATIONAL CHARTER</a>
+                <a href="#" class="hover:text-white">PRIVACY ARCHITECTURE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Brutalist Streetwear Drop Database
+         */
+        const INVENTORY_DB = [
+            { id: 'PTV-01', name: 'Yaba Tactical Cargo Vest', price: 145.00, category: 'Utility', specs: '1000D Cordura / Modular Molle Webbing / Triple Pocket Layering', images: ['https://images.unsplash.com/photo-1618355829737-2228915674e0?q=80&w=800&auto=format&fit=crop'], desc: 'Engineered for metropolitan transport utility. Constructed with military-grade ballistic fabrics by precision workhouses in Mainland Lagos.' },
+            { id: 'PTV-02', name: 'Braamfontein Heavy Oversized Hoodie', price: 170.00, category: 'Apparel', specs: '480GSM Diagonal Loop Loopback French Terry / Acid Volt Print', images: ['https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format&fit=crop'], desc: 'Immensely thick structured drape profile. Features distressed raw edge accents and highly reflective algorithmic graphic text mapping across back spine area.' },
+            { id: 'PTV-03', name: 'Eko Industrial Raw Denim Pants', price: 195.00, category: 'Apparel', specs: '15oz Selvedge Raw Cotton Denim / Reinforced Knee Architecture', images: ['https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop'], desc: 'Rigid structural denim cut flat to lock boxy profiles over footwear. Individually stamped with capsule sequence classification metrics.' },
+            { id: 'PTV-04', name: 'Neon-Matrix Webbing Utility Belt', price: 65.00, category: 'Hardware', specs: 'Heavy Nylon Strand Composition / Quick-Release Cobalt Alloy Buckle', images: ['https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=800&auto=format&fit=crop'], desc: 'Infinite adjustments belt harness format layout with laser-etched PTV insignia tooling across industrial composite clasp architecture.' }
+        ];
+
+        const app = {
+            state: { cart: [], activeFilter: 'all', currentSort: 'featured', activeCheckoutStep: 1, selectedSize: null },
+            init: function() { this.router.init(); this.store.renderCatalog(); this.cart.loadAndSync(); lucide.createIcons(); }
+        };
+
+        // --- SINGLE PAGE PROTOCOL ROUTER ---
+        app.router = {
+            init: function() {
+                window.addEventListener('popstate', () => this.evalRoute(window.location.hash));
+                this.evalRoute(window.location.hash || '#home');
+            },
+            navigate: function(view, params = null) {
+                let hash = `#${view}`;
+                if (params) hash += `?${new URLSearchParams(params).toString()}`;
+                history.pushState(null, null, hash);
+                this.evalRoute(hash);
+            },
+            evalRoute: function(hashString) {
+                const parts = hashString.split('?');
+                const view = parts[0] || '#home';
+                const queryParams = parts[1] ? Object.fromEntries(new URLSearchParams(parts[1])) : {};
+                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+                const targetView = document.getElementById(`view-${view.replace('#', '')}`);
+                if (targetView) targetView.classList.add('active');
+                
+                if (view === '#shop') { app.store.filterCatalog('all'); } 
+                else if (view === '#product' && queryParams.id) { app.store.renderProductDetail(queryParams.id); } 
+                else if (view === '#checkout') { app.checkout.renderCurrentStep(); }
+                window.scrollTo({top:0, behavior: 'auto'});
+            }
+        };
+
+        // --- PRODUCTION ARCHIVE LOGISTICS ---
+        app.store = {
+            renderCatalog: function(itemsToRender = INVENTORY_DB) {
+                const grid = document.getElementById('shop-items-grid');
+                if (!grid) return;
+                grid.innerHTML = itemsToRender.map(item => `
+                    <div class="group cursor-pointer bg-[var(--bg-surface)] border-2 border-[var(--border-heavy)] p-4 flex flex-col justify-between" onclick="app.router.navigate('product', {id: '${item.id}'})">
+                        <div class="aspect-square w-full bg-black mb-4 overflow-hidden relative border border-[var(--border-heavy)]">
+                            <img src="${item.images[0]}" alt="${item.name}" class="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-500">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-baseline mb-1 font-mono text-xs">
+                                <span class="text-[var(--bg-volt)] font-bold">// ${item.category}</span>
+                                <span class="text-white font-bold">$${item.price.toFixed(2)}</span>
+                            </div>
+                            <h3 class="font-impact text-lg tracking-tight text-neutral-300 group-hover:text-white transition-colors">${item.name}</h3>
+                        </div>
+                    </div>`).join('');
+            },
+            filterCatalog: function(cat) { app.state.activeFilter = cat; this.renderCatalog(cat === 'all' ? INVENTORY_DB : INVENTORY_DB.filter(i => i.category === cat)); },
+            sortCatalog: function(criteria) {
+                let sorted = [...INVENTORY_DB];
+                if (criteria === 'price-low') sorted.sort((a,b) => a.price - b.price);
+                if (criteria === 'price-high') sorted.sort((a,b) => b.price - a.price);
+                this.renderCatalog(sorted);
+            },
+            selectSize: function(sz) {
+                app.state.selectedSize = sz;
+                document.querySelectorAll('.btn-sz-tactical').forEach(b => b.className = "btn-sz-tactical border border-[var(--border-heavy)] bg-black text-white p-3 font-mono text-xs text-center transition-all");
+                event.target.className = "btn-sz-tactical border-2 border-[var(--bg-volt)] bg-[var(--bg-volt)] text-black p-3 font-mono text-xs text-center font-bold transition-all";
+                document.getElementById('sz-alert-prompt').classList.add('hidden');
+            },
+            renderProductDetail: function(id) {
+                const item = INVENTORY_DB.find(p => p.id === id);
+                if (!item) return;
+                app.state.selectedSize = null;
+
+                const sizes = ['MATRIX_SZ_S', 'MATRIX_SZ_M', 'MATRIX_SZ_L', 'MATRIX_SZ_XL'];
+
+                document.getElementById('product-detail-target').innerHTML = `
+                    <div class="w-full lg:col-span-6 bg-black border-2 border-[var(--border-heavy)] p-4">
+                        <div class="aspect-square overflow-hidden bg-neutral-900 border border-[var(--border-heavy)]">
+                            <img src="${item.images[0]}" alt="${item.name}" class="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+                        </div>
+                    </div>
+                    <div class="w-full lg:col-span-6 flex flex-col justify-center bg-[var(--bg-surface)] p-6 md:p-8 border-2 border-[var(--border-heavy)]">
+                        <span class="text-xs font-bold text-[var(--bg-volt)] tracking-widest uppercase mb-1 block">>> PTV SPEC // INDEX ${item.id}</span>
+                        <h1 class="font-impact text-3xl sm:text-4xl text-white leading-none mb-4">${item.name}</h1>
+                        <p class="text-xl font-bold font-mono text-white mb-6">$${item.price.toFixed(2)}</p>
+                        
+                        <div class="mb-6 font-mono">
+                            <span class="text-xs font-bold text-neutral-400 block mb-2">CHOOSE ALLOCATION SCALE:</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                ${sizes.map(sz => `<button onclick="app.store.selectSize('${sz}')" class="btn-sz-tactical border border-[var(--border-heavy)] bg-black text-white p-3 font-mono text-xs text-center hover:border-[var(--bg-volt)]">${sz}</button>`).join('')}
+                            </div>
+                            <span id="sz-alert-prompt" class="text-[var(--bg-volt)] text-xs font-bold mt-2 block hidden">>> CRITICAL: CHOOSE MASS DIMENSION INDEX BEFORE SYSTEM ADD</span>
+                        </div>
+
+                        <button onclick="app.store.executeCartInsertion('${item.id}')" class="w-full py-4 btn-volt text-xs font-bold mb-6 flex justify-center items-center gap-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i> DEPLOY TO CARGO CONTAINER
+                        </button>
+                        
+                        <div class="space-y-3 pt-4 border-t border-[var(--border-heavy)] text-xs font-mono text-neutral-400">
+                            <p class="text-white"><strong class="text-[var(--bg-volt)]">// DATA DETAILS:</strong> ${item.desc}</p>
+                            <p><strong class="text-white">// HARDWARE SPEC:</strong> ${item.specs}</p>
+                        </div>
+                    </div>`;
+                lucide.createIcons();
+            },
+            executeCartInsertion: function(id) {
+                if(!app.state.selectedSize) {
+                    document.getElementById('sz-alert-prompt').classList.remove('hidden');
+                    return;
+                }
+                app.cart.addItem(id, app.state.selectedSize);
+            },
+            handleSearch: function(term) {
+                const out = document.getElementById('search-results-output');
+                if (!term) { out.innerHTML = ''; return; }
+                out.innerHTML = INVENTORY_DB.filter(i => i.name.toLowerCase().includes(term.toLowerCase())).map(i => `
+                    <div onclick="app.ui.toggleSearchOverlay(); app.router.navigate('product', {id: '${i.id}'})" class="flex items-center space-x-4 p-3 bg-[var(--bg-surface)] border border-[var(--border-heavy)] hover:border-[var(--bg-volt)] cursor-pointer transition-all">
+                        <img src="${i.images[0]}" class="w-10 h-10 object-cover filter grayscale shrink-0 border border-[var(--border-heavy)]">
+                        <div class="flex-grow font-mono">
+                            <span class="block text-sm font-bold text-white uppercase">${i.name}</span>
+                            <span class="block text-[10px] text-[var(--bg-volt)] uppercase">${i.category}</span>
+                        </div>
+                        <span class="font-mono text-sm font-bold text-white">$${i.price}</span>
+                    </div>`).join('');
+            }
+        };
+
+        // --- BOX CONTENT TRANSIT LEDGER (CART) ---
+        app.cart = {
+            loadAndSync: function() { const stored = localStorage.getItem('PTV_box_cart'); if (stored) app.state.cart = JSON.parse(stored); this.updateUI(); },
+            addItem: function(id, size) {
+                const prod = INVENTORY_DB.find(p => p.id === id);
+                const exist = app.state.cart.find(item => item.product.id === id && item.size === size);
+                if (exist) exist.qty += 1; else app.state.cart.push({ product: prod, qty: 1, size: size });
+                this.sync(); app.ui.triggerToast(`ITEM BOUND IN CONTAINER INDEX.`); app.ui.toggleCartDrawer(true);
+            },
+            updateQty: function(index, val) { 
+                const item = app.state.cart[index]; 
+                if (!item) return; 
+                item.qty += val; 
+                if (item.qty <= 0) app.state.cart.splice(index, 1); 
+                this.sync(); 
+            },
+            sync: function() { localStorage.setItem('PTV_box_cart', JSON.stringify(app.state.cart)); this.updateUI(); },
+            updateUI: function() {
+                const drawerContainer = document.getElementById('cart-drawer-items');
+                const badge = document.getElementById('global-cart-count');
+                const subtotalText = document.getElementById('cart-drawer-subtotal');
+                const totalItems = app.state.cart.reduce((sum, i) => sum + i.qty, 0);
+                const subtotal = app.state.cart.reduce((sum, i) => sum + (i.product.price * i.qty), 0);
+                
+                if (totalItems > 0) { badge.classList.remove('opacity-0'); badge.innerText = totalItems; } else { badge.classList.add('opacity-0'); }
+                subtotalText.innerText = `$${subtotal.toFixed(2)}`;
+                
+                if (app.state.cart.length === 0) { 
+                    drawerContainer.innerHTML = `<div class="text-center text-neutral-600 text-xs py-16 font-mono">// BOX EMPTY // CONTAINER IN VACUUM STATE.</div>`; 
+                } else {
+                    drawerContainer.innerHTML = app.state.cart.map((item, idx) => `
+                        <div class="flex space-x-4 bg-[var(--bg-surface)] border border-[var(--border-heavy)] p-3">
+                            <img src="${item.product.images[0]}" class="w-14 h-14 object-cover filter grayscale shrink-0 border border-[var(--border-heavy)]">
+                            <div class="flex flex-col justify-between flex-grow font-mono">
+                                <div>
+                                    <h4 class="text-xs font-bold text-white leading-tight mb-0.5 uppercase">${item.product.name}</h4>
+                                    <span class="text-[9px] text-[var(--bg-volt)] block font-bold">${item.size}</span>
+                                </div>
+                                <div class="flex justify-between items-center mt-1">
+                                    <div class="flex items-center space-x-2 border border-[var(--border-heavy)] bg-black px-1.5 py-0.5 text-[11px]">
+                                        <button onclick="app.cart.updateQty(${idx}, -1)" class="text-neutral-500 hover:text-[var(--bg-volt)] font-bold">&minus;</button>
+                                        <span class="text-white w-4 text-center text-[10px]">${item.qty}</span>
+                                        <button onclick="app.cart.updateQty(${idx}, 1)" class="text-neutral-500 hover:text-[var(--bg-volt)] font-bold">&plus;</button>
+                                    </div>
+                                    <span class="text-xs font-bold text-white">$${(item.product.price * item.qty).toFixed(2)}</span>
+                                </div>
+                            </div>
+                        </div>`).join('');
+                }
+            }
+        };
+
+        // --- TRANSACTION PLATFORM GATEWAY ---
+        app.checkout = {
+            initiateCheckout: function() { if(!app.state.cart.length) return; app.ui.toggleCartDrawer(false); app.router.navigate('checkout'); },
+            renderCurrentStep: function() {
+                const container = document.getElementById('checkout-step-container');
+                const sub = app.state.cart.reduce((sum, i) => sum + (i.product.price * i.qty), 0);
+                document.getElementById('chk-sub').innerText = `$${sub.toFixed(2)}`;
+                document.getElementById('chk-total').innerText = `$${sub.toFixed(2)}`;
+                
+                document.getElementById('checkout-summary-items').innerHTML = app.state.cart.map(i => `
+                    <div class="flex justify-between items-center text-xs font-mono py-1">
+                        <span class="text-neutral-400 truncate max-w-[200px] uppercase">${i.product.name} [x${i.qty}]</span>
+                        <span class="text-white font-bold">$${(i.product.price * i.qty).toFixed(2)}</span>
+                    </div>`).join('');
+                
+                document.getElementById('step-nav-1').className = app.state.activeCheckoutStep === 1 ? "text-[var(--bg-volt)] font-bold" : "text-neutral-600";
+                document.getElementById('step-nav-2').className = app.state.activeCheckoutStep === 2 ? "text-[var(--bg-volt)] font-bold" : "text-neutral-600";
+
+                if (app.state.activeCheckoutStep === 1) { 
+                    container.innerHTML = `
+                        <input type="email" required placeholder="USER_EMAIL_METRIC" class="w-full PTV-input">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" required placeholder="FIRSTNAME" class="w-full PTV-input">
+                            <input type="text" required placeholder="SURNAME" class="w-full PTV-input">
+                        </div>
+                        <input type="text" required placeholder="DESTINATION_STREET_ADDRESS" class="w-full PTV-input">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" required placeholder="METROPOLIS_CITY" class="w-full PTV-input">
+                            <input type="text" required placeholder="ZIP_POSTAL_CODE" class="w-full PTV-input">
+                        </div>`; 
+                } else if (app.state.activeCheckoutStep === 2) { 
+                    container.innerHTML = `
+                        <div class="p-3 bg-neutral-900 border border-[var(--border-heavy)] text-[11px] text-[var(--bg-volt)] tracking-wider uppercase font-bold">
+                            >> LOGISTICS VERIFIED. CARD ROUTE READY.
+                        </div>
+                        <input type="text" required placeholder="CREDIT_CARD_PAN_NUMBER" class="w-full PTV-input">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" required placeholder="EXPIRY_METRIC (MM/YY)" class="w-full PTV-input">
+                            <input type="text" required placeholder="SECURITY_KEY (CVC)" class="w-full PTV-input">
+                        </div>`; 
+                }
+            },
+            handleStepSubmit: function(e) { 
+                e.preventDefault(); 
+                if(app.state.activeCheckoutStep < 2) { 
+                    app.state.activeCheckoutStep += 1; 
+                    this.renderCurrentStep(); 
+                } else { 
+                    app.state.cart = []; 
+                    app.cart.sync(); 
+                    app.state.activeCheckoutStep = 1; 
+                    alert("ALLOCATION DISPATCH LOGGED. BLUEPRINT EXECUTING SECURELY."); 
+                    app.router.navigate('home'); 
+                } 
+            }
+        };
+
+        // --- INTERACTIVE INTERFACES ---
+        app.ui = {
+            toggleCartDrawer: function(forceOpen = null) {
+                const overlay = document.getElementById('cart-drawer-overlay');
+                const inner = overlay.firstElementChild;
+                if (forceOpen === true) { 
+                    overlay.classList.remove('opacity-0', 'pointer-events-none'); 
+                    inner.classList.remove('translate-x-full'); 
+                    return; 
+                }
+                if (forceOpen === false) { 
+                    overlay.classList.add('opacity-0', 'pointer-events-none'); 
+                    inner.classList.add('translate-x-full'); 
+                    return; 
+                }
+                overlay.classList.toggle('opacity-0'); 
+                overlay.classList.toggle('pointer-events-none');
+                inner.classList.toggle('translate-x-full');
+            },
+            toggleSearchOverlay: function() { 
+                const s = document.getElementById('search-overlay'); 
+                s.classList.toggle('hidden'); 
+                s.classList.toggle('flex'); 
+                if(!s.classList.contains('hidden')) {
+                    setTimeout(() => document.getElementById('live-search-input').focus(), 100);
+                }
+            },
+            triggerToast: function(msg) {
+                const t = document.getElementById('toast-notif'); 
+                if(msg) document.getElementById('toast-notif-message').innerText = msg;
+                t.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                setTimeout(() => { 
+                    t.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none'); 
+                }, 3000);
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => app.init());
+    </script>
+</body>
+</html>
