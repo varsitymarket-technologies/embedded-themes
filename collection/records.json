@@ -5,6 +5,12 @@
   },"kinetic": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
+  },"terra": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
+  },"oasis": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
   },"hastings.ego": {
     "hash": "v1.0.0.2",
     "files": ["interface","autofill.json","poster.png"]
