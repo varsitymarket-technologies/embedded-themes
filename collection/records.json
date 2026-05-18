@@ -5,6 +5,9 @@
   },"kinetic": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
+  },"anti": {
+    "hash": "v1.0.1.4",
+    "files": ["interface","poster.png"]
   },"pvt": {
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
@@ -45,7 +48,7 @@
     "hash": "v1.0.1.4",
     "files": ["interface","poster.png"]
   },"eros": {
-    "hash": "v1.0.2.4",
+    "hash": "v1.0.2.5",
     "files": ["interface","poster.png"]
   },"imara": {
     "hash": "v1.0.0.1",
