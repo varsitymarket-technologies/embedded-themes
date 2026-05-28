@@ -1,1051 +1,699 @@
-<html lang="en" class="theme-dark"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embedded Theme Page</title>
-    <link href="assets/css2.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="assets/tailwind.output.css">
-    <link rel="stylesheet" href="assets/style.css">
-
-    <!-- Google tag (gtag.js) -->
-    <script async="" src="assets/js"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-YVH6L2RLM1');
-    </script>
-
-    <script src="assets/alpine.min.js" defer="defer"></script>
-
-    <script src="assets/init-alpine.js"></script>
-    <script src="assets/inbox_notification.js"></script>
-    <link rel="stylesheet" href="assets/Chart.min.css">
-
-    <link rel="stylesheet" href="assets/all.min.css">
-    <script src="assets/chart.min.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="assets/css2_002.css" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="assets/css2_003.css" rel="stylesheet">
-
-    <style>
-        .theme-font-style {
-            font-family: "Tilt Neon", sans-serif !important;
-            font-optical-sizing: auto !important;
-            font-weight: 400;
-            font-style: normal;
-            font-variation-settings:
-                "XROT" 0,
-                "YROT" 0;
-        }
-
-        .navbar-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 3rem 1rem;
-        }
-
-        .navbar-container img {
-            width: 8vh;
-            height: auto;
-        }
-
-        .navbar-container .quick_links {
-            font-size: 1.1rem;
-            width: 100%;
-            text-align: center;
-        }
-
-        .navbar-container .quick_links a {
-            margin: 10px;
-        }
-
-        .footer {
-            margin: 3rem 0rem;
-        }
-
-        .footer .signature {
-            font-size: 10px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .footer .signature .credits {
-            font-size: 12px;
-            font-weight: 700;
-            text-align: center;
-            font-weight: 400;
-            font-style: normal;
-            color: #6934b7;
-        }
-
-        .poster {
-            display: flex;
-            border-radius: 1rem;
-            margin: 2rem 0rem 1rem 0rem;
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            width:100%; 
-        }
-
-        .poster .contents {
-            border-radius: 1rem;
-            background: linear-gradient(220deg, #00000000, #6934b7);
-            min-height: 75vh;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        ._drop-shadow {
-            filter: drop-shadow(4px 4px 13px black);
-        }
-
-        /* 
-	Weight axis: 100 – 700
-	Width axis: 85 – 100
-*/
-        /* @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100..900&display=swap */
-
-        @font-face {
-            font-family: 'Heading Now';
-            src: url('https://fonts.vdhazel.com/headingnow/Heading-Now-Variable-Regular-trial.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .animation_containeer {
-            font-family: "Heading Now", sans-serif;
-            font-optical-sizing: auto;
-            font-style: normal;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 100vh;
-            color: #fff;
-        }
-
-
-        .animated-text {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3rem;
-            font-size: 10vw;
-            line-height: 10vw;
-        }
-
-        .letter {
-            display: inline-block;
-            --wght: 100;
-            --wdth: 85;
-            --opacity: 0.25;
-            --letter-spacing: 0;
-            --font-size: 10vw;
-            font-variation-settings: "wght" var(--wght), "wdth" var(--wdth);
-            opacity: var(--opacity);
-            letter-spacing: var(--letter-spacing);
-            font-size: var(--font-size);
-            transition:
-                font-variation-settings 1s ease-in-out,
-                opacity 1s ease-in-out,
-                letter-spacing 2s ease-in-out,
-                font-size 1s ease-in-out;
-        }
-
-
-        @import "compass/css3";
-
-        @import url(https://fonts.googleapis.com/css?family=Finger+Paint);
-
-        .smoke_container {
-            overflow: hidden;
-            font-family: "Tilt Neon", sans-serif !important;
-            font-size: 10vh;
-            text-align: center;
-            color: transparent;
-            backface-visibility: hidden;
-            padding: 4rem 0;
-        }
-
-        .smoke_container span {
-            display: inline-block;
-            text-shadow: 0 0 0 whitesmoke;
-            animation: smoky 5s 3s both;
-        }
-
-        .smoke_container span:nth-child(even) {
-            animation-name: smoky-mirror;
-        }
-
-        @keyframes smoky {
-            60% {
-                text-shadow: 0 0 40px whitesmoke;
-            }
-
-            to {
-                transform:
-                    translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg) scale(1.5);
-                text-shadow: 0 0 20px whitesmoke;
-                opacity: 0;
-            }
-        }
-
-        @keyframes smoky-mirror {
-            60% {
-                text-shadow: 0 0 40px whitesmoke;
-            }
-
-            to {
-                transform:
-                    translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg) scale(2);
-                text-shadow: 0 0 20px whitesmoke;
-                opacity: 0;
-            }
-        }
-
-        @for $item from 1 through 21 {
-            span:nth-of-type(#{$item}) {
-                animation-delay: #{(3 + ($item/10))}s;
-            }
-        }
-
-        * {
-            margin: 0;
-        }
-
-        .capture_container {
-            padding: 8rem 0 0 0;
-        }
-
-        .gradient-text:after {
-            content: "";
-            background-image: url("assets/img/Noise_Texture.png");
-            height: 300%;
-            width: 300%;
-            position: fixed;
-            pointer-events: none;
-            opacity: 0.05;
-            animation: animateGrain 8s steps(10) infinite;
-        }
-
-        @keyframes animateGrain {
-
-            0%,
-            100% {
-                transform: translate(0, 0)
-            }
-
-            10% {
-                transform: translate(-5%, -10%)
-            }
-
-            20% {
-                transform: translate(-15%, -20%)
-            }
-
-            30% {
-                transform: translate(-5%, -10%)
-            }
-
-            40% {
-                transform: translate(-15%, -20%)
-            }
-
-            50% {
-                transform: translate(-5%, -10%)
-            }
-
-            60% {
-                transform: translate(-15%, -20%)
-            }
-
-            70% {
-                transform: translate(-5%, -10%)
-            }
-
-            80% {
-                transform: translate(-15%, -20%)
-            }
-
-            90% {
-                transform: translate(-5%, -10%)
-            }
-
-            100% {
-                transform: translate(-10%, -20%)
-            }
-
-        }
-
-        :root {
-            --text-color: white;
-            --background-color: #6c2bd9;
-        }
-
-        .text-box {
-            cursor: pointer;
-            position: relative;
-            width: 400px;
-            height: 400px;
-            opacity: 0.9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0px 0px 2px 1px color-mix(in srgb, var(--text-color) 30%, transparent);
-            border-radius: 20px;
-        }
-
-        .gradient-text {
-            margin: 0;
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3rem;
-        }
-
-        .top-1,
-        .top-2,
-        .top-3 {
-            opacity: 0;
-            position: absolute;
-            -webkit-text-stroke: 2px transparent;
-            color: #121317;
-            ;
-            background: linear-gradient(180deg, var(--text-color) 0%, rgba(153, 153, 153, 0) 80%);
-            background-size: 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            text-shadow: 0px 1px 14px var(--background-color);
-        }
-
-
-
-        .bottom-1,
-        .bottom-2,
-        .bottom-3 {
-            opacity: 0;
-            position: absolute;
-            -webkit-text-stroke: 2px transparent;
-            color: #6c2bd978;
-            ;
-            background: linear-gradient(360deg, var(--text-color) 10%, rgba(153, 153, 153, 0) 80%);
-            background-size: 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            text-shadow: 0px 1px 4px var(--background-color);
-        }
-
-        .main-text {
-            position: absolute;
-            z-index: 10;
-            padding: 40px;
-            cursor: pointer;
-            scale: 1.2;
-            color: var(--text-color);
-            text-shadow: 2px 2px 4px var(--background-color);
-            ;
-        }
-
-
-
-
-        .inputSection {
-            position: absolute;
-            bottom: 2vh;
-            width: 480px;
-            height: 80px;
-            border-radius: 16px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #ffffff5f;
-            border: 2px solid rgba(0, 0, 0, 0.561);
-            box-shadow: inset 0px 12px 16px 0px color-mix(in srgb, var(--text-color) 30%, transparent);
-        }
-
-        input[type=text] {
-            width: 60%;
-            height: 40%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(#444, #555, #666);
-            box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.35),
-                inset 0 5px 5px rgba(0, 0, 0, 0.5),
-                inset 0 15px 25px rgba(0, 0, 0, 0.35);
-            color: #333;
-            font-size: large;
-            font-weight: 400;
-        }
-
-        input[type=text]:focus {
-            color: #aaa;
-            background: linear-gradient(#333, #444, #555);
-            border: none;
-            outline: none;
-            /* Remove default focus outline */
-        }
-
-        input[type="color"] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: 50px;
-            height: 50px;
-            border: none;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        input[type="color"]::-webkit-color-swatch {
-            cursor: pointer;
-            border-radius: 50%;
-            scale: 0.95;
-            border: none;
-            box-shadow: 0px 2px 12px #000;
-        }
-
-        .fieldLabel {
-            display: flex;
-            height: 100%;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        label {
-            color: #222;
-            text-shadow: 0px -0.5px 0.5px #ffffff4f;
-            font-size: medium;
-            font-weight: 600;
-        }
-
-        .typewriter {
-            overflow: hidden;
-            /* Ensures the content is not revealed until the animation */
-            border-right: .15em solid #684da3;
-            /* The typwriter cursor */
-            margin: 0 auto;
-            /* Gives that scrolling effect as the typing happens */
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        /* The typing effect */
-        @keyframes typing {
-            from {
-                width: 0
-            }
-
-            to {
-                width: 100%
-            }
-        }
-
-        /* The typewriter cursor effect */
-        @keyframes blink-caret {
-
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: orange;
-            }
-        }
-
-        @media (max-width: 1024px) {
-
-            .quick_links {
-                display: none;
-            }
-        }
-    </style>
+    <title>Template Library | Varsity Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap');
-        
-        .theme-font-style {
-            font-family: "Outfit", sans-serif !important;
-        }
 
         body {
-            background-color: #050505 !important;
+            font-family: 'Outfit', sans-serif;
+            background-color: #050505;
             background-image: none !important;
             color: white;
         }
 
-        .solid-card-featured {
+        .solid-header {
+            background: #000000;
+            border-bottom: 1px solid #222222;
+        }
+
+        .solid-card {
             background: #111111;
             border: 1px solid #222222;
             border-radius: 4px;
             transition: border-color 0.15s ease;
         }
-        
-        .solid-card-featured:hover {
-            border-color: #a855f7; 
+
+        .solid-card:hover {
+            border-color: #a855f7;
+        }
+
+        .solid-search {
+            background: #111111;
+            border: 1px solid #222222;
+            transition: border-color 0.15s ease;
+        }
+
+        .solid-search:focus-within {
+            border-color: #a855f7;
+            outline: none;
         }
     </style>
 </head>
 
-<body class="theme-font-style text-gray-200">
-    <div class="flex bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
-        <div style="width:100%; ">
-            <main class="h-full overflow-y-auto" style="width:100%;">
-                <!-- Remove everything INSIDE this div to a really blank page -->
-                <div style="display:block; padding:20px 1vw;" class="container mx-auto grid">
+<body class="text-gray-100 antialiased selection:bg-purple-500/30">
 
-                    <div id="top" style="width:100%; overflow:hidden; ">
-                        <nav class="sticky top-0 z-50 w-full" style="background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky !important; top: 0 !important; z-index: 50 !important; width: 100% !important;">
-                            <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center w-full">
-                                <div class="flex items-center gap-3 cursor-pointer" onclick="reload_page('https://themes.varsitymarket.tech/')">
-                                    <div class="w-8 h-8 rounded bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                                    </div>
-                                    <span class="text-white font-bold tracking-wide" style="font-family: 'Outfit', sans-serif;">VARSITY<span style="color: #a855f7;">MARKET</span></span>
-                                </div>
-                                
-                                <div class="hidden md:flex items-center gap-8">
-                                    <a href="/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors" style="font-family: 'Outfit', sans-serif; text-decoration: none;">Home</a>
-                                    <a href="/collection/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors" style="font-family: 'Outfit', sans-serif; text-decoration: none;">Library</a>
-                                    <a href="/create/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors" style="font-family: 'Outfit', sans-serif; text-decoration: none;">Create Theme</a>
-                                </div>
+    <nav class="sticky top-0 z-50 w-full"
+        style="background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky !important; top: 0 !important; z-index: 50 !important; width: 100% !important;">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center w-full">
+            <div class="flex items-center gap-3 cursor-pointer"
+                onclick="reload_page('https://themes.varsitymarket.tech/')">
+                <img src="/assets/favicon.png" style="width: 100px; height: 100px;">
+            </div>
 
-                                <div class="flex items-center gap-4">
-                                    <a href="/publish/" class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors" style="font-family: 'Outfit', sans-serif; text-decoration: none;">Publish</a>
-                                    <button onclick="openmenu()" class="md:hidden text-gray-300 hover:text-white focus:outline-none bg-transparent border-none">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </nav>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">Home</a>
+                <a href="/collection/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">Library</a>
+                <a href="/marketplace/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">New Marketplace</a>
+            </div>
 
-                        <style>
-                            .menu-overlay {
-                                height: 100%;
-                                width: 0;
-                                position: fixed;
-                                z-index: 100;
-                                top: 0;
-                                left: 0;
-                                background-color: rgb(0, 0, 0);
-                                background-color: rgba(0, 0, 0, 0.9);
-                                overflow-x: hidden;
-                                transition: 0.5s;
-                                max-width: 60vh;
-                                opacity: 1;
-                                pointer-events: all;
-                            }
-
-                            .menu-overlay a {
-                                padding: 8px;
-                                text-decoration: none;
-                                font-size: 2vh;
-                                color: #818181;
-                                display: block;
-                                transition: 0.3s;
-                            }
-
-                            .overlay-content {
-                                position: relative;
-                                top: 5%;
-                                width: 100%;
-                                text-align: center;
-                                margin-top: 30px;
-                            }
-
-                            .thththththt {
-                                font-size: 2rem;
-                            }
-
-                            .closebtn {
-                                font-size: 3rem !important;
-                                display: flex !important;
-                                margin: 10px !important;
-                                padding: 0;
-                                height: auto;
-                                /* position: absolute; */
-                                /* top: 2rem; */
-                                /* left: 3rem; */
-                                flex-direction: row-reverse !important;
-                            }
-
-                            .sesedesedwsedwdd {
-                                text-align: start;
-                                margin: 0.6rem 0 0 3rem;
-                            }
-
-                            .sesedesedwsedwdd i {
-                                font-size: 1.1rem !important;
-                            }
-                        </style>
-
-                        <div>
-
-                            <div id="myNav" class="menu-overlay" style="width: 0%;">
-                                <a class="closebtn" onclick="close_menu();">×</a>
-                                <div class="overlay-content">
-                                    <img onclick="reload_page('#')" src="assets/favicon.png" style="width:20vh; height:auto; margin:auto; ">
-                                    <a></a>
-                                    <a onclick="reload_page('https://themes.varsitymarket.tech/')" class="sesedesedwsedwdd">Home Page</a>
-                                    <a onclick="reload_page('/create/')" class="sesedesedwsedwdd">Create A Theme</a>
-                                    <a onclick="reload_page('/publish/')" class="sesedesedwsedwdd">Publish My Theme</a>
-                                    <a onclick="reload_page('/collection/')" class="sesedesedwsedwdd">Theme Library</a>
-                                    <a style="margin:1rem"></a>
-                                    <br>
-
-                                    <div>
-
-                                    </div>
-
-                                    <a style="margin:0.4rem"></a>
-                                    <br>
-                                    <p style="font-size:9px; padding: 0rem 0px 8rem 0px">Powered by VARSITYMARKET <span style="font-size: 8px; font-weight: 800;">technologies<span></span></span></p>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <script>
-                            function reload_page(link) {
-                                window.location.href = link;
-                            }
-                        </script>
-
-                        <style>
-                            .signature_hero_make_do {
-                                position: absolute;
-                                top: 55%;
-                                width: -webkit-fill-available;
-                                font-size: 36px;
-                                letter-spacing: 3px;
-                                color: rgba(255,255,255,0.08); /* Faded back heavily */
-                                font-family: Outfit, sans-serif;
-                                text-align: center;
-                                font-weight: 800;
-                            }
-
-                            .signature_hero_make_do span {
-                                letter-spacing: 0;
-                                font-weight: 300;
-                                font-size: 16px;
-                                line-height: 24px;
-                            }
-                        </style>
-
-                        <div>
-                            <!--  Content  -->
-                            <article>
-                                <h1 class="signature_hero_make_do">VARSITY MARKET.<br> <span>technologies</span></h1>
-                            </article>
-                        </div>
-
-                        <script>
-                            // ES6 Class
-                            class TypeWritter {
-                                constructor(txtElement, words, wait = 3000) {
-                                    this.txtElement = txtElement;
-                                    this.words = words;
-                                    this.txt = '';
-                                    this.wordIndex = 0;
-                                    this.wait = parseInt(wait, 10);
-                                    this.type();
-                                    this.isDeleting = false;
-                                }
-
-                                // Type Method
-                                type() {
-                                    // Current index of word
-                                    const current = this.wordIndex % this.words.length;
-                                    // Get full text of current word
-                                    const fullTxt = this.words[current];
-                                    // Check if deleting
-                                    if (this.isDeleting) {
-                                        // Remove char
-                                        this.txt = fullTxt.substring(0, this.txt.length - 1);
-                                    } else {
-                                        // Add char
-                                        this.txt = fullTxt.substring(0, this.txt.length + 1);
-                                    }
-
-                                    //Insert txt into element
-                                    this.txtElement.innerHTML = `<span class="txt">${
-                            this.txt
-                            }<span class="blinking-cursor">|</span></span>`;
-
-                                    // Initial type Speed
-                                    let typeSpeed = 150;
-
-                                    if (this.isDeleting) {
-                                        typeSpeed /= 2;
-                                    }
-
-                                    // If word is complete
-                                    if (!this.isDeleting && this.txt === fullTxt) {
-                                        // Make pause at end
-                                        typeSpeed = this.wait;
-                                        // Set delete to true
-                                        this.isDeleting = true;
-                                    } else if (this.isDeleting && this.txt === '') {
-                                        this.isDeleting = false;
-                                        // Move to next word
-                                        this.wordIndex++;
-                                        // Pause before start typing
-                                        typeSpeed = 500;
-                                    }
-
-                                    setTimeout(() => this.type(), typeSpeed);
-                                }
-                            }
-
-                            // Init on DOM  Load
-                            document.addEventListener('DOMContentLoaded', init);
-
-                            // Init App
-                            function init() {
-                                const txtElement = document.querySelector('.txt-type');
-                                const words = JSON.parse(txtElement.getAttribute('data-words'));
-                                const wait = txtElement.getAttribute('data-wait');
-                                // Init TypeWritter
-                                new TypeWritter(txtElement, words, wait);
-                            }
-                        </script>
-                        <style>
-                            /* Cursor */
-                            .txt-type .txt {
-                                /* border-right: solid 2px #777; */
-                                padding-right: 3px;
-                            }
-
-                            .blinking-cursor {
-                                color: #2e3d48;
-                                -webkit-animation: 1s blink step-end infinite;
-                                -moz-animation: 1s blink step-end infinite;
-                                -ms-animation: 1s blink step-end infinite;
-                                -o-animation: 1s blink step-end infinite;
-                                animation: 1s blink step-end infinite;
-                            }
-
-                            @keyframes blink {
-
-                                from,
-                                to {
-                                    color: #2e3d48;
-                                }
-
-                                50% {
-                                    color: transparent;
-                                }
-                            }
-                        </style>
-
-
-                        <div id="intro-hero-v2" class="poster">
-                            <div class="contents" style="padding: 4rem 2rem; justify-content: flex-end !important; background: transparent !important; min-height: 60vh;">
-                                <h2 style="padding-top:20px; " class="card-title code_descr text-white">
-                                    <span style=" font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #a855f7; font-weight: 700;">Webstore Design Collection<br>
-                                        <span style="font-size: 4.5rem; font-weight:900; letter-spacing: -2px; color: white; line-height: 1.1; display: block; margin: 10px 0;">Embedded Theme</span>
-                                    </span>
-
-                                    <div style="width: 100%; max-width: 55vw; margin-top: 1.5rem;">
-                                        <span style="font-size: 1.2rem; color: #a3a3a3; font-weight: 300; line-height: 1.6;">
-                                            A premium collection of designs engineered for the embedded system. Elevate your storefront with cutting-edge layouts crafted for unparalleled performance.
-                                        </span>
-                                    </div>
-                                </h2>
-                            </div>
-                        </div>
-
-                        <div id="featured-themes" class="mt-8 mb-12" style="margin-top: 4rem;">
-                            <h3 style="font-family: Outfit, sans-serif; font-weight: 800; letter-spacing: 1px; text-align: center; color: white; font-size: 2.5rem; margin-bottom: 3rem;">Featured Series</h3>
-                            
-                            <div id="index-themes-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-                                <!-- JS injected themes -->
-                            </div>
-                            
-                            <div style="text-align: center; margin-top: 4rem;">
-                                <a href="collection/" style="display: inline-block; padding: 14px 32px; background: #a855f7; color: white; text-decoration: none; border-radius: 4px; font-weight: 700; transition: background 0.2s; font-family: Outfit, sans-serif; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;" onmouseover="this.style.background='#9333ea'" onmouseout="this.style.background='#a855f7'">Browse Full Library →</a>
-                            </div>
-                        </div>
-
-                        <footer style="border-top: 1px solid rgba(255, 255, 255, 0.05); background: #050505; padding: 4rem 0 2rem 0; margin-top: auto; width: 100%;">
-                            <div class="max-w-7xl mx-auto px-6">
-                                <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-8" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-                                    <div class="flex flex-col items-center md:items-start text-center md:text-left" style="display: flex; flex-direction: column;">
-                                        <span class="text-white font-bold tracking-wide text-xl mb-2" style="font-family: 'Outfit', sans-serif;">VARSITY<span style="color: #a855f7;">MARKET</span></span>
-                                        <p class="text-gray-500 text-sm max-w-xs" style="font-family: 'Outfit', sans-serif;">The premier destination for embedded high-performance template designs.</p>
-                                    </div>
-                                    <div class="flex gap-8" style="display: flex; gap: 2rem;">
-                                        <a href="/" class="text-sm text-gray-400 hover:text-white transition-colors" style="font-family: 'Outfit', sans-serif; text-decoration: none;">Home</a>
-                                        <a href="/collection/" class="text-sm text-gray-400 hover:text-white transition-colors" style="font-family: 'Outfit', sans-serif; text-decoration: none;">Library</a>
-                                        <a href="/publish/" class="text-sm text-gray-400 hover:text-white transition-colors" style="font-family: 'Outfit', sans-serif; text-decoration: none;">Publish</a>
-                                    </div>
-                                </div>
-                                <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
-                                    <p class="text-gray-600 text-xs" style="font-family: 'Outfit', sans-serif; margin: 0; color: #555;">&copy; 2026 Varsitymarket Technologies. All rights reserved.</p>
-                                    <div class="flex gap-4" style="display: flex; gap: 1rem;">
-                                        <a href="#" class="text-gray-600 hover:text-gray-400" style="color: #555;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
-                                        <a href="#" class="text-gray-600 hover:text-gray-400" style="color: #555;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-            </main>
+            <div class="flex items-center gap-4">
+                <a href="/publish/"
+                    class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">Publish</a>
+                <button onclick="openmenu()"
+                    class="md:hidden text-gray-300 hover:text-white focus:outline-none bg-transparent border-none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
-    </div>
+    </nav>
 
-
-<script>
-    function openmenu() {
-        let x = document.getElementById('myNav');
-        x.style.width = 100 + '%';
-    }
-
-    function close_menu() {
-        let x = document.getElementById('myNav');
-        x.style.width = 0 + '%';
-    }
-
-    // Load featured themes
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('index-themes-container');
-        if (!container) return;
-
-        function humanize(str) {
-            return str.split('.').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    <style>
+        .menu-overlay {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow-x: hidden;
+            transition: 0.5s;
+            max-width: 60vh;
+            opacity: 1;
+            pointer-events: all;
         }
 
-        fetch('collection/records.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to load templates');
-                return response.json();
-            })
-            .then(data => {
-                const keys = Object.keys(data).slice(0, 3); // take first 3 real keys
-                keys.forEach(themeKey => {
-                    const theme = data[themeKey];
-                    const title = humanize(themeKey);
-                    const posterUrl = (theme.files && theme.files.includes('poster.png')) 
-                        ? `collection/${themeKey}/poster.png` 
-                        : 'https://placehold.co/600x400/1a1a1a/444444?text=No+Preview';
-                    
-                    const cardHTML = `
-                            <div class="solid-card-featured flex flex-col h-full overflow-hidden group">
-                                <div class="relative overflow-hidden w-full bg-[#1a1a1a]" style="padding-top: 65%;">
+        .menu-overlay a {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 2vh;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 5%;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .thththththt {
+            font-size: 2rem;
+        }
+
+        .closebtn {
+            font-size: 3rem !important;
+            display: flex !important;
+            margin: 10px !important;
+            padding: 0;
+            height: auto;
+            /* position: absolute; */
+            /* top: 2rem; */
+            /* left: 3rem; */
+            flex-direction: row-reverse !important;
+        }
+
+        .sesedesedwsedwdd {
+            text-align: start;
+            margin: 0.6rem 0 0 3rem;
+        }
+
+        .sesedesedwsedwdd i {
+            font-size: 1.1rem !important;
+        }
+    </style>
+
+    <div>
+
+        <div id="myNav" class="menu-overlay" style="width: 0%;">
+            <a class="closebtn" onclick="close_menu();">×</a>
+            <div class="overlay-content">
+                <img onclick="reload_page('#')" src="/assets/favicon.png"
+                    style="width:20vh; height:auto; margin:auto; ">
+                <a></a>
+                <a onclick="reload_page('https://themes.varsitymarket.tech/')" class="sesedesedwsedwdd">Home Page</a>
+                <a onclick="reload_page('/marketplace/')" class="sesedesedwsedwdd">Create A Theme</a>
+                <a onclick="reload_page('/publish/')" class="sesedesedwsedwdd">Publish My Theme</a>
+                <a onclick="reload_page('/collection/')" class="sesedesedwsedwdd">Theme Library</a>
+                <a style="margin:1rem"></a>
+                <br>
+
+                <div>
+
+                </div>
+
+                <a style="margin:0.4rem"></a>
+                <br>
+                <p style="font-size:9px; padding: 0rem 0px 8rem 0px">Powered by VARSITYMARKET <span
+                        style="font-size: 8px; font-weight: 800;">technologies<span></span></span></p>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function reload_page(link) {
+            window.location.href = link;
+        }
+    </script>
+    <script>
+        function openmenu() {
+            let x = document.getElementById('myNav');
+            x.style.width = 100 + '%';
+        }
+
+        function close_menu() {
+            let x = document.getElementById('myNav');
+            x.style.width = 0 + '%';
+        }
+    </script>
+
+
+    <div class="container mx-auto px-6 py-12">
+        <div style="display:block;" class="container mx-auto grid">
+
+            <div id="top" style="width:100%; overflow:hidden; ">
+
+
+
+                <!-- Tailwind CSS CDN (required) -->
+                <script src="https://cdn.tailwindcss.com"></script>
+                <!-- custom config for extended theme (optional but keeps animations) -->
+                <script>
+                    tailwind.config = {
+                        theme: {
+                            extend: {
+                                fontFamily: { 'sans': ['Inter', 'system-ui', 'sans-serif'] },
+                                animation: { 'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite' }
+                            }
+                        }
+                    }
+                </script>
+                <!-- Inter font + subtle background noise style -->
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap');
+
+                    .bg-noise {
+                        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+                        pointer-events: none;
+                    }
+                </style>
+
+                <!-- ========== HERO SECTION (EXPANDED) ========== -->
+                <div id="intro-hero-v2" class="relative overflow-hidden bg-black min-h-[80vh] flex items-center">
+
+                    <!-- background layers + depth -->
+                    <div class="absolute inset-0"></div>
+                    <div
+                        class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-700/20 rounded-full blur-[120px] -translate-x-1/2">
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-0 w-[550px] h-[550px] bg-indigo-900/30 rounded-full blur-[130px]">
+                    </div>
+                    <div class="absolute inset-0 bg-noise opacity-30"></div>
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=" 60" height="60"
+                        xmlns="http://www.w3.org/2000/svg" %3E%3Cdefs%3E%3Cpattern id="grid" width="40" height="40"
+                        patternUnits="userSpaceOnUse" %3E%3Cpath d="M 40 0 L 0 0 0 40" fill="none"
+                        stroke="rgba(168,85,247,0.05)" stroke-width="0.8" /%3E%3C/pattern%3E%3C/defs%3E%3Crect
+                        width="100%25" height="100%25" fill="url(%23grid)" /%3E%3C/svg%3E')] opacity-50"></div>
+
+                    <div class="relative w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-12 py-16 md:py-24">
+                        <div class="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+
+                            <!-- LEFT: text + CTAs (original messaging preserved) -->
+                            <div class="flex-1 space-y-6">
+
+                                <div class="space-y-3">
+                                    <span class="text-sm md:text-base font-semibold tracking-[0.2em] uppercase block">
+                                        Webstore Design Collection
+                                    </span>
+                                    <h1
+                                        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[1.1]">
+                                        Embedded<br><span class="text-white">Theme</span>
+                                    </h1>
+                                </div>
+
+                                <div class="max-w-xl">
+                                    <p class="text-gray-300 text-lg md:text-xl font-light leading-relaxed">
+                                        A premium collection of designs engineered for the embedded system. Elevate
+                                        your storefront with cutting-edge layouts crafted for unparalleled performance.
+                                    </p>
+                                </div>
+
+                                <div class="flex flex-wrap gap-4 pt-4">
+                                    <a href="/collection/"
+                                        class="group relative px-8 py-3.5 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 rounded-xl font-semibold text-white shadow-lg shadow-purple-800/30 transition-all duration-300 transform hover:scale-[1.02] flex items-center gap-2">
+                                        Explore Collection
+                                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                        </svg>
+                                    </a>
+                                    <a href="https://demo-embedded.varsitymarket.co.za/"
+                                        class="px-8 py-3.5 rounded-xl border border-gray-700 bg-black/30 backdrop-blur-sm text-gray-200 font-medium hover:border-purple-500 hover:text-purple-300 transition-all duration-300 hover:bg-purple-950/20">
+                                        Live Demo
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- optional scroll hint -->
+                        <div
+                            class="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 opacity-60">
+                            <span class="text-gray-500 text-[11px] tracking-wider">SCROLL</span>
+                            <div class="w-5 h-8 border-2 border-gray-600 rounded-full flex justify-center">
+                                <div class="w-1 h-2 bg-purple-500 rounded-full mt-1 animate-bounce"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="featured-themes" class="mt-8 mb-12" style="margin-top: 4rem;">
+                    <h3
+                        style="font-family: Outfit, sans-serif; font-weight: 800; letter-spacing: 1px; text-align: center; color: white; font-size: 2.5rem; margin-bottom: 3rem;">
+                        Featured Series</h3>
+
+                    <div id="index-themes-container"
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                        <!-- JS injected themes -->
+
+                        <div class="solid-card-featured flex flex-col h-full overflow-hidden group">
+                            <div class="relative overflow-hidden w-full bg-[#1a1a1a]" style="padding-top: 65%;">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    style="background-image: url(collection/austin/poster.png); opacity: 0.8;"></div>
+                                <div
+                                    class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#111111] to-transparent">
+                                </div>
+                                <div class="absolute top-4 right-4"><span
+                                        class="text-[10px] font-bold bg-[#222222] text-white px-3 py-1 border border-[#333333]">v2.0.1.1</span>
+                                </div>
+                            </div>
+                            <div class="p-6 relative z-10 flex-grow flex flex-col justify-between -mt-4">
+                                <div>
+                                    <h4
+                                        style="color: white; margin: 0 0 0.5rem 0; font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700;">
+                                        Austin</h4>
+                                    <p
+                                        style="font-size: 0.875rem; color: #888888; line-height: 1.6; margin-bottom: 1.5rem;">
+                                        Fully responsive template tailored for conversion and premium visual appeal.</p>
+                                </div>
+                                <a href="javascript:void(0)" onclick="openPreview('collection/austin/', 'Austin')"
+                                    style="color: #a855f7; text-decoration: none; font-size: 0.875rem; font-family: 'Outfit', sans-serif; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; transition: color 0.15s;"
+                                    onmouseover="this.style.color='white'"
+                                    onmouseout="this.style.color='#a855f7'">Launch Explore →</a>
+                            </div>
+                        </div>
+
+                        <div class="solid-card-featured flex flex-col h-full overflow-hidden group">
+                            <div class="relative overflow-hidden w-full bg-[#1a1a1a]" style="padding-top: 65%;">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    style="background-image: url(collection/default/poster.png); opacity: 0.8;"></div>
+                                <div
+                                    class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#111111] to-transparent">
+                                </div>
+                                <div class="absolute top-4 right-4"><span
+                                        class="text-[10px] font-bold bg-[#222222] text-white px-3 py-1 border border-[#333333]">v1.0.0.1</span>
+                                </div>
+                            </div>
+                            <div class="p-6 relative z-10 flex-grow flex flex-col justify-between -mt-4">
+                                <div>
+                                    <h4
+                                        style="color: white; margin: 0 0 0.5rem 0; font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700;">
+                                        Default</h4>
+                                    <p
+                                        style="font-size: 0.875rem; color: #888888; line-height: 1.6; margin-bottom: 1.5rem;">
+                                        Fully responsive template tailored for conversion and premium visual appeal.</p>
+                                </div>
+                                <a href="javascript:void(0)" onclick="openPreview('collection/default/', 'Default')"
+                                    style="color: #a855f7; text-decoration: none; font-size: 0.875rem; font-family: 'Outfit', sans-serif; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; transition: color 0.15s;"
+                                    onmouseover="this.style.color='white'"
+                                    onmouseout="this.style.color='#a855f7'">Launch Explore →</a>
+                            </div>
+                        </div>
+
+                        <div class="solid-card-featured flex flex-col h-full overflow-hidden group">
+                            <div class="relative overflow-hidden w-full bg-[#1a1a1a]" style="padding-top: 65%;">
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                    style="background-image: url(collection/kinetic/poster.png); opacity: 0.8;"></div>
+                                <div
+                                    class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#111111] to-transparent">
+                                </div>
+                                <div class="absolute top-4 right-4"><span
+                                        class="text-[10px] font-bold bg-[#222222] text-white px-3 py-1 border border-[#333333]">v1.0.0.1</span>
+                                </div>
+                            </div>
+                            <div class="p-6 relative z-10 flex-grow flex flex-col justify-between -mt-4">
+                                <div>
+                                    <h4
+                                        style="color: white; margin: 0 0 0.5rem 0; font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700;">
+                                        Kinetic</h4>
+                                    <p
+                                        style="font-size: 0.875rem; color: #888888; line-height: 1.6; margin-bottom: 1.5rem;">
+                                        Fully responsive template tailored for conversion and premium visual appeal.</p>
+                                </div>
+                                <a href="javascript:void(0)" onclick="openPreview('collection/kinetic/', 'Kinetic')"
+                                    style="color: #a855f7; text-decoration: none; font-size: 0.875rem; font-family: 'Outfit', sans-serif; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; transition: color 0.15s;"
+                                    onmouseover="this.style.color='white'"
+                                    onmouseout="this.style.color='#a855f7'">Launch Explore →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 4rem;">
+                        <a href="collection/"
+                            style="display: inline-block; padding: 14px 32px; background: rgb(168, 85, 247); color: white; text-decoration: none; border-radius: 4px; font-weight: 700; transition: background 0.2s; font-family: Outfit, sans-serif; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;"
+                            onmouseover="this.style.background='#9333ea'"
+                            onmouseout="this.style.background='#a855f7'">Browse Full Library →</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('themes-container');
+
+            function humanize(str) {
+                return str.split('.').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            }
+
+            fetch('records.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load templates');
+                    return response.json();
+                })
+                .then(data => {
+                    container.innerHTML = ''; // Clear loading text
+
+                    Object.keys(data).forEach((themeKey, index) => {
+                        const theme = data[themeKey];
+                        const title = humanize(themeKey);
+                        const hasPoster = theme.files && theme.files.includes('poster.png');
+                        const posterUrl = hasPoster ? `./${themeKey}/poster.png` : 'https://placehold.co/600x400/1a1a1a/444444?text=No+Preview';
+
+                        // Pick random tags for aesthetics since no metadata exists
+                        const tags = ["E-Commerce", "Portfolio", "Minimal", "Agency", "Dark Mode"];
+                        // just deterministically pick 2 based on string length of key to keep it consistent
+                        const tagIndex1 = themeKey.length % tags.length;
+                        const tagIndex2 = (themeKey.length + 3) % tags.length;
+                        const selectedTags = [...new Set([tags[tagIndex1], tags[tagIndex2]])];
+
+                        const cardHTML = `
+                            <div class="solid-card flex flex-col h-full overflow-hidden group">
+                                <div class="relative overflow-hidden w-full bg-[#1a1a1a]" style="padding-top: 60%;">
                                     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url(${posterUrl}); opacity: 0.8;"></div>
                                     <div class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#111111] to-transparent"></div>
                                     <div class="absolute top-4 right-4"><span class="text-[10px] font-bold bg-[#222222] text-white px-3 py-1 border border-[#333333]">${theme.hash || 'v1.0'}</span></div>
                                 </div>
                                 <div class="p-6 relative z-10 flex-grow flex flex-col justify-between -mt-4">
                                     <div>
-                                        <h4 style="color: white; margin: 0 0 0.5rem 0; font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700;">${title}</h4>
-                                        <p style="font-size: 0.875rem; color: #888888; line-height: 1.6; margin-bottom: 1.5rem;">Fully responsive template tailored for conversion and premium visual appeal.</p>
+                                        <h3 class="font-bold text-2xl text-white mb-2 tracking-tight">${title}</h3>
+                                        <p class="text-sm text-[#888888] mb-6 line-clamp-2 leading-relaxed font-light">Experience unmatched flexibility and stunning aesthetics engineered directly for the modern web layout.</p>
                                     </div>
-                                    <a href="javascript:void(0)" onclick="openPreview('collection/${themeKey}/', '${title}')" style="color: #a855f7; text-decoration: none; font-size: 0.875rem; font-family: 'Outfit', sans-serif; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; transition: color 0.15s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a855f7'">Launch Explore →</a>
+                                    <div class="flex items-center justify-between mt-auto">
+                                        <div class="flex space-x-2">
+                                            ${selectedTags.map(tag => `<span class="text-[11px] font-medium text-[#888888] bg-[#111111] px-3 py-1 rounded-sm border border-[#222222]">${tag}</span>`).join('')}
+                                        </div>
+                                        <a href="javascript:void(0)" onclick="openPreview('./${themeKey}/', '${title}')" class="text-[#a855f7] hover:text-white text-sm font-semibold transition-colors flex items-center gap-1">Open <span>→</span></a>
+                                    </div>
                                 </div>
                             </div>
                         `;
-                    container.insertAdjacentHTML('beforeend', cardHTML);
+                        container.insertAdjacentHTML('beforeend', cardHTML);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching records:', error);
+                    container.innerHTML = `<div class="col-span-full py-12 text-center text-red-400">Failed to load templates. Please try again later.</div>`;
                 });
-            })
-            .catch(err => {
-                console.error(err);
-                container.innerHTML = '<p style="color: #ff6b6b; text-align: center;">Unable to load featured themes.</p>';
-            });
-    });
-</script>
+        });
+    </script>
+    <footer
+        style="border-top: 1px solid rgba(255, 255, 255, 0.05); background: #050505; padding: 4rem 0 2rem 0; margin-top: auto; width: 100%;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-8"
+                style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left"
+                    style="display: flex; flex-direction: column;">
+                    <span class="text-white font-bold tracking-wide text-xl mb-2"
+                        style="font-family: 'Outfit', sans-serif;">VARSITY<span
+                            style="color: #a855f7;">MARKET</span></span>
+                    <p class="text-gray-500 text-sm max-w-xs" style="font-family: 'Outfit', sans-serif;">The premier
+                        destination for embedded high-performance template designs.</p>
+                </div>
+                <div class="flex gap-8" style="display: flex; gap: 2rem;">
+                    <a href="/" class="text-sm text-gray-400 hover:text-white transition-colors"
+                        style="font-family: 'Outfit', sans-serif; text-decoration: none;">Home</a>
+                    <a href="/collection/" class="text-sm text-gray-400 hover:text-white transition-colors"
+                        style="font-family: 'Outfit', sans-serif; text-decoration: none;">Library</a>
+                    <a href="/publish/" class="text-sm text-gray-400 hover:text-white transition-colors"
+                        style="font-family: 'Outfit', sans-serif; text-decoration: none;">Publish</a>
+                </div>
+            </div>
+            <div
+                style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                <p class="text-gray-600 text-xs" style="font-family: 'Outfit', sans-serif; margin: 0; color: #555;">
+                    &copy; 2026 Varsitymarket Technologies. All rights reserved.</p>
+                <div class="flex gap-4" style="display: flex; gap: 1rem;">
+                    <a href="#" class="text-gray-600 hover:text-gray-400" style="color: #555;"><svg width="18"
+                            height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                        </svg></a>
+                    <a href="#" class="text-gray-600 hover:text-gray-400" style="color: #555;"><svg width="18"
+                            height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<!-- Theme Preview Modal -->
-<style>
-    .theme-preview-modal {
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(10px);
-        display: none; /* hidden by default */
-        flex-direction: column;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    .theme-preview-modal.active {
-        display: flex;
-        opacity: 1;
-        animation: modalFadeIn 0.3s ease forwards;
-    }
-    @keyframes modalFadeIn {
-        from { opacity: 0; transform: scale(0.98); }
-        to { opacity: 1; transform: scale(1); }
-    }
-    .tpm-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background: #000;
-        border-bottom: 1px solid #333;
-    }
-    .tpm-title {
-        color: white;
-        font-family: 'Outfit', sans-serif;
-        font-weight: 700;
-        font-size: 1.25rem;
-    }
-    .tpm-controls {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-    }
-    .tpm-device-btn {
-        background: transparent;
-        border: 1px solid #333;
-        color: #888;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.875rem;
-        transition: all 0.2s;
-    }
-    .tpm-device-btn:hover {
-        border-color: #666;
-        color: white;
-    }
-    .tpm-device-btn.active {
-        background: #a855f7;
-        border-color: #a855f7;
-        color: white;
-    }
-    .tpm-close {
-        background: #333;
-        border: none;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: 'Outfit', sans-serif;
-        font-weight: 600;
-        margin-left: 1rem;
-        transition: background 0.2s;
-    }
-    .tpm-close:hover {
-        background: #ff4757;
-    }
-    .tpm-iframe-container {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem;
-        overflow: hidden;
-    }
-    .tpm-iframe-wrapper {
-        width: 100%;
-        height: 100%;
-        background: #000;
-        border-radius: 8px;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-    .tpm-iframe-wrapper iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        background: #fff;
-    }
-    
-    /* Device Modes */
-    .tpm-mode-desktop { width: 100%; height: 100%; }
-    .tpm-mode-tablet { width: 768px; height: 1024px; max-height: 100%; }
-    .tpm-mode-mobile { width: 375px; height: 812px; max-height: 100%; }
+    <!-- Theme Preview Modal -->
+    <style>
+        .theme-preview-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: none;
+            /* hidden by default */
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-    @media (max-width: 768px) {
-        .tpm-device-btn { display: none; }
-    }
-</style>
+        .theme-preview-modal.active {
+            display: flex;
+            opacity: 1;
+            animation: modalFadeIn 0.3s ease forwards;
+        }
 
-<div id="themePreviewModal" class="theme-preview-modal">
-    <div class="tpm-header">
-        <div class="tpm-title" id="tpmTitle">Theme Preview</div>
-        <div class="tpm-controls">
-            <button class="tpm-device-btn active" onclick="setDeviceMode('desktop')" id="btnDesktop">Desktop</button>
-            <button class="tpm-device-btn" onclick="setDeviceMode('tablet')" id="btnTablet">Tablet</button>
-            <button class="tpm-device-btn" onclick="setDeviceMode('mobile')" id="btnMobile">Mobile</button>
-            <button class="tpm-close" onclick="closePreview()">Close</button>
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .tpm-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #000;
+            border-bottom: 1px solid #333;
+        }
+
+        .tpm-title {
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .tpm-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .tpm-device-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .tpm-device-btn:hover {
+            border-color: #666;
+            color: white;
+        }
+
+        .tpm-device-btn.active {
+            background: #a855f7;
+            border-color: #a855f7;
+            color: white;
+        }
+
+        .tpm-close {
+            background: #333;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            margin-left: 1rem;
+            transition: background 0.2s;
+        }
+
+        .tpm-close:hover {
+            background: #ff4757;
+        }
+
+        .tpm-iframe-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .tpm-iframe-wrapper {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .tpm-iframe-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+        }
+
+        /* Device Modes */
+        .tpm-mode-desktop {
+            width: 100%;
+            height: 100%;
+        }
+
+        .tpm-mode-tablet {
+            width: 768px;
+            height: 1024px;
+            max-height: 100%;
+        }
+
+        .tpm-mode-mobile {
+            width: 375px;
+            height: 812px;
+            max-height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .tpm-device-btn {
+                display: none;
+            }
+        }
+    </style>
+
+    <div id="themePreviewModal" class="theme-preview-modal">
+        <div class="tpm-header">
+            <div class="tpm-title" id="tpmTitle">Theme Preview</div>
+            <div class="tpm-controls">
+                <button class="tpm-device-btn active" onclick="setDeviceMode('desktop')"
+                    id="btnDesktop">Desktop</button>
+                <button class="tpm-device-btn" onclick="setDeviceMode('tablet')" id="btnTablet">Tablet</button>
+                <button class="tpm-device-btn" onclick="setDeviceMode('mobile')" id="btnMobile">Mobile</button>
+                <button class="tpm-close" onclick="closePreview()">Close</button>
+            </div>
+        </div>
+        <div class="tpm-iframe-container">
+            <div id="tpmIframeWrapper" class="tpm-iframe-wrapper tpm-mode-desktop">
+                <iframe id="tpmIframe" src=""></iframe>
+            </div>
         </div>
     </div>
-    <div class="tpm-iframe-container">
-        <div id="tpmIframeWrapper" class="tpm-iframe-wrapper tpm-mode-desktop">
-            <iframe id="tpmIframe" src=""></iframe>
-        </div>
-    </div>
-</div>
 
-<script>
-    function openPreview(url, title) {
-        const modal = document.getElementById('themePreviewModal');
-        const iframe = document.getElementById('tpmIframe');
-        const titleEl = document.getElementById('tpmTitle');
-        
-        iframe.src = url;
-        titleEl.textContent = title + ' Preview';
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; 
-    }
-    
-    function closePreview() {
-        const modal = document.getElementById('themePreviewModal');
-        const iframe = document.getElementById('tpmIframe');
-        
-        modal.classList.remove('active');
-        setTimeout(() => {
-            iframe.src = ''; 
-        }, 300);
-        document.body.style.overflow = '';
-    }
-    
-    function setDeviceMode(mode) {
-        const wrapper = document.getElementById('tpmIframeWrapper');
-        wrapper.className = 'tpm-iframe-wrapper tpm-mode-' + mode;
-        
-        document.getElementById('btnDesktop').classList.remove('active');
-        document.getElementById('btnTablet').classList.remove('active');
-        document.getElementById('btnMobile').classList.remove('active');
-        
-        if(mode === 'desktop') document.getElementById('btnDesktop').classList.add('active');
-        if(mode === 'tablet') document.getElementById('btnTablet').classList.add('active');
-        if(mode === 'mobile') document.getElementById('btnMobile').classList.add('active');
-    }
-</script>
+    <script>
+        function openPreview(url, title) {
+            const modal = document.getElementById('themePreviewModal');
+            const iframe = document.getElementById('tpmIframe');
+            const titleEl = document.getElementById('tpmTitle');
 
- </body></html>
+            iframe.src = url;
+            titleEl.textContent = title + ' Preview';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview() {
+            const modal = document.getElementById('themePreviewModal');
+            const iframe = document.getElementById('tpmIframe');
+
+            modal.classList.remove('active');
+            setTimeout(() => {
+                iframe.src = '';
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        function setDeviceMode(mode) {
+            const wrapper = document.getElementById('tpmIframeWrapper');
+            wrapper.className = 'tpm-iframe-wrapper tpm-mode-' + mode;
+
+            document.getElementById('btnDesktop').classList.remove('active');
+            document.getElementById('btnTablet').classList.remove('active');
+            document.getElementById('btnMobile').classList.remove('active');
+
+            if (mode === 'desktop') document.getElementById('btnDesktop').classList.add('active');
+            if (mode === 'tablet') document.getElementById('btnTablet').classList.add('active');
+            if (mode === 'mobile') document.getElementById('btnMobile').classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publish Theme | Varsity Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #050505;
+            background-image: none !important;
+            color: white;
+        }
+
+        .solid-header {
+            background: #000000;
+            border-bottom: 1px solid #222222;
+        }
+
+        .solid-card {
+            background: #111111;
+            border: 1px solid #222222;
+            border-radius: 4px;
+            transition: border-color 0.15s ease;
+        }
+
+        .solid-card:hover {
+            border-color: #a855f7;
+        }
+
+        .solid-search {
+            background: #111111;
+            border: 1px solid #222222;
+            transition: border-color 0.15s ease;
+        }
+
+        .solid-search:focus-within {
+            border-color: #a855f7;
+            outline: none;
+        }
+
+        /* custom file input & form elements */
+        .file-drop-area {
+            border: 2px dashed #2a2a2a;
+            transition: all 0.2s ease;
+        }
+
+        .file-drop-area:hover {
+            border-color: #a855f7;
+            background-color: rgba(168, 85, 247, 0.05);
+        }
+
+        input,
+        textarea {
+            background-color: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            color: #f0f0f0;
+            transition: all 0.2s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #a855f7;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+        }
+
+        ::-webkit-file-upload-button {
+            background: #1f1f1f;
+            border: 1px solid #333;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        ::-webkit-file-upload-button:hover {
+            background: #2a2a2a;
+            border-color: #a855f7;
+        }
+    </style>
+</head>
+
+<body class="text-gray-100 antialiased selection:bg-purple-500/30">
+
+    <!-- ========== STICKY NAVIGATION (identical to index) ========== -->
+    <nav class="sticky top-0 z-50 w-full"
+        style="background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky !important; top: 0 !important; z-index: 50 !important; width: 100% !important;">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center w-full">
+            <div class="flex items-center gap-3 cursor-pointer"
+                onclick="reload_page('https://themes.varsitymarket.tech/')">
+                <img src="/assets/favicon.png" style="width: 100px; height: 100px;" alt="Varsity Market">
+            </div>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">Home</a>
+                <a href="/collection/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">Library</a>
+                <a href="/marketplace/" class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">New Marketplace</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="/publish/"
+                    class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-purple-600/90 border border-purple-500 rounded-full hover:bg-purple-700 transition-colors"
+                    style="font-family: 'Outfit', sans-serif; text-decoration: none;">Publish</a>
+                <button onclick="openmenu()"
+                    class="md:hidden text-gray-300 hover:text-white focus:outline-none bg-transparent border-none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== MOBILE MENU OVERLAY ========== -->
+    <style>
+        .menu-overlay {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.96);
+            overflow-x: hidden;
+            transition: 0.5s;
+            max-width: 100%;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .menu-overlay a {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 2vh;
+            color: #cfcfcf;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 5%;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .closebtn {
+            font-size: 3rem !important;
+            display: flex !important;
+            margin: 10px !important;
+            padding: 0;
+            flex-direction: row-reverse !important;
+        }
+
+        .sesedesedwsedwdd {
+            text-align: start;
+            margin: 0.6rem 0 0 3rem;
+        }
+    </style>
+
+    <div id="myNav" class="menu-overlay" style="width: 0%;">
+        <a class="closebtn" onclick="close_menu();">×</a>
+        <div class="overlay-content">
+            <img onclick="reload_page('#')" src="/assets/favicon.png" style="width:20vh; height:auto; margin:auto;">
+            <a onclick="reload_page('https://themes.varsitymarket.tech/')" class="sesedesedwsedwdd">Home Page</a>
+            <a onclick="reload_page('/marketplace/')" class="sesedesedwsedwdd">Create A Theme</a>
+            <a onclick="reload_page('/publish/')" class="sesedesedwsedwdd">Publish My Theme</a>
+            <a onclick="reload_page('/collection/')" class="sesedesedwsedwdd">Theme Library</a>
+            <p style="font-size:9px; padding: 2rem 0px 2rem 0px; margin-top: 4rem;">Powered by VARSITYMARKET <span
+                    style="font-size: 8px; font-weight: 800;">technologies</span></p>
+        </div>
+    </div>
+
+    <script>
+        function reload_page(link) {
+            window.location.href = link;
+        }
+        function openmenu() {
+            document.getElementById('myNav').style.width = '100%';
+        }
+        function close_menu() {
+            document.getElementById('myNav').style.width = '0%';
+        }
+    </script>
+
+    <!-- ========== MAIN PUBLISH FORM SECTION ========== -->
+    <main class="max-w-4xl mx-auto px-6 py-16 md:py-20">
+        <div class="text-center mb-12">
+
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white">
+                Publish Your Theme</h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto mt-4">Share your embedded‑ready design with the community.
+                Pack your theme into a <span class="text-purple-400 font-mono">.zip</span> archive and we’ll forward it
+                to our review channel.</p>
+        </div>
+
+        <!-- Submission Card -->
+        <div class="solid-card rounded-2xl p-6 md:p-8 shadow-2xl transition-all">
+            <form id="publishForm" enctype="multipart/form-data">
+                <!-- Theme name -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Theme name <span
+                            class="text-purple-400">*</span></label>
+                    <input type="text" id="themeName" name="themeName" required
+                        class="w-full px-4 py-3 rounded-lg bg-black/60 border border-gray-800 focus:border-purple-500 transition"
+                        placeholder="e.g., Neon Pulse, Aurora, Quantum">
+                </div>
+
+                <!-- Version & author row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Version</label>
+                        <input type="text" id="themeVersion" name="version" value="1.0.0"
+                            class="w-full px-4 py-3 rounded-lg bg-black/60 border border-gray-800 focus:border-purple-500 transition"
+                            placeholder="1.0.0">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Author / Vendor</label>
+                        <input type="text" id="themeAuthor" name="author"
+                            class="w-full px-4 py-3 rounded-lg bg-black/60 border border-gray-800 focus:border-purple-500 transition"
+                            placeholder="Your name or studio">
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Short description <span
+                            class="text-purple-400">*</span></label>
+                    <textarea id="themeDesc" name="description" rows="3" required
+                        class="w-full px-4 py-3 rounded-lg bg-black/60 border border-gray-800 focus:border-purple-500 transition"
+                        placeholder="Describe the key features, embedded optimizations, or unique layout aspects..."></textarea>
+                </div>
+
+                <!-- File upload area (ZIP only) -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Theme package (.zip) <span
+                            class="text-purple-400">*</span></label>
+                    <div class="file-drop-area relative rounded-xl p-6 text-center border border-dashed border-gray-700 hover:border-purple-500 transition bg-black/30"
+                        id="dropZone">
+                        <input type="file" id="themeZip" name="themeZip" accept=".zip,.rar,.7z" required
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                        <div class="pointer-events-none">
+                            <svg class="w-10 h-10 mx-auto text-gray-500 mb-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <p class="text-gray-400 text-sm">Drag & drop your .zip file here or <span
+                                    class="text-purple-400 underline">browse</span></p>
+                            <p class="text-gray-500 text-xs mt-1">Max 24MB (Discord limit). Include index.html, assets,
+                                and theme.json (optional).</p>
+                        </div>
+                    </div>
+                    <div id="fileInfo" class="mt-2 text-sm text-gray-400 hidden"></div>
+                </div>
+
+                <!-- Submit & status -->
+                <div class="flex flex-col sm:flex-row gap-4 items-center justify-between pt-4">
+                    <button type="submit" id="submitBtn"
+                        class="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg shadow-purple-800/30 transform hover:scale-[1.02] flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                        </svg>
+                        Upload to Discord & Publish
+                    </button>
+                    <p class="text-gray-500 text-xs">Your theme will be reviewed and added to the library.</p>
+                </div>
+                <div id="formStatus" class="mt-5 text-sm font-medium text-center rounded-lg p-3 hidden"></div>
+            </form>
+        </div>
+
+        <!-- Guidelines Section -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-black/40 border border-gray-800/50 rounded-xl p-5">
+                <div class="w-8 h-8 rounded-full bg-purple-900/50 flex items-center justify-center mb-3">📦</div>
+                <h3 class="font-bold text-white mb-1">ZIP Structure</h3>
+                <p class="text-gray-400 text-sm">Include a root folder with <span
+                        class="font-mono text-purple-300">index.html</span>, styles, assets, and a <span
+                        class="font-mono">theme.json</span> (name, version, preview).</p>
+            </div>
+            <div class="bg-black/40 border border-gray-800/50 rounded-xl p-5">
+                <div class="w-8 h-8 rounded-full bg-purple-900/50 flex items-center justify-center mb-3">⚙️</div>
+                <h3 class="font-bold text-white mb-1">Embedded Ready</h3>
+                <p class="text-gray-400 text-sm">Optimized for performance, responsive, and lightweight. Tailwind or
+                    custom CSS both accepted.</p>
+            </div>
+            <div class="bg-black/40 border border-gray-800/50 rounded-xl p-5">
+                <div class="w-8 h-8 rounded-full bg-purple-900/50 flex items-center justify-center mb-3">🤖</div>
+                <h3 class="font-bold text-white mb-1">Community Submission</h3>
+                <p class="text-gray-400 text-sm">Once uploaded, our team reviews the submission and notifies you via
+                    email/DM (webhook).</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ========== FOOTER (same style as index) ========== -->
+    <footer class="border-t border-white/5 bg-[#050505] py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-8">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <span class="text-white font-bold tracking-wide text-xl mb-2">VARSITY<span
+                            class="text-purple-500">MARKET</span></span>
+                    <p class="text-gray-500 text-sm max-w-xs">The premier destination for embedded high-performance
+                        template designs.</p>
+                </div>
+                <div class="flex gap-8">
+                    <a href="/" class="text-sm text-gray-400 hover:text-white transition-colors">Home</a>
+                    <a href="/collection/" class="text-sm text-gray-400 hover:text-white transition-colors">Library</a>
+                    <a href="/publish/" class="text-sm text-gray-400 hover:text-white transition-colors">Publish</a>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-6 flex flex-wrap justify-between items-center gap-4">
+                <p class="text-gray-600 text-xs">&copy; 2026 Varsitymarket Technologies. All rights reserved.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== CONFIGURATION ==========
+        // 🔁 REPLACE WITH YOUR ACTUAL DISCORD WEBHOOK URL
+        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1351440639177855096/dH_y6WAgQa-51J-5h5JQb6TdzM_hf9IqUYl5v0-g9GgSCFv10v7AKVd5mNlTpKAPpaEI';
+        //  ⚠️ IMPORTANT: For production, consider moving webhook to a backend proxy to avoid exposing it.
+        //     The current approach works for direct browser → Discord (CORS is allowed by Discord).
+        // ===================================
+
+        const form = document.getElementById('publishForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDiv = document.getElementById('formStatus');
+        const fileInput = document.getElementById('themeZip');
+        const fileInfo = document.getElementById('fileInfo');
+        const dropZone = document.getElementById('dropZone');
+
+        // show file name on selection
+        function updateFileInfo() {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                if (file.size > 24 * 1024 * 1024) {
+                    fileInfo.classList.remove('hidden');
+                    fileInfo.innerHTML = `<span class="text-red-400">⚠️ File exceeds 24MB (Discord limit). Please compress your theme.</span>`;
+                    fileInfo.classList.add('text-red-400');
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    fileInfo.classList.remove('hidden');
+                    fileInfo.innerHTML = `<span class="text-green-400">✓ ${file.name} (${(file.size / 1024).toFixed(1)} KB) ready for upload</span>`;
+                    fileInfo.classList.remove('text-red-400');
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            } else {
+                fileInfo.classList.add('hidden');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        fileInput.addEventListener('change', updateFileInfo);
+
+        // drag & drop styling
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-purple-500', 'bg-purple-950/20');
+        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-purple-500', 'bg-purple-950/20');
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-purple-500', 'bg-purple-950/20');
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileInfo();
+            }
+        });
+
+        // Form submission handler
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const themeName = document.getElementById('themeName').value.trim();
+            const themeVersion = document.getElementById('themeVersion').value.trim() || '1.0.0';
+            const themeAuthor = document.getElementById('themeAuthor').value.trim() || 'Anonymous';
+            const themeDesc = document.getElementById('themeDesc').value.trim();
+            const zipFile = fileInput.files[0];
+
+            if (!themeName) {
+                showStatus('Please provide a theme name.', 'error');
+                return;
+            }
+            if (!themeDesc) {
+                showStatus('Please provide a short description of your theme.', 'error');
+                return;
+            }
+            if (!zipFile) {
+                showStatus('Please select a .zip file containing your theme.', 'error');
+                return;
+            }
+            if (zipFile.size > 24 * 1024 * 1024) {
+                showStatus('File exceeds 24 MB. Please compress your theme and try again.', 'error');
+                return;
+            }
+            if (!zipFile.name.endsWith('.zip') && !zipFile.name.endsWith('.rar') && !zipFile.name.endsWith('.7z')) {
+                showStatus('Only ZIP archives are accepted (or .rar/.7z). Please pack your theme as ZIP.', 'error');
+                return;
+            }
+
+            // Prepare message content + embed
+            const content = `🎨 **New theme submission** from **${themeAuthor}**\n📦 **${themeName}** v${themeVersion}`;
+            const embed = {
+                title: `${themeName} v${themeVersion}`,
+                description: themeDesc.length > 400 ? themeDesc.substring(0, 397) + '...' : themeDesc,
+                color: 0xa855f7,
+                fields: [
+                    { name: 'Author', value: themeAuthor, inline: true },
+                    { name: 'Version', value: themeVersion, inline: true },
+                    { name: 'File', value: zipFile.name, inline: false }
+                ],
+                timestamp: new Date().toISOString(),
+                footer: { text: 'Varsity Market Theme Publisher' }
+            };
+
+            // Build FormData
+            const formData = new FormData();
+            formData.append('payload_json', JSON.stringify({ content, embeds: [embed] }));
+            formData.append('file', zipFile, `${themeName.replace(/[^a-z0-9]/gi, '_')}_v${themeVersion}.zip`);
+
+            // Disable button & show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                Publishing...`;
+            showStatus('Uploading theme to Discord review channel... please wait.', 'info');
+
+            try {
+                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    showStatus(`✅ Success! "${themeName}" has been submitted. Our team will review it shortly.`, 'success');
+                    form.reset();
+                    fileInput.value = '';
+                    updateFileInfo();
+                    document.getElementById('themeVersion').value = '1.0.0';
+                    document.getElementById('themeAuthor').value = '';
+                } else {
+                    const errorText = await response.text();
+                    console.error('Discord webhook error:', errorText);
+                    showStatus(`❌ Upload failed (HTTP ${response.status}). Make sure the webhook URL is valid or try again later.`, 'error');
+                }
+            } catch (err) {
+                console.error('Network error:', err);
+                showStatus(`❌ Network error: ${err.message}. Check your internet or CORS configuration.`, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    Upload to Discord & Publish`;
+            }
+        });
+
+        function showStatus(msg, type) {
+            statusDiv.classList.remove('hidden', 'bg-red-900/30', 'bg-green-900/30', 'bg-blue-900/30', 'text-red-300', 'text-green-300', 'text-blue-300');
+            let bgClass = '', textClass = '';
+            if (type === 'error') {
+                bgClass = 'bg-red-900/30';
+                textClass = 'text-red-300';
+            } else if (type === 'success') {
+                bgClass = 'bg-green-900/30';
+                textClass = 'text-green-300';
+            } else {
+                bgClass = 'bg-blue-900/30';
+                textClass = 'text-blue-300';
+            }
+            statusDiv.className = `mt-5 text-sm font-medium text-center rounded-lg p-3 ${bgClass} ${textClass}`;
+            statusDiv.innerHTML = msg;
+            statusDiv.classList.remove('hidden');
+            if (type !== 'error') {
+                setTimeout(() => {
+                    if (statusDiv) statusDiv.classList.add('hidden');
+                }, 6000);
+            }
+        }
+    </script>
+    <!-- Note: Replace DISCORD_WEBHOOK_URL with your actual Discord webhook URL (keep secret). For testing, you can create a private channel webhook. -->
+</body>
+
+</html>
