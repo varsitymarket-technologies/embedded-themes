@@ -17,6 +17,15 @@
       "autofill.json"
     ]
   },
+  "boat": {
+    "hash": "v1.0.0.1",
+    "files": [
+      "interface",
+      "poster.png",
+      "index.html",
+      "autofill.json"
+    ]
+  },
   "anti": {
     "hash": "v1.0.1.4",
     "files": [
