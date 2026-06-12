@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VM Commerce</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#07090d;
+    --glass:rgba(255,255,255,.06);
+    --glass-border:rgba(255,255,255,.12);
+    --text:#ffffff;
+    --muted:#9ba6b2;
+    --accent:#74f9ff;
+    --accent2:#7f5cff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(127,92,255,.25), transparent 30%),
+        radial-gradient(circle at 85% 15%, rgba(116,249,255,.18), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(127,92,255,.18), transparent 35%);
+    z-index:-1;
+}
+
+.container{
+    width:min(1400px,90%);
+    margin:auto;
+}
+
+.glass{
+    background:var(--glass);
+    backdrop-filter:blur(25px);
+    border:1px solid var(--glass-border);
+}
+
+nav{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1400px,90%);
+    z-index:1000;
+    border-radius:20px;
+    padding:18px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:1.2rem;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:white;
+    opacity:.8;
+}
+
+.cart-btn{
+    padding:12px 18px;
+    border-radius:14px;
+    cursor:pointer;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.hero h1{
+    font-size:clamp(3rem,8vw,7rem);
+    line-height:0.95;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:var(--muted);
+    max-width:550px;
+    font-size:1.1rem;
+    line-height:1.8;
+}
+
+.cta-row{
+    margin-top:40px;
+    display:flex;
+    gap:20px;
+}
+
+.btn{
+    padding:16px 30px;
+    border-radius:16px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#000;
+}
+
+.btn-secondary{
+    background:rgba(255,255,255,.05);
+    color:white;
+}
+
+.hero-card{
+    height:650px;
+    border-radius:35px;
+    overflow:hidden;
+    position:relative;
+}
+
+.hero-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.7),
+        transparent
+    );
+}
+
+.section{
+    padding:120px 0;
+}
+
+.section-title{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.section-subtitle{
+    color:var(--muted);
+    margin-bottom:60px;
+}
+
+.filter-row{
+    display:flex;
+    gap:15px;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+}
+
+.filter{
+    padding:12px 18px;
+    border-radius:50px;
+    cursor:pointer;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.product{
+    border-radius:28px;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.product:hover{
+    transform:translateY(-10px);
+}
+
+.product-image{
+    height:320px;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product-content{
+    padding:24px;
+}
+
+.product-title{
+    font-size:1.2rem;
+    margin-bottom:8px;
+}
+
+.product-price{
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.add-btn{
+    width:100%;
+    padding:15px;
+    border-radius:14px;
+    border:none;
+    background:white;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.story{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.story-card{
+    padding:40px;
+    border-radius:30px;
+}
+
+.story-card h2{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.story-card p{
+    color:var(--muted);
+    line-height:1.8;
+}
+
+footer{
+    padding:80px 0;
+    text-align:center;
+    color:var(--muted);
+}
+
+.cart-drawer{
+    position:fixed;
+    top:0;
+    right:-450px;
+    width:420px;
+    height:100vh;
+    transition:.4s;
+    padding:30px;
+    z-index:2000;
+}
+
+.cart-drawer.open{
+    right:0;
+}
+
+@media(max-width:900px){
+
+.hero-grid,
+.story{
+    grid-template-columns:1fr;
+}
+
+.hero-card{
+    height:500px;
+}
+
+nav{
+    padding:15px;
+}
+
+.nav-links{
+    display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="glass">
+    <div class="logo">VM STORE</div>
+
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Collections</a>
+        <a href="#">About</a>
+    </div>
+
+    <div class="cart-btn glass" onclick="toggleCart()">
+        Cart (<span id="cartCount">0</span>)
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+
+            <div>
+                <h1>Designed For The Extraordinary</h1>
+
+                <p>
+                    A next-generation commerce experience blending
+                    storytelling, luxury aesthetics, and immersive product
+                    discovery.
+                </p>
+
+                <div class="cta-row">
+                    <button class="btn btn-primary">
+                        Shop Collection
+                    </button>
+
+                    <button class="btn btn-secondary">
+                        Explore Story
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-card glass">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <h2 class="section-title">
+            Featured Products
+        </h2>
+
+        <p class="section-subtitle">
+            Curated products powered by API data.
+        </p>
+
+        <div class="filter-row">
+            <div class="filter glass">All</div>
+            <div class="filter glass">Lifestyle</div>
+            <div class="filter glass">Tech</div>
+            <div class="filter glass">Accessories</div>
+        </div>
+
+        <div id="products" class="products"></div>
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="story">
+
+            <div class="story-card glass">
+                <h2>Experience First</h2>
+
+                <p>
+                    Modern commerce should feel cinematic.
+                    Every interaction is designed to create delight,
+                    trust, and desire.
+                </p>
+            </div>
+
+            <div class="hero-card glass">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    Crafted for the future of commerce.
+</footer>
+
+<div id="cartDrawer" class="cart-drawer glass">
+    <h2>Your Cart</h2>
+    <br>
+    <div id="cartItems"></div>
+</div>
+
+<script>
+
+let cart = [];
+
+const mockProducts = [
+{
+    id:1,
+    title:"Minimal Backpack",
+    price:2499,
+    image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+},
+{
+    id:2,
+    title:"Premium Headphones",
+    price:3499,
+    image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+},
+{
+    id:3,
+    title:"Smart Watch",
+    price:4999,
+    image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+},
+{
+    id:4,
+    title:"Travel Camera",
+    price:8999,
+    image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32"
+}
+];
+
+function renderProducts(products){
+
+    const container =
+        document.getElementById('products');
+
+    container.innerHTML = products.map(product => `
+        <div class="product glass">
+
+            <div class="product-image">
+                <img src="${product.image}">
+            </div>
+
+            <div class="product-content">
+                <div class="product-title">
+                    ${product.title}
+                </div>
+
+                <div class="product-price">
+                    R ${product.price}
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart(${product.id})">
+                    Add To Cart
+                </button>
+
+            </div>
+
+        </div>
+    `).join('');
+
+}
+
+function addToCart(id){
+
+    const product =
+        mockProducts.find(p=>p.id===id);
+
+    cart.push(product);
+
+    document.getElementById('cartCount')
+        .textContent = cart.length;
+
+    renderCart();
+
+}
+
+function renderCart(){
+
+    document.getElementById('cartItems')
+        .innerHTML = cart.map(item => `
+            <div style="padding:12px 0">
+                ${item.title}
+            </div>
+        `).join('');
+
+}
+
+function toggleCart(){
+    document
+        .getElementById('cartDrawer')
+        .classList.toggle('open');
+}
+
+renderProducts(mockProducts);
+
+/*
+
+VM SDK EXAMPLE
+
+<script src="vm-store.js"></script>
+
+async function loadProducts(){
+
+   const products =
+      await VMStore.products();
+
+   renderProducts(products);
+
+}
+
+Replace mockProducts with API response.
+
+*/
+
+</script>
+
+</body>
+</html>
