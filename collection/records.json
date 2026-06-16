@@ -27,9 +27,11 @@
     ]
   },
   "anti": {
-    "hash": "v1.0.1.4",
+    "hash": "v2.0.1.4",
     "files": [
       "interface",
+      "autofill.json",
+      "index.html",
       "poster.png"
     ]
   },
