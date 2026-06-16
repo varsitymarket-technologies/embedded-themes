@@ -1,1045 +1,643 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTI CLOTHING</title>
-    
-    <!-- Tailwind CSS CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ANTI CLOTHING | ANTI isn't just about being against things; it’s about stripping away the excess of the modern fashion industry.</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-bg': '#050505',
-                        'brand-card': '#111111',
-                        'brand-border': '#222222',
-                        'brand-text': '#E5E5E5',
-                        'brand-mute': '#888888',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
-            }
+    <script src="https://demo-embedded.varsitymarket.co.za/track/vm.analytics.js" data-store-id="36" defer=""></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+        .cart-drawer { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .cart-drawer.open { transform: translateX(0); }
+        .modal-overlay { backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: 0.2s; }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .img-zoom img { transition: transform 0.5s ease; }
+        .img-zoom:hover img { transform: scale(1.03); }
+        .view { animation: fadeUp 0.3s ease; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .menu-overlay {
+            height: 100%; width: 0; position: fixed; z-index: 100; top: 0; left: 0;
+            background: rgba(0,0,0,0.96); backdrop-filter: blur(16px);
+            overflow-x: hidden; transition: 0.4s; max-width: 80vw;
         }
-    </script>
-
-    <style type="text/css">
-        body { 
-            background-color: #050505; 
-            color: #E5E5E5;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #333; }
-
-        /* Cart Drawer Animation */
-        .cart-drawer {
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .cart-drawer.open {
-            transform: translateX(0);
-        }
-
-        /* Modal Blur */
-        .modal-overlay {
-            backdrop-filter: blur(8px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .modal-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* Hover Zoom */
-        .img-zoom:hover img {
-            transform: scale(1.08);
-        }
-
-        /* Button Pulse */
-        .btn-active:active {
-            transform: scale(0.96);
-        }
-
-        /* View Toggling */
-        .view { display: block; animation: fadeIn 0.4s ease; }
-        .view.hidden { display: none; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .closebtn { font-size: 3rem; display: flex; justify-content: flex-end; padding: 1rem 2rem; cursor: pointer; color: #aaa; }
+        .overlay-content { margin-top: 12vh; text-align: center; }
+        .nav-link { font-size: 1.6rem; font-weight: 500; margin: 1.2rem 0; }
     </style>
-</head>
-<body class="font-sans antialiased">
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.-right-3{right:-0.75rem}.-top-2{top:-0.5rem}.right-0{right:0px}.top-0{top:0px}.z-10{z-index:10}.z-50{z-index:50}.z-\[100\]{z-index:100}.z-\[60\]{z-index:60}.z-\[70\]{z-index:70}.mx-auto{margin-left:auto;margin-right:auto}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-20{margin-bottom:5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-12{margin-top:3rem}.mt-2{margin-top:0.5rem}.mt-20{margin-top:5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.mt-10{margin-top:2.5rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-5{height:1.25rem}.h-72{height:18rem}.h-80{height:20rem}.h-auto{height:auto}.h-full{height:100%}.h-64{height:16rem}.max-h-\[90vh\]{max-height:90vh}.w-16{width:4rem}.w-20{width:5rem}.w-5{width:1.25rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-auto{overflow:auto}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l{border-left-width:1px}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-white\/30{border-color:rgb(255 255 255 / 0.3)}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-black\/40{background-color:rgb(0 0 0 / 0.4)}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-black\/60{background-color:rgb(0 0 0 / 0.6)}.bg-black\/70{background-color:rgb(0 0 0 / 0.7)}.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-black{--tw-gradient-from:#000 var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:rgb(0 0 0 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-black{--tw-gradient-to:#000 var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.p-5{padding:1.25rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-16{padding-top:4rem;padding-bottom:4rem}.pb-20{padding-bottom:5rem}.pb-32{padding-bottom:8rem}.pb-40{padding-bottom:10rem}.pl-4{padding-left:1rem}.pt-32{padding-top:8rem}.pt-40{padding-top:10rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-9xl{font-size:8rem;line-height:1}.text-\[10px\]{font-size:10px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.1\]{line-height:1.1}.leading-relaxed{line-height:1.625}.tracking-tighter{letter-spacing:-0.05em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-white\/60{color:rgb(255 255 255 / 0.6)}.text-zinc-300{--tw-text-opacity:1;color:rgb(212 212 216 / var(--tw-text-opacity, 1))}.text-zinc-400{--tw-text-opacity:1;color:rgb(161 161 170 / var(--tw-text-opacity, 1))}.text-zinc-500{--tw-text-opacity:1;color:rgb(113 113 122 / var(--tw-text-opacity, 1))}.text-zinc-600{--tw-text-opacity:1;color:rgb(82 82 91 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.opacity-60{opacity:0.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.grayscale{--tw-grayscale:grayscale(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.grayscale-\[0\.3\]{--tw-grayscale:grayscale(0.3);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:border-white:hover{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.hover\:border-white\/40:hover{border-color:rgb(255 255 255 / 0.4)}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-white\/70:hover{color:rgb(255 255 255 / 0.7)}.hover\:opacity-80:hover{opacity:0.8}.focus\:border-white:focus{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:mx-0{margin-left:0px;margin-right:0px}.md\:w-1\/3{width:33.333333%}.md\:w-2\/3{width:66.666667%}.md\:w-\[450px\]{width:450px}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:justify-start{justify-content:flex-start}.md\:p-12{padding:3rem}.md\:py-32{padding-top:8rem;padding-bottom:8rem}.md\:text-left{text-align:left}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:text-8xl{font-size:6rem;line-height:1}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.-right-3{right:-0.75rem}.-top-2{top:-0.5rem}.right-0{right:0px}.top-0{top:0px}.z-10{z-index:10}.z-50{z-index:50}.z-\[100\]{z-index:100}.z-\[60\]{z-index:60}.z-\[70\]{z-index:70}.mx-auto{margin-left:auto;margin-right:auto}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-20{margin-bottom:5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-12{margin-top:3rem}.mt-2{margin-top:0.5rem}.mt-20{margin-top:5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.mt-10{margin-top:2.5rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-5{height:1.25rem}.h-64{height:16rem}.h-72{height:18rem}.h-80{height:20rem}.h-auto{height:auto}.h-full{height:100%}.max-h-\[90vh\]{max-height:90vh}.w-16{width:4rem}.w-20{width:5rem}.w-5{width:1.25rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-auto{overflow:auto}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l{border-left-width:1px}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-white\/30{border-color:rgb(255 255 255 / 0.3)}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-black\/40{background-color:rgb(0 0 0 / 0.4)}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-black\/60{background-color:rgb(0 0 0 / 0.6)}.bg-black\/70{background-color:rgb(0 0 0 / 0.7)}.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-black{--tw-gradient-from:#000 var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:rgb(0 0 0 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-black{--tw-gradient-to:#000 var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-16{padding-top:4rem;padding-bottom:4rem}.pb-20{padding-bottom:5rem}.pb-32{padding-bottom:8rem}.pb-40{padding-bottom:10rem}.pl-4{padding-left:1rem}.pt-32{padding-top:8rem}.pt-40{padding-top:10rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-9xl{font-size:8rem;line-height:1}.text-\[10px\]{font-size:10px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.1\]{line-height:1.1}.leading-relaxed{line-height:1.625}.tracking-tighter{letter-spacing:-0.05em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-white\/60{color:rgb(255 255 255 / 0.6)}.text-zinc-300{--tw-text-opacity:1;color:rgb(212 212 216 / var(--tw-text-opacity, 1))}.text-zinc-400{--tw-text-opacity:1;color:rgb(161 161 170 / var(--tw-text-opacity, 1))}.text-zinc-500{--tw-text-opacity:1;color:rgb(113 113 122 / var(--tw-text-opacity, 1))}.text-zinc-600{--tw-text-opacity:1;color:rgb(82 82 91 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.opacity-60{opacity:0.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.grayscale{--tw-grayscale:grayscale(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.grayscale-\[0\.3\]{--tw-grayscale:grayscale(0.3);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:border-white:hover{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.hover\:border-white\/40:hover{border-color:rgb(255 255 255 / 0.4)}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-white\/70:hover{color:rgb(255 255 255 / 0.7)}.hover\:opacity-80:hover{opacity:0.8}.focus\:border-white:focus{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:mx-0{margin-left:0px;margin-right:0px}.md\:w-1\/3{width:33.333333%}.md\:w-2\/3{width:66.666667%}.md\:w-\[450px\]{width:450px}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:justify-start{justify-content:flex-start}.md\:p-12{padding:3rem}.md\:py-32{padding-top:8rem;padding-bottom:8rem}.md\:text-left{text-align:left}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:text-8xl{font-size:6rem;line-height:1}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}</style><meta name="description" content="ANTI Clothing is a utilitarian apparel project built on the rejection of modern fashion norms. It strips away seasonal trends, excessive branding, and manufactured hype in favor of raw functionality and brutalist design. Functioning more as an industrial supplier than a traditional fashion house, ANTI produces permanent, deconstructed uniforms engineered from heavy-duty materials. It is clothing reduced to its most essential, unapologetic form."><meta property="og:description" content="ANTI Clothing is a utilitarian apparel project built on the rejection of modern fashion norms. It strips away seasonal trends, excessive branding, and manufactured hype in favor of raw functionality and brutalist design. Functioning more as an industrial supplier than a traditional fashion house, ANTI produces permanent, deconstructed uniforms engineered from heavy-duty materials. It is clothing reduced to its most essential, unapologetic form."><meta name="twitter:description" content="ANTI Clothing is a utilitarian apparel project built on the rejection of modern fashion norms. It strips away seasonal trends, excessive branding, and manufactured hype in favor of raw functionality and brutalist design. Functioning more as an industrial supplier than a traditional fashion house, ANTI produces permanent, deconstructed uniforms engineered from heavy-duty materials. It is clothing reduced to its most essential, unapologetic form.v"><meta property="og:title" content="ANTI CLOTHING | ANTI isn't just about being against things; it’s about stripping away the excess of the modern fashion industry."><meta name="twitter:title" content="ANTI CLOTHING | ANTI isn't just about being against things; it’s about stripping away the excess of the modern fashion industry."><meta property="og:image" content="https://anti.top/assets/logo.png"><meta property="og:url" content="https://anti.top/"><link rel="icon" href="https://anti.top/assets/logo.png"><link rel="apple-touch-icon" href="https://anti.top/assets/logo.png"><meta name="twitter:image" content="https://anti.top/assets/logo.png"><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.-right-3{right:-0.75rem}.-top-2{top:-0.5rem}.right-0{right:0px}.top-0{top:0px}.z-10{z-index:10}.z-50{z-index:50}.z-\[100\]{z-index:100}.z-\[60\]{z-index:60}.z-\[70\]{z-index:70}.mx-auto{margin-left:auto;margin-right:auto}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-20{margin-bottom:5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-12{margin-top:3rem}.mt-2{margin-top:0.5rem}.mt-20{margin-top:5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.mt-10{margin-top:2.5rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-5{height:1.25rem}.h-64{height:16rem}.h-72{height:18rem}.h-80{height:20rem}.h-auto{height:auto}.h-full{height:100%}.max-h-\[90vh\]{max-height:90vh}.w-16{width:4rem}.w-20{width:5rem}.w-5{width:1.25rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-auto{overflow:auto}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l{border-left-width:1px}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-white\/30{border-color:rgb(255 255 255 / 0.3)}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-black\/40{background-color:rgb(0 0 0 / 0.4)}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-black\/60{background-color:rgb(0 0 0 / 0.6)}.bg-black\/70{background-color:rgb(0 0 0 / 0.7)}.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-black{--tw-gradient-from:#000 var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:rgb(0 0 0 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-black{--tw-gradient-to:#000 var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-16{padding-top:4rem;padding-bottom:4rem}.pb-20{padding-bottom:5rem}.pb-32{padding-bottom:8rem}.pb-40{padding-bottom:10rem}.pl-4{padding-left:1rem}.pt-32{padding-top:8rem}.pt-40{padding-top:10rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-9xl{font-size:8rem;line-height:1}.text-\[10px\]{font-size:10px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[1\.1\]{line-height:1.1}.leading-relaxed{line-height:1.625}.tracking-tighter{letter-spacing:-0.05em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-white\/60{color:rgb(255 255 255 / 0.6)}.text-zinc-300{--tw-text-opacity:1;color:rgb(212 212 216 / var(--tw-text-opacity, 1))}.text-zinc-400{--tw-text-opacity:1;color:rgb(161 161 170 / var(--tw-text-opacity, 1))}.text-zinc-500{--tw-text-opacity:1;color:rgb(113 113 122 / var(--tw-text-opacity, 1))}.text-zinc-600{--tw-text-opacity:1;color:rgb(82 82 91 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.opacity-60{opacity:0.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.grayscale{--tw-grayscale:grayscale(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.grayscale-\[0\.3\]{--tw-grayscale:grayscale(0.3);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:border-white:hover{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.hover\:border-white\/40:hover{border-color:rgb(255 255 255 / 0.4)}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-white\/70:hover{color:rgb(255 255 255 / 0.7)}.focus\:border-white:focus{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:mx-0{margin-left:0px;margin-right:0px}.md\:w-1\/3{width:33.333333%}.md\:w-2\/3{width:66.666667%}.md\:w-\[450px\]{width:450px}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:justify-start{justify-content:flex-start}.md\:p-12{padding:3rem}.md\:py-32{padding-top:8rem;padding-bottom:8rem}.md\:text-left{text-align:left}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:text-8xl{font-size:6rem;line-height:1}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}</style></head>
+<body class="antialiased">
 
-    <!-- NAVIGATION -->
-    <nav class="fixed top-0 w-full z-50 border-b border-brand-border bg-brand-bg/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold tracking-tighter text-white">ANTI<span class="text-white/40">.CLOTHING</span></a>
-            
-            <div class="flex items-center gap-8 text-sm font-medium">
-                <a href="#" onclick="showView('search')" class="hover:text-white transition-colors" title="Search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </a>
-                <a href="#" onclick="showView('shop')" class="hover:text-white transition-colors hidden md:block" id="nav-shop">Home</a>
-                <a href="#" onclick="showView('collection')" class="hover:text-white transition-colors">Catalog</a>
-                <a href="#" onclick="showView('blog')" class="hidden md:block hover:text-white transition-colors">Journal</a>
-                <a href="#" onclick="handleAccountClick()" id="nav-account" class="hover:text-white transition-colors">Account</a>
-                <button onclick="toggleCart()" class="relative group">
-                    <span class="hover:text-white transition-colors">Cart</span>
-                    <span id="cart-dot" class="absolute -top-1 -right-3 w-4 h-4 bg-white text-black text-[10px] font-bold rounded-full flex items-center justify-center transform scale-0 transition-transform duration-300">0</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- MAIN CONTENT VIEWS -->
-    <div id="view-shop" class="view">
-        <!-- HERO -->
-        <header class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
-            <div class="max-w-2xl">
-                <h1 class="text-6xl md:text-8xl font-bold tracking-tight leading-none text-white mb-6">ESSENTIALS FOR THE MODERN ERA.</h1>
-                <p class="text-lg text-brand-mute leading-relaxed max-w-md">Precision crafted, minimalist essentials designed to elevate your digital and physical space.</p>
-            </div>
-        </header>
-
-        <!-- PRODUCT GRID -->
-        <main id="shop" class="max-w-7xl mx-auto px-6 pb-40">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="catalog-container">
-                <!-- Products injected by JS -->
-            </div>
-        </main>
-    </div>
-
-    <!-- ACCOUNT/LOGIN VIEW -->
-    <div id="view-account" class="view hidden pt-40 pb-40 px-6 max-w-lg mx-auto text-center">
-        <h1 class="text-4xl font-bold text-white mb-4">Welcome</h1>
-        <p class="text-brand-mute mb-10">Sign in to manage your orders and preferences.</p>
-        <div class="bg-brand-card border border-brand-border p-8 rounded-2xl shadow-2xl">
-            <input type="email" id="login-email" placeholder="Email Address" class="w-full bg-brand-bg border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors mb-4">
-            <button onclick="login()" class="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-gray-200 transition-colors mb-4 transform active:scale-[0.98]">Login to Account</button>
-            <p class="text-[10px] text-brand-mute uppercase tracking-widest">Secure 1-click access</p>
-        </div>
-    </div>
-
-    <!-- DASHBOARD VIEW -->
-    <div id="view-dashboard" class="view hidden pt-40 pb-40 px-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-brand-border pb-8">
-            <div>
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-2">Welcome back.</h1>
-                <p class="text-xl text-brand-mute" id="dash-user-email">guest</p>
-            </div>
-            <button onclick="logout()" class="text-sm font-semibold uppercase tracking-widest text-brand-mute hover:text-white mt-4 md:mt-0">Sign Out</button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div class="bg-brand-card border border-brand-border p-8 rounded-2xl shadow-xl transition-all hover:border-white/20">
-                <p class="text-[10px] font-bold uppercase tracking-widest text-brand-mute mb-2">Total Orders</p>
-                <p class="text-4xl font-bold text-white" id="dash-total-orders">0</p>
-            </div>
-            <div class="bg-brand-card border border-brand-border p-8 rounded-2xl shadow-xl transition-all hover:border-white/20">
-                <p class="text-[10px] font-bold uppercase tracking-widest text-brand-mute mb-2">Total Spent</p>
-                <p class="text-4xl font-bold text-white" id="dash-total-spent">$0.00</p>
-            </div>
-            <div class="bg-brand-card border border-brand-border p-8 rounded-2xl shadow-xl relative overflow-hidden transition-all hover:border-white/20">
-                <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
-                <p class="text-[10px] font-bold uppercase tracking-widest text-brand-mute mb-2">Member Status</p>
-                <p class="text-4xl font-bold text-white" id="dash-member-status">VIP</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div class="lg:col-span-2">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-white">Recent Orders</h2>
-                    <button onclick="showView('orders')" class="text-sm font-medium text-brand-mute hover:text-white transition-colors">View All &rarr;</button>
-                </div>
-                <div id="dash-recent-orders" class="space-y-4">
-                    <!-- Injected via JS -->
-                </div>
-            </div>
-            <div>
-                <h2 class="text-2xl font-bold text-white mb-6">Support & Service</h2>
-                <div class="bg-brand-card border border-brand-border p-8 rounded-2xl shadow-xl space-y-6">
-                    <div>
-                        <h3 class="text-white font-medium mb-1">Need help with an order?</h3>
-                        <p class="text-sm text-brand-mute mb-6">Our premium support team is available 24/7 to assist you.</p>
-                        <button onclick="alert('Support initiated. A representative will contact you via email shortly.')" class="w-full bg-brand-bg border border-brand-border text-white py-4 rounded-xl hover:border-white transition-colors text-sm font-semibold active:scale-[0.98]">Contact Concierge</button>
-                    </div>
-                    <hr class="border-brand-border">
-                    <div class="space-y-4">
-                        <h3 class="text-[10px] font-bold uppercase tracking-widest text-brand-mute">Self-Service</h3>
-                        <a href="#" class="block text-sm text-brand-mute hover:text-white transition-colors">Track a Package</a>
-                        <a href="#" class="block text-sm text-brand-mute hover:text-white transition-colors">Start a Return</a>
-                        <a href="#" class="block text-sm text-brand-mute hover:text-white transition-colors">Warranty Policy</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ORDERS VIEW -->
-    <div id="view-orders" class="view hidden pt-40 pb-40 px-6 max-w-5xl mx-auto">
-        <div class="flex items-center gap-6 mb-12">
-            <button onclick="showView('dashboard')" class="w-12 h-12 rounded-full border border-brand-border flex items-center justify-center bg-brand-card hover:bg-white hover:text-black transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            </button>
-            <h1 class="text-4xl md:text-5xl font-bold text-white">Order History</h1>
-        </div>
-        <div id="orders-list" class="space-y-4">
-            <!-- Injected via JS -->
-        </div>
-    </div>
-
-    <!-- ORDER DETAIL VIEW -->
-    <div id="view-order-detail" class="view hidden pt-40 pb-40 px-6 max-w-5xl mx-auto">
-        <div class="flex justify-between items-start mb-12 border-b border-brand-border pb-8">
-            <div class="flex items-center gap-6">
-                <button onclick="showView('orders')" class="w-12 h-12 rounded-full border border-brand-border flex items-center justify-center bg-brand-card hover:bg-white hover:text-black transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                </button>
-                <div>
-                    <h1 class="text-4xl md:text-5xl font-bold text-white">Order #<span id="detail-id"></span></h1>
-                    <p class="text-brand-mute mt-2">Placed on <span id="detail-date" class="text-white"></span></p>
-                </div>
-            </div>
-            <button onclick="reorderCurrent()" class="hidden md:flex bg-white text-black font-bold py-4 px-8 rounded-full hover:bg-gray-200 transition-colors items-center gap-3 active:scale-[0.98]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                Reorder All
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div class="md:col-span-2">
-                <h3 class="text-xs font-bold uppercase tracking-widest text-brand-mute mb-6">Items</h3>
-                <div id="detail-items" class="space-y-4">
-                    <!-- Injected via JS -->
-                </div>
-            </div>
-            <div>
-                <div class="bg-brand-card border border-brand-border p-8 rounded-2xl shadow-xl mb-6">
-                    <h3 class="text-xs font-bold uppercase tracking-widest text-brand-mute mb-6">Summary</h3>
-                    <div class="space-y-4 mb-8">
-                        <div class="flex justify-between text-sm"><span class="text-brand-mute">Subtotal</span><span class="text-white font-medium" id="detail-subtotal">$0.00</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-brand-mute">Shipping</span><span class="text-white font-medium">FREE</span></div>
-                    </div>
-                    <div class="pt-6 border-t border-brand-border flex justify-between items-center text-xl font-bold text-white">
-                        <span>Total</span><span id="detail-total">$0.00</span>
-                    </div>
-                </div>
-                <div class="bg-brand-card border border-brand-border p-8 rounded-2xl shadow-xl">
-                    <h3 class="text-xs font-bold uppercase tracking-widest text-brand-mute mb-4">Status</h3>
-                    <p class="text-3xl font-bold text-white tracking-tight" id="detail-status">Processing</p>
-                    <div class="mt-6 w-full bg-brand-bg rounded-full h-2 overflow-hidden border border-brand-border">
-                        <div class="bg-white h-full w-1/3 rounded-full"></div>
-                    </div>
-                    <p class="text-xs text-brand-mute mt-4">We are preparing your order. You will receive an update shortly.</p>
-                </div>
-            </div>
-        </div>
+<!-- MOBILE OVERLAY -->
+<div id="myNav" class="menu-overlay" style="width: 0%;">
+    <a class="closebtn" onclick="closeMenu()">×</a>
+    <div class="overlay-content">
         
-        <button onclick="reorderCurrent()" class="w-full mt-10 md:hidden bg-white text-black font-bold py-5 rounded-full shadow-2xl active:scale-[0.98] transition-transform flex justify-center items-center gap-2">
-            Reorder All
-        </button>
+                        <img onclick="reload_page('#')" src="https://anti.top/assets/logo.png" style="width:20vh; height:auto; margin:auto; ">
+                <a></a>
+                
+        <a href="#" onclick="closeMenu(); navigate('shop')" class="nav-link block hover:text-white">SHOP</a>
+        <a href="#" onclick="closeMenu(); navigate('categories')" class="nav-link block hover:text-white">CATEGORIES</a>
+        <a href="#" onclick="closeMenu(); navigate('stories')" class="nav-link block hover:text-white">STORIES</a>
+        <a href="#" onclick="closeMenu(); handleAccountClick()" class="nav-link block hover:text-white">ACCOUNT</a>
+        <a href="#" onclick="closeMenu(); navigate('support')" class="nav-link block hover:text-white">SUPPORT</a>
+        <p class="text-[10px] tracking-widest mt-20 text-zinc-600">Powered by Varsity Market Technologies</p>
     </div>
+</div>
 
-    <!-- PRODUCT PDP VIEW -->
-    <div id="view-product" class="view hidden pt-32 pb-40 px-6 max-w-7xl mx-auto">
-        <div class="flex items-center gap-6 mb-8 text-sm text-brand-mute font-medium">
-            <a href="#" onclick="showView('collection')" class="hover:text-white transition-colors">Catalog</a>
-            <span>/</span>
-            <span class="text-white" id="pdp-category">Category</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20">
-            <div class="bg-brand-card rounded-3xl overflow-hidden aspect-square border border-brand-border">
-                <img id="pdp-img" src="" class="w-full h-full object-cover">
-            </div>
-            <div class="flex flex-col justify-center">
-                <h1 id="pdp-name" class="text-5xl font-bold text-white mb-4">Product Name</h1>
-                <p id="pdp-price" class="text-2xl text-brand-mute mb-8">$0.00</p>
-                <div class="mb-8">
-                    <p class="text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Color Options</p>
-                    <div class="flex gap-3">
-                        <button class="w-10 h-10 rounded-full bg-[#111111] border-2 border-brand-border hover:border-white focus:border-white focus:scale-110 transition-all"></button>
-                        <button class="w-10 h-10 rounded-full bg-[#444444] border-2 border-brand-border hover:border-white focus:border-white focus:scale-110 transition-all"></button>
-                        <button class="w-10 h-10 rounded-full bg-[#E5E5E5] border-2 border-brand-border hover:border-white focus:border-white focus:scale-110 transition-all"></button>
-                    </div>
-                </div>
-                <div class="mb-10">
-                    <p class="text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Quantity</p>
-                    <div class="flex items-center gap-6 bg-brand-bg w-max px-2 py-2 rounded-full border border-brand-border shadow-inner">
-                        <button onclick="changePdpQty(-1)" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-card transition-colors text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-                        <span id="pdp-qty" class="text-lg font-bold text-white w-4 text-center">1</span>
-                        <button onclick="changePdpQty(1)" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-card transition-colors text-white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-                    </div>
-                </div>
-                <button id="pdp-add" onclick="addPdpToCart()" class="w-full bg-white text-black font-bold py-5 rounded-full hover:bg-gray-200 transition-transform active:scale-[0.98] mb-12 shadow-2xl">
-                    Add to Bag
-                </button>
-                <div class="space-y-6 bg-brand-card border border-brand-border p-8 rounded-3xl">
-                    <h3 class="text-sm font-bold uppercase tracking-widest text-white">Details</h3>
-                    <p id="pdp-desc" class="text-brand-mute leading-relaxed text-sm">...</p>
-                </div>
-            </div>
-        </div>
-        <div class="border-t border-brand-border pt-20">
-            <h2 class="text-3xl font-bold text-white mb-10">Customer Insights</h2>
-            <div id="pdp-reviews" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Injected via JS -->
-            </div>
-        </div>
-    </div>
-
-    <!-- COLLECTION VIEW -->
-    <div id="view-collection" class="view hidden pt-40 pb-40 px-6 max-w-7xl mx-auto">
-        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">The Collection</h1>
-        <p class="text-lg text-brand-mute mb-12 max-w-2xl">Browse our entire range of premium, minimalist essentials curated for modern life.</p>
+<!-- NAVIGATION -->
+<nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         
-        <div class="flex gap-4 mb-12 overflow-x-auto pb-4 no-scrollbar border-b border-brand-border" id="collection-filters">
-            <button onclick="filterCollection('all')" id="filter-all" class="filter-btn text-white font-bold border-b-2 border-white pb-3 whitespace-nowrap">All Items</button>
-            <button onclick="filterCollection('Tech')" id="filter-Tech" class="filter-btn text-brand-mute hover:text-white pb-3 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-brand-mute">Tech</button>
-            <button onclick="filterCollection('Accessories')" id="filter-Accessories" class="filter-btn text-brand-mute hover:text-white pb-3 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-brand-mute">Accessories</button>
-            <button onclick="filterCollection('Home')" id="filter-Home" class="filter-btn text-brand-mute hover:text-white pb-3 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-brand-mute">Home Office</button>
+                    <a href="#shop">
+                <img src="https://anti.top/assets/logo.png" style="max-width: 2.5rem; width:100%;">
+            </a>
+        <div class="flex items-center gap-6">
+            <button onclick="navigate('search')" class="hover:text-white/70"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+            <button onclick="openMenu()" class="hover:text-white/70"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg></button>
+            <button onclick="toggleCart()" class="relative"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg><span id="cart-dot" class="absolute -top-2 -right-3 text-xs font-bold bg-white text-black rounded-full w-5 h-5 inline-flex items-center justify-center">0</span></button>
         </div>
+    </div>
+</nav>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12" id="collection-grid">
-            <!-- Injected via JS -->
+<!-- ========== LANDING PAGE (SHOP) - ENHANCED with Founder's Note & More Content ========== -->
+<div id="view-shop" class="view pt-32 pb-20">
+    <!-- Hero Section -->
+    <div class="relative mb-20 px-6 max-w-7xl mx-auto">
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-60 rounded-3xl"></div>
+        <div class="relative z-10 py-20 md:py-32 text-center md:text-left">
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-white leading-[1.1]">ANTI-<br>CLOTHING</h1>
+            <p class="text-zinc-300 text-lg max-w-xl mt-6 mx-auto md:mx-0">ANTI isn't just about being against things; it’s about stripping away the excess of the modern fashion industry. It is anti-trend, anti-fast fashion, and anti-logomania.</p>
+            <div class="flex gap-4 justify-center md:justify-start mt-8">
+                <button onclick="navigate('collection')" class="bg-white text-black px-8 py-3 rounded-full font-bold text-sm hover:bg-gray-200 transition">VISIT SHOP</button>
+                <button onclick="navigate('categories')" class="border border-white/30 px-8 py-3 rounded-full text-sm hover:border-white transition">EXPLORE</button>
+            </div>
         </div>
     </div>
 
-    <!-- ABOUT VIEW -->
-    <div id="view-about" class="view hidden pt-40 pb-40 px-6 max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl md:text-7xl font-bold text-white mb-8">Our Philosophy</h1>
-        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1200&auto=format&fit=crop" class="w-full h-[400px] object-cover rounded-3xl mb-12 grayscale-[0.2]">
-        <div class="text-left space-y-6 text-lg text-brand-mute leading-relaxed">
-            <p><strong class="text-white">ANTI.CLOTHING</strong> was founded on a simple principle: technology and daily essentials should blend seamlessly into our environments without fighting for attention.</p>
-            <p>Every product in our collection is carefully selected or crafted to meet rigorous standards of minimalism, utility, and longevity. We strip away the unnecessary so you can focus on what matters.</p>
-        </div>
+    <!-- Featured Products -->
+    <div class="max-w-7xl mx-auto px-6 mb-20">
+        <h2 class="text-3xl font-bold mb-8 border-l-4 border-white pl-4">FEATURED DROPS</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="featured-grid"><div onclick="openPDP(1)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-4"><div class="flex justify-between"><h3 class="font-bold">OBSCURA HOODIE</h3><span>R 1899</span></div></div></div><div onclick="openPDP(2)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-4"><div class="flex justify-between"><h3 class="font-bold">VOID OVERSIZED TEE</h3><span>R 799</span></div></div></div><div onclick="openPDP(3)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-4"><div class="flex justify-between"><h3 class="font-bold">SHADOW CARGO PANTS</h3><span>R 1499</span></div></div></div><div onclick="openPDP(4)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-4"><div class="flex justify-between"><h3 class="font-bold">SILVER CHAIN</h3><span>R 499</span></div></div></div></div>
     </div>
 
-    <!-- CONTACT VIEW -->
-    <div id="view-contact" class="view hidden pt-40 pb-40 px-6 max-w-3xl mx-auto">
-        <h1 class="text-5xl font-bold text-white mb-4">Get in Touch</h1>
-        <p class="text-xl text-brand-mute mb-12">Our concierge team is available worldwide.</p>
-        <form onsubmit="event.preventDefault(); alert('Message sent!'); showView('shop');" class="bg-brand-card border border-brand-border p-10 rounded-3xl space-y-8 shadow-2xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Name</label>
-                    <input type="text" required class="w-full bg-brand-bg border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors">
+    <!-- Founder's Note Section -->
+    <div class="max-w-6xl mx-auto px-6 mb-20">
+        <div class="border border-white/10 rounded-3xl p-8 md:p-12 bg-black/40 backdrop-blur-sm">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/3">
+                    <img src="https://anti.top/assets/logo.png" alt="Founder" class="rounded-2xl w-full h-auto grayscale border border-white/20">
                 </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Email</label>
-                    <input type="email" required class="w-full bg-brand-bg border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors">
-                </div>
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Inquiry Type</label>
-                <select class="w-full bg-brand-bg border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors appearance-none">
-                    <option>Order Support</option>
-                    <option>Product Question</option>
-                    <option>Press & Media</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Message</label>
-                <textarea required rows="5" class="w-full bg-brand-bg border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors"></textarea>
-            </div>
-            <button class="w-full bg-white text-black font-bold py-5 rounded-full hover:bg-gray-200 transition-transform active:scale-[0.98]">Send Message</button>
-        </form>
-    </div>
-
-    <!-- FAQ VIEW -->
-    <div id="view-faq" class="view hidden pt-40 pb-40 px-6 max-w-3xl mx-auto">
-        <h1 class="text-5xl font-bold text-white mb-12">FAQ</h1>
-        <div class="space-y-4">
-            <div class="bg-brand-card border border-brand-border p-8 rounded-3xl shadow-xl">
-                <h3 class="text-lg font-bold text-white mb-2">What is your return policy?</h3>
-                <p class="text-brand-mute">We accept returns within 30 days of standard delivery. Items must be in original condition and packaging. Customized items are final sale.</p>
-            </div>
-            <div class="bg-brand-card border border-brand-border p-8 rounded-3xl shadow-xl">
-                <h3 class="text-lg font-bold text-white mb-2">How long does shipping take?</h3>
-                <p class="text-brand-mute">Premium Express ensures delivery within 1-2 business days. Standard Delivery takes 3-5 business days depending on location.</p>
-            </div>
-            <div class="bg-brand-card border border-brand-border p-8 rounded-3xl shadow-xl">
-                <h3 class="text-lg font-bold text-white mb-2">Do you ship internationally?</h3>
-                <p class="text-brand-mute">Yes, we deliver worldwide across 150+ countries. International shipping rates and relevant duties are calculated securely at checkout.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- POLICIES VIEW -->
-    <div id="view-policies" class="view hidden pt-40 pb-40 px-6 max-w-4xl mx-auto">
-        <h1 class="text-5xl font-bold text-white mb-12">Legal Policies</h1>
-        <div class="space-y-12 text-brand-mute">
-            <section class="space-y-4 bg-brand-card p-10 rounded-3xl border border-brand-border">
-                <h2 class="text-2xl font-bold text-white">Terms of Service</h2>
-                <p>Welcome to ANTI CLOTHING. By accessing this premium storefront, you agree to our standard terms and conditions regarding digital commerce.</p>
-                <p>All content remains the intellectual property of VMTECH. Unauthorized reproduction of our minimalist assets is explicitly prohibited.</p>
-            </section>
-            <section class="space-y-4 bg-brand-card p-10 rounded-3xl border border-brand-border">
-                <h2 class="text-2xl font-bold text-white">Privacy Policy</h2>
-                <p>We believe your data is your own. We only collect essential information required to fulfill orders and improve our platform.</p>
-                <p>We do not sell your personal data to third-party advertising brokers at any point.</p>
-            </section>
-        </div>
-    </div>
-
-    <!-- BLOG VIEW -->
-    <div id="view-blog" class="view hidden pt-40 pb-40 px-6 max-w-7xl mx-auto">
-        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">The Journal</h1>
-        <p class="text-xl text-brand-mute mb-16">Thoughts on modern design and intentional living.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div class="group cursor-pointer" onclick="alert('Article opening...')">
-                <div class="h-80 bg-brand-card rounded-3xl overflow-hidden mb-6 border border-brand-border">
-                    <img src="https://images.unsplash.com/photo-1542451542907-6cf80ff362d6?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <p class="text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Design · April 25</p>
-                <h2 class="text-3xl font-bold text-white mb-3">Workspace Minimalism</h2>
-                <p class="text-brand-mute">Why less visual clutter leads to more profound creative outcomes.</p>
-            </div>
-            <div class="group cursor-pointer" onclick="alert('Article opening...')">
-                <div class="h-80 bg-brand-card rounded-3xl overflow-hidden mb-6 border border-brand-border">
-                    <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition-transform duration-700">
-                </div>
-                <p class="text-xs font-bold uppercase tracking-widest text-brand-mute mb-3">Lifestyle · April 12</p>
-                <h2 class="text-3xl font-bold text-white mb-3">The Intentional Wardrobe</h2>
-                <p class="text-brand-mute">Building a foundation of core pieces that outlast seasonal trends.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SEARCH VIEW -->
-    <div id="view-search" class="view hidden pt-32 pb-40 px-6 max-w-7xl mx-auto">
-        <div class="max-w-3xl mx-auto mb-16">
-            <div class="relative">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="absolute left-6 top-6 text-brand-mute"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Search products..." class="w-full bg-brand-card border border-brand-border py-6 pl-16 pr-6 rounded-3xl text-2xl text-white outline-none focus:border-white transition-colors">
-            </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="search-results">
-            <!-- Injected via JS -->
-        </div>
-    </div>
-
-    <!-- 404 VIEW -->
-    <div id="view-404" class="view hidden pt-40 pb-40 px-6 max-w-2xl mx-auto text-center h-[70vh] flex flex-col justify-center items-center">
-        <h1 class="text-9xl font-bold text-brand-border mb-4">404</h1>
-        <h2 class="text-3xl font-bold text-white mb-6">Signal lost.</h2>
-        <p class="text-brand-mute mb-10">The destination you're looking for doesn't exist in our current collection.</p>
-        <button onclick="showView('shop')" class="bg-white text-black font-bold py-4 px-10 rounded-full hover:bg-gray-200 transition-colors">Return Home</button>
-    </div>
-
-    <!-- CART DRAWER -->
-    <div id="drawer-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/60 z-[60] opacity-0 pointer-events-none transition-opacity duration-300"></div>
-    <div id="cart-drawer" class="cart-drawer fixed top-0 right-0 h-full w-full md:w-[450px] bg-brand-bg border-l border-brand-border z-[70] flex flex-col shadow-2xl">
-        <div class="p-6 border-b border-brand-border flex justify-between items-center bg-brand-card">
-            <h2 class="text-xl font-semibold text-white">Your Bag</h2>
-            <button onclick="toggleCart()" class="text-brand-mute hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-        </div>
-        
-        <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-6">
-            <!-- Items injected by JS -->
-        </div>
-
-        <div class="p-6 border-t border-brand-border bg-brand-card space-y-4">
-            <div class="flex border border-brand-border rounded-xl overflow-hidden mb-4">
-                <input type="text" id="discount-code" placeholder="Discount Code" class="w-full bg-brand-bg px-4 py-3 text-sm text-white outline-none focus:border-white transition-colors uppercase">
-                <button onclick="applyDiscount()" class="bg-brand-border text-white px-4 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors">Apply</button>
-            </div>
-            <div class="space-y-2 text-sm text-brand-mute border-b border-brand-border pb-4 mb-4">
-                <div class="flex justify-between"><span>Subtotal</span><span id="subtotal" class="text-white">$0.00</span></div>
-                <div class="flex justify-between" id="discount-row" style="display:none;"><span class="text-green-400">Discount (<span id="discount-label"></span>)</span><span class="text-green-400" id="discount-amount">-$0.00</span></div>
-                <div class="flex justify-between"><span>Shipping</span><span class="text-white">Calculated at checkout</span></div>
-            </div>
-            <div class="flex justify-between items-center text-lg font-bold text-white mb-6">
-                <span>Total</span><span id="cart-drawer-total">$0.00</span>
-            </div>
-            <button onclick="openCheckout()" class="w-full bg-white text-black font-bold py-4 rounded-full transition-transform active:scale-[0.98]">
-                Check out
-            </button>
-        </div>
-    </div>
-
-    <!-- CHECKOUT MODAL -->
-    <div id="checkout-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 overflow-y-auto">
-        <div class="bg-brand-bg border border-brand-border w-full max-w-2xl rounded-2xl p-8 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-start mb-10">
-                <div>
-                    <h2 class="text-3xl font-bold text-white mb-2">Checkout</h2>
-                    <p class="text-brand-mute">Continue as Guest</p>
-                </div>
-                <button onclick="closeCheckout()" class="p-2 hover:bg-brand-border rounded-full transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            </div>
-
-            <form onsubmit="handleCheckout(event)" class="space-y-8">
-                <!-- Shipping Info -->
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold uppercase tracking-widest text-brand-mute">Shipping Details</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="email" placeholder="Email Address" required class="w-full bg-brand-card border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors">
-                        <input type="text" placeholder="Full Name" required class="w-full bg-brand-card border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors">
-                    </div>
-                    <input type="text" placeholder="Shipping Address" required class="w-full bg-brand-card border border-brand-border p-4 rounded-xl text-white outline-none focus:border-white transition-colors">
-                </div>
-
-                <!-- Payment Mockup -->
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold uppercase tracking-widest text-brand-mute">Payment</h3>
-                    <div class="bg-brand-card border border-brand-border p-4 rounded-xl">
-                        <div class="flex items-center gap-4 mb-4 pb-4 border-b border-brand-border text-brand-mute text-xs">
-                            <span class="flex-grow">Card Number</span>
-                            <span>Exp</span>
-                            <span>CVV</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <input type="text" placeholder="XXXX XXXX XXXX XXXX" required class="bg-transparent text-white outline-none w-full tracking-widest">
-                            <input type="text" placeholder="MM/YY" required class="bg-transparent text-white outline-none w-16 text-center">
-                            <input type="text" placeholder="***" required class="bg-transparent text-white outline-none w-12 text-center">
-                        </div>
+                <div class="md:w-2/3">
+                    <div class="text-sm uppercase tracking-wider text-zinc-500 mb-2">FROM THE FOUNDER</div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Demetrius</h2>
+                    <p class="text-zinc-300 leading-relaxed mb-4">"ANTI Clothing is a utilitarian apparel project built on the rejection of modern fashion norms. It strips away seasonal trends, excessive branding, and manufactured hype in favor of raw functionality and brutalist design. Functioning more as an industrial supplier than a traditional fashion house, ANTI produces permanent, deconstructed uniforms engineered from heavy-duty materials. It is clothing reduced to its most essential, unapologetic form."</p>
+                    <p class="text-zinc-400 text-sm italic">— Founder &amp; Creative Director</p>
+                    <div class="mt-6 flex gap-4">
+                        <div><span class="text-2xl font-bold text-white">10+</span><p class="text-xs text-zinc-500">Clothing Designs</p></div>
+                        <div><span class="text-2xl font-bold text-white">∞</span><p class="text-xs text-zinc-500">No compromises</p></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="pt-6 border-t border-brand-border">
-                    <div class="flex justify-between items-center mb-6">
-                        <span class="text-brand-mute">Grand Total</span>
-                        <span id="final-total" class="text-2xl font-bold text-white">$0.00</span>
-                    </div>
-                    <button type="submit" class="w-full bg-white text-black font-bold py-5 rounded-full hover:bg-gray-200 transition-colors">
-                        Complete Order
-                    </button>
-                    <p class="text-center text-[10px] text-brand-mute mt-4 uppercase tracking-tighter">Your payment information is handled securely</p>
-                </div>
+    <!-- Full Catalog -->
+    <div class="max-w-7xl mx-auto px-6 pb-20">
+        <h2 class="text-3xl font-bold mb-8 border-l-4 border-white pl-4">ALL GARMENTS</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="catalog-container"><div onclick="openPDP(1)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">OBSCURA HOODIE</h3><span>R 1899</span></div><p class="text-xs text-zinc-500 uppercase">Hoodies</p></div></div><div onclick="openPDP(2)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">VOID OVERSIZED TEE</h3><span>R 799</span></div><p class="text-xs text-zinc-500 uppercase">Tees</p></div></div><div onclick="openPDP(3)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">SHADOW CARGO PANTS</h3><span>R 1499</span></div><p class="text-xs text-zinc-500 uppercase">Pants</p></div></div><div onclick="openPDP(4)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">SILVER CHAIN</h3><span>R 499</span></div><p class="text-xs text-zinc-500 uppercase">Accessories</p></div></div><div onclick="openPDP(5)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1542272604-6c5b3c421f10?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">DECONSTRUCTED DENIM JACKET</h3><span>R 2499</span></div><p class="text-xs text-zinc-500 uppercase">Outerwear</p></div></div><div onclick="openPDP(6)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">MESH PANEL CAP</h3><span>R 399</span></div><p class="text-xs text-zinc-500 uppercase">Accessories</p></div></div><div onclick="openPDP(7)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">BLACKOUT SNEAKERS</h3><span>R 2299</span></div><p class="text-xs text-zinc-500 uppercase">Footwear</p></div></div><div onclick="openPDP(8)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1578768074951-9632bdf9f1ee?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">ACID WASH HOODIE</h3><span>R 1799</span></div><p class="text-xs text-zinc-500 uppercase">Hoodies</p></div></div><div onclick="openPDP(9)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">NOIR SCRIPT TEE</h3><span>R 699</span></div><p class="text-xs text-zinc-500 uppercase">Tees</p></div></div><div onclick="openPDP(10)" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">COVERT BELT BAG</h3><span>R 899</span></div><p class="text-xs text-zinc-500 uppercase">Accessories</p></div></div></div>
+    </div>
+
+    <!-- Newsletter / Community -->
+    <div class="max-w-4xl mx-auto px-6 py-12 border-t border-white/10">
+        <div class="text-center">
+            <h3 class="text-2xl font-bold mb-2">JOIN THE CLUB</h3>
+            <p class="text-zinc-400 mb-6">Subscribe to our Newsletter to get updates on the latest releases.</p>
+            <form onsubmit="event.preventDefault(); alert('Thank you for joining the darkness.');" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="Your email" required="" class="flex-1 bg-black border border-white/20 rounded-full px-5 py-3 text-sm focus:outline-none focus:border-white">
+                <button type="submit" class="bg-white text-black px-6 py-3 rounded-full text-sm font-bold hover:bg-gray-200">SUBSCRIBE</button>
             </form>
         </div>
     </div>
+</div>
 
-    <!-- FOOTER -->
-    <footer class="py-20 px-6 border-t border-brand-border">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-            <div>
-                <h3 class="text-white font-bold mb-4">VMTECH</h3>
-                <p class="text-sm text-brand-mute max-w-xs">Building high-performance e-commerce experiences for the modern world.</p>
-            </div>
-            <div class="flex gap-20">
-                <div class="space-y-4">
-                    <h4 class="text-xs font-bold uppercase text-brand-mute tracking-widest">About</h4>
-                    <ul class="text-sm space-y-2">
-                        <li><a href="#" onclick="showView('about')" class="hover:text-white transition-colors">Our Story</a></li>
-                        <li><a href="#" onclick="showView('policies')" class="hover:text-white transition-colors">Legal & Privacy</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="text-xs font-bold uppercase text-brand-mute tracking-widest">Support</h4>
-                    <ul class="text-sm space-y-2">
-                        <li><a href="#" onclick="showView('faq')" class="hover:text-white transition-colors">FAQ & Shipping</a></li>
-                        <li><a href="#" onclick="showView('contact')" class="hover:text-white transition-colors">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+<!-- OTHER VIEWS: Categories, Product, Account, Dashboard, Orders, etc. (unchanged but fully functional) -->
+<div id="view-categories" class="view pt-32 pb-32 px-6 max-w-7xl mx-auto hidden"><h1 class="text-6xl md:text-7xl font-black text-white mb-4">ARCHIVE</h1><p class="text-zinc-400 text-lg mb-12">Shop by category — each collection tells a story.</p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="categories-grid"><div onclick="navigate('collection'); setTimeout(()=&gt;filterCollection('Hoodies'),50)" class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer"><div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="p-6 text-center"><h2 class="text-3xl font-bold">HOODIES</h2><p class="text-zinc-400 mt-2">Explore Hoodies</p></div></div><div onclick="navigate('collection'); setTimeout(()=&gt;filterCollection('Tees'),50)" class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer"><div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="p-6 text-center"><h2 class="text-3xl font-bold">TEES</h2><p class="text-zinc-400 mt-2">Explore Tees</p></div></div><div onclick="navigate('collection'); setTimeout(()=&gt;filterCollection('Pants'),50)" class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer"><div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="p-6 text-center"><h2 class="text-3xl font-bold">PANTS</h2><p class="text-zinc-400 mt-2">Explore Pants</p></div></div><div onclick="navigate('collection'); setTimeout(()=&gt;filterCollection('Accessories'),50)" class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer"><div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="p-6 text-center"><h2 class="text-3xl font-bold">ACCESSORIES</h2><p class="text-zinc-400 mt-2">Explore Accessories</p></div></div><div onclick="navigate('collection'); setTimeout(()=&gt;filterCollection('Outerwear'),50)" class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer"><div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="p-6 text-center"><h2 class="text-3xl font-bold">OUTERWEAR</h2><p class="text-zinc-400 mt-2">Explore Outerwear</p></div></div><div onclick="navigate('collection'); setTimeout(()=&gt;filterCollection('Footwear'),50)" class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer"><div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="p-6 text-center"><h2 class="text-3xl font-bold">FOOTWEAR</h2><p class="text-zinc-400 mt-2">Explore Footwear</p></div></div></div></div>
+<div id="view-product" class="view hidden pt-32 pb-32 px-6 max-w-7xl mx-auto"></div>
+<div id="view-account" class="view pt-40 pb-40 px-6 max-w-md mx-auto text-center hidden"><h1 class="text-5xl font-black text-white">ENTER</h1><p class="text-zinc-400 mt-2 mb-10">Sign in or create account to place orders</p><div class="bg-black/60 border border-white/10 p-8 rounded-3xl"><input type="email" id="login-email" placeholder="Email" class="w-full bg-black border border-white/20 p-4 rounded-xl text-white outline-none focus:border-white mb-4"><input type="text" id="login-name" placeholder="Full name (optional)" class="w-full bg-black border border-white/20 p-4 rounded-xl text-white outline-none focus:border-white mb-6"><button onclick="login()" class="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-gray-200">ACCESS / REGISTER</button><p class="text-xs text-zinc-500 mt-4">One-click access — orders &amp; dashboard saved</p></div></div>
+<div id="view-dashboard" class="view hidden pt-32 pb-32 px-6 max-w-7xl mx-auto"></div>
+<div id="view-orders" class="view hidden pt-32 pb-32 px-6 max-w-5xl mx-auto"><div class="flex items-center gap-4 mb-10"><button onclick="navigate('dashboard')" class="border border-white/30 p-3 rounded-full">←</button><h1 class="text-5xl font-black">ORDER HISTORY</h1></div><div id="orders-list" class="space-y-4"></div></div>
+<div id="view-order-detail" class="view hidden pt-32 pb-32 px-6 max-w-5xl mx-auto"></div>
+<div id="view-search" class="view pt-32 pb-32 px-6 max-w-7xl mx-auto hidden"><div class="max-w-3xl mx-auto mb-12"><input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Search hoodies, tees..." class="w-full bg-black border border-white/20 py-5 px-6 rounded-2xl text-white text-xl"></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="search-results"></div></div>
+<div id="view-about" class="view hidden pt-32 pb-32 px-6 max-w-4xl mx-auto text-center"><h1 class="text-6xl font-black mb-6">MONOCHROME REBELLION</h1><div class="border border-white/10 rounded-3xl overflow-hidden mb-8"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&amp;auto=format" class="w-full h-80 object-cover grayscale"></div><p class="text-zinc-300 text-lg leading-relaxed">ANTI was born in the shadows — a response to overproduction, weak identity. Each garment is crafted for the outsider, the purist. Our fabrics are heavyweight, cuts are intentional. Wear the silence.</p></div>
+<div id="view-stories" class="view pt-32 pb-32 px-6 max-w-7xl mx-auto hidden"><h1 class="text-5xl md:text-7xl font-black mb-6">STORIES</h1><p class="text-xl text-zinc-400 mb-16">Our Shared Experience with our users and the public</p><div class="grid md:grid-cols-2 gap-12"><div class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer" onclick="alert('Full story coming — The making of ANTI')"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&amp;auto=format" class="h-72 w-full object-cover grayscale group-hover:scale-105 transition"><div class="p-6"><p class="text-xs uppercase tracking-wider text-zinc-500">ORIGINS · JUN 10</p><h2 class="text-2xl font-bold mt-2">Levidoc Agency Collab</h2><p class="text-zinc-400 mt-2">This website has been made into a theme allowing fans to simulate how it will feel owning our brand</p></div></div><div class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer" onclick="alert('Full story — Crafting raw denim')"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&amp;auto=format" class="h-72 w-full object-cover grayscale group-hover:scale-105 transition"><div class="p-6"><p class="text-xs uppercase tracking-wider text-zinc-500">CRAFT · MAY 22</p><h2 class="text-2xl font-bold mt-2">FOUNDERS NOTE</h2><p class="text-zinc-400 mt-2">Creating ANTI Has been a journey of struggling and trying to see where the aesthetic fits  in Mzansi's market</p></div></div></div></div>
+<div id="view-contact" class="view pt-32 pb-32 px-6 max-w-3xl mx-auto hidden"><h1 class="text-5xl font-black mb-6">CONTACT US</h1><form onsubmit="event.preventDefault(); alert('Message sent — we reply within 24h'); navigate('shop');" class="border border-white/10 p-8 rounded-3xl space-y-6"><input type="text" placeholder="NAME" required="" class="w-full bg-black border border-white/20 p-4 rounded-xl"><input type="email" placeholder="EMAIL" required="" class="w-full bg-black border border-white/20 p-4 rounded-xl"><textarea rows="4" placeholder="YOUR MESSAGE" class="w-full bg-black border border-white/20 p-4 rounded-xl"></textarea><button class="w-full bg-white text-black py-5 rounded-full font-bold">SEND</button></form></div>
+<div id="view-faq" class="view pt-32 pb-32 px-6 max-w-3xl mx-auto hidden"><h1 class="text-5xl font-black mb-12">FREQUENTLY ASKED QUESTIONS</h1><div class="space-y-6"><div class="border border-white/10 p-8 rounded-2xl"><h3 class="text-xl font-bold">RETURNS &amp; EXCHANGES?</h3><p class="text-zinc-400 mt-2">14 days, unworn with original tags. Final sale on discounted items.</p></div><div class="border border-white/10 p-8 rounded-2xl"><h3 class="text-xl font-bold">SHIPPING TIMEFRAME?</h3><p class="text-zinc-400 mt-2">Express worldwide 2-4 business days. Free over R2000.</p></div><div class="border border-white/10 p-8 rounded-2xl"><h3 class="text-xl font-bold">SIZE GUIDE?</h3><p class="text-zinc-400 mt-2">Oversized fit — we recommend your usual size for relaxed silhouette.</p></div></div></div>
+<div id="view-support" class="view pt-32 pb-32 px-6 max-w-4xl mx-auto hidden"><h1 class="text-5xl font-black mb-6">SUPPORT CENTER</h1><p class="text-zinc-400 mb-10">24/7 assistance for all your orders.</p><div class="grid md:grid-cols-2 gap-8"><div class="border border-white/10 p-8 rounded-3xl"><h2 class="text-2xl font-bold mb-4">Live Chat</h2><p class="text-zinc-400 mb-6">Chat with our team. We are ready to help</p><button onclick="alert('Live chat opening...')" class="w-full bg-white/10 py-3 rounded-full">START CHAT</button></div><div class="border border-white/10 p-8 rounded-3xl"><h2 class="text-2xl font-bold mb-4">Email Support</h2><p class="text-zinc-400 mb-6"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="204e4f5245504c5960414e54490e544f50">[email&#160;protected]</a></p><button onclick="location.href='mailto:support@anti.world'" class="w-full bg-white/10 py-3 rounded-full">SEND EMAIL</button></div></div><div class="mt-12 border border-white/10 p-8 rounded-3xl"><h3 class="text-xl font-bold mb-3">Frequently asked</h3><div class="space-y-4 text-zinc-400"><p><strong class="text-white">Cancel order?</strong> — Contact within 2 hours of placing.</p><p><strong class="text-white">Track my package?</strong> — Tracking link sent via email.</p><p><strong class="text-white">Damaged item?</strong> — We replace immediately with proof.</p></div></div></div>
+<div id="view-policies" class="view pt-32 pb-32 px-6 max-w-4xl mx-auto hidden"><h1 class="text-5xl font-black mb-12">LEGAL DARKNESS</h1><div class="space-y-8"><div class="border border-white/10 p-8 rounded-3xl"><h2 class="text-2xl font-bold mb-4">Terms of Service</h2><p class="text-zinc-400">By accessing ANTI, you agree to our terms. All products subject to availability. We reserve right to refuse service.</p></div><div class="border border-white/10 p-8 rounded-3xl"><h2 class="text-2xl font-bold mb-4">Privacy Policy</h2><p class="text-zinc-400">We collect only essential data for order fulfillment. No third-party selling. Ever.</p></div><div class="border border-white/10 p-8 rounded-3xl"><h2 class="text-2xl font-bold mb-4">Shipping Policy</h2><p class="text-zinc-400">Orders processed within 24h. Tracking provided. Customs fees may apply.</p></div><div class="border border-white/10 p-8 rounded-3xl"><h2 class="text-2xl font-bold mb-4">Return &amp; Refund Policy</h2><p class="text-zinc-400">14-day window, unworn, original packaging. Refunds processed within 7 business days.</p></div><div class="border border-white/10 p-8 rounded-3xl"><h2 class="text-2xl font-bold mb-4">Warranty</h2><p class="text-zinc-400">1-year manufacturing warranty against defects.</p></div></div></div>
+<div id="view-404" class="view hidden pt-40 pb-40 text-center"><h1 class="text-9xl font-black">404</h1><p class="text-zinc-400">Lost in the dark.</p><button onclick="navigate('shop')" class="mt-6 bg-white text-black px-8 py-3 rounded-full">RETURN HOME</button></div>
 
-    <script type="text/javascript">
-        /**
-         * VMTECH Webstore Core Logic
-         * High-performance cart management and rendering
-         */
+<!-- CART DRAWER -->
+<div id="drawer-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/70 z-[60] opacity-0 pointer-events-none transition"></div>
+<div id="cart-drawer" class="cart-drawer fixed top-0 right-0 h-full w-full md:w-[450px] bg-black border-l border-white/10 z-[70] flex flex-col shadow-2xl">
+    <div class="p-6 border-b border-white/10 flex justify-between items-center"><h2 class="text-xl font-bold">BAG</h2><button onclick="toggleCart()" class="text-white/60 text-2xl">✕</button></div>
+    <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-6"><div class="text-center text-zinc-500 py-20">YOUR BAG IS EMPTY</div></div>
+    <div class="p-6 border-t border-white/10 space-y-4">
+        <div class="flex gap-2"><input type="text" id="discount-code" placeholder="DISCOUNT CODE" class="bg-black border border-white/20 p-3 rounded-xl flex-1 text-sm uppercase"><button onclick="applyDiscount()" class="bg-white/10 px-4 rounded-xl text-sm font-bold hover:bg-white hover:text-black">APPLY</button></div>
+        <div class="space-y-2 text-sm"><div class="flex justify-between"><span>Subtotal</span><span id="subtotal">R 0.00</span></div><div id="discount-row" class="hidden flex justify-between text-green-400"><span>Discount</span><span id="discount-amount"></span></div></div>
+        <div class="text-lg font-bold flex justify-between"><span>Total</span><span id="cart-drawer-total">R 0.00</span></div>
+        <button onclick="openCheckout()" class="w-full bg-white text-black font-bold py-4 rounded-full">CHECKOUT →</button>
+    </div>
+</div>
 
-        const PRODUCTS = [
-            { id: 101, name: 'Minimalist Clock', price: 120.00, category: 'Home', img: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=800&auto=format&fit=crop', desc: 'A striking statement piece stripped of numerals or unnecessary markings. Precision quartz movement ensures silent, perfect timing.', reviews: [{name:'Alex R.', text:'Beautiful addition to my wall.'}] },
-            { id: 102, name: 'Graphite Backpack', price: 245.00, category: 'Accessories', img: 'https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=800&auto=format&fit=crop', desc: 'Constructed from weather-proof ballistic nylon. Features a dedicated laptop sleeve and concealed organizational pockets.', reviews: [{name:'Jordan M.', text:'Perfect for commuting.'}] },
-            { id: 103, name: 'Sleek Keyboard', price: 180.00, category: 'Tech', img: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=800&auto=format&fit=crop', desc: 'Low-profile mechanical switches housed in an aerospace-grade aluminum chassis. Connects up to 3 devices seamlessly via Bluetooth.', reviews: [{name:'Casey T.', text:'Typing feels amazing.'}, {name:'Sam W.', text:'Worth every penny.'}] },
-            { id: 104, name: 'Pure Water Bottle', price: 45.00, category: 'Accessories', img: 'https://images.unsplash.com/photo-1602143399827-bd95efef29a0?q=80&w=800&auto=format&fit=crop', desc: 'Double-walled vacuum insulated stainless steel. Keeps drinks cold for 24 hours or hot for 12 hours. Pure hydration, zero condensation.', reviews: [{name:'Taylor B.', text:'Stays cold all day long.'}] },
-            { id: 105, name: 'Oak Desk Lamp', price: 160.00, category: 'Home', img: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=800&auto=format&fit=crop', desc: 'Warm LED lighting integrated into a solid oak arm. Adjustable brightness and color temperature for optimal focus.', reviews: [] },
-            { id: 106, name: 'Linen Notebook', price: 32.00, category: 'Accessories', img: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?q=80&w=800&auto=format&fit=crop', desc: '140 pages of premium 100gsm dot-grid paper. Bound in a durable, tactile linen cover that ages gracefully.', reviews: [{name:'Drew V.', text:'Paper holds ink beautifully without bleeding.'}] },
-            { id: 107, name: 'Analog Camera', price: 480.00, category: 'Tech', img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop', desc: 'Fully manual 35mm film camera. Recalibrate your creative eye with mechanical precision and timeless aesthetics.', reviews: [{name:'Morgan F.', text:'A joy to shoot with.'}] },
-            { id: 108, name: 'Matte Ceramic Mug', price: 28.00, category: 'Home', img: 'https://images.unsplash.com/photo-1514228742587-6b1558fbedcf?q=80&w=800&auto=format&fit=crop', desc: 'Hand-thrown ceramic mug finished with a proprietary matte black glaze. Ergonomic handle and heat-retaining thickness.', reviews: [{name:'Jamie S.', text:'My go-to morning mug now.'}] }
-        ];
+<!-- CHECKOUT MODAL (only if logged in) -->
+<div id="checkout-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80">
+    <div class="bg-black border border-white/20 w-full max-w-2xl rounded-2xl p-8 max-h-[90vh] overflow-auto">
+        <div class="flex justify-between mb-6"><h2 class="text-3xl font-black">FINALIZE</h2><button onclick="closeCheckout()">✕</button></div>
+        <form onsubmit="handleCheckout(event)" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-4"><input type="email" placeholder="EMAIL" required="" class="bg-black border border-white/20 p-4 rounded-xl"><input type="text" placeholder="FULL NAME" required="" class="bg-black border border-white/20 p-4 rounded-xl"></div>
+            <input type="text" placeholder="ADDRESS" required="" class="w-full bg-black border border-white/20 p-4 rounded-xl">
+            <div class="bg-black/50 border border-white/10 p-4 rounded-xl"><div class="flex gap-4"><input type="text" placeholder="4242 4242 4242 4242" class="bg-transparent outline-none flex-1"><input type="text" placeholder="MM/YY" class="w-20"><input type="text" placeholder="CVV" class="w-16"></div></div>
+            <div class="flex justify-between text-xl font-bold"><span>GRAND TOTAL</span><span id="final-total">R 0.00</span></div>
+            <button type="submit" class="w-full bg-white text-black py-5 rounded-full font-bold">PLACE ORDER</button>
+        </form>
+    </div>
+</div>
 
-        // STATE Logic
-        let cart = JSON.parse(localStorage.getItem('vm_cart')) || [];
-        let userHistory = JSON.parse(localStorage.getItem('vm_user_history')) || [];
-        let userSession = JSON.parse(localStorage.getItem('vm_user_session')) || null;
-        let currentOrderView = null;
-        let currentDiscount = null; // {code: 'VM10', percent: 10}
-        
-        let activePdpProduct = null;
-        let activePdpQty = 1;
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
-        function saveCart() {
-            localStorage.setItem('vm_cart', JSON.stringify(cart));
-            renderCart();
-            updateCartIndicator();
+    // ██████████████████████████████████████████████████████████████
+    // FULL STORE LOGIC — Varsity Market API Integration (Store #36)
+    // ██████████████████████████████████████████████████████████████
+
+    // ---------- STORE CONFIGURATION ----------
+    const CONFIG = {
+        CURRENCY: 'R',
+        STORE_ID: 36,
+        STORE_NAME: 'ANTI CLOTHING',
+        TIMEZONE: 'Africa/Johannesburg'
+    };
+
+    // ---------- VARSITY MARKET API CONFIG ----------
+const VM_API_BASE = 'https://demo-embedded.varsitymarket.co.za/store-access/36/';
+const VM_API_KEY  = 'vm_live_b75f7873cf9b2328ddc5f14577318953fcdf4bfcfb76a87e';
+
+async function vmGet(params) {
+    const url = new URL(VM_API_BASE);
+    
+    // Append params dynamically to the URL
+    Object.entries(params || {}).forEach(([k, v]) => { 
+        if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, v); 
+    });
+    
+    // Add the api_key to the query params as your code intended
+    url.searchParams.set('api_key', VM_API_KEY);
+
+    try {
+        // Use the dynamically constructed URL object
+        const res = await fetch(url.toString(), {
+            method: 'GET',
+            headers: { 'X-API-Key': VM_API_KEY }
+        });
+
+        if (!res.ok) { 
+            console.error('VM API GET failed', params, res.status); 
+            return null; 
         }
 
-        /**
-         * UI Toggles
-         */
-        function toggleCart() {
-            const drawer = document.getElementById('cart-drawer');
-            const overlay = document.getElementById('drawer-overlay');
-            drawer.classList.toggle('open');
-            overlay.classList.toggle('opacity-0');
-            overlay.classList.toggle('pointer-events-none');
-            document.body.classList.toggle('overflow-hidden');
+        return await res.json();
+    } catch (err) { 
+        console.error('VM API GET error', params, err); 
+        return null; 
+    }
+}
+
+async function vmPost(state, body) {
+    const url = new URL(VM_API_BASE);
+    url.searchParams.set('state', state);
+    url.searchParams.set('api_key', VM_API_KEY);
+
+    try {
+        const res = await fetch(url.toString(), {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'X-API-Key': VM_API_KEY, 
+                'Authorization': `Bearer ${VM_API_KEY}` 
+            },
+            body: JSON.stringify(body || {})
+        });
+
+        if (!res.ok) { 
+            console.error('VM API POST failed', state, res.status); 
+            return null; 
         }
 
-        function openCheckout() {
-            if(cart.length === 0) return alert("Your bag is empty.");
-            document.getElementById('checkout-modal').classList.add('open');
-            document.getElementById('final-total').textContent = calculateTotal();
-            toggleCart();
+        return await res.json();
+    } catch (err) { 
+        console.error('VM API POST error', state, err); 
+        return null; 
+    }
+}
+
+    function vmList(res, ...keys) {
+        if (!res) return [];
+        if (Array.isArray(res)) return res;
+        for (const k of keys) { if (Array.isArray(res[k])) return res[k]; }
+        if (res.data && Array.isArray(res.data)) return res.data;
+        return [];
+    }
+
+    // ---------- NORMALIZERS ----------
+    function normalizeId(v) {
+        if (v === undefined || v === null) return v;
+        if (typeof v === 'string' && /^\d+$/.test(v)) return parseInt(v, 10);
+        return v;
+    }
+    // Returns a value safe to embed unquoted inside an inline onclick="fn(...)" attribute.
+    function idAttr(id) {
+        return (typeof id === 'string') ? JSON.stringify(id) : id;
+    }
+    function pickImage(p) {
+        let img = p.image || p.image_url || p.thumbnail || p.thumbnail_url || p.photo;
+        if (!img && Array.isArray(p.images) && p.images.length) {
+            const first = p.images[0];
+            img = (typeof first === 'string') ? first : (first?.src || first?.url || first?.image_url);
         }
+        return img || 'https://placehold.co/600x800/111/333?text=ANTI';
+    }
+    function pickPrice(p) {
+        let price = p.price ?? p.price_amount ?? p.amount ?? p.unit_price;
+        if (price === undefined && Array.isArray(p.variants) && p.variants[0]) price = p.variants[0].price;
+        return parseFloat(price) || 0;
+    }
+    function pickCategory(p) {
+        let cat = p.category || p.category_name || p.product_type;
+        if (!cat && Array.isArray(p.categories) && p.categories.length) cat = p.categories[0]?.name || p.categories[0];
+        return cat || 'General';
+    }
+    function normalizeProduct(p) {
+        return {
+            id: normalizeId(p.id ?? p.product_id ?? p._id),
+            name: p.name || p.title || p.product_name || 'UNTITLED',
+            price: pickPrice(p),
+            category: pickCategory(p),
+            image: pickImage(p),
+            desc: p.description || p.desc || p.body_html || p.summary || ''
+        };
+    }
+    function normalizeCategory(c) {
+        if (typeof c === 'string') return c;
+        return c.name || c.title || c.category_name || String(c);
+    }
+    function normalizeCartItem(i) {
+        return {
+            id: normalizeId(i.product_id ?? i.id),
+            name: i.name || i.title || i.product_name || '',
+            price: pickPrice(i),
+            quantity: i.quantity ?? i.qty ?? 1,
+            image: pickImage(i)
+        };
+    }
+    function normalizeOrder(o, fallbackEmail) {
+        return {
+            id: normalizeId(o.id ?? o.order_id ?? o.number ?? Date.now()),
+            date: o.date || o.created_at || o.created || new Date().toLocaleDateString(),
+            items: (o.items || o.line_items || o.products || []).map(normalizeCartItem),
+            total: parseFloat(o.total ?? o.total_price ?? o.amount ?? 0),
+            status: o.status || o.fulfillment_status || o.order_status || 'Confirmed',
+            email: o.email || o.customer_email || fallbackEmail || '',
+            name: o.name || o.customer_name || '',
+            address: o.address || o.shipping_address || ''
+        };
+    }
 
-        function closeCheckout() {
-            document.getElementById('checkout-modal').classList.remove('open');
+    // ---------- FALLBACK PRODUCT DATA (used only if the live API is unreachable) ----------
+    const FALLBACK_PRODUCTS = [
+        { id:1, name:"OBSCURA HOODIE", price:1899, category:"Hoodies", image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600", desc:"Heavyweight cotton, oversized hood, raw edge details." },
+        { id:2, name:"VOID OVERSIZED TEE", price:799, category:"Tees", image:"https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600", desc:"Pigment-dyed black, dropped shoulders." },
+        { id:3, name:"SHADOW CARGO PANTS", price:1499, category:"Pants", image:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600", desc:"Tapered fit, heavy twill, multiple pockets." },
+        { id:4, name:"SILVER CHAIN", price:499, category:"Accessories", image:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600", desc:"Stainless steel, noir finish, signature pendant." },
+        { id:5, name:"DECONSTRUCTED DENIM JACKET", price:2499, category:"Outerwear", image:"https://images.unsplash.com/photo-1542272604-6c5b3c421f10?w=600", desc:"Asymmetric zip, raw hem, washed black denim." },
+        { id:6, name:"MESH PANEL CAP", price:399, category:"Accessories", image:"https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600", desc:"Vent mesh, leather strap." },
+        { id:7, name:"BLACKOUT SNEAKERS", price:2299, category:"Footwear", image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600", desc:"Matte leather, vulcanized sole." },
+        { id:8, name:"ACID WASH HOODIE", price:1799, category:"Hoodies", image:"https://images.unsplash.com/photo-1578768074951-9632bdf9f1ee?w=600", desc:"Mottled gray/black, distressed print." },
+        { id:9, name:"NOIR SCRIPT TEE", price:699, category:"Tees", image:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600", desc:"Minimal gothic typography." },
+        { id:10, name:"COVERT BELT BAG", price:899, category:"Accessories", image:"https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600", desc:"Ballistic nylon, YKK hardware." }
+    ];
+
+    // ---------- STATE ----------
+    let PRODUCTS = [];
+    let CATEGORIES = [];
+    let DISCOUNTS = [];
+    let userSession = JSON.parse(localStorage.getItem('anti_session')) || null;
+    let userOrders = JSON.parse(localStorage.getItem('anti_orders')) || [];
+    let cart = { items: [], subtotal: 0, item_count: 0 };
+    let cartId = localStorage.getItem('anti_cart_id') || null;
+    let currentDiscount = null;
+    let activePDP = null, pdpQty = 1;
+
+    function getProductImg(p) { return p.image || 'https://placehold.co/600x800/111/333?text=ANTI'; }
+    function updateCartDot() { document.getElementById('cart-dot').innerText = cart.item_count || '0'; }
+
+    // ---------- DATA LOADING ----------
+    async function loadProducts() {
+        const res = await vmGet({ state: 'products' });
+        const list = vmList(res, 'products', 'items');
+        PRODUCTS = list.length ? list.map(normalizeProduct) : FALLBACK_PRODUCTS;
+        renderCatalog();
+    }
+    async function loadCategories() {
+        const res = await vmGet({ state: 'categories' });
+        const list = vmList(res, 'categories', 'items');
+        CATEGORIES = list.length ? list.map(normalizeCategory) : [...new Set(PRODUCTS.map(p => p.category))];
+    }
+    async function loadDiscounts() {
+        const res = await vmGet({ state: 'discounts' });
+        DISCOUNTS = vmList(res, 'discounts', 'items');
+    }
+    async function loadOrderHistory(email) {
+        if (!email) return;
+        const res = await vmGet({ state: 'orders', email });
+        const list = vmList(res, 'orders', 'items');
+        if (list.length) {
+            userOrders = list.map(o => normalizeOrder(o, email));
+            localStorage.setItem('anti_orders', JSON.stringify(userOrders));
         }
+    }
 
-        /**
-         * Discount Logic
-         */
-        function applyDiscount() {
-            const code = document.getElementById('discount-code').value.toUpperCase();
-            if (code === 'VIP20') {
-                currentDiscount = { code: 'VIP20', percent: 20 };
-                alert("Discount applied: 20% off");
-            } else if (code === 'WELCOME') {
-                currentDiscount = { code: 'WELCOME', percent: 10 };
-                alert("Discount applied: 10% off");
-            } else {
-                alert("Invalid or expired discount code.");
-                return;
-            }
-            renderCart();
+    // ---------- CART (synced with Varsity Market API) ----------
+    async function ensureCart() {
+        if (cartId) return cartId;
+        const res = await vmPost('cart_create', {});
+        cartId = res?.cart_id || res?.id || res?.cart?.id || null;
+        if (cartId) localStorage.setItem('anti_cart_id', cartId);
+        return cartId;
+    }
+    async function refreshCart() {
+        if (!cartId) { renderCart(); updateCartDot(); return; }
+        const res = await vmGet({ state: 'cart', cart_id: cartId });
+        const items = vmList(res, 'items', 'line_items') || (res?.cart?.items) || [];
+        cart.items = items.map(normalizeCartItem);
+        cart.subtotal = res?.subtotal ?? res?.cart?.subtotal ?? cart.items.reduce((s, i) => s + i.price * i.quantity, 0);
+        cart.item_count = cart.items.reduce((s, i) => s + i.quantity, 0);
+        renderCart(); updateCartDot();
+    }
+    async function addToCart(p, q) {
+        await ensureCart();
+        if (!cartId) {
+            let ex = cart.items.find(i => i.id === p.id);
+            if (ex) ex.quantity += q; else cart.items.push({ id: p.id, name: p.name, price: p.price, image: p.image, quantity: q });
+            cart.subtotal = cart.items.reduce((s, i) => s + i.price * i.quantity, 0);
+            cart.item_count = cart.items.reduce((s, i) => s + i.quantity, 0);
+            renderCart(); updateCartDot();
+            return;
         }
-
-        /**
-         * Cart Operations
-         */
-        function addToCart(productId) {
-            const product = PRODUCTS.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId);
-
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-
-            saveCart();
-            toggleCart();
+        await vmPost('cart_add', { cart_id: cartId, product_id: p.id, quantity: q });
+        await refreshCart();
+    }
+    window.updateQuantity = async (id, d) => {
+        let idx = cart.items.findIndex(i => i.id === id);
+        if (idx === -1) return;
+        let nq = cart.items[idx].quantity + d;
+        if (!cartId) {
+            if (nq <= 0) cart.items.splice(idx, 1); else cart.items[idx].quantity = nq;
+            cart.subtotal = cart.items.reduce((s, i) => s + i.price * i.quantity, 0);
+            cart.item_count = cart.items.reduce((s, i) => s + i.quantity, 0);
+            renderCart(); updateCartDot();
+            return;
         }
+        if (nq <= 0) await vmPost('cart_remove', { cart_id: cartId, product_id: id });
+        else await vmPost('cart_update', { cart_id: cartId, product_id: id, quantity: nq });
+        await refreshCart();
+    };
 
-        function updateQuantity(productId, delta) {
-            const item = cart.find(i => i.id === productId);
-            if (!item) return;
+    // ---------- RENDERING ----------
+    function renderCatalog() {
+        const container = document.getElementById('catalog-container');
+        if (container) container.innerHTML = PRODUCTS.map(p => `<div onclick="openPDP(${idAttr(p.id)})" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-80 overflow-hidden"><img src="${getProductImg(p)}" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-5"><div class="flex justify-between"><h3 class="font-bold text-lg">${p.name}</h3><span>${CONFIG.CURRENCY} ${p.price}</span></div><p class="text-xs text-zinc-500 uppercase">${p.category}</p></div></div>`).join('');
+        const featured = document.getElementById('featured-grid');
+        if (featured) featured.innerHTML = PRODUCTS.slice(0, 4).map(p => `<div onclick="openPDP(${idAttr(p.id)})" class="group cursor-pointer border border-white/10 rounded-2xl overflow-hidden bg-black/40 hover:border-white/40 transition"><div class="img-zoom h-64 overflow-hidden"><img src="${getProductImg(p)}" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition"></div><div class="p-4"><div class="flex justify-between"><h3 class="font-bold">${p.name}</h3><span>${CONFIG.CURRENCY} ${p.price}</span></div></div></div>`).join('');
+    }
+    function renderCategoriesGrid() {
+        const cats = CATEGORIES.length ? CATEGORIES : [...new Set(PRODUCTS.map(p => p.category))];
+        document.getElementById('categories-grid').innerHTML = cats.map(cat => `<div onclick="navigate('collection'); setTimeout(()=>filterCollection(${JSON.stringify(cat)}),50)" class="border border-white/10 rounded-3xl overflow-hidden group cursor-pointer"><div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="p-6 text-center"><h2 class="text-3xl font-bold">${String(cat).toUpperCase()}</h2><p class="text-zinc-400 mt-2">Explore ${cat}</p></div></div>`).join('');
+    }
+    function filterCollection(cat) {
+        const grid = document.getElementById('collection-grid');
+        if (!grid) return;
+        let filtered = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => String(p.category).toLowerCase() === String(cat).toLowerCase());
+        grid.innerHTML = filtered.map(p => `<div onclick="openPDP(${idAttr(p.id)})" class="cursor-pointer group"><div class="img-zoom h-96 rounded-2xl overflow-hidden border border-white/10"><img src="${getProductImg(p)}" class="w-full h-full object-cover grayscale group-hover:scale-105 transition"></div><div class="mt-4 flex justify-between"><span class="font-bold">${p.name}</span><span>${CONFIG.CURRENCY} ${p.price}</span></div></div>`).join('');
+    }
 
-            item.quantity += delta;
-            if (item.quantity <= 0) {
-                cart = cart.filter(i => i.id !== productId);
-            }
-            saveCart();
+    window.openPDP = (id) => {
+        activePDP = PRODUCTS.find(p => p.id === id);
+        if (!activePDP) return;
+        pdpQty = 1;
+        document.getElementById('view-product').innerHTML = `<div class="flex items-center gap-4 mb-6"><button onclick="navigate('shop')" class="text-sm text-zinc-400 hover:text-white">← BACK</button><span>/${activePDP.category}</span></div><div class="grid md:grid-cols-2 gap-12"><div class="rounded-3xl overflow-hidden border border-white/10"><img src="${getProductImg(activePDP)}" class="w-full object-cover"></div><div><h1 class="text-5xl font-black">${activePDP.name}</h1><p class="text-3xl mt-4">${CONFIG.CURRENCY} ${activePDP.price}</p><p class="text-zinc-400 mt-6">${activePDP.desc}</p><div class="mt-8"><div class="flex items-center gap-4 mb-6"><button onclick="changePdpQty(-1)" class="border border-white/30 w-10 h-10 rounded-full">−</button><span id="pdp-qty" class="text-xl w-12 text-center">1</span><button onclick="changePdpQty(1)" class="border border-white/30 w-10 h-10 rounded-full">+</button></div><button onclick="addPdpToCart()" class="w-full bg-white text-black py-5 rounded-full font-bold">ADD TO BAG →</button></div></div></div>`;
+        showView('product');
+        document.getElementById('pdp-qty').innerText = pdpQty;
+    };
+    window.changePdpQty = (d) => { pdpQty = Math.max(1, pdpQty + d); if (document.getElementById('pdp-qty')) document.getElementById('pdp-qty').innerText = pdpQty; };
+    window.addPdpToCart = async () => { if (activePDP) { await addToCart(activePDP, pdpQty); toggleCart(); } };
+
+    function renderCart() {
+        let c = document.getElementById('cart-items');
+        if (!c) return;
+        if (cart.items.length === 0) {
+            c.innerHTML = '<div class="text-center text-zinc-500 py-20">YOUR BAG IS EMPTY</div>';
+            document.getElementById('subtotal').innerText = `${CONFIG.CURRENCY} 0.00`;
+            document.getElementById('cart-drawer-total').innerText = `${CONFIG.CURRENCY} 0.00`;
+            document.getElementById('discount-row').classList.add('hidden');
+            return;
         }
-
-        function setupCatalog() {
-            const container = document.getElementById('catalog-container');
-            container.innerHTML = PRODUCTS.map(p => `
-                <div onclick="openPDP(${p.id})" class="cursor-pointer group border border-brand-border rounded-2xl overflow-hidden bg-brand-card transition-colors hover:border-white/20">
-                    <div class="img-zoom h-80 overflow-hidden relative">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover grayscale-[0.2] transition-transform duration-700">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-1">
-                            <h3 class="font-medium text-white">${p.name}</h3>
-                            <span class="text-brand-mute">$${p.price.toFixed(2)}</span>
-                        </div>
-                        <p class="text-[10px] uppercase tracking-widest text-brand-mute font-semibold">${p.category}</p>
-                    </div>
-                </div>
-            `).join('');
+        c.innerHTML = cart.items.map(i => `<div class="flex gap-4"><div class="w-20 h-20 bg-white/5 rounded-lg overflow-hidden"><img src="${getProductImg(i)}" class="w-full h-full object-cover"></div><div class="flex-1"><div class="font-bold">${i.name}</div><div>${CONFIG.CURRENCY} ${i.price}</div><div class="flex gap-3 mt-2"><button onclick="updateQuantity(${idAttr(i.id)},-1)" class="border px-2 rounded">-</button><span>${i.quantity}</span><button onclick="updateQuantity(${idAttr(i.id)},1)" class="border px-2 rounded">+</button></div></div><div class="font-bold">${CONFIG.CURRENCY} ${(i.price * i.quantity).toFixed(2)}</div></div>`).join('');
+        let sub = cart.subtotal;
+        document.getElementById('subtotal').innerText = `${CONFIG.CURRENCY} ${sub.toFixed(2)}`;
+        let total = sub;
+        if (currentDiscount) {
+            let off = currentDiscount.percent ? sub * currentDiscount.percent / 100 : (currentDiscount.amount || 0);
+            total = Math.max(0, sub - off);
+            document.getElementById('discount-row').classList.remove('hidden');
+            document.getElementById('discount-amount').innerText = `-${CONFIG.CURRENCY} ${off.toFixed(2)}`;
+        } else {
+            document.getElementById('discount-row').classList.add('hidden');
         }
+        document.getElementById('cart-drawer-total').innerText = `${CONFIG.CURRENCY} ${total.toFixed(2)}`;
+    }
 
-        function calculateTotal() {
-            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            if (currentDiscount) {
-                let discountAmt = (subtotal * currentDiscount.percent) / 100;
-                return `$${(subtotal - discountAmt).toFixed(2)}`;
-            }
-            return `$${subtotal.toFixed(2)}`;
+    window.applyDiscount = async () => {
+        let code = document.getElementById('discount-code').value.toUpperCase().trim();
+        if (!code) return;
+        if (!DISCOUNTS.length) await loadDiscounts();
+        let match = DISCOUNTS.find(d => String(d.code || d.coupon || d.name || '').toUpperCase() === code);
+        if (match) {
+            let percent = match.percent ?? match.percentage ?? (match.type === 'percentage' ? match.value : null);
+            let amount = match.amount ?? (match.type === 'fixed' ? match.value : null);
+            currentDiscount = { percent: percent ? parseFloat(percent) : 0, amount: amount ? parseFloat(amount) : 0 };
+        } else {
+            alert("Invalid discount code");
+            return;
         }
-
-        function renderCart() {
-            const container = document.getElementById('cart-items');
-            const subtotalEl = document.getElementById('subtotal');
-            
-            if (cart.length === 0) {
-                container.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-center">
-                    <p class="text-brand-mute text-sm mb-4">Your bag is empty.</p>
-                    <button onclick="toggleCart()" class="text-xs uppercase tracking-widest font-bold text-white underline">Start Shopping</button>
-                </div>`;
-                subtotalEl.textContent = '$0.00';
-                return;
-            }
-
-            container.innerHTML = cart.map(item => `
-                <div class="flex gap-4 items-center">
-                    <div class="w-20 h-20 bg-brand-border rounded-lg overflow-hidden flex-shrink-0">
-                        <img src="${item.img}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow">
-                        <h4 class="text-sm font-medium text-white">${item.name}</h4>
-                        <p class="text-xs text-brand-mute">$${item.price.toFixed(2)}</p>
-                        <div class="flex items-center gap-3 mt-2">
-                            <button onclick="updateQuantity(${item.id}, -1)" class="w-6 h-6 border border-brand-border rounded flex items-center justify-center hover:border-white transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            </button>
-                            <span class="text-xs font-bold text-white w-4 text-center">${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)" class="w-6 h-6 border border-brand-border rounded flex items-center justify-center hover:border-white transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="text-sm font-semibold text-white">
-                        $${(item.price * item.quantity).toFixed(2)}
-                    </div>
-                </div>
-            `).join('');
-
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-            
-            if(currentDiscount) {
-                document.getElementById('discount-row').style.display = 'flex';
-                document.getElementById('discount-label').textContent = currentDiscount.code;
-                document.getElementById('discount-amount').textContent = `-$${((subtotal * currentDiscount.percent) / 100).toFixed(2)}`;
-            } else {
-                document.getElementById('discount-row').style.display = 'none';
-            }
-            
-            document.getElementById('cart-drawer-total').textContent = calculateTotal();
-        }
-
-        function updateCartIndicator() {
-            const dot = document.getElementById('cart-dot');
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            dot.textContent = totalItems;
-            if (totalItems > 0) {
-                dot.classList.remove('scale-0');
-                dot.classList.add('scale-100');
-            } else {
-                dot.classList.remove('scale-100');
-                dot.classList.add('scale-0');
-            }
-        }
-
-        function handleCheckout(e) {
-            e.preventDefault();
-            
-            // Get email if provided in form
-            const emailInput = document.querySelector('input[type="email"]').value;
-            const userEmail = userSession ? userSession.email : (emailInput || 'guest@example.com');
-            
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const totalDiscount = currentDiscount ? (subtotal * currentDiscount.percent / 100) : 0;
-            const finalP = subtotal - totalDiscount;
-            
-            const newOrder = {
-                id: Math.floor(Math.random() * 90000) + 10000,
-                email: userEmail,
-                date: new Date().toLocaleDateString(),
-                status: 'Processing',
-                items: [...cart],
-                total: finalP
-            };
-            
-            userHistory.push(newOrder);
-            localStorage.setItem('vm_user_history', JSON.stringify(userHistory));
-
-            alert("Order confirmed! Thank you for choosing VMTECH.");
-            cart = [];
-            saveCart();
-            closeCheckout();
-            currentDiscount = null; // reset discount
-            
-            // If logged in, go to dashboard, else shop
-            if(userSession && userSession.email === userEmail) {
-                showView('dashboard');
-            } else {
-                showView('shop');
-            }
-        }
-
-        // --- SPA VIEWS & ROUTING ---
-        function showView(viewId) {
-            if (!document.getElementById('view-' + viewId)) {
-                viewId = '404';
-            }
-            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-            document.getElementById('view-' + viewId).classList.remove('hidden');
-            
-            // Update Nav account status
-            const accountNav = document.getElementById('nav-account');
-            accountNav.style.opacity = (viewId !== 'shop' && viewId !== 'account') ? '1' : '';
-            if (viewId === 'search') {
-                setTimeout(() => document.getElementById('search-input').focus(), 100);
-            }
-            if (viewId === 'dashboard') renderDashboardUI();
-            if (viewId === 'orders') renderOrdersUI();
-            
-            window.scrollTo(0, 0);
-        }
-
-        function handleAccountClick() {
-            if (userSession) {
-                showView('dashboard');
-            } else {
-                showView('account');
-            }
-        }
-
-        function login() {
-            const email = document.getElementById('login-email').value;
-            if (email && email.includes('@')) {
-                userSession = { email };
-                localStorage.setItem('vm_user_session', JSON.stringify(userSession));
-                document.getElementById('nav-account').textContent = 'Profile';
-                showView('dashboard');
-            } else {
-                alert('Please enter a valid email.');
-            }
-        }
-
-        function logout() {
-            userSession = null;
-            localStorage.removeItem('vm_user_session');
-            document.getElementById('nav-account').textContent = 'Account';
-            showView('shop');
-        }
-
-        function renderDashboardUI() {
-            if (!userSession) return showView('account');
-            
-            document.getElementById('dash-user-email').textContent = userSession.email;
-            const userOrders = userHistory.filter(o => o.email === userSession.email);
-            const totalSpent = userOrders.reduce((sum, o) => sum + o.total, 0);
-            
-            document.getElementById('dash-total-orders').textContent = userOrders.length;
-            document.getElementById('dash-total-spent').textContent = `$${totalSpent.toFixed(2)}`;
-            
-            const recentContainer = document.getElementById('dash-recent-orders');
-            if (userOrders.length === 0) {
-                recentContainer.innerHTML = '<p class="text-brand-mute italic mt-4">No recent orders.</p>';
-                return;
-            }
-            
-            recentContainer.innerHTML = userOrders.slice(-3).reverse().map(o => `
-                <div onclick="openOrder(${o.id})" class="bg-brand-card border border-brand-border p-6 rounded-2xl hover:border-white/50 transition-colors cursor-pointer flex justify-between items-center group shadow-md">
-                    <div>
-                        <p class="text-white font-bold text-lg mb-1 group-hover:text-white transition-colors">Order #${o.id}</p>
-                        <p class="text-xs text-brand-mute uppercase tracking-widest">${o.status}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-white font-bold text-lg mb-1">$${o.total.toFixed(2)}</p>
-                        <p class="text-xs text-brand-mute">${o.date}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderOrdersUI() {
-            if (!userSession) return showView('account');
-            const userOrders = userHistory.filter(o => o.email === userSession.email).reverse();
-            const container = document.getElementById('orders-list');
-            
-            if (userOrders.length === 0) {
-                container.innerHTML = '<div class="text-center py-32 border border-brand-border border-dashed rounded-3xl"><p class="text-brand-mute font-medium text-lg">No history found.</p></div>';
-                return;
-            }
-            
-            container.innerHTML = userOrders.map(o => `
-                <div onclick="openOrder(${o.id})" class="bg-brand-card border border-brand-border p-6 md:p-8 rounded-2xl hover:border-white transition-colors cursor-pointer flex flex-col md:flex-row justify-between md:items-center gap-6 shadow-xl">
-                    <div>
-                        <p class="text-2xl text-white font-bold mb-2">Order #${o.id}</p>
-                        <p class="text-sm text-brand-mute">${o.date}</p>
-                    </div>
-                    <div class="flex items-center gap-8 justify-between md:justify-end">
-                        <div class="text-right flex flex-col items-end">
-                            <p class="text-2xl text-white font-bold mb-2">$${o.total.toFixed(2)}</p>
-                            <span class="inline-block bg-brand-bg border border-brand-border px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-brand-mute">${o.status}</span>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-mute"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function openOrder(orderId) {
-            currentOrderView = userHistory.find(o => o.id === orderId);
-            if (!currentOrderView) return;
-            
-            document.getElementById('detail-id').textContent = currentOrderView.id;
-            document.getElementById('detail-date').textContent = currentOrderView.date;
-            document.getElementById('detail-status').textContent = currentOrderView.status;
-            document.getElementById('detail-subtotal').textContent = `$${currentOrderView.total.toFixed(2)}`;
-            document.getElementById('detail-total').textContent = `$${currentOrderView.total.toFixed(2)}`;
-            
-            document.getElementById('detail-items').innerHTML = currentOrderView.items.map(item => `
-                <div class="flex gap-6 items-center bg-brand-card p-6 rounded-2xl border border-brand-border shadow-md">
-                    <div class="w-20 h-20 bg-brand-bg rounded-xl overflow-hidden flex-shrink-0 border border-brand-border">
-                        <img src="${item.img}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow">
-                        <h4 class="text-lg font-bold text-white mb-1">${item.name}</h4>
-                        <p class="text-sm text-brand-mute uppercase tracking-widest font-semibold">Qty: ${item.quantity}</p>
-                    </div>
-                    <div class="text-lg font-bold text-white">
-                        $${(item.price * item.quantity).toFixed(2)}
-                    </div>
-                </div>
-            `).join('');
-            
-            showView('order-detail');
-        }
-
-        function reorderCurrent() {
-            if(!currentOrderView) return;
-            currentOrderView.items.forEach(orderItem => {
-                const existing = cart.find(c => c.id === orderItem.id);
-                if (existing) {
-                    existing.quantity += orderItem.quantity;
-                } else {
-                    cart.push({ ...orderItem });
-                }
-            });
-            saveCart();
-            showView('shop');
-            toggleCart();
-        }
-
-        // --- NEW SPA FEATURES ROUTING ---
-        
-        function openPDP(productId) {
-            activePdpProduct = PRODUCTS.find(p => p.id === productId);
-            if(!activePdpProduct) return showView('404');
-            
-            activePdpQty = 1;
-            document.getElementById('pdp-img').src = activePdpProduct.img;
-            document.getElementById('pdp-name').textContent = activePdpProduct.name;
-            document.getElementById('pdp-price').textContent = `$${activePdpProduct.price.toFixed(2)}`;
-            document.getElementById('pdp-desc').textContent = activePdpProduct.desc;
-            document.getElementById('pdp-category').textContent = activePdpProduct.category;
-            document.getElementById('pdp-qty').textContent = activePdpQty;
-            
-            const reviewContainer = document.getElementById('pdp-reviews');
-            if (activePdpProduct.reviews && activePdpProduct.reviews.length > 0) {
-                reviewContainer.innerHTML = activePdpProduct.reviews.map(r => `
-                    <div class="bg-brand-card p-6 rounded-2xl border border-brand-border h-full">
-                        <div class="flex text-white gap-1 mb-4">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        </div>
-                        <p class="text-sm text-brand-mute leading-relaxed">"${r.text}"</p>
-                        <p class="text-xs font-bold text-white mt-4 uppercase tracking-widest">${r.name}</p>
-                    </div>
-                `).join('');
-            } else {
-                reviewContainer.innerHTML = '<p class="text-brand-mute text-sm">No reviews yet for this product.</p>';
-            }
-            
-            showView('product');
-        }
-
-        function changePdpQty(delta) {
-            activePdpQty += delta;
-            if (activePdpQty < 1) activePdpQty = 1;
-            document.getElementById('pdp-qty').textContent = activePdpQty;
-        }
-
-        function addPdpToCart() {
-            if(!activePdpProduct) return;
-            const existing = cart.find(item => item.id === activePdpProduct.id);
-            if (existing) {
-                existing.quantity += activePdpQty;
-            } else {
-                cart.push({ ...activePdpProduct, quantity: activePdpQty });
-            }
-            saveCart();
-            toggleCart();
-        }
-
-        function renderCollectionList(items, containerId) {
-            const container = document.getElementById(containerId);
-            if(items.length === 0) {
-                container.innerHTML = '<p class="text-brand-mute text-lg col-span-full">No products found matching these criteria.</p>';
-                return;
-            }
-            container.innerHTML = items.map(p => `
-                <div onclick="openPDP(${p.id})" class="cursor-pointer group">
-                    <div class="img-zoom h-96 rounded-3xl overflow-hidden bg-brand-card mb-6 border border-brand-border">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover grayscale-[0.2] transition-transform duration-700">
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-white mb-2">${p.name}</h3>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-400 font-semibold uppercase tracking-widest">${p.category}</span>
-                            <span class="text-white">$${p.price.toFixed(2)}</span>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterCollection(category) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('text-white', 'border-white');
-                btn.classList.add('text-brand-mute', 'border-transparent');
-            });
-            document.getElementById('filter-' + category)?.classList.remove('text-brand-mute', 'border-transparent');
-            document.getElementById('filter-' + category)?.classList.add('text-white', 'border-white');
-            
-            const filtered = category === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === category);
-            renderCollectionList(filtered, 'collection-grid');
-        }
-
-        function handleSearch() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const results = PRODUCTS.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
-            renderCollectionList(results, 'search-results');
-        }
-
-        // Initialize App
-        setupCatalog();
-        filterCollection('all'); // Initialize collection view
         renderCart();
-        updateCartIndicator();
-        
-        if (userSession) {
-            document.getElementById('nav-account').textContent = 'Profile';
+    };
+
+    // ---------- CHECKOUT ----------
+    window.openCheckout = () => {
+        if (!userSession) { alert("Please create an account to place an order."); navigate('account'); return; }
+        if (cart.items.length === 0) return alert("Your bag is empty.");
+        document.getElementById('final-total').innerText = document.getElementById('cart-drawer-total').innerText;
+        document.getElementById('checkout-modal').classList.add('open');
+        toggleCart();
+    };
+    window.closeCheckout = () => document.getElementById('checkout-modal').classList.remove('open');
+
+    window.handleCheckout = async (e) => {
+        e.preventDefault();
+        if (!userSession) { alert("You must be logged in."); navigate('account'); return; }
+        let email = e.target.querySelector('input[type="email"]').value;
+        let textInputs = e.target.querySelectorAll('input[type="text"]');
+        let name = textInputs[0]?.value || userSession.name;
+        let address = textInputs[1]?.value || '';
+        let totalVal = parseFloat(document.getElementById('cart-drawer-total').innerText.replace(CONFIG.CURRENCY, '').trim()) || 0;
+
+        await ensureCart();
+        let result = await vmPost('checkout_create', { cart_id: cartId, email, name, address, total: totalVal });
+        let checkoutId = result?.checkout_id || result?.id || cartId;
+        let completion = await vmPost('checkout_complete', { checkout_id: checkoutId, cart_id: cartId, email, name, address });
+        if (!completion || completion.error) {
+            completion = await vmPost('order', { cart_id: cartId, email, name, address, items: cart.items, total: totalVal });
         }
 
-    </script>
-</body>
-</html>
+        let orderId = completion?.order_id || completion?.id || completion?.order?.id || Date.now();
+        let newOrder = { id: orderId, date: new Date().toLocaleDateString(), items: [...cart.items], total: totalVal, status: completion?.status || "Confirmed", email, name, address };
+        userOrders.unshift(newOrder);
+        localStorage.setItem('anti_orders', JSON.stringify(userOrders));
+
+        cart = { items: [], subtotal: 0, item_count: 0 };
+        currentDiscount = null;
+        localStorage.removeItem('anti_cart_id');
+        cartId = null;
+        renderCart(); updateCartDot();
+
+        closeCheckout();
+        alert(`ORDER #${orderId} PLACED. THANK YOU.`);
+        if (userSession && userSession.email === email) navigate('dashboard'); else navigate('shop');
+    };
+
+    // ---------- CART DRAWER / MENU ----------
+    window.toggleCart = () => {
+        document.getElementById('cart-drawer').classList.toggle('open');
+        document.getElementById('drawer-overlay').classList.toggle('opacity-0');
+        document.getElementById('drawer-overlay').classList.toggle('pointer-events-none');
+    };
+    window.openMenu = () => document.getElementById('myNav').style.width = '100%';
+    window.closeMenu = () => document.getElementById('myNav').style.width = '0%';
+
+    // ---------- AUTH ----------
+    window.login = async () => {
+        let email = document.getElementById('login-email').value;
+        let name = document.getElementById('login-name').value;
+        if (!email.includes('@')) { alert("valid email required"); return; }
+        userSession = { email, name: name || email.split('@')[0] };
+        localStorage.setItem('anti_session', JSON.stringify(userSession));
+        await loadOrderHistory(email);
+        navigate('dashboard');
+    };
+    window.logout = () => { userSession = null; localStorage.removeItem('anti_session'); navigate('shop'); };
+    window.handleAccountClick = () => { if (userSession) navigate('dashboard'); else navigate('account'); };
+
+    // ---------- DASHBOARD / ORDERS ----------
+    function renderDashboard() {
+        let d = document.getElementById('view-dashboard');
+        let myOrders = userOrders.filter(o => o.email === userSession?.email);
+        let totalSpent = myOrders.reduce((s, o) => s + o.total, 0);
+        let lastAddress = myOrders.length ? myOrders[0].address : "No saved address yet";
+        d.innerHTML = `<div class="flex flex-wrap justify-between border-b border-white/10 pb-8 mb-10"><div><h1 class="text-6xl font-black">WELCOME BACK</h1><p class="text-zinc-400">${userSession?.name} (${userSession?.email})</p></div><button onclick="logout()" class="border border-white/20 px-6 py-2 rounded-full">SIGN OUT</button></div><div class="grid md:grid-cols-3 gap-6 mb-16"><div class="border border-white/10 p-8 rounded-2xl"><div class="text-xs uppercase">TOTAL ORDERS</div><div class="text-5xl font-bold">${myOrders.length}</div></div><div class="border border-white/10 p-8 rounded-2xl"><div class="text-xs uppercase">LIFETIME SPENT</div><div class="text-5xl font-bold">${CONFIG.CURRENCY} ${totalSpent.toFixed(2)}</div></div><div class="border border-white/10 p-8 rounded-2xl"><div class="text-xs uppercase">STATUS</div><div class="text-2xl font-bold">BLACKLIST ELITE</div></div></div><div class="grid md:grid-cols-2 gap-8 mb-12"><div class="border border-white/10 p-6 rounded-2xl"><h3 class="text-xl font-bold mb-3">ACCOUNT DETAILS</h3><p><strong>Email:</strong> ${userSession?.email}</p><p><strong>Member since:</strong> ${new Date().toLocaleDateString()}</p></div><div class="border border-white/10 p-6 rounded-2xl"><h3 class="text-xl font-bold mb-3">DEFAULT ADDRESS</h3><p class="text-zinc-400">${lastAddress}</p><button onclick="alert('You can update address during checkout')" class="text-xs underline mt-2">Update</button></div></div><h2 class="text-3xl font-bold mb-6">RECENT ORDERS</h2><div id="dash-recent" class="space-y-4"></div><div class="mt-10"><button onclick="navigate('orders')" class="border border-white/20 px-6 py-3 rounded-full">VIEW ALL ORDERS →</button></div>`;
+        let recentDiv = document.getElementById('dash-recent');
+        if (myOrders.length === 0) recentDiv.innerHTML = '<p class="text-zinc-500">No orders yet. Start shopping.</p>';
+        else recentDiv.innerHTML = myOrders.slice(0, 3).map(o => `<div onclick="viewOrderDetail(${idAttr(o.id)})" class="border border-white/10 p-6 rounded-2xl cursor-pointer flex justify-between"><div><span class="font-bold">#${o.id}</span><p class="text-sm">${o.date}</p></div><div>${CONFIG.CURRENCY} ${o.total.toFixed(2)}</div></div>`).join('');
+    }
+    function renderOrders() {
+        let oDiv = document.getElementById('orders-list');
+        let myOrders = userOrders.filter(o => o.email === userSession?.email);
+        if (myOrders.length === 0) { oDiv.innerHTML = '<div class="text-center py-32">No history</div>'; return; }
+        oDiv.innerHTML = myOrders.map(o => `<div onclick="viewOrderDetail(${idAttr(o.id)})" class="border border-white/10 p-6 rounded-2xl cursor-pointer flex justify-between"><div><div class="text-xl font-bold">ORDER #${o.id}</div><div class="text-sm text-zinc-500">${o.date}</div></div><div>${CONFIG.CURRENCY} ${o.total.toFixed(2)}</div></div>`).join('');
+    }
+    window.viewOrderDetail = (id) => {
+        let order = userOrders.find(o => o.id === id);
+        if (!order) return;
+        document.getElementById('view-order-detail').innerHTML = `<div class="flex items-center gap-4 mb-8"><button onclick="navigate('orders')" class="border border-white/30 p-3 rounded-full">←</button><div><h1 class="text-5xl font-black">ORDER #${order.id}</h1><p class="text-zinc-400">${order.date}</p></div></div><div class="grid md:grid-cols-3 gap-10"><div class="md:col-span-2 space-y-4">${order.items.map(i => `<div class="flex gap-4 border-b border-white/10 pb-4"><img src="${getProductImg(i)}" class="w-16 h-16 object-cover rounded"><div><div class="font-bold">${i.name}</div><div>QTY ${i.quantity}</div><div>${CONFIG.CURRENCY} ${(i.price * i.quantity).toFixed(2)}</div></div></div>`).join('')}</div><div class="border border-white/10 p-6 rounded-2xl"><div class="text-xl font-bold">TOTAL: ${CONFIG.CURRENCY} ${order.total.toFixed(2)}</div><div class="text-green-400 mt-2">${order.status}</div><button onclick="reorderFromOrder(${idAttr(order.id)})" class="mt-6 w-full bg-white text-black py-3 rounded-full">REORDER ALL</button></div></div>`;
+        showView('order-detail');
+    };
+    window.reorderFromOrder = async (id) => {
+        let order = userOrders.find(o => o.id === id);
+        if (!order) return;
+        for (const i of order.items) await addToCart({ id: i.id, name: i.name, price: i.price, image: i.image }, i.quantity);
+        toggleCart();
+        navigate('shop');
+    };
+
+    // ---------- SEARCH ----------
+    window.handleSearch = async () => {
+        let q = document.getElementById('search-input')?.value.trim();
+        let resultsEl = document.getElementById('search-results');
+        if (!q) { resultsEl.innerHTML = ''; return; }
+        const res = await vmGet({ state: 'search', q });
+        let list = vmList(res, 'products', 'results', 'items');
+        let products = list.length ? list.map(normalizeProduct) : PRODUCTS.filter(p => p.name.toLowerCase().includes(q.toLowerCase()) || p.category.toLowerCase().includes(q.toLowerCase()));
+        resultsEl.innerHTML = products.map(p => `<div onclick="openPDP(${idAttr(p.id)})" class="border border-white/10 p-4 rounded-2xl cursor-pointer"><img src="${getProductImg(p)}" class="h-48 w-full object-cover rounded mb-2"><div class="font-bold">${p.name}</div><div>${CONFIG.CURRENCY} ${p.price}</div></div>`).join('') || '<p class="col-span-full text-center">no results</p>';
+    };
+
+    // ---------- ROUTING ----------
+    window.navigate = (v) => { window.location.hash = v; };
+    function showView(v) {
+        document.querySelectorAll('.view').forEach(el => el.classList.add('hidden'));
+        let t = document.getElementById(`view-${v}`);
+        if (t) t.classList.remove('hidden'); else document.getElementById('view-404').classList.remove('hidden');
+        if (v === 'dashboard') renderDashboard();
+        if (v === 'orders') renderOrders();
+        if (v === 'categories') renderCategoriesGrid();
+        if (v === 'collection') {
+            if (!document.getElementById('collection-grid')) {
+                let colDiv = document.createElement('div');
+                colDiv.id = 'collection-grid';
+                colDiv.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
+                document.getElementById('view-collection').appendChild(colDiv);
+            }
+            filterCollection('all');
+        }
+        window.scrollTo(0, 0);
+    }
+    window.addEventListener('hashchange', () => {
+        let h = location.hash.slice(1) || 'shop';
+        if (h.startsWith('product/')) { let pid = parseInt(h.split('/')[1]); if (pid) openPDP(pid); else showView('shop'); }
+        else showView(h);
+    });
+
+    // ---------- INIT ----------
+    (async function init() {
+        await loadProducts();
+        loadCategories();
+        if (userSession) loadOrderHistory(userSession.email);
+        await ensureCart();
+        await refreshCart();
+        if (!location.hash || location.hash === '#') navigate('shop'); else window.dispatchEvent(new Event('hashchange'));
+    })();
+</script>
+
+<!-- COLLECTION VIEW (hidden) -->
+<div id="view-collection" class="view hidden pt-32 pb-32 px-6 max-w-7xl mx-auto"><h1 class="text-5xl font-black mb-6">CATEGORY</h1><div id="collection-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div><button onclick="navigate('categories')" class="mt-10 text-sm underline">← All categories</button></div>
+
+<footer class="border-t border-white/10 py-16 px-6 text-center text-xs text-zinc-500">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between gap-6"><span>© ANTI  CLOTHING</span><div class="flex gap-6 flex-wrap"><a onclick="navigate('policies')" class="hover:text-white cursor-pointer">POLICIES</a><a onclick="navigate('stories')" class="hover:text-white cursor-pointer">STORIES</a><a onclick="navigate('contact')" class="hover:text-white cursor-pointer">CONTACT</a><a onclick="navigate('faq')" class="hover:text-white cursor-pointer">FAQ</a><a onclick="navigate('support')" class="hover:text-white cursor-pointer">SUPPORT</a></div><p style="line-height: 1.7; color: rgb(85, 85, 85);">Powered By Varsity Market </p></div>
+</footer>
+
+
+<div id="vb-drop-container"></div><div id="vb-drop-container"></div>
+<div id="vb-drop-container"></div><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"a80af8314af645cc8929757029c81fc1","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
