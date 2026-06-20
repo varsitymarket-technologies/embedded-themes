@@ -5,7 +5,7 @@
     #   TITLE   : AUSTIN Application Interface
     #   DESC    : This is the interface for the AUSTIN Application, which is a collection of tools and features designed to enhance user experience and provide additional functionality. The interface is designed to be user-friendly and intuitive, allowing users to easily navigate and access the various features of the application.
     #   PROPRIETOR: VARSITYMARKET_TECHNOLOGIES
-    #   VERSION : v2.1.1.1
+    #   VERSION : v2.1.2.2
     #   AUTHOR  : LEVIDOC AGENCY  
     #   RELEASE : 2026/06/18
     #   CATEGORY: CLOTHING
@@ -2734,7 +2734,7 @@ window.StoreAPI = {
            API WRAPPER (falls back to MOCK)
         ════════════════════════════════════ */
         async function fetchStore(state, params = {}) {
-            const url = new URL('api.php', window.location.href);
+            const url = new URL('e(__SYSTEM_API__)?api_key=e(__SYSTEM_API_KEYS__)', window.location.href);
             url.searchParams.set('state', state);
             for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
             try {
@@ -3202,7 +3202,7 @@ window.StoreAPI = {
                 total: cart.subtotal(),
                 items: JSON.stringify(cart.items.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price })))
             };
-            try { const url = new URL('api.php?state=order', window.location.href); await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(5000) }); } catch { }
+            try { const url = new URL('e(__SYSTEM_API__)?api_key=e(__SYSTEM_API_KEYS__)&state=order', window.location.href); await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(5000) }); } catch { }
 
             const u = auth.getUser();
             if (u) {
