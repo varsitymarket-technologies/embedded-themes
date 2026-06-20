@@ -5,7 +5,7 @@
     #   TITLE   : AUSTIN Application Interface
     #   DESC    : This is the interface for the AUSTIN Application, which is a collection of tools and features designed to enhance user experience and provide additional functionality. The interface is designed to be user-friendly and intuitive, allowing users to easily navigate and access the various features of the application.
     #   PROPRIETOR: VARSITYMARKET_TECHNOLOGIES
-    #   VERSION : v2.1.2.2
+    #   VERSION : v2.2.2.2
     #   AUTHOR  : LEVIDOC AGENCY  
     #   RELEASE : 2026/06/18
     #   CATEGORY: CLOTHING
@@ -2730,42 +2730,82 @@ window.StoreAPI = {
             ]
         };
 
-        /* ════════════════════════════════════
-           API WRAPPER (falls back to MOCK)
-        ════════════════════════════════════ */
-        async function fetchStore(state, params = {}) {
-            const url = new URL('e(__SYSTEM_API__)?api_key=e(__SYSTEM_API_KEYS__)', window.location.href);
-            url.searchParams.set('state', state);
-            for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-            try {
-                const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
-                if (!res.ok) throw new Error(res.status);
-                return await res.json();
-            } catch {
-                return getMockData(state, params);
-            }
-        }
+        
+/* ════════════════════════════════════
+   VARSITYMARKET STORE API (STORE 20)
+════════════════════════════════════ */
+const STORE_ID = 20;
+const API_BASE = `http://localhost:8016/store-access/${STORE_ID}/`;
 
-        function getMockData(state, params = {}) {
-            switch (state) {
-                case 'site': return MOCK.site;
-                case 'products': return MOCK.products;
-                case 'product': return MOCK.products.find(p => p.id == params.id) || null;
-                case 'categories': return MOCK.categories;
-                case 'products_by_category': return MOCK.products.filter(p => p.category_id == params.category_id);
-                case 'search': {
-                    const q = (params.q || '').toLowerCase();
-                    return MOCK.products.filter(p =>
-                        p.name.toLowerCase().includes(q) ||
-                        p.description.toLowerCase().includes(q) ||
-                        (MOCK.categories.find(c => c.id === p.category_id)?.name || '').toLowerCase().includes(q)
-                    );
-                }
-                case 'discounts': return MOCK.discounts;
-                case 'orders': return [];
-                default: return [];
-            }
+async function fetchStore(state, params = {}) {
+    const url = new URL(API_BASE, window.location.href);
+
+    url.searchParams.set('state', state);
+
+    Object.entries(params).forEach(([k,v]) => {
+        if(v !== undefined && v !== null) {
+            url.searchParams.set(k, v);
         }
+    });
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`API Error ${response.status}`);
+    }
+
+    return await response.json();
+}
+
+async function postStore(state, payload = {}) {
+    const url = new URL(API_BASE, window.location.href);
+    url.searchParams.set('state', state);
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+        throw new Error(`API Error ${response.status}`);
+    }
+
+    return await response.json();
+}
+
+window.StoreAPI = {
+    products: () => fetchStore('products'),
+    product: id => fetchStore('product', {id}),
+    categories: () => fetchStore('categories'),
+    search: q => fetchStore('search', {q}),
+    discounts: () => fetchStore('discounts'),
+    site: () => fetchStore('site'),
+    orders: email => fetchStore('orders', {email}),
+    cart: cart_id => fetchStore('cart', {cart_id}),
+
+    cartCreate: () => postStore('cart_create'),
+    cartAdd: (cart_id, product_id, quantity=1) =>
+        postStore('cart_add', {cart_id, product_id, quantity}),
+
+    cartUpdate: (cart_id, product_id, quantity) =>
+        postStore('cart_update', {cart_id, product_id, quantity}),
+
+    cartRemove: (cart_id, product_id) =>
+        postStore('cart_remove', {cart_id, product_id}),
+
+    checkoutCreate: cart_id =>
+        postStore('checkout_create', {cart_id}),
+
+    checkoutComplete: payload =>
+        postStore('checkout_complete', payload),
+
+    order: payload =>
+        postStore('order', payload)
+};
+
 
         /* ════════════════════════════════════
            CURRENCY
