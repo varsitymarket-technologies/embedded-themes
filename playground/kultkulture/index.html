@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>NOIR — Premium Commerce</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#050505;
+--card:rgba(255,255,255,.04);
+--border:rgba(255,255,255,.08);
+--purple:#8b5cf6;
+--cyan:#06b6d4;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:var(--bg);
+color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%, rgba(139,92,246,.18), transparent 35%),
+radial-gradient(circle at 80% 60%, rgba(6,182,212,.12), transparent 35%);
+pointer-events:none;
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+background-size:40px 40px;
+pointer-events:none;
+z-index:-1;
+}
+
+.glass{
+background:rgba(255,255,255,.04);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.product-card{
+transition:.45s;
+}
+
+.product-card:hover{
+transform:translateY(-10px);
+}
+
+.fade{
+animation:fade .45s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:none;
+}
+}
+
+.hero-title{
+font-size:clamp(4rem,8vw,8rem);
+line-height:.9;
+font-weight:900;
+}
+
+.glow{
+box-shadow:
+0 0 60px rgba(139,92,246,.15),
+0 0 120px rgba(6,182,212,.08);
+}
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#222;
+border-radius:100px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav
+class="fixed top-5 left-1/2 -translate-x-1/2 glass rounded-full px-8 py-4 flex gap-8 z-50">
+
+<a href="#/" class="hover:text-purple-400">Home</a>
+<a href="#/shop" class="hover:text-purple-400">Shop</a>
+<a href="#/categories" class="hover:text-purple-400">Categories</a>
+
+<button onclick="toggleCart()">
+Cart (<span id="cart-count">0</span>)
+</button>
+
+</nav>
+
+<div id="app"></div>
+
+<div
+id="cartDrawer"
+class="fixed top-0 right-[-420px] h-full w-[400px] glass transition-all duration-500 z-50 p-8">
+
+<div class="flex justify-between items-center mb-8">
+
+<h2 class="text-2xl font-bold">
+Cart
+</h2>
+
+<button onclick="toggleCart()">
+✕
+</button>
+
+</div>
+
+<div id="cartItems"></div>
+
+</div>
+
+<script>
+
+const state={
+cart:[]
+};
+
+const api={
+async products(){
+return [
+{
+id:1,
+name:"Nebula Headphones",
+price:299,
+category:"Audio",
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200"
+},
+{
+id:2,
+name:"Carbon Watch",
+price:499,
+category:"Wearables",
+image:"https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1200"
+},
+{
+id:3,
+name:"Noir Speaker",
+price:399,
+category:"Audio",
+image:"https://images.unsplash.com/photo-1545454675-3531b543be5d?w=1200"
+},
+{
+id:4,
+name:"Quantum Camera",
+price:899,
+category:"Photography",
+image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200"
+},
+{
+id:5,
+name:"Phantom Laptop",
+price:1499,
+category:"Computing",
+image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1200"
+},
+{
+id:6,
+name:"Aurora Keyboard",
+price:179,
+category:"Gaming",
+image:"https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=1200"
+}
+];
+}
+};
+
+const app=document.getElementById("app");
+
+async function router(){
+
+const route=location.hash.slice(1)||"/";
+
+if(route==="/"){
+renderHome();
+return;
+}
+
+if(route==="/shop"){
+renderShop();
+return;
+}
+
+if(route==="/categories"){
+renderCategories();
+return;
+}
+
+if(route.startsWith("/product/")){
+renderProduct(route.split("/")[2]);
+return;
+}
+
+render404();
+}
+
+async function renderHome(){
+
+app.innerHTML=`
+<section class="min-h-screen flex items-center px-10">
+
+<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+
+<div>
+
+<p class="tracking-[10px] uppercase text-purple-400 mb-5">
+Future Commerce
+</p>
+
+<h1 class="hero-title">
+SHOP THE
+FUTURE
+</h1>
+
+<p class="text-zinc-400 text-xl mt-8 max-w-xl">
+A premium dark commerce experience inspired by luxury fashion,
+technology and cinematic design.
+</p>
+
+<div class="flex gap-4 mt-10">
+
+<a
+href="#/shop"
+class="glass px-8 py-4 rounded-full glow">
+Explore Collection
+</a>
+
+</div>
+
+</div>
+
+<div class="relative">
+
+<div class="absolute inset-0 blur-3xl bg-purple-500/20 rounded-full"></div>
+
+<img
+class="relative rounded-[40px] glow"
+src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200">
+
+</div>
+
+</div>
+</section>
+`;
+}
+
+async function renderShop(){
+
+const products=await api.products();
+
+app.innerHTML=`
+<section class="max-w-7xl mx-auto pt-40 px-6 fade">
+
+<div class="mb-12">
+
+<h2 class="text-6xl font-black">
+Collection
+</h2>
+
+<p class="text-zinc-400 mt-4">
+Curated premium products
+</p>
+
+</div>
+
+<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+${products.map(product=>`
+
+<div
+class="glass rounded-[32px] overflow-hidden product-card">
+
+<a href="#/product/${product.id}">
+
+<img
+src="${product.image}"
+class="h-[350px] w-full object-cover">
+
+</a>
+
+<div class="p-6">
+
+<div class="text-sm text-zinc-500">
+${product.category}
+</div>
+
+<h3 class="text-2xl font-bold mt-2">
+${product.name}
+</h3>
+
+<div class="flex justify-between items-center mt-6">
+
+<p class="text-purple-400 font-bold">
+$${product.price}
+</p>
+
+<button
+onclick="addToCart(${product.id})"
+class="glass px-4 py-2 rounded-full">
+Add
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("")}
+
+</div>
+
+</section>
+`;
+}
+
+async function renderProduct(id){
+
+const products=await api.products();
+
+const p=products.find(x=>x.id==id);
+
+app.innerHTML=`
+<section
+class="max-w-7xl mx-auto pt-40 px-8 fade">
+
+<div class="grid lg:grid-cols-2 gap-16">
+
+<img
+src="${p.image}"
+class="rounded-[40px]">
+
+<div>
+
+<p class="text-purple-400">
+${p.category}
+</p>
+
+<h1 class="text-7xl font-black mt-4">
+${p.name}
+</h1>
+
+<div class="text-4xl mt-8 font-bold">
+$${p.price}
+</div>
+
+<p class="text-zinc-400 mt-8 leading-8">
+Built for creators, dreamers and innovators.
+A luxury product experience engineered for the next generation.
+</p>
+
+<button
+onclick="addToCart(${p.id})"
+class="mt-10 glass px-8 py-4 rounded-full glow">
+
+Add To Cart
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+`;
+}
+
+function renderCategories(){
+
+app.innerHTML=`
+<section class="pt-40 max-w-7xl mx-auto px-8">
+
+<h1 class="text-6xl font-black mb-12">
+Categories
+</h1>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+${[
+"Audio",
+"Wearables",
+"Photography",
+"Gaming"
+].map(cat=>`
+
+<div
+class="glass rounded-[30px] h-[250px] flex items-center justify-center text-3xl font-bold">
+
+${cat}
+
+</div>
+
+`).join("")}
+
+</div>
+
+</section>
+`;
+}
+
+function render404(){
+
+app.innerHTML=`
+<div class="h-screen flex items-center justify-center">
+
+<h1 class="text-5xl font-black">
+404
+</h1>
+
+</div>
+`;
+}
+
+async function addToCart(id){
+
+const products=await api.products();
+
+const item=products.find(x=>x.id===id);
+
+state.cart.push(item);
+
+updateCart();
+}
+
+function updateCart(){
+
+document.getElementById("cart-count").textContent=
+state.cart.length;
+
+document.getElementById("cartItems").innerHTML=
+
+state.cart.map(item=>`
+
+<div class="glass rounded-2xl p-4 mb-4">
+
+<div class="font-semibold">
+${item.name}
+</div>
+
+<div class="text-purple-400">
+$${item.price}
+</div>
+
+</div>
+
+`).join("");
+}
+
+function toggleCart(){
+
+const drawer=document.getElementById("cartDrawer");
+
+drawer.style.right=
+drawer.style.right==="0px"
+? "-420px"
+: "0px";
+}
+
+window.addEventListener("hashchange",router);
+
+router();
+
+</script>
+
+</body>
+</html>

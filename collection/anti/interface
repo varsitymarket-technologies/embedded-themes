@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
+
+    #   TITLE   : Anti Application Interface
+    #   DESC    : This is the interface for the Anti Application, which is a collection of tools and features designed to enhance user experience and provide additional functionality. The interface is designed to be user-friendly and intuitive, allowing users to easily navigate and access the various features of the application.
+    #   PROPRIETOR: VARSITYMARKET_TECHNOLOGIES
+    #   VERSION : 2.0.1.1
+    #   AUTHOR  : LEVIDOC AGENCY  
+    #   RELEASE : 2026/06/18
+    #   CATEGORY: CLOTHING
+
+-->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>e(__SITE_TITLE__).</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://demo-embedded.varsitymarket.co.za/track/vm.analytics.js" data-store-id="36" defer=""></script>
+    e(__SYSTEM_ANALYTICS__)
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet">
