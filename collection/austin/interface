@@ -2734,8 +2734,6 @@ window.StoreAPI = {
 /* ════════════════════════════════════
    VARSITYMARKET STORE API (STORE 20)
 ════════════════════════════════════ */
-const STORE_ID = 20;
-const API_BASE = `http://localhost:8016/store-access/${STORE_ID}/`;
 
 async function fetchStore(state, params = {}) {
     const url = new URL(API_BASE, window.location.href);
