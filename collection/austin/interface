@@ -1600,8 +1600,7 @@
 <body>
 
     <!-- ══ ANNOUNCEMENT BAR ══ -->
-    <div id="bar">▸ Free shipping on orders over R500 &nbsp;·&nbsp; Use WELCOME10 for 10% off &nbsp;·&nbsp; New drop
-        every week ◂</div>
+    <div id="bar">Free shipping on orders over R500</div>
 
     <!-- ══ HEADER ══ -->
     <div id="site-header">
@@ -1824,7 +1823,7 @@
         <div style="background:var(--forest);padding:80px 40px;text-align:center;position:relative;overflow:hidden;">
             <div
                 style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:220px;color:rgba(255,255,255,0.03);white-space:nowrap;pointer-events:none;letter-spacing:0.04em;">
-                AUSTIN</div>
+                e(__SITE_TITLE__)</div>
             <p class="eyebrow" style="color:var(--muted);position:relative;margin-bottom:12px;">Members Only</p>
             <h2
                 style="font-family:'Playfair Display',serif;font-size:52px;color:var(--white);margin-bottom:18px;position:relative;">
@@ -2432,7 +2431,7 @@
                 <div class="dash-panel active" id="panel-overview">
                     <div class="dash-title">Welcome, <span id="dash-first"
                             style="color:var(--muted);font-style:italic;">—</span></div>
-                    <div class="dash-sub">Austin Member Dashboard</div>
+                    <div class="dash-sub">e(__SITE_TITLE__) Member Dashboard</div>
                     <div class="stat-grid">
                         <div class="stat-card">
                             <div class="stat-label">Total Orders</div>
@@ -2601,7 +2600,7 @@
     <footer>
         <div class="footer-grid">
             <div>
-                <div class="footer-brand">Austin.</div>
+                <div class="footer-brand">e(__SITE_TITLE__)</div>
                 <p style="font-size:13px;color:var(--bone);line-height:1.75;max-width:220px;opacity:0.65;">Cultivating
                     connection between human spaces and the natural world.</p>
             </div>
@@ -2627,8 +2626,7 @@
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 e(__SITE_TITLE__). All rights reserved.</span>
-            <span style="display:flex;gap:14px;align-items:center;"><span>🔒 SSL Secured</span><span>💳 Visa ·
-                    Mastercard · PayFast</span></span>
+            <span style="display:flex;gap:14px;align-items:center;"><span>Powered By Varsity Market/span></span>
         </div>
     </footer>
 
@@ -2640,7 +2638,67 @@
     <!-- ══════════════════════════
      JAVASCRIPT
 ══════════════════════════ -->
-    <script>
+    
+<script>
+const STORE_ID = e(__STORE_INDEX__);
+const API_KEY = "e(__SYSTEM_API_KEYS__)";
+const API_BASE = `e(__SYSTEM_API__)`;
+
+async function vmRequest(url, options = {}) {
+    const response = await fetch(url, {
+        headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": API_KEY,
+            ...(options.headers || {})
+        },
+        ...options
+    });
+
+    if (!response.ok) {
+        throw new Error(`API Error ${response.status}`);
+    }
+
+    return response.json();
+}
+
+window.StoreAPI = {
+    getProducts: () => vmRequest(`${API_BASE}?state=products`),
+    getProduct: id => vmRequest(`${API_BASE}?state=product&id=${id}`),
+    getCategories: () => vmRequest(`${API_BASE}?state=categories`),
+    searchProducts: q => vmRequest(`${API_BASE}?state=search&q=${encodeURIComponent(q)}`),
+    getDiscounts: () => vmRequest(`${API_BASE}?state=discounts`),
+    getSiteInfo: () => vmRequest(`${API_BASE}?state=site`),
+    getOrders: email => vmRequest(`${API_BASE}?state=orders&email=${encodeURIComponent(email)}`),
+    getCart: cartId => vmRequest(`${API_BASE}?state=cart&cart_id=${cartId}`),
+    createCart: () => vmRequest(`${API_BASE}?state=cart_create`, {method:"POST"}),
+    addToCart: (cartId, productId, quantity=1) => vmRequest(`${API_BASE}?state=cart_add`, {
+        method:"POST",
+        body: JSON.stringify({cart_id:cartId, product_id:productId, quantity})
+    }),
+    updateCart: (cartId, productId, quantity) => vmRequest(`${API_BASE}?state=cart_update`, {
+        method:"POST",
+        body: JSON.stringify({cart_id:cartId, product_id:productId, quantity})
+    }),
+    removeCart: (cartId, productId) => vmRequest(`${API_BASE}?state=cart_remove`, {
+        method:"POST",
+        body: JSON.stringify({cart_id:cartId, product_id:productId})
+    }),
+    createCheckout: cartId => vmRequest(`${API_BASE}?state=checkout_create`, {
+        method:"POST",
+        body: JSON.stringify({cart_id:cartId})
+    }),
+    completeCheckout: data => vmRequest(`${API_BASE}?state=checkout_complete`, {
+        method:"POST",
+        body: JSON.stringify(data)
+    }),
+    placeOrder: data => vmRequest(`${API_BASE}?state=order`, {
+        method:"POST",
+        body: JSON.stringify(data)
+    })
+};
+</script>
+
+<script>
         /* ════════════════════════════════════
            MOCK DATA
         ════════════════════════════════════ */
@@ -2712,7 +2770,7 @@
         /* ════════════════════════════════════
            CURRENCY
         ════════════════════════════════════ */
-        let CURRENCY = 'R';
+        let CURRENCY = 'e(__SYSTEM_CURRENCY__)';
         const fmt = a => `${CURRENCY}${parseFloat(a).toFixed(2)}`;
 
         /* ════════════════════════════════════
@@ -2873,7 +2931,7 @@
                 const target = document.getElementById(`view-${view}`);
                 if (target) target.classList.add('active');
                 else document.getElementById('view-home').classList.add('active');
-                document.title = `Austin — ${view.charAt(0).toUpperCase() + view.slice(1)}`;
+                document.title = `e(__SITE_TITLE__) — ${view.charAt(0).toUpperCase() + view.slice(1)}`;
                 window.scrollTo({ top: 0, behavior: 'instant' });
                 closeCart(); closeMobileNav();
                 this.onRoute(view, params);
@@ -3170,8 +3228,8 @@
         }
 
         const FAQ_DATA = [
-            { q: 'What is your shipping policy?', a: 'Free standard shipping on orders over R500. Standard: 3–5 days (R80). Express: 1–2 days (R150). International via DHL: 7–14 days.' },
-            { q: 'How do I return an item?', a: 'Returns accepted within 30 days of delivery. Items must be in original condition. Email returns@austin.co.za with your order reference.' },
+            { q: 'What is your shipping policy?', a: 'Free standard shipping on orders over ' + CURRENCY + '500. Standard: 3–5 days (' + CURRENCY + '80). Express: 1–2 days (' + CURRENCY + '150). International via DHL: 7–14 days.' },
+            { q: 'How do I return an item?', a: 'Returns accepted within 30 days of delivery. Items must be in original condition. Email returns@' + window.location.hostname + '.co.za with your order reference.' },
             { q: 'What payment methods do you accept?', a: 'Visa, Mastercard, and PayFast. All transactions are 256-bit SSL encrypted.' },
             { q: 'How do I track my order?', a: 'Visit the Track Order page and enter your email. You can also view status in your account dashboard under My Orders.' },
             { q: 'Do you ship internationally?', a: 'Yes — we ship globally via DHL Express. Duties and taxes may apply depending on your country.' },
@@ -3336,7 +3394,7 @@
             if (users.find(u => u.email === email)) { showToast('An account with this email already exists', 'error'); return; }
             users.push(newUser); localStorage.setItem('aus_users', JSON.stringify(users));
             auth.setUser(newUser); closeAuthModal();
-            showToast(`Welcome to Austin, ${fname}!`);
+            showToast(`Welcome to ${window.location.hostname}, ${fname}!`);
             updateAccountBtn();
             router.nav('dashboard');
         }
