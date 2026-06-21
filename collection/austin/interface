@@ -1606,10 +1606,7 @@
     <div id="site-header">
         <nav>
             <a href="#home" class="nav-logo">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 22c4-4 8-9.5 8-14a8 8 0 00-16 0c0 4.5 4 10 8 14zm0-17a3 3 0 110 6 3 3 0 010-6z" />
-                </svg>
-                e(__SITE_TITLE__)
+                <img style="width:2.5rem; height:auto;" src="https://img.magnific.com/premium-vector/leaf-logo-template-green-leaf-icon_701361-702.jpg" alt="e(__SITE_TITLE__)">
             </a>
 
             <div class="nav-links">
@@ -2197,7 +2194,7 @@
             <h1
                 style="font-family:'Playfair Display',serif;font-size:clamp(52px,9vw,110px);color:var(--forest);line-height:0.95;margin-bottom:22px;">
                 Root &amp; <em style="color:var(--muted);">Flourish.</em></h1>
-            <p style="max-width:520px;margin:0 auto;color:rgba(26,47,34,0.65);font-size:15px;line-height:1.8;">Austin
+            <p style="max-width:520px;margin:0 auto;color:rgba(26,47,34,0.65);font-size:15px;line-height:1.8;">e(__SITE_TITLE__)
                 was built in reverence to the natural world. Every plant, every vessel, every tool we carry is chosen to
                 deepen your relationship with living things.</p>
         </div>
@@ -2219,7 +2216,7 @@
                     </div>
                     <div
                         style="aspect-ratio:4/5;background:var(--sage);border-radius:28px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:64px;color:rgba(26,47,34,0.12);font-style:italic;">
-                        Austin.</div>
+                        e(__SITE_TITLE__).</div>
                 </div>
                 <div
                     style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(26,47,34,0.08);border-radius:16px;overflow:hidden;">
@@ -2266,7 +2263,7 @@
                             <div style="display:flex;gap:14px;"><span style="font-size:18px;margin-top:2px;">📧</span>
                                 <div>
                                     <div class="eyebrow" style="margin-bottom:4px;">Email</div>
-                                    <div style="font-size:14px;color:var(--forest);">hello@austin.co.za</div>
+                                    <div style="font-size:14px;color:var(--forest);">hello@e(__SITE_TITLE__).co.za</div>
                                 </div>
                             </div>
                             <div style="display:flex;gap:14px;"><span style="font-size:18px;margin-top:2px;">📍</span>
@@ -2343,11 +2340,11 @@
                             style="font-size:28px;color:var(--forest);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(26,47,34,0.08);">
                             Terms of Service</h2>
                         <p style="font-size:14px;color:rgba(26,47,34,0.65);line-height:1.85;margin-bottom:10px;">By
-                            accessing Austin's online store, you agree to be bound by these terms. We reserve the right
+                            accessing e(__SITE_TITLE__)'s online store, you agree to be bound by these terms. We reserve the right
                             to refuse service or cancel orders at our sole discretion.</p>
                         <p style="font-size:14px;color:rgba(26,47,34,0.65);line-height:1.85;">You may not reproduce,
                             duplicate, or exploit any portion of the store without express written permission from
-                            Austin.</p>
+                            e(__SITE_TITLE__).</p>
                     </div>
                     <div>
                         <h2 class="font-serif"
@@ -2358,7 +2355,7 @@
                             not sell or share your personal data with third parties beyond what is necessary for
                             shipping and payment processing.</p>
                         <p style="font-size:14px;color:rgba(26,47,34,0.65);line-height:1.85;">Contact
-                            privacy@austin.co.za for data-related requests.</p>
+                            privacy@e(__SITE_TITLE__).co.za for data-related requests.</p>
                     </div>
                     <div>
                         <h2 class="font-serif"
@@ -2366,7 +2363,7 @@
                             Refund &amp; Return Policy</h2>
                         <p style="font-size:14px;color:rgba(26,47,34,0.65);line-height:1.85;margin-bottom:10px;">Returns
                             are accepted within 30 days of delivery. Items must be in original condition. Initiate a
-                            return at returns@austin.co.za with your order reference. Refunds processed within 5–7
+                            return at returns@e(__SITE_TITLE__).co.za with your order reference. Refunds processed within 5–7
                             business days.</p>
                     </div>
                     <div>
@@ -2626,7 +2623,7 @@
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 e(__SITE_TITLE__). All rights reserved.</span>
-            <span style="display:flex;gap:14px;align-items:center;"><span>Powered By Varsity Market/span></span>
+            <span style="display:flex;gap:14px;align-items:center;"><span>Powered By Varsity Market</span></span>
         </div>
     </footer>
 
@@ -2647,90 +2644,182 @@
     const API_KEY = "e(__SYSTEM_API_KEYS__)";
     const API_BASE = `e(__SYSTEM_API__)`;
 
-    // ── CORE API HELPERS ──
-    async function fetchStore(state, params = {}) {
+
+    
+let apiConnected = false;
+
+function showApiWarning(message) {
+    if (document.getElementById("api-warning-modal")) return;
+
+    const modal = document.createElement("div");
+
+    modal.id = "api-warning-modal";
+
+    modal.innerHTML = `
+        <div style="
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.75);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:999999;
+        ">
+            <div style="
+                max-width:480px;
+                background:#fff;
+                color:#111;
+                padding:24px;
+                border-radius:12px;
+                text-align:center;
+                font-family:sans-serif;
+            ">
+                <h2 style="margin-bottom:12px">
+                    API Connection Failed
+                </h2>
+
+                <p style="margin-bottom:18px">
+                    ${message}
+                </p>
+
+                <button onclick="
+                    document.getElementById('api-warning-modal').remove()
+                ">
+                    Close
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+}
+
+async function fetchStore(state, params = {}) {
+
+    const controller = new AbortController();
+
+    const timeout = setTimeout(() => {
+        controller.abort();
+    }, 10000);
+
+    try {
+
         const url = new URL(API_BASE);
-        url.searchParams.set('state', state);
+
+        url.searchParams.set("state", state);
+
         Object.entries(params).forEach(([k, v]) => {
             if (v !== undefined && v !== null) {
                 url.searchParams.set(k, v);
             }
         });
 
-        const response = await fetch(url, {
+        url.searchParams.set("api_key", API_KEY);
+
+        const response = await fetch(url.toString(), {
+            method: "GET",
+            signal: controller.signal,
             headers: {
-                'X-API-Key': API_KEY
+                "Accept": "application/json",
+                "X-API-Key": API_KEY,
+                "Authorization": `Bearer ${API_KEY}`
             }
         });
 
+        clearTimeout(timeout);
+
         if (!response.ok) {
-            throw new Error(`API Error ${response.status}: ${response.statusText}`);
+            throw new Error(
+                `HTTP ${response.status} ${response.statusText}`
+            );
         }
+        const data = await response.json();
 
-        return await response.json();
+        apiConnected = true;
+
+        return data;
+
+    } catch (err) {
+
+        apiConnected = false;
+
+        console.error("API GET ERROR:", err);
+
+        showApiWarning(
+            "Unable to connect to the store API. Offline data is being used."
+        );
+
+        throw err;
     }
+}
 
-    async function postStore(state, payload = {}) {
+async function postStore(state, payload = {}) {
+
+    const controller = new AbortController();
+
+    const timeout = setTimeout(() => {
+        controller.abort();
+    }, 10000);
+
+    try {
+
         const url = new URL(API_BASE);
-        url.searchParams.set('state', state);
 
-        const response = await fetch(url, {
-            method: 'POST',
+        url.searchParams.set("state", state);
+        url.searchParams.set("api_key", API_KEY);
+
+        const response = await fetch(url.toString(), {
+            method: "POST",
+            signal: controller.signal,
             headers: {
-                'Content-Type': 'application/json',
-                'X-API-Key': API_KEY
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "X-API-Key": API_KEY,
+                "Authorization": `Bearer ${API_KEY}`
             },
             body: JSON.stringify(payload)
         });
 
+        clearTimeout(timeout);
+
         if (!response.ok) {
-            throw new Error(`API Error ${response.status}: ${response.statusText}`);
+            throw new Error(
+                `HTTP ${response.status} ${response.statusText}`
+            );
         }
 
-        return await response.json();
+        const data = await response.json();
+
+        apiConnected = true;
+
+        return data;
+
+    } catch (err) {
+
+        apiConnected = false;
+
+        console.error("API POST ERROR:", err);
+
+        showApiWarning(
+            "Store checkout services are currently unavailable."
+        );
+
+        throw err;
     }
+}
 
-    // ── EXPOSE TO GLOBAL SCOPE ──
-    window.StoreAPI = {
-        products: () => fetchStore('products'),
-        product: id => fetchStore('product', { id }),
-        categories: () => fetchStore('categories'),
-        search: q => fetchStore('search', { q }),
-        discounts: () => fetchStore('discounts'),
-        site: () => fetchStore('site'),
-        orders: email => fetchStore('orders', { email }),
-        cart: cart_id => fetchStore('cart', { cart_id }),
 
-        cartCreate: () => postStore('cart_create'),
-        cartAdd: (cart_id, product_id, quantity = 1) =>
-            postStore('cart_add', { cart_id, product_id, quantity }),
 
-        cartUpdate: (cart_id, product_id, quantity) =>
-            postStore('cart_update', { cart_id, product_id, quantity }),
 
-        cartRemove: (cart_id, product_id) =>
-            postStore('cart_remove', { cart_id, product_id }),
 
-        checkoutCreate: cart_id =>
-            postStore('checkout_create', { cart_id }),
 
-        checkoutComplete: payload =>
-            postStore('checkout_complete', payload),
+    /////////////////////////////////////////////
 
-        order: payload =>
-            postStore('order', payload)
-    };
-</script>
 
-<!-- ============================================ -->
-<!--  THE REST OF YOUR APPLICATION LOGIC          -->
-<!--  (unchanged, but now uses the fixed API)    -->
-<!-- ============================================ -->
-
-<script>
+    
     /* ── MOCK DATA FALLBACK (only used if API fails) ── */
     const MOCK = {
-        site: { name: 'Austin', currency: 'R' },
+        site: { name: 'e(__SITE_TITLE__)', currency: 'R' },
         categories: [
             { id: 1, name: 'Indoor Plants' },
             { id: 2, name: 'Ceramics' },
@@ -2912,7 +3001,7 @@
             const target = document.getElementById(`view-${view}`);
             if (target) target.classList.add('active');
             else document.getElementById('view-home').classList.add('active');
-            document.title = `Austin — ${view.charAt(0).toUpperCase() + view.slice(1)}`;
+            document.title = `e(__SITE_TITLE__) — ${view.charAt(0).toUpperCase() + view.slice(1)}`;
             window.scrollTo({ top: 0, behavior: 'instant' });
             closeCart(); closeMobileNav();
             this.onRoute(view, params);
@@ -2935,20 +3024,46 @@
         }
     };
 
+    function ensureArray(data) {
+    if (Array.isArray(data)) return data;
+    if (data && typeof data === 'object') {
+        if (Array.isArray(data.data)) return data.data;
+        if (Array.isArray(data.items)) return data.items;
+        if (Array.isArray(data.results)) return data.results;
+    }
+    return []; // fallback
+}
+
+function ensureObject(data) {
+    if (data && typeof data === 'object' && !Array.isArray(data)) {
+        // If it has a data property that is an object, return that
+        if (data.data && typeof data.data === 'object' && !Array.isArray(data.data)) return data.data;
+        if (data.product && typeof data.product === 'object') return data.product;
+        if (data.item && typeof data.item === 'object') return data.item;
+        return data; // assume it's the object itself
+    }
+    return data;
+}
+
     // ── PAGE RENDERERS ──
 
     async function renderHome() {
-        let prods, cats;
-        try {
-            [prods, cats] = await Promise.all([fetchStore('products'), fetchStore('categories')]);
-        } catch {
-            prods = MOCK.products;
-            cats = MOCK.categories;
-            showToast('Using offline data', 'info');
-        }
-        const hp = document.getElementById('home-products');
-        hp.innerHTML = prods.slice(0, 4).map(productCard).join('');
-        bindCards();
+    
+           let prods, cats;
+    try {
+        [prods, cats] = await Promise.all([fetchStore('products'), fetchStore('categories')]);
+    } catch {
+        prods = MOCK.products;
+        cats = MOCK.categories;
+        showToast('Using offline data', 'info');
+    }
+    prods = ensureArray(prods);
+    cats = ensureArray(cats);
+
+    const hp = document.getElementById('home-products');
+    hp.innerHTML = prods.slice(0, 4).map(productCard).join('');
+    bindCards();
+
 
         const imgs = [
             'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600',
@@ -2960,7 +3075,7 @@
         hc.innerHTML = cats.map((c, i) => {
             const cnt = MOCK.products.filter(p => p.category_id === c.id).length;
             return `<div class="coll-card" style="cursor:pointer;" onclick="router.nav('shop',{cat:${c.id}})">
-      <img class="coll-card-bg" src="${imgs[i] || imgs[0]}" alt="${c.name}">
+      <img class="coll-card-bg" src="${c.image}" alt="${c.name}">
       <div class="coll-card-over"><span>${cnt} items</span><h3>${c.name}</h3></div>
     </div>`;
         }).join('');
@@ -2974,6 +3089,9 @@
             prods = MOCK.products;
             cats = MOCK.categories;
         }
+            prods = ensureArray(prods);
+            cats = ensureArray(cats);
+
         shopAll = prods;
         shopCat = catId ? parseInt(catId) : null;
 
@@ -3015,6 +3133,9 @@
             p = MOCK.products.find(x => x.id == id);
             if (!p) { showToast('Product not found', 'error'); router.nav('shop'); return; }
         }
+
+        p = ensureObject(p); 
+        
         if (!p) { showToast('Product not found', 'error'); router.nav('shop'); return; }
         currentProduct = p;
         const cat = MOCK.categories.find(c => c.id === p.category_id);
@@ -3042,6 +3163,7 @@
         } catch {
             related = MOCK.products.filter(r => r.category_id === p.category_id);
         }
+        related = ensureArray(related);   // <--- ADD THIS LINE
         document.getElementById('related-grid').innerHTML = related.filter(r => r.id != p.id).slice(0, 4).map(productCard).join('');
         bindCards();
     }
@@ -3066,6 +3188,8 @@
             cats = MOCK.categories;
             prods = MOCK.products;
         }
+           cats = ensureArray(cats);
+    prods = ensureArray(prods);
         const imgs = [
             'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600',
             'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600',
@@ -3076,7 +3200,7 @@
         cg.innerHTML = cats.map((c, i) => {
             const cnt = prods.filter(p => p.category_id === c.id).length;
             return `<div class="coll-card" style="cursor:pointer;" onclick="router.nav('shop',{cat:${c.id}})">
-      <img class="coll-card-bg" src="${imgs[i] || imgs[0]}" alt="${c.name}">
+      <img class="coll-card-bg" src="${c.image}" alt="${c.name}">
       <div class="coll-card-over"><span>${cnt} items</span><h3>${c.name}</h3></div>
     </div>`;
         }).join('');
@@ -3090,6 +3214,9 @@
             discounts = MOCK.discounts;
             prods = MOCK.products;
         }
+        discounts = ensureArray(discounts);
+        prods = ensureArray(prods);
+
         const maxPct = Math.max(...discounts.filter(d => d.active).map(d => d.percentage));
         const hl = document.getElementById('sale-headline');
         if (hl) hl.textContent = `UP TO ${maxPct}% OFF`;
@@ -3165,6 +3292,7 @@
         } catch {
             discounts = MOCK.discounts;
         }
+         discounts = ensureArray(discounts);
         const result = cart.applyCode(code, discounts);
         const res = document.getElementById('disc-result');
         if (result) { res.textContent = `✓ ${result.pct}% off applied`; res.style.color = 'var(--muted)'; showToast(`${result.pct}% discount applied!`); renderCartPage(); }
@@ -3243,6 +3371,7 @@
         } catch {
             results = MOCK.products.filter(p => p.name.toLowerCase().includes(q.toLowerCase()));
         }
+        results = ensureArray(results);   // ADD
         document.getElementById('search-pg-label').textContent = `${results.length} result${results.length !== 1 ? 's' : ''} for "${q}"`;
         const grid = document.getElementById('search-pg-grid');
         if (!results.length) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:80px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:rgba(26,47,34,0.3);">No results for "${q}"</div>`; return; }
