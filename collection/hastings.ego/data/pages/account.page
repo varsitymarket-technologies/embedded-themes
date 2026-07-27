@@ -1,0 +1,195 @@
+<!-- ═════════════════ SINGLE-PAGE ACCOUNT DASHBOARD ═════════════════ -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24">
+    <h1 class="font-display text-4xl font-bold text-black mb-12">My Account</h1>
+
+    <div class="flex flex-col md:flex-row gap-10">
+        
+        <!-- Sidebar Menu -->
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <!-- On mobile, this uses a horizontal flex/scroll. On desktop, it's a vertical column -->
+            <nav class="flex md:flex-col overflow-x-auto md:overflow-visible space-x-2 md:space-x-0 md:space-y-1 pb-4 md:pb-0">
+                
+                <button onclick="switchTab('homepage')" id="btn-homepage" class="tab-btn flex items-center space-x-3 px-4 py-3 bg-black text-white border-b-2 md:border-b-0 md:border-l-2 border-black transition-all whitespace-nowrap">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span class="font-semibold">Dashboard</span>
+                </button>
+
+                <button onclick="switchTab('orders')" id="btn-orders" class="tab-btn flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 border-b-2 md:border-b-0 md:border-l-2 border-transparent hover:border-black transition-all whitespace-nowrap">
+                    <i data-lucide="package" class="w-5 h-5"></i>
+                    <span class="font-semibold">Orders</span>
+                </button>
+
+                <button onclick="switchTab('billing')" id="btn-billing" class="tab-btn flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 border-b-2 md:border-b-0 md:border-l-2 border-transparent hover:border-black transition-all whitespace-nowrap">
+                    <i data-lucide="credit-card" class="w-5 h-5"></i>
+                    <span class="font-semibold">Billing</span>
+                </button>
+
+                <button onclick="switchTab('settings')" id="btn-settings" class="tab-btn flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 border-b-2 md:border-b-0 md:border-l-2 border-transparent hover:border-black transition-all whitespace-nowrap">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    <span class="font-semibold">Settings</span>
+                </button>
+
+                <button onclick="switchTab('help')" id="btn-help" class="tab-btn flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 border-b-2 md:border-b-0 md:border-l-2 border-transparent hover:border-black transition-all whitespace-nowrap">
+                    <i data-lucide="help-circle" class="w-5 h-5"></i>
+                    <span class="font-semibold">Help</span>
+                </button>
+
+            </nav>
+        </aside>
+
+        <!-- Main Content Display Area -->
+        <main class="flex-1 min-h-[400px]">
+            <div class="border border-gray-200 p-6 sm:p-8 h-full bg-white">
+                
+                <!-- 1. HOMEPAGE / DASHBOARD PANE -->
+                <div id="pane-homepage" class="tab-pane block">
+                    <div class="mb-8 border-b border-gray-200 pb-4">
+                        <h2 class="font-display text-2xl font-bold text-black">Dashboard</h2>
+                        <p class="text-sm text-gray-600 mt-1">Overview of your account activity.</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                        <div class="border border-gray-100 p-4 bg-gray-50">
+                            <p class="font-display text-3xl font-bold text-black">3</p>
+                            <p class="text-xs uppercase text-gray-600 font-semibold mt-1">Items in Cart</p>
+                        </div>
+                        <div class="border border-gray-100 p-4 bg-gray-50">
+                            <p class="font-display text-3xl font-bold text-black">12</p>
+                            <p class="text-xs uppercase text-gray-600 font-semibold mt-1">Total Orders</p>
+                        </div>
+                        <div class="border border-gray-100 p-4 bg-gray-50">
+                            <p class="font-display text-3xl font-bold text-black">R4,250</p>
+                            <p class="text-xs uppercase text-gray-600 font-semibold mt-1">Lifetime Spent</p>
+                        </div>
+                    </div>
+                    <a href="/shop" class="inline-block bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 transition-colors">Continue Shopping</a>
+                </div>
+
+                <!-- 2. ORDERS PANE -->
+                <div id="pane-orders" class="tab-pane hidden">
+                    <div class="mb-8 border-b border-gray-200 pb-4">
+                        <h2 class="font-display text-2xl font-bold text-black">Order History</h2>
+                        <p class="text-sm text-gray-600 mt-1">View and track your recent purchases.</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="border-b border-black text-black">
+                                    <th class="pb-3 font-semibold">Order #</th>
+                                    <th class="pb-3 font-semibold">Date</th>
+                                    <th class="pb-3 font-semibold">Status</th>
+                                    <th class="pb-3 font-semibold">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600">
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-4">#ORD-0092</td>
+                                    <td class="py-4">Oct 24, 2023</td>
+                                    <td class="py-4"><span class="px-2 py-1 bg-gray-100 text-black text-xs font-semibold rounded-sm">Shipped</span></td>
+                                    <td class="py-4">R1,200.00</td>
+                                </tr>
+                                <tr class="border-b border-gray-100">
+                                    <td class="py-4">#ORD-0085</td>
+                                    <td class="py-4">Sep 12, 2023</td>
+                                    <td class="py-4"><span class="px-2 py-1 bg-black text-white text-xs font-semibold rounded-sm">Delivered</span></td>
+                                    <td class="py-4">R850.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. BILLING PANE -->
+                <div id="pane-billing" class="tab-pane hidden">
+                    <div class="mb-8 border-b border-gray-200 pb-4">
+                        <h2 class="font-display text-2xl font-bold text-black">Billing & Payments</h2>
+                        <p class="text-sm text-gray-600 mt-1">Manage your payment methods and billing addresses.</p>
+                    </div>
+                    <div class="border border-gray-300 p-6 mb-6 relative">
+                        <i data-lucide="credit-card" class="w-6 h-6 text-black mb-4"></i>
+                        <p class="font-semibold text-black">Visa ending in **** 4242</p>
+                        <p class="text-sm text-gray-600 mt-1">Expires 12/25</p>
+                        <button class="absolute top-6 right-6 text-xs font-semibold text-gray-500 hover:text-black uppercase">Edit</button>
+                    </div>
+                    <button class="border border-black text-black px-6 py-3 font-semibold hover:bg-black hover:text-white transition-colors w-full sm:w-auto">
+                        + Add Payment Method
+                    </button>
+                </div>
+
+                <!-- 4. SETTINGS PANE -->
+                <div id="pane-settings" class="tab-pane hidden">
+                    <div class="mb-8 border-b border-gray-200 pb-4">
+                        <h2 class="font-display text-2xl font-bold text-black">Account Settings</h2>
+                        <p class="text-sm text-gray-600 mt-1">Update your personal information and password.</p>
+                    </div>
+                    <form class="space-y-6 max-w-lg">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-black uppercase mb-2">First Name</label>
+                                <input type="text" class="w-full border border-gray-300 p-3 focus:outline-none focus:border-black transition-colors" value="John">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-black uppercase mb-2">Last Name</label>
+                                <input type="text" class="w-full border border-gray-300 p-3 focus:outline-none focus:border-black transition-colors" value="Doe">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-black uppercase mb-2">Email Address</label>
+                            <input type="email" class="w-full border border-gray-300 p-3 focus:outline-none focus:border-black transition-colors" value="john@example.com">
+                        </div>
+                        <button type="submit" class="bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 transition-colors">Save Changes</button>
+                    </form>
+                </div>
+
+                <!-- 5. HELP PANE -->
+                <div id="pane-help" class="tab-pane hidden">
+                    <div class="mb-8 border-b border-gray-200 pb-4">
+                        <h2 class="font-display text-2xl font-bold text-black">Support & Help</h2>
+                        <p class="text-sm text-gray-600 mt-1">Need assistance? We're here to help.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border border-gray-300 p-6 hover:border-black transition-colors">
+                            <h3 class="font-bold text-black mb-2">Frequently Asked Questions</h3>
+                            <p class="text-sm text-gray-600">Find answers to shipping, returns, and sizing.</p>
+                            <a href="#" class="text-sm font-semibold text-black underline mt-3 inline-block">Read FAQs</a>
+                        </div>
+                        <div class="border border-gray-300 p-6 hover:border-black transition-colors">
+                            <h3 class="font-bold text-black mb-2">Contact Customer Service</h3>
+                            <p class="text-sm text-gray-600">Email us at support@store.com or call 0800 123 456.</p>
+                            <a href="mailto:support@store.com" class="text-sm font-semibold text-black underline mt-3 inline-block">Email Support</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</section>
+
+<!-- Vanilla JS for Tab Switching -->
+<script>
+    function switchTab(tabId) {
+        // 1. Hide all panes
+        const panes = document.querySelectorAll('.tab-pane');
+        panes.forEach(pane => {
+            pane.classList.remove('block');
+            pane.classList.add('hidden');
+        });
+
+        // 2. Show the selected pane
+        document.getElementById('pane-' + tabId).classList.remove('hidden');
+        document.getElementById('pane-' + tabId).classList.add('block');
+
+        // 3. Reset all buttons to inactive state
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+            btn.className = "tab-btn flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 border-b-2 md:border-b-0 md:border-l-2 border-transparent hover:border-black transition-all whitespace-nowrap";
+        });
+
+        // 4. Set the clicked button to active state
+        const activeBtn = document.getElementById('btn-' + tabId);
+        activeBtn.className = "tab-btn flex items-center space-x-3 px-4 py-3 bg-black text-white border-b-2 md:border-b-0 md:border-l-2 border-black transition-all whitespace-nowrap";
+        
+        // Ensure the active button icon is the correct color (Lucide inherits text color, but force it just in case)
+        lucide.createIcons(); // Re-render icons if necessary to pick up new stroke colors
+    }
+</script>

@@ -1,0 +1,61 @@
+<!-- #/engine/navbar/encode/:BEGIN -->
+<nav class="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-100 font-body">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="/home" class="font-display text-xl font-bold text-black select-none" data-testid="logo">
+            <img style="width: 4.1rem;" src="https://static.wikia.nocookie.net/logopedia/images/b/b3/Black_Sheep_Production.png/revision/latest/scale-to-width-down/250?cb=20190831135004"> 
+        </a>
+
+        <!-- Center navigation (hidden on mobile) -->
+        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
+            <li><a href="/home"       class="nav-link hover:text-black transition-colors">Home</a></li>
+            <li><a href="/shop"       class="nav-link hover:text-black transition-colors">Shop</a></li>
+            <li><a href="/collection" class="nav-link hover:text-black transition-colors">Collection</a></li>
+            <li><a href="/about"      class="nav-link hover:text-black transition-colors">About</a></li>
+        </ul>
+
+        <!-- Right: Search + Cart -->
+        <div class="flex items-center gap-6">
+            <!-- Search -->
+            <a href="/search" class="text-gray-700 hover:text-black transition-colors" aria-label="Search">
+                <i data-lucide="search" class="w-5 h-5"></i>
+            </a>
+
+            <!-- Account -->
+            <a href="/account" class="text-gray-700 hover:text-black transition-colors" aria-label="Account">
+                <i data-lucide="user" class="w-5 h-5"></i>
+            </a>
+
+            <!-- Cart (opens drawer) -->
+            <button id="cart-trigger" class="relative text-gray-700 hover:text-black transition-colors" aria-label="Cart" aria-expanded="false">
+                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                <!-- #!/engine/node/
+                $cart = $_SESSION['cart'] ?? [];
+                $cartCount = count($cart);
+                if ($cartCount > 0): -->
+                <span class="absolute -top-2 -right-2 bg-black text-white text-xs w-4 h-4 flex items-center justify-center rounded-full font-semibold">
+                    <!-- #!/engine/node/ echo $cartCount; -->
+                </span>
+                <!-- #!/engine/node/ endif; -->
+            </button>
+
+            <!-- Mobile menu toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-black" aria-label="Menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+        <ul class="flex flex-col px-4 py-4 gap-3 text-sm font-medium text-gray-700">
+            <li><a href="/home"       class="block py-2 hover:text-black transition-colors">Home</a></li>
+            <li><a href="/shop"       class="block py-2 hover:text-black transition-colors">Shop</a></li>
+            <li><a href="/collection" class="block py-2 hover:text-black transition-colors">Collection</a></li>
+            <li><a href="/about"      class="block py-2 hover:text-black transition-colors">About</a></li>
+            <li><a href="/contact"    class="block py-2 hover:text-black transition-colors">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- #/engine/navbar/encode/:END; -->

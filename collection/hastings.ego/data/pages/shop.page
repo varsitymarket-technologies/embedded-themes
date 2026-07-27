@@ -1,0 +1,16 @@
+<!-- ════════════════════════════════ SHOP PAGE ════════════════════════════════ -->
+
+<main>
+    <section class="container">
+        <div class="shop-header">
+            <h1>Our Shop</h1>
+            <p>View Our Products</p>
+        </div>
+
+        <div id="product-grid">
+            <!-- #!/engine/node/
+    app()->create_shop_ui(api()->async_products());
+    -->
+        </div>
+    </section>
+</main>

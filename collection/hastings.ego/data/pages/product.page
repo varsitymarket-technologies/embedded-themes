@@ -1,0 +1,70 @@
+<!-- ════════════════════════════ PRODUCT DETAIL PAGE ═════════════════════════ -->
+
+<?php
+$product_id = $GLOBALS['product_id'] ?? 1;
+$product = api()->async_single_products($product_id);
+?>
+
+<main>
+    <section class="container product-detail-grid">
+        <div class="product-image-gallery">
+            <div class="flex items-center gap-2 text-xs text-gray-600 mb-12">
+                <a href="/home" class="hover:text-black transition-colors">Home</a>
+                <span>/</span>
+                <a href="/shop" class="hover:text-black transition-colors">Shop</a>
+                <span>/</span>
+                <span class="text-black"><?= htmlspecialchars($product['name'] ?? 'Product') ?></span>
+            </div>
+
+            <img src="<?= htmlspecialchars($product['image'] ?? '') ?>" alt="<?= htmlspecialchars($product['name'] ?? '') ?>">
+        </div>
+        <div class="product-details">
+            <h1><?= htmlspecialchars($product['name'] ?? '') ?></h1>
+            <p class="price"><?= htmlspecialchars($product['price'] ?? 'Price unavailable') ?></p>
+            <p class="description"> <?= htmlspecialchars($product['description'] ?? '') ?></p>
+
+            <!-- Add to cart -->
+            <form method="POST" action="/cart" class="space-y-4 mb-12">
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="product_id" value="<?= (int)($product['id'] ?? 1) ?>">
+                <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name'] ?? '') ?>">
+                <input type="hidden" name="product_price" value="<?= htmlspecialchars($product['price'] ?? '') ?>">
+                <input type="hidden" name="product_image" value="<?= htmlspecialchars($product['image'] ?? '') ?>">
+
+                <div class="flex items-center gap-4">
+                    <label class="text-xs uppercase font-semibold text-gray-700">Quantity</label>
+                    <input type="number" name="quantity" value="1" min="1"
+                        class="w-16 border border-gray-300 text-center py-2 text-sm outline-none focus:border-black transition-colors">
+                </div>
+
+                <button type="submit"
+                    class="btn">
+                    Add to Cart
+                </button>
+            </form>
+
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="border-t border-gray-200 pt-8 space-y-3 text-sm text-gray-600">
+            <p><span class="text-black font-medium">Category</span> — <?= htmlspecialchars($product['category_name'] ?? 'General') ?></p>
+            <p><span class="text-black font-medium">SKU</span> — ESS-<?= str_pad((int)($product['id'] ?? 1), 4, '0', STR_PAD_LEFT) ?></p>
+            <p><span class="text-black font-medium">Availability</span> — In Stock</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <p class="text-xs uppercase tracking-wider text-gray-600 font-semibold mb-3">
+                <?= htmlspecialchars($product['category_name'] ?? $product['category'] ?? 'Product') ?>
+            </p>
+        <h2 class="font-display text-3xl font-bold text-black mb-12">You Might Also Like</h2>
+        <br>
+        <div id="product-grid">
+            <!-- #!/engine/node/
+            $pid = $GLOBALS['product_id'] ?? 1;
+            app()->create_related_products_ui(array_slice(api()->async_related_products($pid), 0, 4));
+            -->
+        </div>
+    </section>
+</main>

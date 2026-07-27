@@ -1,0 +1,11 @@
+<!-- #/engine/navbar/encode/:BEGIN -->
+    <header class="main-header">
+        <div class="logo"><a href="/"><img style="max-width:4rem;" src="https://avatars.githubusercontent.com/u/157944600?v=4" alt="Logo"></a></div>
+        <nav class="main-nav">
+            <a href="/shop/" class="active">Shop</a>
+            <a href="/collection/">Collection</a>
+            <a href="/cart/" id="cart-indicator">Cart <span id="cart-count">2</span></a>
+            <a href="/login/">Account</a>
+        </nav>
+    </header>
+<!-- #/engine/navbar/encode/:END; -->

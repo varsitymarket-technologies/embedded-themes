@@ -1,0 +1,59 @@
+<!-- ════════════════════════════════ SEARCH PAGE ═════════════════════════════ -->
+
+<?php
+$query   = trim($_GET['q'] ?? '');
+$results = [];
+
+if (!empty($query)) {
+    $all = api()->async_products();
+    foreach ($all as $p) {
+        if (stripos($p['name'], $query) !== false || stripos($p['description'] ?? '', $query) !== false) {
+            $results[] = $p;
+        }
+    }
+}
+?>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <h1 class="font-display text-4xl font-bold text-black mb-8">Search</h1>
+
+    <form method="GET" action="/search" class="mb-12">
+        <div class="flex gap-0 border border-gray-300">
+            <input type="text" name="q" value="<?= htmlspecialchars($query) ?>"
+                placeholder="Search products..."
+                class="flex-1 bg-white px-6 py-4 text-sm outline-none focus:bg-gray-50 transition-colors placeholder-gray-500">
+            <button type="submit" class="bg-black text-white px-8 py-4 text-sm font-semibold hover:bg-gray-800 transition-colors">
+                Search
+            </button>
+        </div>
+    </form>
+
+    <?php if (!empty($query)): ?>
+        <p class="text-sm text-gray-600 mb-8">
+            <?= count($results) ?> result<?= count($results) !== 1 ? 's' : '' ?> found
+        </p>
+
+        <?php if (empty($results)): ?>
+            <div class="text-center py-20">
+                <i data-lucide="search" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
+                <p class="font-display text-2xl text-black mb-2">No results</p>
+                <p class="text-gray-600 text-sm">Try a different search term</p>
+            </div>
+        <?php else: ?>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pb-24">
+                <!-- #!/engine/node/
+                $q = trim($_GET['q'] ?? '');
+                if (!empty($q)) {
+                    $all = api()->async_products();
+                    $res = array_filter($all, fn($p) => stripos($p['name'], $q) !== false || stripos($p['description'] ?? '', $q) !== false);
+                    app()->create_shop_ui(array_values($res));
+                }
+                -->
+            </div>
+        <?php endif; ?>
+    <?php else: ?>
+        <div class="text-center py-12 text-gray-600">
+            <p class="text-sm">Enter a search term to get started</p>
+        </div>
+    <?php endif; ?>
+</section>

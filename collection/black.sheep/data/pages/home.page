@@ -1,0 +1,100 @@
+<!-- ════════════════════════════════ HOME PAGE ═════════════════════════════════ -->
+
+<!-- Hero -->
+<section class="bg-gray-50 pt-20 pb-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+            <h1 class="font-display text-6xl sm:text-7xl font-bold text-black leading-tight mb-6">
+                BLACK<br>
+                <span class="text-gray-600">SHEEP.</span>
+            </h1>
+            <p class="text-gray-600 text-lg leading-relaxed mb-8 max-w-md">
+                Thoughtfully designed products for a more intentional life. Quality over quantity, always.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="/shop" class="bg-black text-white px-8 py-3 text-sm font-semibold hover:bg-gray-800 transition-colors">
+                    Shop Collection
+                </a>
+                <a href="/about" class="border border-black text-black px-8 py-3 text-sm font-semibold hover:bg-black hover:text-white transition-colors">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured section -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="mb-16">
+        <h2 class="font-display text-4xl font-bold text-black mb-2">New Arrivals</h2>
+        <p class="text-gray-600 text-sm">Carefully selected items, just in.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <!-- #!/engine/node/
+        app()->create_shop_ui(array_slice(api()->async_products(), 0, 4));
+        -->
+    </div>
+
+    <div class="mt-12 text-center">
+        <a href="/shop" class="inline-block text-black font-semibold hover:underline underline-offset-4 transition-colors">
+            View all products →
+        </a>
+    </div>
+</section>
+
+<!-- Collection preview -->
+<section class="border-y border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h3 class="font-display text-4xl font-bold text-black mb-6">Curated Selection</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Every piece in our collection is selected with purpose. We believe in quality, sustainability, and timeless design.
+                </p>
+                <a href="/collection" class="inline-block text-black font-semibold hover:underline underline-offset-4">
+                    Explore Collection →
+                </a>
+            </div>
+            <div class="aspect-square bg-gray-100 overflow-hidden">
+                <img src="/assets/images/collection-feature.jpg" alt="Collection" class="w-full h-full object-cover opacity-60">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div>
+            <i data-lucide="leaf" class="w-8 h-8 text-gray-400 mb-4"></i>
+            <h4 class="font-semibold text-black mb-2">Sustainable</h4>
+            <p class="text-sm text-gray-600">Ethically sourced and designed to last.</p>
+        </div>
+        <div>
+            <i data-lucide="package" class="w-8 h-8 text-gray-400 mb-4"></i>
+            <h4 class="font-semibold text-black mb-2">Carefully Packaged</h4>
+            <p class="text-sm text-gray-600">Shipped with care in minimal, recyclable packaging.</p>
+        </div>
+        <div>
+            <i data-lucide="heart" class="w-8 h-8 text-gray-400 mb-4"></i>
+            <h4 class="font-semibold text-black mb-2">Made with Purpose</h4>
+            <p class="text-sm text-gray-600">Every design decision serves the user.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="bg-gray-50 py-16">
+    <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h3 class="font-display text-2xl font-bold text-black mb-2">Stay Updated</h3>
+        <p class="text-sm text-gray-600 mb-6">New products and thoughtful updates, delivered monthly.</p>
+        <form class="flex gap-0" method="POST" action="/contact">
+            <input type="email" name="email" placeholder="your@email.com"
+                class="flex-1 bg-white border border-gray-300 px-4 py-3 text-sm outline-none focus:border-black transition-colors">
+            <button type="submit" class="bg-black text-white px-6 py-3 text-sm font-semibold hover:bg-gray-800 transition-colors">
+                Subscribe
+            </button>
+        </form>
+    </div>
+</section>

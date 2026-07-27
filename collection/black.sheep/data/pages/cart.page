@@ -1,0 +1,116 @@
+<!-- ════════════════════════════════ CART PAGE ═════════════════════════════════ -->
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add') {
+    if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
+    $id    = (int)($_POST['product_id'] ?? 0);
+    $name  = htmlspecialchars($_POST['product_name']  ?? '');
+    $price = htmlspecialchars($_POST['product_price'] ?? 'R0.00');
+    $image = htmlspecialchars($_POST['product_image'] ?? '');
+    $qty   = max(1, (int)($_POST['quantity'] ?? 1));
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['qty'] += $qty;
+    } else {
+        $_SESSION['cart'][$id] = ['id'=>$id,'name'=>$name,'price'=>$price,'image'=>$image,'qty'=>$qty];
+    }
+    header('Location: /cart');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'remove') {
+    $id = (int)($_POST['product_id'] ?? 0);
+    unset($_SESSION['cart'][$id]);
+    header('Location: /cart');
+    exit;
+}
+
+$cart  = $_SESSION['cart'] ?? [];
+$total = 0.0;
+foreach ($cart as $item) {
+    $raw = preg_replace('/[^0-9.]/', '', $item['price']);
+    $total += (float)$raw * (int)$item['qty'];
+}
+?>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24">
+    <h1 class="font-display text-4xl sm:text-5xl font-bold text-black mb-12">Cart</h1>
+
+    <?php if (empty($cart)): ?>
+        <div class="text-center py-24">
+            <i data-lucide="shopping-bag" class="w-16 h-16 text-gray-300 mx-auto mb-6"></i>
+            <p class="font-display text-3xl text-black mb-4">Your cart is empty</p>
+            <a href="/shop" class="inline-block bg-black text-white px-8 py-3 text-sm font-semibold hover:bg-gray-800 transition-colors mt-4">
+                Continue Shopping
+            </a>
+        </div>
+    <?php else: ?>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+            <!-- Items -->
+            <div class="lg:col-span-2">
+                <div class="space-y-6">
+                    <?php foreach ($cart as $item): ?>
+                    <div class="flex gap-6 pb-6 border-b border-gray-200">
+                        <img src="<?= $item['image'] ?>" alt="<?= $item['name'] ?>"
+                             class="w-24 h-24 object-cover bg-gray-100">
+                        <div class="flex-1">
+                            <p class="font-medium text-black"><?= $item['name'] ?></p>
+                            <p class="text-sm text-gray-600 mt-1"><?= $item['price'] ?></p>
+                            <div class="flex items-center gap-4 mt-4">
+                                <label class="text-xs text-gray-600 font-semibold">Qty:</label>
+                                <span class="text-sm"><?= $item['qty'] ?></span>
+                                <form method="POST" action="/cart" class="ml-auto">
+                                    <input type="hidden" name="action"     value="remove">
+                                    <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
+                                    <button type="submit" class="text-xs text-gray-600 hover:text-red-600 transition-colors underline">
+                                        Remove
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="mt-8">
+                    <a href="/shop" class="text-black font-semibold hover:underline underline-offset-4">
+                        ← Continue Shopping
+                    </a>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="h-fit">
+                <div class="bg-gray-50 p-8 space-y-4">
+                    <h3 class="font-display text-2xl font-bold text-black">Order Summary</h3>
+                    
+                    <div class="space-y-3 py-6 border-y border-gray-200">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span class="text-black">R<?= number_format($total, 2) ?></span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Shipping</span>
+                            <span class="text-gray-600">Calculated next</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Tax</span>
+                            <span class="text-gray-600">Calculated next</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between font-semibold text-lg pt-4">
+                        <span>Total</span>
+                        <span class="text-black">R<?= number_format($total, 2) ?></span>
+                    </div>
+
+                    <a href="/checkout" class="block w-full bg-black text-white py-4 text-sm font-semibold hover:bg-gray-800 transition-colors text-center mt-6">
+                        Proceed to Checkout
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    <?php endif; ?>
+</section>

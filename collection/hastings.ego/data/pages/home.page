@@ -1,0 +1,16 @@
+<!-- ════════════════════════════════ HOME PAGE ═════════════════════════════════ -->
+
+        <section class="container">
+            <div class="shop-header">
+                <h1>Hasting's Ego</h1>
+                <p>Quality products, delivered to you.</p>
+            </div>
+            <div class="shop-controls">
+                <input type="search" id="search-bar" placeholder="Search for products...">
+            </div>
+            <div id="product-grid">
+            <!-- #!/engine/node/
+            app()->create_shop_ui(array_slice(api()->async_products(), 0, ));
+            -->
+            </div>
+        </section>

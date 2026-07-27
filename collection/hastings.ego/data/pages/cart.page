@@ -1,0 +1,86 @@
+<!-- ════════════════════════════════ CART PAGE ═════════════════════════════════ -->
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add') {
+    if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
+    $id    = (int)($_POST['product_id'] ?? 0);
+    $name  = htmlspecialchars($_POST['product_name']  ?? '');
+    $price = htmlspecialchars($_POST['product_price'] ?? 'R0.00');
+    $image = htmlspecialchars($_POST['product_image'] ?? '');
+    $qty   = max(1, (int)($_POST['quantity'] ?? 1));
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['qty'] += $qty;
+    } else {
+        $_SESSION['cart'][$id] = ['id'=>$id,'name'=>$name,'price'=>$price,'image'=>$image,'qty'=>$qty];
+    }
+    header('Location: /cart');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'remove') {
+    $id = (int)($_POST['product_id'] ?? 0);
+    unset($_SESSION['cart'][$id]);
+    header('Location: /cart');
+    exit;
+}
+
+$cart  = $_SESSION['cart'] ?? [];
+$total = 0.0;
+foreach ($cart as $item) {
+    $raw = preg_replace('/[^0-9.]/', '', $item['price']);
+    $total += (float)$raw * (int)$item['qty'];
+}
+?>
+
+
+<main class="container account-container" style="max-width: 800px;">
+    <h1>Your Cart</h1>
+
+    <?php if (empty($cart)): ?>
+        <div class="text-center py-24">
+            <i data-lucide="shopping-bag" class="w-16 h-16 text-gray-300 mx-auto mb-6"></i>
+            <p class="font-display text-3xl text-black mb-4">Your cart is empty</p>
+            <a href="/shop" class="inline-block bg-black text-white px-8 py-3 text-sm font-semibold hover:bg-gray-800 transition-colors mt-4">
+                Continue Shopping
+            </a>
+        </div>
+    <?php else: ?>
+
+        <div class="checkout-summary" style="margin-bottom: 20px;">
+            <?php foreach ($cart as $item): ?>
+                <div class="cart-item">
+                    <img src="<?= $item['image'] ?>" alt="<?= $item['name'] ?>">
+                    <div class="cart-item-info">
+                        <h4><?= $item['name'] ?></h4>
+                        <p><?= $item['price'] ?> x <?= $item['qty'] ?></p>
+                    </div>
+                    <span> <?=  number_format($item['qty'] * $item['price'],2) ?></span>
+
+                    <form method="POST" action="/cart" class="ml-auto">
+                                    <input type="hidden" name="action"     value="remove">
+                                    <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
+                                    <button type="submit" class="text-xs text-gray-600 hover:text-red-600 transition-colors underline">
+                                        Remove
+                                    </button>
+                                </form>
+                </div>
+                
+            <?php endforeach; ?>
+        </div>
+
+
+    <main>
+        <div class="checkout-summary" style="margin-bottom: 20px;">
+            
+            <div class="cart-total">
+                <span>Total</span>
+                <span>R<?= number_format($total, 2) ?></span>
+            </div>
+        </div>
+        <a href="/checkout/" class="btn" style="width: 100%;">Proceed to Checkout</a>
+        <a href="/shop/" class="btn btn-dark" style="width: 100%; margin-top: 15px;">Continue Shopping</a>
+    </main>
+
+    <?php endif; ?>
+</section>

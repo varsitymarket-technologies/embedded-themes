@@ -1,0 +1,18 @@
+<!-- ══════════════════════════════ COLLECTION PAGE ═════════════════════════════ -->
+
+<section class="bg-gray-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="font-display text-5xl sm:text-6xl font-bold text-black mb-4">Curated with Care</h1>
+        <p class="text-gray-600 text-lg max-w-xl mx-auto">
+            A selection of pieces we believe in. Each item is chosen for its quality, design, and purpose.
+        </p>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <!-- #!/engine/node/
+        app()->create_shop_ui(api()->async_products());
+        -->
+    </div>
+</section>

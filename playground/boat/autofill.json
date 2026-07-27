@@ -1,0 +1,79 @@
+{
+  "constants": {
+    "__SYSTEM_CURRENCY__": "USD",
+    "__STORE_NAME__": "Boat",
+    "__STORE_DESCRIPTION__": "Premium Ecommerce Store",
+    "__STORE_EMAIL__": "support@vmcommerce.com",
+    "__STORE_PHONE__": "+1 (555) 123-4567",
+    "__STORE_ADDRESS__": "123 Commerce Street, New York, NY 10001",
+    "__STORE_HOURS__": "Monday - Friday: 9AM - 6PM EST",
+    "__SOCIAL_INSTAGRAM__": "https://instagram.com/vmcommerce",
+    "__SOCIAL_FACEBOOK__": "https://facebook.com/vmcommerce",
+    "__SOCIAL_TWITTER__": "https://twitter.com/vmcommerce",
+    "__SOCIAL_LINKEDIN__": "https://linkedin.com/company/vmcommerce",
+    "__LOGO_URL__": "https://via.placeholder.com/200x60?text=VM+Commerce",
+    "__HERO_IMAGE__": "https://via.placeholder.com/1200x400?text=Welcome+to+VM+Commerce",
+    "__FEATURED_COLLECTION_IMAGE__": "https://via.placeholder.com/400x300?text=Featured+Collection",
+    "__ABOUT_IMAGE__": "https://via.placeholder.com/600x400?text=About+Us",
+    "__FAVICON__": "https://via.placeholder.com/32x32?text=VM"
+  },
+  "theme_info": {
+    "name": "VM Commerce",
+    "version": "1.0.0",
+    "description": "A comprehensive Shopify-style ecommerce theme with 14+ pages and account dashboard",
+    "author": "VM Commerce Team",
+    "license": "MIT",
+    "pages": [
+      "home",
+      "shop",
+      "product",
+      "collections",
+      "sale",
+      "cart",
+      "checkout",
+      "search",
+      "about",
+      "contact",
+      "faq",
+      "track",
+      "terms",
+      "orders",
+      "account"
+    ],
+    "features": [
+      "Hash-based SPA routing",
+      "Product catalog with pagination",
+      "Shopping cart with persistence",
+      "Multi-step checkout",
+      "Account dashboard",
+      "Search functionality",
+      "Discount codes",
+      "Order tracking",
+      "Responsive design",
+      "SEO optimized",
+      "Accessibility compliant",
+      "Mobile hamburger menu"
+    ]
+  },
+  "api_endpoints": {
+    "products": "/api/store/products",
+    "search": "/api/store/search",
+    "categories": "/api/store/categories",
+    "orders": "/api/store/orders",
+    "order_submit": "/api/store/order"
+  },
+  "discount_codes": {
+    "WELCOME10": {
+      "discount_percentage": 10,
+      "description": "10% off for new customers"
+    },
+    "SUMMER20": {
+      "discount_percentage": 20,
+      "description": "20% off summer sale"
+    },
+    "VIPEXCLUSIVE": {
+      "discount_percentage": 25,
+      "description": "25% off VIP exclusive offer"
+    }
+  }
+}

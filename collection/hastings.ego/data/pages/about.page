@@ -1,0 +1,10 @@
+<!-- ════════════════════════════════ ABOUT PAGE ═════════════════════════════ -->
+
+<header class="main-header">
+        <nav class="main-nav"><a href="index.html">Back to Shop</a></nav>
+    </header>
+    <main class="container text-page-container">
+        <h1>About Us</h1>
+        <p>Hasting's Ego was founded with one mission: to bring you premium quality streetwear that stands out.</p>
+        <p>We believe in high-quality materials, bold designs, and a brand identity that speaks for itself. Explore our collections and find your new everyday staples.</p>
+    </main>

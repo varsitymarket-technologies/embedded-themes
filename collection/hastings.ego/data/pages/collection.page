@@ -1,0 +1,10 @@
+<!-- ══════════════════════════════ COLLECTION PAGE ═════════════════════════════ -->
+
+    <main class="container">
+        <div class="shop-header"><h1>Shop By Category</h1></div>
+        <div id="product-grid">
+            <!-- #!/engine/node/
+                app()->create_category_ui(api()->async_categories());
+            -->
+        </div>
+    </main>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORSELE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: {
+                            base: '#FBFBFB',
+                            glass: 'rgba(255, 255, 255, 0.6)',
+                            ink: '#121212',
+                            ghost: '#999999'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #FBFBFB; color: #121212; overflow-x: hidden; }
+        
+        /* The "Void" Animation */
+        .fade-in { animation: voidReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes voidReveal { from { opacity: 0; filter: blur(10px); transform: scale(1.05); } to { opacity: 1; filter: blur(0); transform: scale(1); } }
+        
+        .hidden { display: none !important; }
+        
+        /* Glass Effect */
+        .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); }
+
+        /* Ghost Interaction */
+        .ghost-input { border-bottom: 1px solid rgba(18, 18, 18, 0.05); transition: border-color 0.4s ease; }
+        .ghost-input:focus { border-color: #121212; }
+
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-thumb { background: #121212; }
+    </style>
+</head>
+<body class="font-sans antialiased text-[14px]">
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel px-10 py-8 flex justify-between items-center">
+        <a href="#home" class="font-extrabold text-lg uppercase tracking-[0.4em]">CORSELE</a>
+        
+        <div class="flex items-center space-x-12">
+            <ul class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.2em] text-void-ghost">
+                <li><a href="#shop" class="hover:text-void-ink transition-colors">Catalog</a></li>
+                <li><a href="#info" class="hover:text-void-ink transition-colors">Concept</a></li>
+            </ul>
+            <a href="#cart" class="group flex items-center space-x-3">
+                <span class="text-[9px] font-mono font-bold uppercase tracking-widest text-void-ghost group-hover:text-void-ink">Cart:</span>
+                <span class="text-[10px] font-mono font-bold js-cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <main id="app-root" class="pt-40 min-h-screen fade-in"></main>
+
+    <footer class="px-10 py-32 mt-40 border-t border-black/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="space-y-6">
+                <p class="font-bold uppercase tracking-widest text-[10px]">CORSELE</p>
+                <p class="text-[11px] text-void-ghost max-w-xs leading-relaxed font-light">
+                    An exploration of physical form in a digital-first world. Produced in limited quantities.
+                </p>
+            </div>
+            <div class="flex flex-col space-y-3 text-[10px] font-bold uppercase tracking-widest">
+                <a href="#" class="opacity-30 hover:opacity-100 transition-opacity underline decoration-1 underline-offset-4">Terms_Of_Access</a>
+                <a href="#" class="opacity-30 hover:opacity-100 transition-opacity underline decoration-1 underline-offset-4">Global_Shipping</a>
+            </div>
+        </div>
+    </footer>
+
+    <template id="tpl-home">
+        <div class="max-w-7xl mx-auto px-10 py-20 text-center">
+            <h1 class="text-[10vw] font-extrabold uppercase tracking-tighter leading-none mb-10 opacity-[0.03] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none whitespace-nowrap">
+                CORSELE
+            </h1>
+            <div class="relative z-10 space-y-12">
+                <h2 class="text-6xl md:text-8xl font-extrabold uppercase tracking-tighter leading-none">
+                    CORSELE <br> <span class="italic font-light opacity-40">CLOTHING.</span>
+                </h2>
+                <div class="flex justify-center">
+                    <a href="#shop" class="group flex flex-col items-center">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.5em] mb-4 group-hover:tracking-[0.8em] transition-all">Begin_Browsing</span>
+                        <div class="w-px h-20 bg-void-ink opacity-20"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-shop">
+        <div class="max-w-7xl mx-auto px-10 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-20 js-product-grid"></div>
+        </div>
+    </template>
+
+    <template id="tpl-product-card">
+        <div class="group cursor-pointer">
+            <a href="#" class="js-prod-link block mb-8 relative overflow-hidden bg-void-base">
+                <div class="aspect-[2/3] bg-white border border-black/5 flex items-center justify-center js-img-placeholder font-mono text-[8px] uppercase tracking-widest text-void-ghost">Img_Ref</div>
+                <div class="absolute inset-0 bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm flex items-center justify-center">
+                    <span class="text-[9px] font-bold uppercase tracking-widest border border-void-ink px-4 py-2">Quick_Look</span>
+                </div>
+            </a>
+            <div class="flex flex-col space-y-2 px-2">
+                <div class="flex justify-between items-baseline">
+                    <h3 class="font-bold uppercase tracking-tight text-xs js-title"></h3>
+                    <span class="font-mono text-[10px] js-price"></span>
+                </div>
+                <p class="text-[9px] font-mono font-bold uppercase tracking-widest text-void-ghost js-category"></p>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-product">
+        <section class="max-w-7xl mx-auto px-10 grid grid-cols-1 lg:grid-cols-2 gap-24 py-10">
+            <div class="aspect-[3/4] bg-white border border-black/5 flex items-center justify-center js-detail-img font-mono text-[10px] uppercase text-void-ghost"></div>
+            <div class="flex flex-col justify-center space-y-12">
+                <div>
+                    <span class="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-void-ghost block mb-4 js-detail-cat"></span>
+                    <h1 class="text-6xl font-extrabold uppercase tracking-tighter mb-4 js-detail-title"></h1>
+                    <p class="text-2xl font-light js-detail-price"></p>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="text-[9px] font-bold uppercase tracking-widest border-b border-black/10 pb-2">Manifesto</p>
+                    <p class="text-[13px] leading-relaxed text-void-ghost js-detail-desc"></p>
+                </div>
+
+                <button class="w-full bg-void-ink text-white py-6 font-bold uppercase tracking-[0.5em] text-[11px] js-add-btn hover:bg-void-ghost transition-all shadow-2xl">
+                    Add_To_Inventory
+                </button>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-cart">
+        <section class="max-w-3xl mx-auto px-10 py-20">
+            <h1 class="text-5xl font-extrabold uppercase tracking-tighter mb-16">Active_Queue</h1>
+            <div class="js-cart-container glass-panel p-10"></div>
+        </section>
+    </template>
+
+    <template id="tpl-cart-empty">
+        <div class="py-12 text-center">
+            <p class="font-mono text-[10px] uppercase tracking-widest text-void-ghost mb-8 italic">No items identified in session.</p>
+            <a href="#shop" class="text-[10px] font-bold uppercase tracking-[0.4em] underline underline-offset-8">Return_To_Void</a>
+        </div>
+    </template>
+
+    <template id="tpl-cart-layout">
+        <div class="space-y-10 js-cart-items mb-16"></div>
+        <div class="border-t border-black/5 pt-10 flex flex-col items-end">
+            <div class="flex justify-between w-full mb-10">
+                <span class="font-mono text-[11px] uppercase font-bold text-void-ghost">Session_Total</span>
+                <span class="text-2xl font-bold js-cart-total"></span>
+            </div>
+            <a href="#checkout" class="w-full bg-void-ink text-white py-6 text-center font-bold uppercase tracking-[0.5em] text-[11px]">Finalize_Transfer</a>
+        </div>
+    </template>
+
+    <template id="tpl-checkout">
+        <section class="max-w-xl mx-auto px-10 py-24">
+            <h1 class="text-4xl font-extrabold uppercase tracking-tighter mb-16">Verification</h1>
+            <form class="space-y-12 js-checkout-form">
+                <input type="email" placeholder="IDENTITY_EMAIL" required class="w-full bg-transparent ghost-input py-4 text-[10px] font-mono font-bold outline-none">
+                <input type="text" placeholder="SHIPPING_TARGET" required class="w-full bg-transparent ghost-input py-4 text-[10px] font-mono font-bold outline-none">
+                <button type="submit" class="w-full bg-void-ink text-white py-6 font-bold uppercase tracking-[0.5em] text-[11px]">Execute_Order</button>
+            </form>
+        </section>
+    </template>
+
+    <template id="tpl-success">
+        <div class="max-w-2xl mx-auto px-10 py-60 text-center">
+            <h1 class="text-7xl font-extrabold uppercase tracking-tighter mb-6">Confirmed.</h1>
+            <p class="font-mono text-[9px] uppercase tracking-[0.5em] text-void-ghost">Accession code generated. Monitor your inbox.</p>
+            <div class="mt-20">
+                <a href="#shop" class="text-[10px] font-bold uppercase tracking-[0.4em] border border-void-ink px-10 py-4">Exit_Session</a>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        const DB = {
+            currency: '¥',
+            products: [
+                { id: 1, title: 'Void Shell 01', price: 58000, category: 'Outwear', img: 'VS_01_BLK', desc: 'Japanese technical nylon. Ghost-seam construction. Waterproof membrane with matte finish.' },
+                { id: 2, title: 'Studio Tee // White', price: 12000, category: 'Base', img: 'VS_TEE_WHT', desc: 'Heavyweight organic cotton. Box fit. Reinforced collar with external size-data tag.' },
+                { id: 3, title: 'Modular Tote', price: 24000, category: 'Utility', img: 'VS_TOTE_01', desc: 'Dyneema® composite fabric. Ultralight. Laser-cut structural reinforcement.' },
+                { id: 4, title: 'Wide Studio Pant', price: 32000, category: 'Bottom', img: 'VS_PNT_GRY', desc: 'Double-pleated wool blend. Cropped silhouette. Internal drawcord system.' },
+                { id: 5, title: 'Signal Beanie', price: 8000, category: 'Accessory', img: 'VS_BN_02', desc: 'Merino wool. High-density knit. Minimalist brand-code embroidery.' }
+            ]
+        };
+
+        class StoreEngine {
+            constructor() {
+                this.root = document.getElementById('app-root');
+                this.cart = JSON.parse(localStorage.getItem('void_cart')) || [];
+                this.initRouter();
+                this.updateCartCount();
+            }
+
+            initRouter() {
+                window.addEventListener('hashchange', () => this.route());
+                this.route();
+            }
+
+            route() {
+                const hash = window.location.hash.slice(1) || 'home';
+                const [view, id] = hash.split('/');
+                this.root.classList.remove('fade-in');
+                void this.root.offsetWidth;
+                this.root.classList.add('fade-in');
+                window.scrollTo(0, 0);
+
+                switch(view) {
+                    case 'shop': this.renderShop(); break;
+                    case 'product': this.renderProduct(id); break;
+                    case 'cart': this.renderCart(); break;
+                    case 'checkout': this.renderCheckout(); break;
+                    case 'success': this.renderSuccess(); break;
+                    default: this.renderTemplate('tpl-home'); break;
+                }
+            }
+
+            renderTemplate(templateId, callback = null) {
+                const tpl = document.getElementById(templateId);
+                this.root.innerHTML = '';
+                this.root.appendChild(tpl.content.cloneNode(true));
+                if (callback) callback.call(this, this.root);
+            }
+
+            renderShop() {
+                this.renderTemplate('tpl-shop', (view) => {
+                    const grid = view.querySelector('.js-product-grid');
+                    const prodTpl = document.getElementById('tpl-product-card');
+
+                    DB.products.forEach(p => {
+                        const card = prodTpl.content.cloneNode(true);
+                        card.querySelector('.js-prod-link').href = `#product/${p.id}`;
+                        card.querySelector('.js-title').textContent = p.title;
+                        card.querySelector('.js-category').textContent = p.category;
+                        card.querySelector('.js-price').textContent = `${DB.currency}${p.price.toLocaleString()}`;
+                        card.querySelector('.js-img-placeholder').textContent = p.img;
+                        grid.appendChild(card);
+                    });
+                });
+            }
+
+            renderProduct(id) {
+                const product = DB.products.find(p => p.id == id);
+                if (!product) return;
+                this.renderTemplate('tpl-product', (view) => {
+                    view.querySelector('.js-detail-title').textContent = product.title;
+                    view.querySelector('.js-detail-price').textContent = `${DB.currency}${product.price.toLocaleString()}`;
+                    view.querySelector('.js-detail-desc').textContent = product.desc;
+                    view.querySelector('.js-detail-cat').textContent = `Object_Code: ${product.id}`;
+                    view.querySelector('.js-detail-img').textContent = product.img;
+                    view.querySelector('.js-add-btn').onclick = () => {
+                        this.cartAdd(product);
+                        window.location.hash = 'cart';
+                    };
+                });
+            }
+
+            renderCart() {
+                if (this.cart.length === 0) {
+                    this.renderTemplate('tpl-cart', v => v.querySelector('.js-cart-container').appendChild(document.getElementById('tpl-cart-empty').content.cloneNode(true)));
+                    return;
+                }
+                this.renderTemplate('tpl-cart', (mainView) => {
+                    const container = mainView.querySelector('.js-cart-container');
+                    const layout = document.getElementById('tpl-cart-layout').content.cloneNode(true);
+                    const list = layout.querySelector('.js-cart-items');
+                    let total = 0;
+
+                    this.cart.forEach((item, index) => {
+                        total += (item.price * item.qty);
+                        const row = document.createElement('div');
+                        row.className = "flex justify-between items-center";
+                        row.innerHTML = `
+                            <div class="space-y-1">
+                                <h3 class="font-bold uppercase text-[10px] tracking-widest">${item.title}</h3>
+                                <p class="font-mono text-[9px] text-void-ghost">${DB.currency}${item.price.toLocaleString()} x ${item.qty}</p>
+                            </div>
+                            <button class="font-mono text-[9px] font-bold text-red-400 uppercase tracking-widest js-remove">Remove</button>
+                        `;
+                        row.querySelector('.js-remove').onclick = () => { this.cart.splice(index, 1); this.cartSave(); this.renderCart(); };
+                        list.appendChild(row);
+                    });
+                    layout.querySelector('.js-cart-total').textContent = `${DB.currency}${total.toLocaleString()}`;
+                    container.appendChild(layout);
+                });
+            }
+
+            renderCheckout() {
+                this.renderTemplate('tpl-checkout', (view) => {
+                    view.querySelector('.js-checkout-form').onsubmit = (e) => {
+                        e.preventDefault();
+                        this.cart = []; this.cartSave(); window.location.hash = 'success';
+                    };
+                });
+            }
+
+            renderSuccess() { this.renderTemplate('tpl-success'); }
+
+            cartAdd(product) {
+                const existing = this.cart.find(item => item.id === product.id);
+                if (existing) { existing.qty += 1; } else { this.cart.push({ ...product, qty: 1 }); }
+                this.cartSave();
+            }
+
+            cartSave() {
+                localStorage.setItem('void_cart', JSON.stringify(this.cart));
+                this.updateCartCount();
+            }
+
+            updateCartCount() {
+                const count = this.cart.reduce((sum, item) => sum + item.qty, 0);
+                document.querySelectorAll('.js-cart-count').forEach(el => el.textContent = count);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { window.App = new StoreEngine(); });
+    </script>
+</body>
+</html>

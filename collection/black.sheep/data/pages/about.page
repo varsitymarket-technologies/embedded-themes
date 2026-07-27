@@ -1,0 +1,58 @@
+<!-- ════════════════════════════════ ABOUT PAGE ═════════════════════════════ -->
+
+<section class="border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+            <h1 class="font-display text-5xl sm:text-6xl font-bold text-black mb-6">About ESSENCE</h1>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                We believe that less is more. ESSENCE exists to provide thoughtfully designed products that serve a purpose and last. No noise, no clutter — just essentials.
+            </p>
+        </div>
+        <div class="aspect-square bg-gray-100 overflow-hidden">
+            <img src="/assets/images/about-hero.jpg" alt="About ESSENCE" class="w-full h-full object-cover opacity-40">
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <h2 class="font-display text-4xl font-bold text-black mb-12 text-center">Our Values</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div>
+            <i data-lucide="minimize-2" class="w-8 h-8 text-gray-900 mb-4"></i>
+            <h3 class="font-semibold text-black mb-3">Minimalism</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                Every product is designed with intention. We remove the unnecessary and keep only what matters.
+            </p>
+        </div>
+        <div>
+            <i data-lucide="leaf" class="w-8 h-8 text-gray-900 mb-4"></i>
+            <h3 class="font-semibold text-black mb-3">Sustainability</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                Quality pieces that endure. Built to last, packaged responsibly, with minimal environmental impact.
+            </p>
+        </div>
+        <div>
+            <i data-lucide="heart" class="w-8 h-8 text-gray-900 mb-4"></i>
+            <h3 class="font-semibold text-black mb-3">Authenticity</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                We stand behind our products. No shortcuts, no false promises — just honest, well-made goods.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="bg-gray-50 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-display text-3xl font-bold text-black mb-4">Made with Care</h2>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+            Every piece in the ESSENCE collection has been carefully selected. We work with makers and manufacturers who share our values of quality, sustainability, and timeless design.
+        </p>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+    <h2 class="font-display text-2xl font-bold text-black mb-8">Start Your Collection</h2>
+    <a href="/collection" class="inline-block bg-black text-white px-10 py-4 text-sm font-semibold hover:bg-gray-800 transition-colors">
+        Explore Collection
+    </a>
+</section>

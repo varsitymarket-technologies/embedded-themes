@@ -1,0 +1,14 @@
+<header class="main-header">
+    <nav class="main-nav"><a href="index.html">Back to Shop</a></nav>
+</header>
+<main class="container text-page-container">
+    <h1>FAQ</h1>
+    <h3>How long does shipping take?</h3>
+    <p>Standard shipping takes 3-5 business days within the country.</p>
+    <br>
+    <h3>Do you offer returns?</h3>
+    <p>Yes, we accept returns within 14 days of delivery. Items must be unworn and with tags attached.</p>
+    <br>
+    <h3>How can I track my order?</h3>
+    <p>Once your order ships, we will email you a tracking number to follow your delivery.</p>
+</main>

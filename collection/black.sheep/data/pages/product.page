@@ -1,0 +1,88 @@
+<!-- ════════════════════════════ PRODUCT DETAIL PAGE ═════════════════════════ -->
+
+<?php
+$product_id = $GLOBALS['product_id'] ?? 1;
+$product    = api()->async_single_products($product_id);
+?>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24">
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-xs text-gray-600 mb-12">
+        <a href="/home" class="hover:text-black transition-colors">Home</a>
+        <span>/</span>
+        <a href="/shop" class="hover:text-black transition-colors">Shop</a>
+        <span>/</span>
+        <span class="text-black"><?= htmlspecialchars($product['name'] ?? 'Product') ?></span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+
+        <!-- Image -->
+        <div class="bg-gray-100 aspect-square overflow-hidden sticky top-20">
+            <img src="<?= htmlspecialchars($product['image'] ?? '') ?>"
+                 alt="<?= htmlspecialchars($product['name'] ?? '') ?>"
+                 class="w-full h-full object-cover">
+        </div>
+
+        <!-- Info -->
+        <div class="flex flex-col justify-center">
+
+            <p class="text-xs uppercase tracking-wider text-gray-600 font-semibold mb-3">
+                <?= htmlspecialchars($product['category_name'] ?? $product['category'] ?? 'Product') ?>
+            </p>
+
+            <h1 class="font-display text-5xl font-bold text-black mb-6 leading-tight">
+                <?= htmlspecialchars($product['name'] ?? '') ?>
+            </h1>
+
+            <p class="text-3xl font-light text-black mb-8">
+                <?= htmlspecialchars($product['price'] ?? 'Price unavailable') ?>
+            </p>
+
+            <p class="text-gray-600 text-base leading-relaxed mb-12">
+                <?= htmlspecialchars($product['description'] ?? '') ?>
+            </p>
+
+            <!-- Add to cart -->
+            <form method="POST" action="/cart" class="space-y-4 mb-12">
+                <input type="hidden" name="action"        value="add">
+                <input type="hidden" name="product_id"    value="<?= (int)($product['id'] ?? 1) ?>">
+                <input type="hidden" name="product_name"  value="<?= htmlspecialchars($product['name'] ?? '') ?>">
+                <input type="hidden" name="product_price" value="<?= htmlspecialchars($product['price'] ?? '') ?>">
+                <input type="hidden" name="product_image" value="<?= htmlspecialchars($product['image'] ?? '') ?>">
+
+                <div class="flex items-center gap-4">
+                    <label class="text-xs uppercase font-semibold text-gray-700">Quantity</label>
+                    <input type="number" name="quantity" value="1" min="1"
+                        class="w-16 border border-gray-300 text-center py-2 text-sm outline-none focus:border-black transition-colors">
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-black text-white py-4 text-sm font-semibold hover:bg-gray-800 transition-colors">
+                    Add to Cart
+                </button>
+            </form>
+
+            <!-- Meta -->
+            <div class="border-t border-gray-200 pt-8 space-y-3 text-sm text-gray-600">
+                <p><span class="text-black font-medium">Category</span> — <?= htmlspecialchars($product['category_name'] ?? 'General') ?></p>
+                <p><span class="text-black font-medium">SKU</span> — ESS-<?= str_pad((int)($product['id'] ?? 1), 4, '0', STR_PAD_LEFT) ?></p>
+                <p><span class="text-black font-medium">Availability</span> — In Stock</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Related products -->
+    <section class="mt-32 pt-20 border-t border-gray-200">
+        <h2 class="font-display text-3xl font-bold text-black mb-12">You Might Also Like</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <!-- #!/engine/node/
+            $pid = $GLOBALS['product_id'] ?? 1;
+            app()->create_related_products_ui(array_slice(api()->async_related_products($pid), 0, 4));
+            -->
+        </div>
+    </section>
+
+</section>
