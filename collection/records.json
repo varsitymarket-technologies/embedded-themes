@@ -1,6 +1,6 @@
 {
   "default": {
-    "hash": "v1.0.0.2",
+    "hash": "v1.0.0.4",
     "files": [
       "interface",
       "autofill.json",
@@ -16,7 +16,7 @@
     ]
   },
   "hastings.ego": {
-    "hash": "v1.0.0.3",
+    "hash": "v1.0.0.4",
     "files": [
       "interface",
       "autofill.json",
