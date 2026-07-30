@@ -28,7 +28,7 @@ if (!empty($email)) {
                 <i data-lucide="inbox" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
                 <p class="font-display text-2xl text-black mb-2">No orders found</p>
                 <p class="text-gray-600 text-sm mb-6">No orders for <?= htmlspecialchars($email) ?></p>
-                <a href="/shop" class="inline-block border border-black text-black px-6 py-2 text-sm font-semibold hover:bg-black hover:text-white transition-colors">
+                <a href="<!-- #!/engine/node/ page('shop') -->" class="inline-block border border-black text-black px-6 py-2 text-sm font-semibold hover:bg-black hover:text-white transition-colors">
                     Continue Shopping
                 </a>
             </div>

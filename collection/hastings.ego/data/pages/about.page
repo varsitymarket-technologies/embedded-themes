@@ -1,7 +1,7 @@
 <!-- ════════════════════════════════ ABOUT PAGE ═════════════════════════════ -->
 
 <header class="main-header">
-        <nav class="main-nav"><a href="index.html">Back to Shop</a></nav>
+        <nav class="main-nav"><a href="<!-- #!/engine/node/ page('home') -->">Back to Shop</a></nav>
     </header>
     <main class="container text-page-container">
         <h1>About Us</h1>

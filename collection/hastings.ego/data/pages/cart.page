@@ -41,7 +41,7 @@ foreach ($cart as $item) {
         <div class="text-center py-24">
             <i data-lucide="shopping-bag" class="w-16 h-16 text-gray-300 mx-auto mb-6"></i>
             <p class="font-display text-3xl text-black mb-4">Your cart is empty</p>
-            <a href="/shop" class="inline-block bg-black text-white px-8 py-3 text-sm font-semibold hover:bg-gray-800 transition-colors mt-4">
+            <a href="<!-- #!/engine/node/ page('shop') -->" class="inline-block bg-black text-white px-8 py-3 text-sm font-semibold hover:bg-gray-800 transition-colors mt-4">
                 Continue Shopping
             </a>
         </div>
@@ -78,8 +78,8 @@ foreach ($cart as $item) {
                 <span>R<?= number_format($total, 2) ?></span>
             </div>
         </div>
-        <a href="/checkout/" class="btn" style="width: 100%;">Proceed to Checkout</a>
-        <a href="/shop/" class="btn btn-dark" style="width: 100%; margin-top: 15px;">Continue Shopping</a>
+        <a href="<!-- #!/engine/node/ page('checkout') -->" class="btn" style="width: 100%;">Proceed to Checkout</a>
+        <a href="<!-- #!/engine/node/ page('shop') -->" class="btn btn-dark" style="width: 100%; margin-top: 15px;">Continue Shopping</a>
     </main>
 
     <?php endif; ?>

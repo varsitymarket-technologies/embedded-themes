@@ -9,9 +9,9 @@ $product = api()->async_single_products($product_id);
     <section class="container product-detail-grid">
         <div class="product-image-gallery">
             <div class="flex items-center gap-2 text-xs text-gray-600 mb-12">
-                <a href="/home" class="hover:text-black transition-colors">Home</a>
+                <a href="<!-- #!/engine/node/ page('home') -->" class="hover:text-black transition-colors">Home</a>
                 <span>/</span>
-                <a href="/shop" class="hover:text-black transition-colors">Shop</a>
+                <a href="<!-- #!/engine/node/ page('shop') -->" class="hover:text-black transition-colors">Shop</a>
                 <span>/</span>
                 <span class="text-black"><?= htmlspecialchars($product['name'] ?? 'Product') ?></span>
             </div>

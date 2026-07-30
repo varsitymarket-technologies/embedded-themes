@@ -14,7 +14,7 @@ function template()
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 </div>
 
-                <a href="/product/(#item_id)/" class="block">
+                <a href="<!-- #!/engine/node/ page(\'product\',\'(#item_id)\'); -->" class="block">
                     <p class="text-xs uppercase text-gray-600 font-semibold mb-2 group-hover:text-black transition-colors">
                         (#item_category)
                     </p>
@@ -36,7 +36,7 @@ function template()
 
   
                 <!-- Example Static Products -->
-                <a href="/product/(#item_id)/" class="product-card">
+                <a href="<!-- #!/engine/node/ page(\'product\',\'(#item_id)\'); -->" class="product-card">
                     <img src="(#item_image)"
                          alt="(#item_name)">
                     <div class="product-card-info">
@@ -54,7 +54,7 @@ function template()
         public function return_category($state = "categories")
         {
             $category_template = '
-            <a href="/shop?cat=(#cat_name)" class="product-card">
+            <a href="<!-- #!/engine/node/ page(\'shop?cat=(#cat_name)\'); -->" class="product-card">
                 <img src="(#cat_image)"alt="(#cat_name)">
                 <div class="product-card-info"><h3>(#cat_name)</h3></div>
             </a>

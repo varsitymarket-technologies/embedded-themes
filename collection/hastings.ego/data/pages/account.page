@@ -61,7 +61,7 @@
                             <p class="text-xs uppercase text-gray-600 font-semibold mt-1">Lifetime Spent</p>
                         </div>
                     </div>
-                    <a href="/shop" class="inline-block bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 transition-colors">Continue Shopping</a>
+                    <a href="<!-- #!/engine/node/ page('shop') -->" class="inline-block bg-black text-white px-6 py-3 font-semibold hover:bg-gray-800 transition-colors">Continue Shopping</a>
                 </div>
 
                 <!-- 2. ORDERS PANE -->

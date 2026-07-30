@@ -10,6 +10,6 @@
                 <input type="password" id="login-password" required>
             </div>
             <button type="submit" class="btn" style="width: 100%;">Login</button>
-            <a href="/signup/" class="btn btn-dark" style="width: 100%; margin-top: 15px; display: block;">Create Account</a>
+            <a href="<!-- #!/engine/node/ page('signup') -->" class="btn btn-dark" style="width: 100%; margin-top: 15px; display: block;">Create Account</a>
         </form>
     </main>
