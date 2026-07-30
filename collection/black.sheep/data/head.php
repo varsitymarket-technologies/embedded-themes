@@ -18,6 +18,8 @@
     <meta name="description" content="Thoughtfully curated essentials. Minimal design, maximum impact.">
     <title>Black Sheep | The Black Sheep Online Store</title>
 
+    <base href="https://themes.varsitymarket.co.za/collection/black.sheep/" target="_blank">
+
 
 
     <!-- Tailwind CSS CDN -->

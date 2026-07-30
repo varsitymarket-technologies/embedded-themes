@@ -1,13 +1,22 @@
 {
   "default": {
-    "hash": "v1.0.0.1",
+    "hash": "v1.0.0.2",
     "files": [
       "interface",
-      "poster.png"
+      "autofill.json",
+      "poster.png",
+      "index.html",
+      "assets/css/main.css",
+      "data/pages/404.page",
+      "data/body.php",
+      "data/head.php",
+      "data/navbar.card",
+      "data/theme.structure.kit",
+      "data/theme.template.kit"
     ]
   },
   "hastings.ego": {
-    "hash": "v1.0.0.2",
+    "hash": "v1.0.0.3",
     "files": [
       "interface",
       "autofill.json",

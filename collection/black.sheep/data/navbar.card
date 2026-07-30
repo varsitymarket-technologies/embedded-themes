@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
 
         <!-- Logo -->
-        <a href="/home" class="font-display text-xl font-bold text-black select-none" data-testid="logo">
+        <a href="<!-- #!/engine/node/ page('home') -->" class="font-display text-xl font-bold text-black select-none" data-testid="logo">
             <img style="width: 4.1rem;" src="https://static.wikia.nocookie.net/logopedia/images/b/b3/Black_Sheep_Production.png/revision/latest/scale-to-width-down/250?cb=20190831135004"> 
         </a>
 
