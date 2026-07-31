@@ -1,0 +1,395 @@
+<!-- #/engine/head/encode/:BEGIN -->
+<!DOCTYPE html>
+<html lang="en"><!-- 
+
+    #   TITLE   : VOIDE Application Interface
+    #   DESC    : This is the interface for the VOIDE Application, which is a collection of tools and features designed to enhance user experience and provide additional functionality. The interface is designed to be user-friendly and intuitive, allowing users to easily navigate and access the various features of the application.
+    #   PROPRIETOR: VARSITYMARKET_TECHNOLOGIES
+    #   VERSION : v2.1.1.1
+    #   AUTHOR  : LEVIDOC AGENCY  
+    #   RELEASE : 2026/07/18
+    #   CATEGORY: LANDING-PAGE
+
+--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>VOIDE CLOTHING</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./theme/css2_Jmeg.css" rel="stylesheet">
+    
+    <script src="./theme/3.4_Jmeg.17"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        archive: {
+                            paper: '#F5F5F5',
+                            ink: '#1A1A1A',
+                            line: '#E0E0E0'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Inter"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F5F5F5; color: #1A1A1A;  }
+        
+        /* Architecture lines */
+        .specimen-border { border: 0.5px solid #E0E0E0; }
+        .dark-border { border: 0.5px solid rgba(245, 245, 245, 0.2); }
+        
+        /* Subtle reveal animations */
+        .reveal { animation: specReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes specReveal { 
+            from { opacity: 0; transform: translateY(20px); filter: blur(5px); } 
+            to { opacity: 1; transform: translateY(0); filter: blur(0); } 
+        }
+
+        /* Hover Logic */
+        .product-card .info { opacity: 0; transition: opacity 0.4s ease; }
+        .product-card:hover .info { opacity: 1; }
+        .product-card img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .product-card:hover img { transform: scale(1.03); }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .menu-open { transform: translateY(0%); }
+        .menu-closed { transform: translateY(-100%); }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #1A1A1A; }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:"JetBrains Mono", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.bottom-10{bottom:2.5rem}.left-0{left:0px}.top-0{top:0px}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-8{margin-bottom:2rem}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-6{margin-bottom:1.5rem}.mt-1{margin-top:0.25rem}.mt-20{margin-top:5rem}.mt-4{margin-top:1rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.aspect-square{aspect-ratio:1 / 1}.aspect-\[4\/5\]{aspect-ratio:4/5}.h-full{height:100%}.min-h-96{min-height:24rem}.min-h-screen{min-height:100vh}.min-h-\[300px\]{min-height:300px}.w-full{width:100%}.max-w-7xl{max-width:80rem}.max-w-screen-2xl{max-width:1536px}.max-w-4xl{max-width:56rem}.max-w-lg{max-width:32rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2\.5{gap:0.625rem}.gap-px{gap:1px}.gap-12{gap:3rem}.gap-6{gap:1.5rem}.space-x-12 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(3rem * var(--tw-space-x-reverse));margin-left:calc(3rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-10 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2.5rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-lg{border-radius:0.5rem}.border-b{border-bottom-width:1px}.border-none{border-style:none}.bg-archive-ink{--tw-bg-opacity:1;background-color:rgb(26 26 26 / var(--tw-bg-opacity, 1))}.bg-archive-line{--tw-bg-opacity:1;background-color:rgb(224 224 224 / var(--tw-bg-opacity, 1))}.bg-archive-paper{--tw-bg-opacity:1;background-color:rgb(245 245 245 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-archive-paper\/80{background-color:rgb(245 245 245 / 0.8)}.bg-transparent{background-color:transparent}.bg-gradient-to-t{background-image:linear-gradient(to top, var(--tw-gradient-stops))}.from-gray-800{--tw-gradient-from:#1f2937 var(--tw-gradient-from-position);--tw-gradient-to:rgb(31 41 55 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:rgb(0 0 0 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.object-center{object-position:center}.p-10{padding:2.5rem}.p-4{padding:1rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.px-12{padding-left:3rem;padding-right:3rem}.py-32{padding-top:8rem;padding-bottom:8rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.pb-6{padding-bottom:1.5rem}.pt-32{padding-top:8rem}.pb-2{padding-bottom:0.5rem}.pb-20{padding-bottom:5rem}.pb-8{padding-bottom:2rem}.text-center{text-align:center}.font-display{font-family:"Inter", sans-serif}.font-mono{font-family:"JetBrains Mono", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-6xl{font-size:3.75rem;line-height:1}.text-\[10px\]{font-size:10px}.text-\[18px\]{font-size:18px}.text-\[9px\]{font-size:9px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-5xl{font-size:3rem;line-height:1}.text-\[12px\]{font-size:12px}.text-\[14px\]{font-size:14px}.text-\[15px\]{font-size:15px}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-none{line-height:1}.leading-loose{line-height:2}.tracking-\[0\.3em\]{letter-spacing:0.3em}.tracking-\[0\.4em\]{letter-spacing:0.4em}.tracking-\[0\.6em\]{letter-spacing:0.6em}.tracking-tighter{letter-spacing:-0.05em}.tracking-\[0\.5em\]{letter-spacing:0.5em}.tracking-widest{letter-spacing:0.1em}.text-archive-paper{--tw-text-opacity:1;color:rgb(245 245 245 / var(--tw-text-opacity, 1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(199 210 254 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-archive-ink{--tw-text-opacity:1;color:rgb(26 26 26 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-40{opacity:0.4}.opacity-60{opacity:0.6}.opacity-0{opacity:0}.opacity-30{opacity:0.3}.opacity-50{opacity:0.5}.opacity-70{opacity:0.7}.mix-blend-multiply{mix-blend-mode:multiply}.mix-blend-difference{mix-blend-mode:difference}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.grayscale{--tw-grayscale:grayscale(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.placeholder\:text-archive-paper\/30::placeholder{color:rgb(245 245 245 / 0.3)}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-archive-ink:hover{--tw-bg-opacity:1;background-color:rgb(26 26 26 / var(--tw-bg-opacity, 1))}.hover\:italic:hover{font-style:italic}.hover\:text-archive-paper:hover{--tw-text-opacity:1;color:rgb(245 245 245 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:line-through:hover{-webkit-text-decoration-line:line-through;text-decoration-line:line-through}.hover\:opacity-100:hover{opacity:1}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:opacity-60{opacity:0.6}.group:hover .group-hover\:opacity-100{opacity:1}@media (min-width: 640px){.sm\:max-w-xl{max-width:36rem}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:justify-center{justify-content:center}.sm\:py-8{padding-top:2rem;padding-bottom:2rem}.sm\:pb-8{padding-bottom:2rem}.sm\:text-5xl{font-size:3rem;line-height:1}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 768px){.md\:mb-12{margin-bottom:3rem}.md\:mb-8{margin-bottom:2rem}.md\:mb-16{margin-bottom:4rem}.md\:mt-0{margin-top:0px}.md\:flex{display:flex}.md\:hidden{display:none}.md\:aspect-auto{aspect-ratio:auto}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-end{align-items:flex-end}.md\:p-16{padding:4rem}.md\:p-12{padding:3rem}.md\:px-10{padding-left:2.5rem;padding-right:2.5rem}.md\:px-8{padding-left:2rem;padding-right:2rem}.md\:py-20{padding-top:5rem;padding-bottom:5rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-8xl{font-size:6rem;line-height:1}.md\:text-7xl{font-size:4.5rem;line-height:1}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:py-12{padding-top:3rem;padding-bottom:3rem}.lg\:pb-12{padding-bottom:3rem}.lg\:text-\[10vw\]{font-size:10vw}.lg\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 1280px){.xl\:py-48{padding-top:12rem;padding-bottom:12rem}}</style></head>
+<!-- #/engine/head/encode/:END; --><body class="antialiased flex flex-col min-h-screen">
+
+        <!-- Navbar -->
+    <!-- #/engine/navbar/encode/:BEGIN -->
+
+<!-- MOBILE RESPONSIVE NAV -->
+<nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 md:px-10 py-6 flex justify-between items-center text-archive-paper">
+  <a href="#" class="font-display font-black text-2xl tracking-tighter z-50 relative">
+    <img src="./theme/logo_Jmeg.png" style="width:100%; max-width: 6rem; filter: invert(1);">
+    <h2 class="font-display font-black text-3xl leading-none" style="text-align:center;">VOIDE</h2>
+                    
+  </a>
+
+  <!-- Desktop Menu -->
+  <div class="hidden md:flex space-x-12 text-[18px] uppercase tracking-[0.6em] font-bold">
+    <a href="#" class="hover:line-through">Home</a>
+    <a href="#shop/" class="hover:line-through">Shop</a>
+    <a href="#contact/" class="hover:line-through">Contact</a>
+    <a href="#login/" class="hover:line-through">Account</a>
+  </div>
+
+
+  <div style="display:flex; ">
+    <img onclick="window.location.href=`/cart/`" style="width: 2.5rem; display: block; opacity: 1; filter: invert(1);" src="./theme/cart_Jmeg.png">
+
+    <!-- Mobile Toggle Button -->
+    <button id="menu-toggle" class="md:hidden z-50 relative text-[10px] uppercase tracking-[0.4em] font-bold focus:outline-none">
+      <img style="padding-left:1rem; width: 3rem; display: block; opacity: 1; filter: invert(1);" src="./theme/menu_Jmeg.png">
+    </button>
+  </div>
+</nav>
+
+<!-- FULLSCREEN MOBILE MENU -->
+<div id="mobile-menu" class="fixed inset-0 bg-archive-ink text-archive-paper z-40 menu-closed flex flex-col justify-center items-center space-y-10">
+  <a href="#shop/" class="font-display font-black text-4xl uppercase hover:italic transition-all">Shop</a>
+  <a href="#about.html" class="font-display font-black text-4xl uppercase hover:italic transition-all">Manifesto</a>
+  <a href="#login.html" class="font-display font-black text-4xl uppercase hover:italic transition-all">Identity</a>
+  <a href="#cart.html" class="font-display font-black text-4xl uppercase hover:italic transition-all">Index [0]</a>
+  <div class="absolute bottom-10 text-[9px] uppercase">Powered By VarsityMarket Technologies</div>
+</div>
+
+<!-- #/engine/navbar/encode/:END; -->
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow pt-32">
+        <!-- #/engine/body/encode/:BEGIN -->
+<div class="bg-white pb-6 sm:pb-8 lg:pb-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+        <section class="relative flex min-h-96 flex-1 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gray-100 py-16 shadow-lg md:py-20 xl:py-48">
+            <!-- image - start -->
+            <img src="./theme/cover_Jmeg.webp" loading="lazy" alt="" class="absolute inset-0 h-full w-full object-cover object-center">
+            <!-- image - end -->
+
+            <!-- overlay - start -->
+            <div class="absolute inset-0 mix-blend-multiply"></div>
+            <!-- overlay - end -->
+
+            <!-- text start -->
+            <div class="relative flex flex-col items-center p-4 sm:max-w-xl">
+                <p class="mb-4 text-center text-lg text-indigo-200 sm:text-xl md:mb-8">Very proud to introduce</p>
+
+                <h1 style="text-align:center; margin:auto;" class="font-display font-black text-white text-6xl md:text-8xl lg:text-[10vw] leading-none uppercase tracking-tighter">
+                    VOIDE
+                </h1>
+
+                <h1 class="mb-8 text-center text-4xl font-bold text-white sm:text-5xl md:mb-12 md:text-6xl">
+                    CLOTHING</h1>
+
+
+                <div class="flex w-full flex-col gap-2.5 sm:flex-row sm:justify-center">
+                </div>
+            </div>
+            <!-- text end -->
+        </section>
+    </div>
+</div>
+
+
+<!-- 3. SAMPLE CATEGORIES -->
+<section class="max-w-7xl mx-auto px-6 md:px-10 py-20 reveal">
+
+    <!-- Brutalist Grid Layout for Categories -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-archive-line specimen-border">
+        <a href="#shop/" class="bg-archive-paper p-10 md:p-16 hover:bg-archive-ink hover:text-archive-paper transition-colors group flex flex-col justify-between aspect-square md:aspect-auto">
+            <span class="text-[10px] font-bold tracking-[0.3em] opacity-40 group-hover:opacity-60 mb-10">01</span>
+            <div>
+                <h3 class="font-display font-black text-3xl md:text-4xl uppercase mb-2">Apparel</h3>
+                <p class="text-xs opacity-60">Structural base layers &amp; anatomy.</p>
+            </div>
+        </a>
+        <a href="#shop/" class="bg-archive-paper p-10 md:p-16 hover:bg-archive-ink hover:text-archive-paper transition-colors group flex flex-col justify-between aspect-square md:aspect-auto">
+            <span class="text-[10px] font-bold tracking-[0.3em] opacity-40 group-hover:opacity-60 mb-10">02</span>
+            <div>
+                <h3 class="font-display font-black text-3xl md:text-4xl uppercase mb-2">Outerwear</h3>
+                <p class="text-xs opacity-60">Technical membranes &amp; shells.</p>
+            </div>
+        </a>
+        <a href="#shop/" class="bg-archive-paper p-10 md:p-16 hover:bg-archive-ink hover:text-archive-paper transition-colors group flex flex-col justify-between aspect-square md:aspect-auto">
+            <span class="text-[10px] font-bold tracking-[0.3em] opacity-40 group-hover:opacity-60 mb-10">03</span>
+            <div>
+                <h3 class="font-display font-black text-3xl md:text-4xl uppercase mb-2">Clothing</h3>
+                <p class="text-xs opacity-60">Utility caps &amp; structural add-ons.</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+        <!-- text - start -->
+        <div class="mb-10 md:mb-16">
+        </div>
+        <!-- text - end -->
+
+        <div class="grid gap-6 sm:grid-cols-2">
+            <!-- product - start -->
+            <a href="#shop/" style="height:75vh" class="group relative flex items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg">
+                <img src="./theme/f8504b70-4027-11f1-b002-c581252a7275_Jmeg.webp" loading="lazy" alt="Photo by Fakurian Design" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110">
+
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                </div>
+
+                <div class="relative flex flex-col">
+                    <span class="text-gray-300">ART</span>
+                    <span class="text-lg font-semibold text-white lg:text-xl">WE CRAFT IT</span>
+                </div>
+            </a>
+            <!-- product - end -->
+
+            <!-- product - start -->
+            <a href="#shop/" style="height:75vh" class="group relative flex h-100 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg">
+                <img src="./theme/e60b53c1-401c-11f1-9555-b9180039253c_Jmeg.webp" loading="lazy" alt="Photo by Fakurian Design" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110">
+
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
+                </div>
+
+                <div class="relative flex flex-col">
+                    <span class="text-gray-300">DESIGNS</span>
+                    <span class="text-lg font-semibold text-white lg:text-xl">WE MAKE IT</span>
+                </div>
+            </a>
+            <!-- product - end -->
+        </div>
+    </div>
+</div>
+
+<main class="flex-grow pt-32">
+    <!-- MAIN CONTENT - CATALOG MATRIX -->
+    <div class="flex-grow pt-32 pb-20 max-w-7xl mx-auto px-6 md:px-10 w-full reveal">
+
+        <!-- HEADER & CATALOG TELEMETRY -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 pb-8 border-b specimen-border gap-6">
+            <div>
+                <p class="text-[10px] font-bold uppercase opacity-40 mb-4">View Whats In Store</p>
+                <h1 class="font-display font-black text-4xl md:text-6xl uppercase tracking-tighter">
+                    Latest Arrivals
+                </h1>
+            </div>
+        </div>
+
+        <!-- PRODUCT GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="catalog-grid">
+
+            <a href="#product/3/" class="specimen-card flex flex-col group cursor-pointer block">
+                <div class="aspect-[4/5] bg-archive-line mb-6 overflow-hidden relative specimen-border">
+                    <img src="./theme/Mocks-_Hoodie-Back-1000x1259_Jmeg.png" alt="HEATSKRS HOODIE" class="w-full h-full object-cover grayscale js-card-img">
+                    <div class="absolute inset-0 bg-archive-paper/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="text-[15px] font-bold">VIEW PRODUCT</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-display font-black text-xl uppercase js-card-title">HEATSKRS HOODIE</h3>
+                        <p class="text-[9px] opacity-40 uppercase js-card-category mt-1"></p>
+                    </div>
+                    <span class="font-bold text-sm js-card-price">R 799.00</span>
+                </div>
+            </a>
+
+            <a href="#product/2/" class="specimen-card flex flex-col group cursor-pointer block">
+                <div class="aspect-[4/5] bg-archive-line mb-6 overflow-hidden relative specimen-border">
+                    <img src="./theme/Mocks-94-1000x1259_Jmeg.webp" alt="Deadlines SLVLSS Tee" class="w-full h-full object-cover grayscale js-card-img">
+                    <div class="absolute inset-0 bg-archive-paper/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="text-[15px] font-bold">VIEW PRODUCT</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-display font-black text-xl uppercase js-card-title">Deadlines SLVLSS Tee</h3>
+                        <p class="text-[9px] opacity-40 uppercase js-card-category mt-1"></p>
+                    </div>
+                    <span class="font-bold text-sm js-card-price">R 399.99</span>
+                </div>
+            </a>
+
+            <a href="#product/1/" class="specimen-card flex flex-col group cursor-pointer block">
+                <div class="aspect-[4/5] bg-archive-line mb-6 overflow-hidden relative specimen-border">
+                    <img src="./theme/Mocks-134-1000x1259_Jmeg.png" alt="TBHBG 220GSM OVRSZD TEE" class="w-full h-full object-cover grayscale js-card-img">
+                    <div class="absolute inset-0 bg-archive-paper/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="text-[15px] font-bold">VIEW PRODUCT</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="font-display font-black text-xl uppercase js-card-title">TBHBG 220GSM OVRSZD TEE</h3>
+                        <p class="text-[9px] opacity-40 uppercase js-card-category mt-1"></p>
+                    </div>
+                    <span class="font-bold text-sm js-card-price">R 499.99</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<section class="bg-archive-ink text-archive-paper py-32 px-6 md:px-10 mt-20">
+    <div class="max-w-4xl mx-auto text-center reveal">
+        <p class="text-[10px] font-bold uppercase tracking-[0.5em] opacity-50 mb-8">Contact Us</p>
+        <h2 class="font-display font-black text-5xl md:text-7xl uppercase mb-12">Reach Out TO uS</h2>
+        <p class="text-sm opacity-70 mb-12 max-w-lg mx-auto leading-loose">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a elit gravida, consequat magna commodo,
+            dapibus urna. Cras leo dui, dictum vitae sem in, lobortis pulvinar nunc. Pellentesque habitant morbi
+            tristique senectus et netus et malesuada fames ac turpis egestas. Integer nec lectus nisl. Vestibulum
+            rhoncus nulla non neque varius sollicitudin. Aliquam tempus odio lacus, nec bibendum mi iaculis ut. Proin
+            odio sem, commodo et ultrices ut, tincidunt ac arcu. Vestibulum tincidunt leo imperdiet volutpat varius.
+            Pellentesque tristique ex vel ante ornare scelerisque. Quisque pharetra lorem eu venenatis convallis.</p>
+        <a href="#contact/" class="inline-block bg-archive-paper text-archive-ink px-12 py-5 font-display font-black uppercase text-sm hover:scale-105 transition-transform">
+            Contact Store
+        </a>
+    </div>
+</section><!-- #/engine/body/encode/:END; -->
+       
+    </main>
+
+    <!-- NEW REDESIGNED GRID FOOTER -->
+    <footer class="bg-archive-ink text-archive-paper">
+        <!-- Top Footer Grid -->
+        <div class="">
+            <div class="grid grid-cols-1 md:grid-cols-4">
+                
+                <!-- Brand Column -->
+                <div class="p-10 md:p-12 flex flex-col justify-between min-h-[300px]">
+                    <img src="./theme/b-logo_Jmeg.png" style="max-width:6rem; margin:auto; ">
+                    <h2 class="font-display font-black text-4xl leading-none" style="text-align:center;">VOIDE</h2>
+                </div>
+                
+                <!-- Link Column 1 -->
+                <div class="p-10 md:p-12">
+                    <h3 class="text-[14px] font-bold uppercase opacity-30 mb-10">The Brand</h3>
+                    <ul class="space-y-6 text-xs uppercase">
+                        <li><a href="#shop/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">Our Shop</a></li>
+                        <li><a href="#about/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">About Us</a></li>
+                        <li><a href="#cart/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">Cart</a></li>
+                        <li><a href="#login/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">Account</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Link Column 2 -->
+                <div class="p-10 md:p-12">
+                    <h3 class="text-[14px] font-bold uppercase opacity-30 mb-10">Support</h3>
+                    <ul class="space-y-6 text-xs uppercase tracking-widest">
+                        <li><a href="#contact/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">Contact Us</a></li>
+                        <li><a href="#faq/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">FAQ</a></li>
+                        <li><a href="#terms-of-use/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">Terms of Use</a></li>
+                        <li><a href="#privacy-policy/" class="hover:text-white opacity-70 hover:opacity-100 transition-opacity">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Subscribe Column -->
+                <div class="p-10 md:p-12">
+                    <h3 class="text-[14px] font-bold uppercase opacity-30 mb-10">Subscribe</h3>
+                    <p class="text-[10px] opacity-60 leading-loose mb-6">Join The Voide Club</p>
+                    <form class="flex pb-2">
+                        <input type="email" placeholder="EMAIL ADDRESS" class="bg-transparent border-none outline-none text-xs w-full uppercase placeholder:text-archive-paper/30 font-mono text-archive-paper" required="">
+                        <button type="submit" class="text-[14px] font-bold uppercase hover:italic">Subscribe</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Bottom Bar -->
+        <div class="p-10 flex flex-col md:flex-row justify-between items-center text-[12px] uppercase opacity-40">
+            <p></p>
+            <p class="mt-4 md:mt-0">Powered By Varsity Market Technologies</p>
+        </div>
+    </footer>
+
+    <!-- MOBILE MENU LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+            let isOpen = false;
+
+            btn.addEventListener('click', () => {
+                isOpen = !isOpen;
+                if (isOpen) {
+                    menu.classList.remove('menu-closed');
+                    menu.classList.add('menu-open');
+                    btn.innerHTML = '<img style="width: 3rem; display: block; opacity: 1; filter: invert(1);" src="/assets/close.png">';
+                } else {
+                    menu.classList.remove('menu-open');
+                    menu.classList.add('menu-closed');
+                    btn.innerHTML = '<img style="width: 3rem; display: block; opacity: 1; filter: invert(1);" src="/assets/menu.png">';
+                }
+            });
+
+            // Close menu if a link is clicked
+            const links = menu.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    isOpen = false;
+                    menu.classList.remove('menu-open');
+                    menu.classList.add('menu-closed');
+                    btn.textContent = '[ MENU ]';
+                });
+            });
+        });
+    </script>
+
+    e(__SYSTEM_ANALYTICS__)
+
+</body></html>
