@@ -1,0 +1,21 @@
+<section class="py-16">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <h1 class="text-4xl font-bold mb-6">Track Order</h1>
+    <form class="flex flex-col sm:flex-row gap-3 mb-8">
+      <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 border border-gray-200 rounded-lg">
+      <button class="py-3 px-6 bg-primary text-white rounded-button">Search</button>
+    </form>
+    <div class="space-y-4">
+      <div class="border border-gray-200 rounded-lg p-6">
+        <div class="flex justify-between items-start mb-2">
+          <div>
+            <p class="font-medium text-gray-900">Order #1001</p>
+            <p class="text-sm text-gray-500">Aug 01, 2026</p>
+          </div>
+          <span class="text-xs uppercase font-semibold px-3 py-1 bg-gray-100 text-gray-700 rounded-full">Processing</span>
+        </div>
+        <p class="text-sm text-gray-600">Total: R0.00</p>
+      </div>
+    </div>
+  </div>
+</section>

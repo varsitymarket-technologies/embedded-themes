@@ -1,0 +1,26 @@
+<section class="py-16">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <h1 class="text-4xl font-bold mb-6">About Us</h1>
+    <p class="text-gray-600 leading-relaxed mb-6">We offer premium quality clothing and accessories for men and women. Our mission is to provide sustainable fashion that lasts.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">Shop</h2>
+        <ul class="space-y-2 text-gray-600">
+          <li>Women</li>
+          <li>Men</li>
+          <li>Accessories</li>
+          <li>Footwear</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-2xl font-semibold mb-3">Help</h2>
+        <ul class="space-y-2 text-gray-600">
+          <li>Customer Service</li>
+          <li>Shipping & Returns</li>
+          <li>FAQs</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

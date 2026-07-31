@@ -1,0 +1,10 @@
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold text-center mb-12">Collection</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- #!/engine/node/
+      app()->create_category_ui(api()->async_categories());
+      -->
+    </div>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'remove') {
+    $id = (int)($_POST['product_id'] ?? 0);
+    unset($_SESSION['cart'][$id]);
+    header('Location: /cart');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add') {
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $id = (int)($_POST['product_id'] ?? 0);
+    $name = (string)($_POST['product_name'] ?? '');
+    $price = (string)($_POST['product_price'] ?? 'R0.00');
+    $image = (string)($_POST['product_image'] ?? '');
+    $qty = max(1, (int)($_POST['quantity'] ?? 1));
+
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['qty'] += $qty;
+    } else {
+        $_SESSION['cart'][$id] = ['id' => $id, 'name' => $name, 'price' => $price, 'image' => $image, 'qty' => $qty];
+    }
+    header('Location: /cart');
+    exit;
+}
+
+$cart = $_SESSION['cart'] ?? [];
+$total = 0.0;
+foreach ($cart as $item) {
+    $raw = preg_replace('/[^0-9.]/', '', $item['price'] ?? '0');
+    $total += (float)$raw * (int)($item['qty'] ?? 1);
+}
+?>
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold mb-8">Your Cart</h1>
+    <?php if (empty($cart)): ?>
+      <p class="text-gray-600">Your cart is empty.</p>
+      <a href="<!-- #!/engine/node/ page('shop') -->" class="inline-block mt-4 py-3 px-6 bg-primary text-white rounded-button">Continue Shopping</a>
+    <?php else: ?>
+      <div class="space-y-4">
+        <?php foreach ($cart as $item): ?>
+          <div class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
+            <div>
+              <h3 class="font-medium text-gray-900"><?= htmlspecialchars($item['name'] ?? '') ?></h3>
+              <p class="text-sm text-gray-500"><?= htmlspecialchars($item['price'] ?? '') ?> x <?= (int)($item['qty'] ?? 1) ?></p>
+            </div>
+            <form method="POST" action="/cart">
+              <input type="hidden" name="action" value="remove">
+              <input type="hidden" name="product_id" value="<?= (int)($item['id'] ?? 0) ?>">
+              <button type="submit" class="text-sm text-gray-500 hover:text-red-600">Remove</button>
+            </form>
+          </div>
+        <?php endforeach; ?>
+      </div>
+      <div class="mt-8 flex items-center justify-between border-t border-gray-200 pt-6">
+        <p class="text-lg font-semibold text-gray-900">Total</p>
+        <p class="text-lg font-semibold text-gray-900">R<?= number_format($total, 2) ?></p>
+      </div>
+      <a href="<!-- #!/engine/node/ page('checkout') -->" class="inline-block mt-8 py-3 px-6 bg-primary text-white rounded-button">Checkout</a>
+    <?php endif; ?>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<?php $query = trim($_GET['q'] ?? ''); ?>
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold mb-8">Search</h1>
+    <form method="GET" action="/search" class="mb-8">
+      <input type="text" name="q" value="<?= htmlspecialchars($query) ?>" placeholder="Search products..." class="w-full max-w-xl px-4 py-3 border border-gray-200 rounded-lg">
+    </form>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <?php if ($query === ''): ?>
+        <p class="text-gray-600">Enter a search term to get started.</p>
+      <?php else: ?>
+        <!-- #!/engine/node/
+        $q = trim($_GET['q'] ?? '');
+        if (!empty($q)) {
+            $all = api()->async_products();
+            $res = array_filter($all, fn($p) => stripos($p['name'], $q) !== false || stripos($p['description'] ?? '', $q) !== false);
+            app()->create_shop_ui(array_values($res));
+        }
+        -->
+      <?php endif; ?>
+    </div>
+  </div>
+</section>

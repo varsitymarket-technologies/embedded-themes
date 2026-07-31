@@ -1,0 +1,114 @@
+<section class="hero-section relative">
+  <div class="container mx-auto px-4 py-24 md:py-32 w-full">
+    <div class="max-w-lg">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Summer Collection 2025</h1>
+      <p class="text-lg text-white mb-8">Discover our latest arrivals designed for comfort and style. Premium quality that lasts.</p>
+      <div class="flex flex-wrap gap-4">
+        <a href="<!-- #!/engine/node/ page('shop') -->" class="py-3 px-6 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap">Shop Now</a>
+        <a href="<!-- #!/engine/node/ page('collection') -->" class="py-3 px-6 bg-white text-gray-800 font-medium rounded-button border border-gray-200 hover:bg-gray-50 transition-colors whitespace-nowrap">Explore Collection</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">Shop by Category</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- #!/engine/node/
+      app()->create_category_ui(api()->async_categories());
+      -->
+    </div>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center mb-12">
+      <h2 class="text-3xl font-bold">Featured Products</h2>
+      <div class="flex space-x-1 px-1 py-1 bg-gray-100 rounded-full">
+        <button class="px-4 py-1.5 bg-white text-gray-800 rounded-full shadow-sm text-sm font-medium whitespace-nowrap">All</button>
+        <button class="px-4 py-1.5 text-gray-600 rounded-full text-sm font-medium hover:bg-white hover:shadow-sm transition whitespace-nowrap">New Arrivals</button>
+        <button class="px-4 py-1.5 text-gray-600 rounded-full text-sm font-medium hover:bg-white hover:shadow-sm transition whitespace-nowrap">Best Sellers</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- #!/engine/node/
+      app()->create_shop_ui(api()->async_products());
+      -->
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-[#2a2929] text-white">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-8 md:mb-0">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Summer Sale</h2>
+        <p class="text-xl text-gray-300 mb-6">Up to 50% off on selected items. Limited time offer.</p>
+        <div class="flex gap-4 mb-8">
+          <div class="bg-white/10 rounded-lg p-4 text-center"><span class="block text-3xl font-bold">00</span><span class="text-sm text-gray-300">Days</span></div>
+          <div class="bg-white/10 rounded-lg p-4 text-center"><span class="block text-3xl font-bold">12</span><span class="text-sm text-gray-300">Hours</span></div>
+          <div class="bg-white/10 rounded-lg p-4 text-center"><span class="block text-3xl font-bold">45</span><span class="text-sm text-gray-300">Minutes</span></div>
+          <div class="bg-white/10 rounded-lg p-4 text-center"><span class="block text-3xl font-bold">30</span><span class="text-sm text-gray-300">Seconds</span></div>
+        </div>
+        <a href="<!-- #!/engine/node/ page('shop') -->" class="inline-block py-3 px-8 bg-white text-gray-900 font-medium rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap">Shop the Sale</a>
+      </div>
+      <div class="md:w-1/2">
+        <img src="/img/cover-image2.jpg" alt="Summer Sale" class="rounded-lg w-full" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">What Our Customers Say</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="flex text-amber-400 mb-4"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+        <p class="text-gray-700 mb-6">"The quality of the clothes is exceptional. I've ordered multiple times and have never been disappointed. The customer service is also top-notch!"</p>
+        <div class="flex items-center"><div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mr-4"><i class="ri-user-3-line text-xl"></i></div><div><h4 class="font-medium text-gray-900">Emily Richardson</h4><p class="text-sm text-gray-500">Loyal Customer</p></div></div>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="flex text-amber-400 mb-4"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i></div>
+        <p class="text-gray-700 mb-6">"Fast shipping and the products look exactly like the pictures. The sizing guide was very helpful. Will definitely shop here again!"</p>
+        <div class="flex items-center"><div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mr-4"><i class="ri-user-3-line text-xl"></i></div><div><h4 class="font-medium text-gray-900">Michael Thompson</h4><p class="text-sm text-gray-500">Verified Buyer</p></div></div>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="flex text-amber-400 mb-4"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+        <p class="text-gray-700 mb-6">"I love the sustainable approach this brand takes. The packaging is eco-friendly and the clothes are made from high-quality, sustainable materials."</p>
+        <div class="flex items-center"><div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mr-4"><i class="ri-user-3-line text-xl"></i></div><div><h4 class="font-medium text-gray-900">Sophia Martinez</h4><p class="text-sm text-gray-500">Repeat Customer</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-4">Follow Us on Instagram</h2>
+    <p class="text-gray-600 text-center mb-12">@AnimeHood_official</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <a href="#" class="block aspect-square overflow-hidden rounded-lg group"><img src="https://readdy.ai/api/search-image?query=fashion%20lifestyle%20image%2C%20person%20wearing%20stylish%20outfit%20in%20urban%20setting%2C%20natural%20lighting%2C%20candid%20pose%2C%20high%20quality&width=300&height=300&seq=insta1&orientation=squarish" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /></a>
+      <a href="#" class="block aspect-square overflow-hidden rounded-lg group"><img src="https://readdy.ai/api/search-image?query=close-up%20of%20fashion%20accessories%20arrangement%2C%20minimal%20aesthetic%2C%20soft%20lighting%2C%20high%20quality%20product%20photography&width=300&height=300&seq=insta2&orientation=squarish" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /></a>
+      <a href="#" class="block aspect-square overflow-hidden rounded-lg group"><img src="https://readdy.ai/api/search-image?query=person%20wearing%20elegant%20outfit%20in%20cafe%20setting%2C%20lifestyle%20fashion%20photography%2C%20soft%20natural%20lighting%2C%20candid%20moment&width=300&height=300&seq=insta3&orientation=squarish" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /></a>
+      <a href="#" class="block aspect-square overflow-hidden rounded-lg group"><img src="https://readdy.ai/api/search-image?query=flatlay%20of%20fashion%20items%20including%20clothing%20and%20accessories%2C%20minimal%20aesthetic%2C%20soft%20lighting%2C%20high%20quality%20product%20photography&width=300&height=300&seq=insta4&orientation=squarish" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /></a>
+      <a href="#" class="block aspect-square overflow-hidden rounded-lg group"><img src="https://readdy.ai/api/search-image?query=person%20wearing%20casual%20outfit%20in%20urban%20setting%2C%20lifestyle%20fashion%20photography%2C%20natural%20lighting%2C%20candid%20pose&width=300&height=300&seq=insta5&orientation=squarish" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /></a>
+      <a href="#" class="block aspect-square overflow-hidden rounded-lg group"><img src="https://readdy.ai/api/search-image?query=close-up%20of%20shoes%20and%20accessories%2C%20minimal%20aesthetic%2C%20soft%20lighting%2C%20high%20quality%20product%20photography&width=300&height=300&seq=insta6&orientation=squarish" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /></a>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-[#2a2929] text-white">
+  <div class="container mx-auto px-4">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+      <p class="text-gray-300 mb-8">Stay updated with our latest collections, exclusive offers, and style tips.</p>
+      <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+        <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 rounded-button border-none text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20" />
+        <button type="submit" class="px-6 py-3 bg-primary text-white font-medium rounded-button hover:bg-primary/90 transition-colors whitespace-nowrap">Subscribe</button>
+      </form>
+      <p class="text-sm text-gray-400 mt-4">By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.</p>
+    </div>
+  </div>
+</section>

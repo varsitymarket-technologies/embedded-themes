@@ -1,0 +1,11 @@
+<section class="py-16">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <h1 class="text-4xl font-bold mb-6">My Account</h1>
+    <p class="text-gray-600 mb-8">Manage your profile, orders, billing, and support from one place.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="<!-- #!/engine/node/ page('orders') -->" class="rounded-lg border border-gray-200 p-6 hover:border-primary transition-colors">Orders</a>
+      <a href="<!-- #!/engine/node/ page('cart') -->" class="rounded-lg border border-gray-200 p-6 hover:border-primary transition-colors">Cart</a>
+      <a href="<!-- #!/engine/node/ page('login') -->" class="rounded-lg border border-gray-200 p-6 hover:border-primary transition-colors">Sign In</a>
+    </div>
+  </div>
+</section>
