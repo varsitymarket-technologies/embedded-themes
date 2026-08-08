@@ -16,7 +16,7 @@
     ]
   },
   "hastings.ego": {
-    "hash": "v1.0.0.4",
+    "hash": "v1.0.0.5",
     "files": [
       "interface",
       "autofill.json",
@@ -82,7 +82,7 @@
     ]
   },
   "voide": {
-    "hash": "v1.0.0.4",
+    "hash": "v1.1.0.4",
     "files": [
       "interface",
       "autofill.json",
