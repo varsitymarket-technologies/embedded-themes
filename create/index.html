@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Varsity Market | Template Library</title>
-    <meta name="description" content="Varsity Market template library and marketplace entry point." />
-    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Create Themes | Varsity Market</title>
+    <meta name="description" content="A simple page for designers to create and submit new themes." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -94,7 +94,7 @@
         }
 
         .menu-btn {
-            display: inline-flex;
+            display: none;
             background: transparent;
             border: 0;
             color: var(--text);
@@ -462,7 +462,7 @@
         }
     </style>
 
-        <style>
+    <style>
         *,
         *::before,
         *::after {
@@ -1022,8 +1022,14 @@
         <nav>
             <a class="brand" href="/">
                 <img src="/assets/favicon.png" alt="Varsity Market">
-                <span>Theme Library</span>
+                <span>Varsity Market</span>
             </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/collection/">Library</a>
+                <a href="/marketplace/">Marketplace</a>
+                <a href="/publish/">Publish</a>
+            </div>
             <button onclick="openmenu()" class="menu-btn" aria-label="Open menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -1036,28 +1042,29 @@
         <section class="hero-section">
             <div class="hero-inner">
                 <div class="copy">
-                    <h1>Template Library for embedded storefronts.</h1>
+                    <h1>Create themes that people actually want to use.</h1>
                     <p class="sub">
-                        Browse the theme collection, open the marketplace, or publish your own theme from one simple
-                        entry point.
+                        Varsity Market gives web designers a simple place to build, package, and submit clean embedded
+                        storefront themes.
+                        Make something useful, make it fast, and make it easy to ship.
                     </p>
                     <div class="actions">
-                        <a class="btn primary" href="/marketplace/">Open Marketplace</a>
-                        <a class="btn" href="/collection/">Browse Library</a>
-                        <a class="btn" href="/publish/">Publish Theme</a>
+                        <a class="btn primary" href="/publish/">Start Creating</a>
+                        <a class="btn" href="/collection/">See Theme Library</a>
+                        <a class="btn" href="/marketplace/">View Marketplace</a>
                     </div>
                     <div class="stats">
                         <div class="stat">
-                            <strong>3</strong>
-                            <span>Main flows: marketplace, library, publish</span>
+                            <strong>Build</strong>
+                            <span>Design a theme with a clear layout and focused hierarchy</span>
                         </div>
                         <div class="stat">
-                            <strong>1</strong>
-                            <span>Simple page that keeps the next step obvious</span>
+                            <strong>Package</strong>
+                            <span>Prepare it for upload, preview, and distribution</span>
                         </div>
                         <div class="stat">
-                            <strong>24/7</strong>
-                            <span>Always available as the starting point for the site</span>
+                            <strong>Ship</strong>
+                            <span>Submit it so other creators and merchants can use it</span>
                         </div>
                     </div>
                 </div>
@@ -1065,26 +1072,24 @@
                 <div>
                     <div class="showcase">
                         <div class="showcase-top">
-                            <span>Featured templates</span>
-                            <span>Simple preview</span>
+                            <span>What to create</span>
+                            <span>Simple direction</span>
                         </div>
                         <div class="showcase-body">
                             <div class="theme-card">
-                                <div class="theme-image" style="background-image:url('collection/austin/poster.png');">
-                                </div>
+                                <div class="theme-image"
+                                    style="background-image:url('/collection/default/poster.png');"></div>
                                 <div class="theme-copy">
-                                    <h3>Austin</h3>
-                                    <p>A strong storefront layout with a clear product focus and direct browsing flow.
-                                    </p>
+                                    <h3>Clean storefronts</h3>
+                                    <p>Make a layout with strong product presentation and obvious calls to action.</p>
                                 </div>
                             </div>
                             <div class="theme-card">
-                                <div class="theme-image" style="background-image:url('collection/default/poster.png');">
+                                <div class="theme-image" style="background-image:url('/collection/austin/poster.png');">
                                 </div>
                                 <div class="theme-copy">
-                                    <h3>Default</h3>
-                                    <p>A clean base theme for embedded stores that keeps the structure easy to follow.
-                                    </p>
+                                    <h3>Fast browsing</h3>
+                                    <p>Keep the structure easy to scan so users can move quickly through the site.</p>
                                 </div>
                             </div>
                         </div>
@@ -1097,11 +1102,11 @@
             <div class="section-inner">
                 <div class="section-head">
                     <div>
-                        <h2>What this page is for</h2>
+                        <h2>Design with purpose.</h2>
                     </div>
                     <p>
-                        This homepage is just a plain entry point. It points people to the marketplace and library
-                        without adding visual noise.
+                        Good themes are practical. They load well, read well, and help the store do its job without
+                        extra noise.
                     </p>
                 </div>
 
@@ -1113,8 +1118,8 @@
                             <path d="M5 19V7l7-4 7 4v12"></path>
                             <path d="M9 19v-8h6v8"></path>
                         </svg>
-                        <h3>Marketplace entry</h3>
-                        <p>Jump straight into the marketplace UI when you want the storefront experience.</p>
+                        <h3>Start with structure</h3>
+                        <p>Build around the sections that matter: hero, products, trust, and checkout flow.</p>
                     </div>
                     <div class="feature">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1123,8 +1128,8 @@
                                 d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
                             </path>
                         </svg>
-                        <h3>Library access</h3>
-                        <p>Browse templates and switch between themes without extra decoration getting in the way.</p>
+                        <h3>Keep it usable</h3>
+                        <p>Design for the customer first so the theme stays practical across different stores.</p>
                     </div>
                     <div class="feature">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1132,8 +1137,8 @@
                             <path d="M12 1v22"></path>
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a4 4 0 0 1 0 8H6"></path>
                         </svg>
-                        <h3>Publish flow</h3>
-                        <p>Send creators to the publish page from a landing page that stays out of the way.</p>
+                        <h3>Submit something useful</h3>
+                        <p>Publish themes that other designers and merchants can actually adapt and reuse.</p>
                     </div>
                 </div>
             </div>
