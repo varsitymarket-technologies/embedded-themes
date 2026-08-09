@@ -3,7 +3,7 @@
         <section
             class="relative flex min-h-96 flex-1 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gray-100 py-16 shadow-lg md:py-20 xl:py-48">
             <!-- image - start -->
-            <img src="/assets/cover.webp" loading="lazy" alt=""
+            <img src="https://themes.varsitymarket.co.za/collection/voide/assets/cover.webp" loading="lazy" alt=""
                 class="absolute inset-0 h-full w-full object-cover object-center" />
             <!-- image - end -->
 
@@ -93,7 +93,7 @@
             <!-- product - start -->
             <a href="<!-- #!/engine/node/ page('shop') -->" style="height:75vh" class="group relative flex h-100 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg">
                 <img src="https://voide.online/cdn/shop/files/e60b53c1-401c-11f1-9555-b9180039253c.png?height=1536&v=1783674161"
-                    loading="lazy" alt="Photo by Fakurian Design"
+                    loading="lazy" alt=""
                     class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
 
                 <div

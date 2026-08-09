@@ -16,7 +16,7 @@
 
                 <!-- Brand Column -->
                 <div class="p-10 md:p-12 flex flex-col justify-between min-h-[300px]">
-                    <img src="/assets/b-logo.png" style="max-width:6rem; margin:auto; ">
+                    <img src="https://themes.varsitymarket.co.za/collection/voide/assets/b-logo.png" style="max-width:6rem; margin:auto; ">
                     <h2 class="font-display font-black text-4xl leading-none" style="text-align:center;">VOIDE</h2>
                 </div>
 
@@ -74,11 +74,11 @@
                 if (isOpen) {
                     menu.classList.remove('menu-closed');
                     menu.classList.add('menu-open');
-                    btn.innerHTML = '<img style="width: 3rem; display: block; opacity: 1; filter: invert(1);" src="/assets/close.png">';
+                    btn.innerHTML = '<img style="width: 3rem; display: block; opacity: 1; filter: invert(1);" src="https://themes.varsitymarket.co.za/collection/voide/assets/close.png">';
                 } else {
                     menu.classList.remove('menu-open');
                     menu.classList.add('menu-closed');
-                    btn.innerHTML = '<img style="width: 3rem; display: block; opacity: 1; filter: invert(1);" src="/assets/menu.png">';
+                    btn.innerHTML = '<img style="width: 3rem; display: block; opacity: 1; filter: invert(1);" src="https://themes.varsitymarket.co.za/collection/voide/assets/menu.png">';
                 }
             });
 

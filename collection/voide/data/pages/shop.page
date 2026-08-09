@@ -105,7 +105,7 @@
                     const clone = template.content.cloneNode(true);
                     
                     const link = clone.querySelector('a');
-                    link.href = `<!-- #!/engine/node/ page('product/${p.id}'); -->`;
+                    link.href = `<!-- #!/engine/node/ page('product','${p.id}'); -->`;
 
                     clone.querySelector('.js-card-title').textContent = p.title;
                     clone.querySelector('.js-card-category').textContent = p.category;

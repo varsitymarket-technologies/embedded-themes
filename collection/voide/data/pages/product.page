@@ -1,5 +1,4 @@
 <style>
-
     /* Architecture lines */
     .specimen-border {
         border: 0.5px solid #E0E0E0;
@@ -80,8 +79,13 @@
     <!-- TOP BREADCRUMB / ARTIFACT ID -->
     <div style="display:none;"
         class="flex justify-between items-center mb-10 pb-4 border-b specimen-border text-[10px] uppercase tracking-[0.4em] opacity-50">
-        <div><a href=" class="hover:underline"><span
-                id="prod-breadcrumb-category"></span> / <span id="prod-breadcrumb-id">REF_01</span></div>
+        <div>
+            <a href="" class="hover:underline">
+                <span id="prod-breadcrumb-category">
+
+                </span> / <span id="prod-breadcrumb-id">REF_01</span>
+            </a>
+        </div>
         <div id="prod-stock-status">Status: Verified Available</div>
     </div>
 
@@ -193,179 +197,180 @@
 <!-- PRODUCT & GALLERY DYNAMIC LOGIC -->
 <script>
     <!-- #!/engine/node/
-    app()->create_shop_ui(api()->async_products());
+        app()->create_shop_ui(api()->async_products());
     -->
 
-    class ProductController {
-        constructor() {
-            this.selectedSize = 'M';
-            this.currentProduct = this.resolveProduct();
+        class ProductController {
+            constructor() {
+                this.selectedSize = 'M';
+                this.currentProduct = this.resolveProduct();
 
-            this.initProductDetails();
-            this.initRelatedProducts();
-            this.initSizeSelector();
-            this.initAddToCart();
-            this.initMobileMenu();
-            this.updateCartCount();
-            this.initReviewForm();
-        }
-
-        resolveProduct() {
-            const hash = window.location.hash.replace('#', '');
-            const prodId = parseInt(hash) || <!-- #!/engine/node/ echo routes(2); -->;
-            return DB_PRODUCTS.find(p => p.id === prodId) || DB_PRODUCTS[0];
-        }
-
-        initProductDetails() {
-            const p = this.currentProduct;
-            document.getElementById('prod-title').textContent = p.title;
-            document.getElementById('prod-price').textContent = `${p.price.toFixed(2)} ZAR`;
-            document.getElementById('prod-category').textContent = p.category;
-            document.getElementById('prod-breadcrumb-category').textContent = p.category;
-            document.getElementById('prod-breadcrumb-id').textContent = `REF_0${p.id}`;
-            document.getElementById('prod-description').textContent = p.desc;
-            document.title = `${p.title} // SPECIMEN ARCHIVE`;
-
-            // Setup Gallery
-            const mainImg = document.getElementById('main-gallery-img');
-            const thumbGrid = document.getElementById('thumbnail-grid');
-
-            mainImg.src = p.gallery[0];
-            thumbGrid.innerHTML = '';
-
-            p.gallery.forEach((imgUrl, index) => {
-                const thumb = document.createElement('div');
-                thumb.className = `aspect-square bg-archive-line overflow-hidden specimen-border cursor-pointer opacity-70 hover:opacity-100 transition-opacity ${index === 0 ? 'ring-1 ring-archive-ink opacity-100' : ''}`;
-                thumb.innerHTML = `<img src="${imgUrl}" alt="Thumbnail ${index + 1}" class="w-full h-full object-cover grayscale">`;
-
-                thumb.addEventListener('click', () => {
-                    mainImg.src = imgUrl;
-                    document.querySelectorAll('#thumbnail-grid > div').forEach(el => {
-                        el.classList.remove('ring-1', 'ring-archive-ink', 'opacity-100');
-                        el.classList.add('opacity-70');
-                    });
-                    thumb.classList.add('ring-1', 'ring-archive-ink', 'opacity-100');
-                    thumb.classList.remove('opacity-70');
-                });
-
-                thumbGrid.appendChild(thumb);
-            });
-        }
-
-        initRelatedProducts() {
-            const grid = document.getElementById('related-products-grid');
-            const template = document.getElementById('tpl-related-card');
-            grid.innerHTML = '';
-
-            // Filter products matching the same category, excluding current item, limit to 3
-            let related = DB_PRODUCTS.filter(p => p.category === this.currentProduct.category && p.id !== this.currentProduct.id);
-
-            // If not enough in the same category, grab any other items to fill up to 3 slots
-            if (related.length < 3) {
-                const others = DB_PRODUCTS.filter(p => p.id !== this.currentProduct.id && !related.includes(p));
-                related = [...related, ...others];
+                this.initProductDetails();
+                this.initRelatedProducts();
+                this.initSizeSelector();
+                this.initAddToCart();
+                this.initMobileMenu();
+                this.updateCartCount();
+                this.initReviewForm();
             }
 
-            related.slice(0, 3).forEach(p => {
-                const clone = template.content.cloneNode(true);
+            resolveProduct() {
+                const hash = window.location.hash.replace('#', '');
+                const prodId = parseInt(hash) || <!-- #!/engine/node/ echo $_GET['data']; -->;
+                return DB_PRODUCTS.find(p => p.id === prodId) || DB_PRODUCTS[0];
+            }
 
-                const link = clone.querySelector('.js-rel-link');
-                link.href = `/product/${p.id}/`;
-                link.addEventListener('click', () => {
-                    window.location.hash = `#${p.id}`;
-                    window.location.reload();
-                });
-
-                clone.querySelector('.js-rel-title').textContent = p.title;
-                clone.querySelector('.js-rel-category').textContent = p.category;
-                clone.querySelector('.js-rel-price').textContent = `${p.price.toFixed(2)} ZAR`;
-                clone.querySelector('.js-rel-img').src = p.gallery[0];
-                clone.querySelector('.js-rel-img').alt = p.title;
-
-                grid.appendChild(clone);
-            });
-        }
-
-        initSizeSelector() {
-            const buttons = document.querySelectorAll('.size-btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    buttons.forEach(b => b.classList.remove('size-active', 'bg-archive-ink', 'text-archive-paper'));
-                    buttons.forEach(b => b.classList.add('border', 'specimen-border'));
-                    e.target.classList.add('size-active');
-                    this.selectedSize = e.target.getAttribute('data-size');
-                });
-            });
-        }
-
-        initAddToCart() {
-            const btn = document.getElementById('add-to-cart-btn');
-            btn.addEventListener('click', () => {
-                const cart = JSON.parse(localStorage.getItem('specimen_cart')) || [];
+            initProductDetails() {
                 const p = this.currentProduct;
+                document.getElementById('prod-title').textContent = p.title;
+                document.getElementById('prod-price').textContent = `${p.price.toFixed(2)} ZAR`;
+                document.getElementById('prod-category').textContent = p.category;
+                document.getElementById('prod-breadcrumb-category').textContent = p.category;
+                document.getElementById('prod-breadcrumb-id').textContent = `REF_0${p.id}`;
+                document.getElementById('prod-description').textContent = p.desc;
+                document.title = `${p.title}`;
 
-                const existingIndex = cart.findIndex(item => item.id === p.id && item.size === this.selectedSize);
-                if (existingIndex > -1) {
-                    cart[existingIndex].qty += 1;
-                } else {
-                    cart.push({
-                        id: p.id,
-                        title: p.title,
-                        price: p.price,
-                        size: this.selectedSize,
-                        img: p.gallery[0],
-                        qty: 1
+                // Setup Gallery
+                const mainImg = document.getElementById('main-gallery-img');
+                const thumbGrid = document.getElementById('thumbnail-grid');
+
+                mainImg.src = p.gallery[0];
+                thumbGrid.innerHTML = '';
+
+                p.gallery.forEach((imgUrl, index) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = `aspect-square bg-archive-line overflow-hidden specimen-border cursor-pointer opacity-70
+hover:opacity-100 transition-opacity ${index === 0 ? 'ring-1 ring-archive-ink opacity-100' : ''}`;
+                    thumb.innerHTML = `<img src="${imgUrl}" alt="Thumbnail ${index + 1}" class="w-full h-full object-cover grayscale">`;
+
+                    thumb.addEventListener('click', () => {
+                        mainImg.src = imgUrl;
+                        document.querySelectorAll('#thumbnail-grid > div').forEach(el => {
+                            el.classList.remove('ring-1', 'ring-archive-ink', 'opacity-100');
+                            el.classList.add('opacity-70');
+                        });
+                        thumb.classList.add('ring-1', 'ring-archive-ink', 'opacity-100');
+                        thumb.classList.remove('opacity-70');
                     });
+
+                    thumbGrid.appendChild(thumb);
+                });
+            }
+
+            initRelatedProducts() {
+                const grid = document.getElementById('related-products-grid');
+                const template = document.getElementById('tpl-related-card');
+                grid.innerHTML = '';
+
+                // Filter products matching the same category, excluding current item, limit to 3
+                let related = DB_PRODUCTS.filter(p => p.category === this.currentProduct.category && p.id !== this.currentProduct.id);
+
+                // If not enough in the same category, grab any other items to fill up to 3 slots
+                if (related.length < 3) {
+                    const others = DB_PRODUCTS.filter(p => p.id !== this.currentProduct.id && !related.includes(p));
+                    related = [...related, ...others];
                 }
 
-                localStorage.setItem('specimen_cart', JSON.stringify(cart));
-                this.updateCartCount();
+                related.slice(0, 3).forEach(p => {
+                    const clone = template.content.cloneNode(true);
 
-                // Visual feedback
-                const originalText = btn.textContent;
-                btn.textContent = 'ADDED_TO_INDEX // SUCCESS';
-                btn.classList.add('bg-emerald-900');
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.classList.remove('bg-emerald-900');
-                }, 1500);
-            });
+                    const link = clone.querySelector('.js-rel-link');
+                    link.href = `/product/${p.id}/`;
+                    link.addEventListener('click', () => {
+                        window.location.hash = `#${p.id}`;
+                        window.location.reload();
+                    });
+
+                    clone.querySelector('.js-rel-title').textContent = p.title;
+                    clone.querySelector('.js-rel-category').textContent = p.category;
+                    clone.querySelector('.js-rel-price').textContent = `${p.price.toFixed(2)} ZAR`;
+                    clone.querySelector('.js-rel-img').src = p.gallery[0];
+                    clone.querySelector('.js-rel-img').alt = p.title;
+
+                    grid.appendChild(clone);
+                });
+            }
+
+            initSizeSelector() {
+                const buttons = document.querySelectorAll('.size-btn');
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        buttons.forEach(b => b.classList.remove('size-active', 'bg-archive-ink', 'text-archive-paper'));
+                        buttons.forEach(b => b.classList.add('border', 'specimen-border'));
+                        e.target.classList.add('size-active');
+                        this.selectedSize = e.target.getAttribute('data-size');
+                    });
+                });
+            }
+
+            initAddToCart() {
+                const btn = document.getElementById('add-to-cart-btn');
+                btn.addEventListener('click', () => {
+                    const cart = JSON.parse(localStorage.getItem('specimen_cart')) || [];
+                    const p = this.currentProduct;
+
+                    const existingIndex = cart.findIndex(item => item.id === p.id && item.size === this.selectedSize);
+                    if (existingIndex > -1) {
+                        cart[existingIndex].qty += 1;
+                    } else {
+                        cart.push({
+                            id: p.id,
+                            title: p.title,
+                            price: p.price,
+                            size: this.selectedSize,
+                            img: p.gallery[0],
+                            qty: 1
+                        });
+                    }
+
+                    localStorage.setItem('specimen_cart', JSON.stringify(cart));
+                    this.updateCartCount();
+
+                    // Visual feedback
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Added To Cart';
+                    btn.classList.add('bg-emerald-900');
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove('bg-emerald-900');
+                    }, 1500);
+                });
+            }
+
+            initMobileMenu() {
+                const btn = document.getElementById('menu-toggle');
+                const menu = document.getElementById('mobile-menu');
+                let isOpen = false;
+
+                btn.addEventListener('click', () => {
+                    isOpen = !isOpen;
+                    if (isOpen) {
+                        menu.classList.remove('menu-closed');
+                        menu.classList.add('menu-open');
+                        btn.textContent = '[ CLOSE ]';
+                    } else {
+                        menu.classList.remove('menu-open');
+                        menu.classList.add('menu-closed');
+                        btn.textContent = '[ MENU ]';
+                    }
+                });
+            }
+
+            updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem('specimen_cart')) || [];
+                const count = cart.reduce((acc, item) => acc + item.qty, 0);
+                document.querySelectorAll('.js-cart-count').forEach(el => el.textContent = count);
+            }
+
+            initReviewForm() {
+                const form = document.getElementById('review-form');
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Review transmission received and logged into the archive queue.');
+                    form.reset();
+                });
+            }
         }
-
-        initMobileMenu() {
-            const btn = document.getElementById('menu-toggle');
-            const menu = document.getElementById('mobile-menu');
-            let isOpen = false;
-
-            btn.addEventListener('click', () => {
-                isOpen = !isOpen;
-                if (isOpen) {
-                    menu.classList.remove('menu-closed');
-                    menu.classList.add('menu-open');
-                    btn.textContent = '[ CLOSE ]';
-                } else {
-                    menu.classList.remove('menu-open');
-                    menu.classList.add('menu-closed');
-                    btn.textContent = '[ MENU ]';
-                }
-            });
-        }
-
-        updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('specimen_cart')) || [];
-            const count = cart.reduce((acc, item) => acc + item.qty, 0);
-            document.querySelectorAll('.js-cart-count').forEach(el => el.textContent = count);
-        }
-
-        initReviewForm() {
-            const form = document.getElementById('review-form');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Review transmission received and logged into the archive queue.');
-                form.reset();
-            });
-        }
-    }
 
     document.addEventListener('DOMContentLoaded', () => {
         window.ProductApp = new ProductController();

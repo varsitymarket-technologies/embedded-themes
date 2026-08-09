@@ -3,7 +3,7 @@
 <!-- MOBILE RESPONSIVE NAV -->
 <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 md:px-10 py-6 flex justify-between items-center text-archive-paper">
   <a href="/" class="font-display font-black text-2xl tracking-tighter z-50 relative">
-    <img src="/assets/logo.png" style="width:100%; max-width: 6rem; filter: invert(1);">
+    <img src="https://themes.varsitymarket.co.za/collection/voide/assets/logo.png" style="width:100%; max-width: 6rem; filter: invert(1);">
     <h2 class="font-display font-black text-3xl leading-none" style="text-align:center;">VOIDE</h2>
 
   </a>
@@ -18,11 +18,11 @@
 
 
   <div style="display:flex; ">
-    <img onclick="window.location.href=`/cart/`" style="width: 2.5rem; display: block; opacity: 1; filter: invert(1);" src="/assets/cart.png">
+    <img onclick="window.location.href=`/cart/`" style="width: 2.5rem; display: block; opacity: 1; filter: invert(1);" src="https://themes.varsitymarket.co.za/collection/voide/assets/cart.png">
 
     <!-- Mobile Toggle Button -->
     <button id="menu-toggle" class="md:hidden z-50 relative text-[10px] uppercase tracking-[0.4em] font-bold focus:outline-none">
-      <img style="padding-left:1rem; width: 3rem; display: block; opacity: 1; filter: invert(1);" src="/assets/menu.png">
+      <img style="padding-left:1rem; width: 3rem; display: block; opacity: 1; filter: invert(1);" src="https://themes.varsitymarket.co.za/collection/voide/assets/menu.png">
     </button>
   </div>
 </nav>
