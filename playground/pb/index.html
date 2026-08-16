@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OBSIDIAN — Gear for ghosts in the machine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:   '#050507',
+          panel: '#0c0c14',
+          line:  '#1d1d29',
+          fog:   '#7d7d92',
+          bone:  '#e9e9f2',
+          alert: '#ff2e63',
+          signal:'#00fff2',
+          toxic: '#d4ff00'
+        },
+        fontFamily: {
+          display: ['"Chakra Petch"', 'sans-serif'],
+          body:    ['"IBM Plex Sans"', 'sans-serif'],
+          mono:    ['"JetBrains Mono"', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background-color: #050507;
+    color: #e9e9f2;
+    overflow-x: hidden;
+  }
+
+  /* faint circuit-grid backdrop */
+  .grid-field {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(0,255,242,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,242,0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at 50% 20%, black 0%, transparent 75%);
+  }
+
+  /* scanlines + flicker, the signature atmosphere layer */
+  .scanlines {
+    position: fixed; inset: 0; z-index: 45; pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px,
+      transparent 1px, transparent 3px
+    );
+    animation: flicker 6s infinite steps(30);
+    opacity: 0.5;
+  }
+  @keyframes flicker {
+    0%,100% { opacity: 0.4; }
+    42% { opacity: 0.4; }
+    43% { opacity: 0.15; }
+    44% { opacity: 0.45; }
+    71% { opacity: 0.45; }
+    72% { opacity: 0.2; }
+    73% { opacity: 0.4; }
+  }
+
+  .glass { background: rgba(5,5,7,0.72); backdrop-filter: blur(14px); border-bottom: 1px solid #1d1d29; }
+
+  /* HUD corner brackets — the recurring structural device */
+  .hud { position: relative; }
+  .hud::before, .hud::after {
+    content: ''; position: absolute; width: 14px; height: 14px;
+    border-color: #00fff2; opacity: 0.55; transition: opacity .3s ease, width .3s ease, height .3s ease;
+  }
+  .hud::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+  .hud::after  { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+  .hud:hover::before, .hud:hover::after { width: 22px; height: 22px; opacity: 1; }
+
+  /* marquee ticker */
+  .ticker-track { display: inline-flex; white-space: nowrap; animation: ticker 32s linear infinite; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* glitch headline — spent boldness, used once */
+  .glitch { position: relative; display: inline-block; }
+  .glitch::before, .glitch::after {
+    content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: #050507; overflow: hidden;
+  }
+  .glitch::before { color: #ff2e63; left: 2px; text-shadow: -1px 0 #ff2e63; clip-path: inset(0 0 0 0); animation: glitchTop 4.5s infinite linear alternate-reverse; }
+  .glitch::after  { color: #00fff2; left: -2px; text-shadow: 1px 0 #00fff2; clip-path: inset(0 0 0 0); animation: glitchBot 4.5s infinite linear alternate-reverse; }
+  @keyframes glitchTop {
+    0%,100% { clip-path: inset(0 0 92% 0); } 20% { clip-path: inset(20% 0 62% 0); }
+    40% { clip-path: inset(65% 0 5% 0); } 60% { clip-path: inset(10% 0 80% 0); }
+    80% { clip-path: inset(48% 0 30% 0); }
+  }
+  @keyframes glitchBot {
+    0%,100% { clip-path: inset(88% 0 0 0); } 25% { clip-path: inset(10% 0 70% 0); }
+    50% { clip-path: inset(60% 0 15% 0); } 75% { clip-path: inset(30% 0 55% 0); }
+  }
+
+  .card-img {
+    background:
+      repeating-linear-gradient(135deg, rgba(0,255,242,0.06) 0px, rgba(0,255,242,0.06) 2px, transparent 2px, transparent 10px),
+      linear-gradient(160deg, #0c0c14, #050507);
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-thumb { background: #00fff2; }
+  ::-webkit-scrollbar-track { background: #050507; }
+
+  ::selection { background: #ff2e63; color: #050507; }
+
+  input:focus { outline: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scanlines, .ticker-track, .glitch::before, .glitch::after { animation: none !important; }
+  }
+</style>
+</head>
+
+<body class="font-body antialiased text-[15px] relative">
+
+  <div class="grid-field"></div>
+  <div class="scanlines"></div>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 w-full z-50 glass px-6 md:px-10 py-5 flex justify-between items-center">
+    <a href="#top" class="font-display font-bold text-lg uppercase tracking-[0.25em] text-bone">
+      OBSIDIAN<span class="text-signal"></span>
+    </a>
+    <div class="hidden md:flex items-center space-x-10 text-[11px] font-mono font-medium uppercase tracking-[0.2em] text-fog">
+      <a href="#catalog" class="hover:text-signal transition-colors">Catalog</a>
+      <a href="#dossier" class="hover:text-signal transition-colors">Dossier</a>
+      <a href="#manifesto" class="hover:text-signal transition-colors">Manifesto</a>
+    </div>
+    <div class="flex items-center space-x-6">
+      <span id="sysClock" class="hidden sm:block font-mono text-[10px] text-fog tracking-widest"> --:--:--</span>
+      <a href="#catalog" class="group flex items-center space-x-2 border border-line px-3 py-1.5 hover:border-signal transition-colors">
+        <span class="text-[9px] font-mono text-fog uppercase tracking-widest">Loadout</span>
+        <span class="text-[11px] font-mono font-bold text-signal js-cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-10 pt-24">
+    <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-signal mb-6 pl-1">Transmission_001 // Black Market Access</p>
+    <h1 class="glitch font-display font-bold uppercase leading-[0.9] text-[13vw] md:text-[8.5vw] tracking-tight text-bone" data-text="GEAR FOR GHOSTS">
+      GEAR FOR GHOSTS
+    </h1>
+    <h1 class="font-display font-bold uppercase leading-[0.9] text-[13vw] md:text-[8.5vw] tracking-tight text-fog/40">
+      IN THE MACHINE
+    </h1>
+    <p class="max-w-md mt-10 text-[13px] leading-relaxed text-fog font-light">
+      Unlicensed outerwear, salvaged optics and comms-grade accessories, fabricated below the corp radar in Sector 09. No warranty. No questions.
+    </p>
+    <div class="flex items-center gap-6 mt-12">
+      <a href="#catalog" class="bg-bone text-ink px-8 py-4 font-mono text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-signal transition-colors">
+        Enter Market
+      </a>
+      <a href="#manifesto" class="font-mono text-[11px] uppercase tracking-[0.3em] text-fog hover:text-bone transition-colors">
+        Read Manifesto
+      </a>
+    </div>
+  </header>
+
+  <!-- CATALOG -->
+  <section id="catalog" class="relative z-10 px-6 md:px-10 py-28 border-t border-line">
+    <div class="flex items-baseline justify-between mb-14">
+      <h2 class="font-display font-bold uppercase text-3xl md:text-5xl tracking-tight text-bone">Catalog</h2>
+      <span class="font-mono text-[10px] uppercase tracking-widest text-fog">06 Items // Unverified Sellers</span>
+    </div>
+
+    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16"></div>
+  </section>
+
+  <template id="tpl-card">
+    <div class="hud border border-line p-3 group">
+      <div class="aspect-[4/5] card-img flex items-center justify-center mb-5 relative overflow-hidden">
+        <span class="font-mono text-[9px] uppercase tracking-widest text-fog js-img"></span>
+        <div class="absolute top-2 left-2 font-mono text-[8px] text-signal/70 js-code"></div>
+      </div>
+      <div class="flex justify-between items-start mb-1">
+        <h3 class="font-display font-semibold uppercase text-sm text-bone js-title"></h3>
+        <span class="font-mono text-[11px] text-toxic js-price"></span>
+      </div>
+      <p class="font-mono text-[9px] uppercase tracking-widest text-fog mb-4 js-cat"></p>
+      <button class="js-add w-full border border-line py-2.5 font-mono text-[9px] font-bold uppercase tracking-[0.25em] text-fog hover:text-ink hover:bg-signal hover:border-signal transition-colors">
+        Add To Loadout
+      </button>
+    </div>
+  </template>
+
+  <!-- DOSSIER -->
+  <section id="dossier" class="relative z-10 px-6 md:px-10 py-28 border-t border-line grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="hud aspect-[4/5] card-img flex items-center justify-center">
+      <span class="font-mono text-[10px] uppercase tracking-widest text-fog">PT 01 // FIELD UNIT</span>
+    </div>
+    <div>
+      <p class="font-mono text-[9px] uppercase tracking-[0.4em] text-signal mb-4">Featured_Dossier</p>
+      <h2 class="font-display font-bold uppercase text-4xl md:text-6xl tracking-tight text-bone mb-6 leading-none">Photon<br>Trench</h2>
+      <p class="text-[13px] leading-relaxed text-fog font-light mb-8 max-w-md">
+        Recovered corp-grade nylon shell, re-stitched by hand. Woven fiber-optic trim throws light in low visibility — good for getting seen, or for getting the drop on someone. Waterproof to district-standard, which is to say: mostly.
+      </p>
+      <div class="flex items-center gap-8 mb-8 font-mono text-[10px] uppercase tracking-widest text-fog">
+        <span>Weight: <span class="text-bone">1.4kg</span></span>
+        <span>Origin: <span class="text-bone">Sector 09</span></span>
+        <span>Stock: <span class="text-toxic">Low</span></span>
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="font-mono text-2xl text-toxic">R580</span>
+        <button class="js-add-featured bg-bone text-ink px-7 py-3.5 font-mono text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-alert transition-colors">
+          Add To Loadout
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section id="manifesto" class="relative z-10 px-6 md:px-10 py-28 border-t border-line">
+    <div class="max-w-2xl">
+      <p class="font-mono text-[9px] uppercase tracking-[0.4em] text-signal mb-6">Manifesto // Decrypted</p>
+      <div class="font-mono text-[13px] leading-loose text-fog space-y-4">
+        <p><span class="text-signal">&gt;</span> Bring intelligence into your home..</p>
+        <p><span class="text-signal">&gt;</span> We sell what's left after the seams are cut out same materials, no leash.</p>
+        <p><span class="text-signal">&gt;</span> Every piece is salvaged, re-cut, or built off-grid in Sector 09.</p>
+        <p><span class="text-signal">&gt;</span> Nothing here reports home. That's the whole product.</p>
+        <p class="text-bone">&gt; OBSIDIAN, unverified</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="relative z-10 px-6 md:px-10 py-20 border-t border-line">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-10">
+      <div>
+        <p class="font-display font-bold uppercase tracking-widest text-sm text-bone mb-3">OBSIDIAN</p>
+        <p class="font-mono text-[10px] text-fog max-w-xs leading-relaxed">Traverse Your Potential. The Age Of Machine is Among Us</p>
+      </div>
+      <div class="flex flex-col space-y-2 font-mono text-[10px] uppercase tracking-widest text-fog">
+        <a href="#" class="hover:text-signal transition-colors">Access_Terms</a>
+        <a href="#" class="hover:text-signal transition-colors">Dead_Drop_Locations</a>
+        <a href="#" class="hover:text-signal transition-colors">Encrypted_Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const CURRENCY = 'R';
+    const PRODUCTS = [
+      { id: 1, title: 'Photon Trench', cat: 'Outerwear', code: 'PT_01', price: 580 },
+      { id: 2, title: 'Static Mask MK.II', cat: 'Headgear', code: 'SM_02', price: 140 },
+      { id: 3, title: 'Datajack Gloves', cat: 'Accessory', code: 'DG_03', price: 950 },
+      { id: 4, title: 'Ghostline Cargo', cat: 'Bottom', code: 'GC_04', price: 320 },
+      { id: 5, title: 'Signal Jammer Vest', cat: 'Utility', code: 'SJ_05', price: 410 },
+      { id: 6, title: 'Neon Tag Hoodie', cat: 'Base', code: 'NT_06', price: 190 }
+    ];
+
+    let cartCount = 0;
+    function bumpCart() {
+      cartCount += 1;
+      document.querySelectorAll('.js-cart-count').forEach(el => el.textContent = cartCount);
+    }
+
+    const grid = document.getElementById('grid');
+    const tpl = document.getElementById('tpl-card');
+    PRODUCTS.forEach(p => {
+      const node = tpl.content.cloneNode(true);
+      node.querySelector('.js-title').textContent = p.title;
+      node.querySelector('.js-cat').textContent = p.cat;
+      node.querySelector('.js-price').textContent = `${CURRENCY}${p.price.toLocaleString()}`;
+      node.querySelector('.js-img').textContent = p.code;
+      node.querySelector('.js-code').textContent = `#${String(p.id).padStart(3,'0')}`;
+      node.querySelector('.js-add').addEventListener('click', bumpCart);
+      grid.appendChild(node);
+    });
+
+    document.querySelector('.js-add-featured').addEventListener('click', bumpCart);
+
+    function tickClock() {
+      const el = document.getElementById('sysClock');
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2,'0');
+      const m = String(now.getMinutes()).padStart(2,'0');
+      const s = String(now.getSeconds()).padStart(2,'0');
+      el.textContent = `SYS_TIME ${h}:${m}:${s}`;
+    }
+    tickClock();
+    setInterval(tickClock, 1000);
+  </script>
+
+</body>
+</html>
