@@ -1,0 +1,209 @@
+<main class="policy-section">
+    <div class="container">
+        
+        <!-- Page Header -->
+        <div class="policy-header" style="max-width: 760px;">
+            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="#" style="color: var(--text-subtle); text-decoration: none;">Index</a> 
+                <i data-lucide="chevron-right" size="12"></i> 
+                <span style="color: var(--text-main);">Cookie Policy</span>
+            </div>
+            <h1 class="policy-title" style="font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: 0.75rem;">
+                Cookie & Telemetry Policy
+            </h1>
+            <p class="policy-meta">
+                Effective Date: August 2026 | Protocol Version 2.4 | POPIA & GDPR Compliant
+            </p>
+        </div>
+
+        <div class="policy-grid">
+            
+            <!-- Sidebar / Technical Summary -->
+            <aside class="card-machined policy-sidebar" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <!-- Telemetry Status Card -->
+                <div style="background: var(--bg-card-subtle); border: 1px solid var(--border-medium); padding: 1rem; border-radius: var(--radius-sm);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; box-shadow: 0 0 8px #22c55e;"></span>
+                        <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main);">
+                            Client Session Active
+                        </span>
+                    </div>
+                    <div style="font-size: 0.8125rem; font-weight: 700; color: var(--text-main);">
+                        Essential Cookies: Enforced
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-subtle); margin-top: 0.25rem;">
+                        Non-essential telemetry is subject to your explicit browser preferences.
+                    </div>
+                </div>
+
+                <!-- Cookie Classification Checklist -->
+                <div>
+                    <div class="sidebar-title" style="margin-bottom: 0.75rem;">Active Storage Types</div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        
+                        <div style="padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); background: var(--bg-card);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                                <span style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); text-transform: uppercase;">Strictly Essential</span>
+                                <span style="font-size: 0.6875rem; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.1); padding: 0.125rem 0.375rem; border-radius: 2px;">REQUIRED</span>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-subtle);">Session IDs, Cart State, CSRF Protection tokens.</div>
+                        </div>
+
+                        <div style="padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); background: var(--bg-card);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                                <span style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); text-transform: uppercase;">Performance & Speed</span>
+                                <span style="font-size: 0.6875rem; font-weight: 700; color: var(--text-subtle); background: var(--bg-card-subtle); padding: 0.125rem 0.375rem; border-radius: 2px;">OPTIONAL</span>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-subtle);">CDN Edge Caching, Load Balancing telemetry.</div>
+                        </div>
+
+                        <div style="padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); background: var(--bg-card);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                                <span style="font-size: 0.75rem; font-weight: 800; color: var(--text-main); text-transform: uppercase;">Analytics & Queue</span>
+                                <span style="font-size: 0.6875rem; font-weight: 700; color: var(--text-subtle); background: var(--bg-card-subtle); padding: 0.125rem 0.375rem; border-radius: 2px;">OPTIONAL</span>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-subtle);">Drop queue metrics & anonymized engagement traffic.</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Navigation Anchors -->
+                <div>
+                    <div class="sidebar-title" style="margin-bottom: 0.75rem;">Document Jump Links</div>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.8125rem;">
+                        <li><a href="#overview" style="color: var(--text-subtle); text-decoration: none;">1. Technical Overview</a></li>
+                        <li><a href="#types" style="color: var(--text-subtle); text-decoration: none;">2. Implemented Storage Categories</a></li>
+                        <li><a href="#third-party" style="color: var(--text-subtle); text-decoration: none;">3. Third-Party Edge Services</a></li>
+                        <li><a href="#control" style="color: var(--text-subtle); text-decoration: none;">4. Client-Side Control & Opt-Out</a></li>
+                    </ul>
+                </div>
+
+            </aside>
+
+            <!-- Main Document Content -->
+            <div class="policy-content" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <!-- Section 1 -->
+                <div id="overview" class="card-machined policy-card" style="padding: 2rem;">
+                    <h2 class="section-heading" style="margin-bottom: 1rem; font-size: 1.25rem;">
+                        <i data-lucide="database" size="20"></i> 1. Technical Overview
+                    </h2>
+                    <p class="policy-text">
+                        DROPSTUDIO utilizes cookies, local storage key-value pairs, and local browser session tokens to deliver high-performance storefront drops, maintain checkout state, and enforce strict security protocols against automated scraping bots and queue manipulation.
+                    </p>
+                    <p class="policy-text" style="margin-bottom: 0;">
+                        Under the Protection of Personal Information Act (POPIA) and General Data Protection Regulation (GDPR), non-essential telemetry requires transparent disclosure and client control. This policy outlines every cookie class executing on <code style="font-family: monospace; color: var(--text-main);">dropstudio.co.za</code>.
+                    </p>
+                </div>
+
+                <!-- Section 2: Detailed Table -->
+                <div id="types" class="card-machined policy-card" style="padding: 2rem;">
+                    <h2 class="section-heading" style="margin-bottom: 1rem; font-size: 1.25rem;">
+                        <i data-lucide="layers" size="20"></i> 2. Implemented Storage Categories
+                    </h2>
+                    <p class="policy-text" style="margin-bottom: 1.5rem;">
+                        Below is the technical specification of all telemetry vectors deployed across our edge architecture:
+                    </p>
+
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.8125rem; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border-medium); color: var(--text-main);">
+                                    <th style="padding: 0.75rem; text-transform: uppercase; font-size: 0.75rem;">Identifier</th>
+                                    <th style="padding: 0.75rem; text-transform: uppercase; font-size: 0.75rem;">Category</th>
+                                    <th style="padding: 0.75rem; text-transform: uppercase; font-size: 0.75rem;">Purpose</th>
+                                    <th style="padding: 0.75rem; text-transform: uppercase; font-size: 0.75rem;">Lifespan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-light);">
+                                    <td style="padding: 0.75rem; font-family: monospace; font-weight: 700; color: var(--text-main);">ds_sess_id</td>
+                                    <td style="padding: 0.75rem; color: #22c55e; font-weight: 700;">Essential</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">Maintains encrypted PHP user session & shopping bag state.</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">Session</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-light);">
+                                    <td style="padding: 0.75rem; font-family: monospace; font-weight: 700; color: var(--text-main);">__cf_bm</td>
+                                    <td style="padding: 0.75rem; color: #22c55e; font-weight: 700;">Essential</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">Cloudflare bot management & automated drop queue defense.</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">30 Mins</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-light);">
+                                    <td style="padding: 0.75rem; font-family: monospace; font-weight: 700; color: var(--text-main);">ds_csrf_token</td>
+                                    <td style="padding: 0.75rem; color: #22c55e; font-weight: 700;">Essential</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">Prevents Cross-Site Request Forgery on form submissions.</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">Session</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-light);">
+                                    <td style="padding: 0.75rem; font-family: monospace; font-weight: 700; color: var(--text-main);">_ga / _gid</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle); font-weight: 700;">Analytics</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">Anonymized traffic metrics to evaluate server load during drops.</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">2 Years</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.75rem; font-family: monospace; font-weight: 700; color: var(--text-main);">ds_vip_token</td>
+                                    <td style="padding: 0.75rem; color: var(--acid); font-weight: 700;">Preferences</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">Stores verified early access password bypass credentials.</td>
+                                    <td style="padding: 0.75rem; color: var(--text-subtle);">30 Days</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div id="third-party" class="card-machined policy-card" style="padding: 2rem;">
+                    <h2 class="section-heading" style="margin-bottom: 1rem; font-size: 1.25rem;">
+                        <i data-lucide="shield-alert" size="20"></i> 3. Third-Party Payment & Security Edge Services
+                    </h2>
+                    <p class="policy-text">
+                        During checkout, third-party payment infrastructure gateways (including Payfast, Ozow, Stitch, or Yoco) execute their own essential cookies to ensure transactional encryption and fraud mitigation.
+                    </p>
+                    <p class="policy-text" style="margin-bottom: 0;">
+                        These cookies are governed directly by the respective financial vendor’s security protocols and are classified as essential for completing financial transactions on DROPSTUDIO.
+                    </p>
+                </div>
+
+                <!-- Section 4 -->
+                <div id="control" class="card-machined policy-card" style="padding: 2rem;">
+                    <h2 class="section-heading" style="margin-bottom: 1rem; font-size: 1.25rem;">
+                        <i data-lucide="settings-2" size="20"></i> 4. Client-Side Control & Browser Opt-Out
+                    </h2>
+                    <p class="policy-text">
+                        You hold total sovereignty over local storage and cookies on your client device. You can clear, block, or inspect cookies at any time directly through your browser security preferences:
+                    </p>
+
+                    <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem; color: var(--text-subtle); font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><strong style="color: var(--text-main);">Chrome / Chromium:</strong> Settings → Privacy and security → Cookies and other site data</li>
+                        <li><strong style="color: var(--text-main);">Safari:</strong> Preferences → Privacy → Manage Website Data</li>
+                        <li><strong style="color: var(--text-main);">Firefox:</strong> Options → Privacy & Security → Cookies and Site Data</li>
+                    </ul>
+
+                    <div style="background: var(--bg-card-subtle); border-left: 3px solid var(--acid); padding: 1rem; border-radius: var(--radius-sm);">
+                        <div style="font-size: 0.8125rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">Notice Regarding Essential Blocking:</div>
+                        <div style="font-size: 0.75rem; color: var(--text-subtle);">
+                            Disabling strictly essential cookies will prevent shopping cart persistence and block access to password-protected drop launches.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Footer -->
+                <div class="card-machined policy-card" style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--bg-card-subtle);">
+                    <div>
+                        <div style="font-size: 0.875rem; font-weight: 700; color: var(--text-main);">Questions regarding telemetry handling?</div>
+                        <div style="font-size: 0.75rem; color: var(--text-subtle);">Contact our legal and data compliance representative.</div>
+                    </div>
+                    <a href="mailto:privacy@dropstudio.co.za" class="btn btn-acid" style="padding: 0.625rem 1.25rem; font-size: 0.75rem;">
+                        <i data-lucide="mail" size="14"></i> Contact Privacy Officer
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
