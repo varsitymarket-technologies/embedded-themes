@@ -1,0 +1,40 @@
+<!-- 
+    #   SCRIPTS_CHECK : pvt.404.page
+-->
+<main class="policy-section">
+    <div class="container" style="max-width: 720px;">
+        
+        <!-- 404 Error Card -->
+        <div class="card-machined policy-card" style="text-align: center; padding: 4rem 2rem;">
+            
+            <!-- Icon Indicator -->
+            <div style="width: 4rem; height: 4rem; background: var(--text-main); color: var(--acid); border-radius: var(--radius-sm); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                <i data-lucide="alert-triangle" size="32"></i>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="policy-title" style="font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1; margin-bottom: 0.5rem;">
+                404
+            </h1>
+            
+            <div style="font-size: 1.125rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.02em;">
+                Page Not Found
+            </div>
+
+            <p class="policy-text" style="max-width: 440px; margin: 0 auto 2rem auto;">
+                The page you are looking for has been moved, unlisted, or sold out entirely.
+            </p>
+
+            
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="?page=home" class="btn btn-outline">
+                    Return to Home
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</main>    
