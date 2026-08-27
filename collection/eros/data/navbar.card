@@ -1,0 +1,30 @@
+<!-- #/engine/navbar/encode/:BEGIN -->
+<header class="sticky top-0 bg-[#030303]/90 backdrop-blur-md z-40 border-b border-[#1A1A1A]">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between relative">
+        <nav class="hidden md:flex items-center space-x-8 text-[11px] font-mono tracking-widest text-[#666]">
+            <a href="<!-- #!/engine/node/ page('home') -->" class="hover:text-white transition-colors">HOME</a>
+            <a href="<!-- #!/engine/node/ page('shop') -->" class="hover:text-white transition-colors">SHOP</a>
+            <a href="<!-- #!/engine/node/ page('collection') -->" class="hover:text-white transition-colors">COLLECTION</a>
+            <a href="<!-- #!/engine/node/ page('about') -->" class="hover:text-white transition-colors">ABOUT US</a>
+            <a href="<!-- #!/engine/node/ page('contact') -->" class="hover:text-white transition-colors">CONTACT US</a>
+        </nav>
+
+        <a href="<!-- #!/engine/node/ page('home') -->" class="font-bold text-2xl tracking-[0.2em] text-white absolute left-1/2 transform -translate-x-1/2" style="align-items: center; display: flex; flex-direction: column;">
+            <img src="https://framerusercontent.com/images/S8eWDEbw3ERIv1ILwZqCUuBMc.png" style="max-width:1.5rem;" >
+        </a>
+
+        <div class="flex items-center space-x-4 md:space-x-6">
+            <button class="md:hidden text-[#666] hover:text-white transition-colors" onclick="app.ui.toggleMobileNav()" aria-label="Menu">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            <button class="text-[#666] hover:text-white transition-colors" onclick="app.ui.toggleSearchOverlay()" aria-label="Query">
+                <i data-lucide="search" class="w-4 h-4"></i>
+            </button>
+            <button class="text-[#666] hover:text-white transition-colors flex items-center space-x-2" onclick="app.ui.toggleCartDrawer()" aria-label="Cart">
+                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                <span id="global-cart-count" class="text-[10px] font-mono text-white opacity-0 transition-opacity">0</span>
+            </button>
+        </div>
+    </div>
+</header>
+<!-- #/engine/navbar/encode/:END; -->

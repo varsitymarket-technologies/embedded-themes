@@ -1,0 +1,28 @@
+<section class="py-16 sm:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303]">
+      <div class="p-8 sm:p-12 border-b border-[#1A1A1A] bg-[#0A0A0A]">
+        <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-4 block">[ SUPPORT / FAQ ]</span>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter uppercase">FREQUENTLY ASKED QUESTIONS</h1>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#1A1A1A]">
+        <div class="bg-[#030303] p-8">
+          <h2 class="text-lg font-semibold tracking-wide mb-3 text-white">How long will it take to receive my order?</h2>
+          <p class="text-[#888] lowercase leading-relaxed">standard domestic shipping takes 3-5 business days. express shipping takes 1-2 business days.</p>
+        </div>
+        <div class="bg-[#030303] p-8">
+          <h2 class="text-lg font-semibold tracking-wide mb-3 text-white">Do you ship internationally?</h2>
+          <p class="text-[#888] lowercase leading-relaxed">yes, we ship to most worldwide destinations. rates are calculated at checkout.</p>
+        </div>
+        <div class="bg-[#030303] p-8">
+          <h2 class="text-lg font-semibold tracking-wide mb-3 text-white">What is your return policy?</h2>
+          <p class="text-[#888] lowercase leading-relaxed">we accept returns of unused items in original condition and packaging within 30 days of delivery.</p>
+        </div>
+        <div class="bg-[#030303] p-8">
+          <h2 class="text-lg font-semibold tracking-wide mb-3 text-white">How can I track my package?</h2>
+          <p class="text-[#888] lowercase leading-relaxed">once your order ships, we send a shipping confirmation email with tracking details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

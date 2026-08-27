@@ -1,0 +1,251 @@
+<section id="view-home" class="view-section active bg-[#050505] text-white font-sans">
+
+  <!-- ================= HERO SECTION ================= -->
+  <div class="border-b border-[#1F1F1F]">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[80vh]">
+        
+        <!-- Hero Copy -->
+        <div class="lg:col-span-7 flex flex-col justify-center py-16 sm:py-20 lg:py-28 lg:pr-16 border-b lg:border-b-0 lg:border-r border-[#1F1F1F]">
+          <span class="text-xs font-semibold tracking-widest text-[#A0A0A0] uppercase mb-4">
+           Welcome To
+          </span>
+          <h1 class="text-5xl sm:text-7xl xl:text-8xl font-black tracking-tight leading-none mb-6 text-white uppercase">
+           EROS
+          </h1>
+          <p class="text-sm sm:text-base text-[#A0A0A0] max-w-xl leading-relaxed mb-8">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nulla sem, pulvinar id ornare ac, mattis non nibh. Morbi libero dolor, venenatis sed auctor a, molestie ac diam. Nulla facilisi. 
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button onclick="/shop/" class="text-xs tracking-widest font-bold px-8 py-4 bg-white text-black hover:bg-neutral-200 transition-colors uppercase">
+              SHOP
+            </button>
+            <button onclick="/about/" class="text-xs tracking-widest font-bold px-8 py-4 border border-[#333] text-white hover:border-white transition-colors uppercase">
+              OUR STORY
+            </button>
+          </div>
+        </div>
+        
+        <!-- Hero Visual Banner -->
+        <div class="lg:col-span-5 relative bg-[#111] overflow-hidden min-h-[45vh]">
+          <img src="/assets/austin.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="New Apparel Collection">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+          
+          <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 border-t border-[#1F1F1F] bg-black/40 backdrop-blur-md flex justify-between items-center text-xs tracking-wider uppercase">
+            <div>
+              <span class="block text-[#888]">COLLECTION</span>
+              <span class="font-bold text-white">FW26 DROP</span>
+            </div>
+            <div>
+              <span class="block text-[#888]">DELIVERY</span>
+              <span class="font-bold text-white">WORLDWIDE</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FEATURED PRODUCTS GRID ================= -->
+  <div class="border-b border-[#1F1F1F] py-16 sm:py-24">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 pb-6 border-b border-[#1F1F1F] gap-4">
+        <div>
+          <span class="text-xs font-semibold tracking-widest text-[#888] uppercase block mb-1">CURATED SELECTION</span>
+          <h2 class="text-3xl sm:text-4xl font-black tracking-tight uppercase">TRENDING NOW</h2>
+        </div>
+        <button onclick="app.router.navigate('shop')" class="text-xs font-bold text-[#AAA] hover:text-white transition-colors tracking-widest uppercase self-start sm:self-auto">
+          VIEW ALL PRODUCTS &rarr;
+        </button>
+      </div>
+
+    <div id="shop-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1A1A1A]">
+      <!-- #!/engine/node/
+        app()->create_shop_ui(api()->async_products());
+      -->
+    </div>
+    </div>
+  </div>
+
+  <!-- ================= SHOP THE LOOK / EDITORIAL BANNER ================= -->
+  <div class="border-b border-[#1F1F1F] bg-[#0A0A0A] py-16 sm:py-24">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-7 relative aspect-[16/9] lg:aspect-[4/3] overflow-hidden border border-[#1F1F1F]">
+          <img src="/assets/austin1.jpeg" class="w-full h-full object-cover" alt="Editorial Lookbook">
+          <div class="absolute inset-0 bg-black/30"></div>
+          <div class="absolute bottom-6 left-6 bg-black/70 backdrop-blur-md px-4 py-2 border border-[#333] text-xs font-semibold tracking-wider uppercase">
+            FALL / WINTER EDITORIAL
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-6 lg:pl-8">
+          <span class="text-xs font-semibold tracking-widest text-[#888] uppercase block">EDITORIAL SPOTLIGHT</span>
+          <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase leading-tight">COMPLETE THE OUTFIT</h2>
+          <p class="text-xs sm:text-sm text-[#888] leading-relaxed">
+            Curated layerings designed to seamlessly transition between urban street style and cold-weather functionality. 
+          </p>
+          <div class="border-t border-b border-[#1F1F1F] py-4 space-y-3">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-white font-bold uppercase">1. HEAVYWEIGHT OVERSHOOT HOODIE</span>
+              <span class="text-[#888]">$120</span>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-white font-bold uppercase">2. RELAXED CARGO PANTS</span>
+              <span class="text-[#888]">$140</span>
+            </div>
+          </div>
+          <button onclick="app.router.navigate('shop')" class="w-full py-4 bg-white text-black font-bold text-xs tracking-widest uppercase hover:bg-neutral-200 transition-colors">
+            SHOP THIS LOOK — $260
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= CUSTOMER REVIEWS / SOCIAL PROOF ================= -->
+  <div class="border-b border-[#1F1F1F] bg-[#0A0A0A] py-16 sm:py-24">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+      
+      <div class="mb-12 text-center">
+        <span class="text-xs font-semibold tracking-widest text-[#888] uppercase block mb-1">COMMUNITY REVIEWS</span>
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight uppercase">WHAT PEOPLE ARE SAYING</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="border border-[#1F1F1F] bg-[#0D0D0D] p-6 space-y-4">
+          <div class="flex text-white text-xs space-x-1">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="text-xs text-[#AAA] leading-relaxed">
+            "The hoodie quality is insane. Super heavy cotton and fits perfectly oversized. Will definitely be buying again."
+          </p>
+          <div class="pt-4 border-t border-[#1F1F1F] text-[11px] text-[#666] flex justify-between">
+            <span class="font-bold text-[#888]">Alex K.</span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="border border-[#1F1F1F] bg-[#0D0D0D] p-6 space-y-4">
+          <div class="flex text-white text-xs space-x-1">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="text-xs text-[#AAA] leading-relaxed">
+            "Shipped to standard address within 3 days. The cargo pants fit exactly as described. Material feels indestructible."
+          </p>
+          <div class="pt-4 border-t border-[#1F1F1F] text-[11px] text-[#666] flex justify-between">
+            <span class="font-bold text-[#888]">Marcus V.</span>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="border border-[#1F1F1F] bg-[#0D0D0D] p-6 space-y-4">
+          <div class="flex text-white text-xs space-x-1">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <p class="text-xs text-[#AAA] leading-relaxed">
+            "Hands down the best oversized t-shirt I own. Holds structure even after multiple washes."
+          </p>
+          <div class="pt-4 border-t border-[#1F1F1F] text-[11px] text-[#666] flex justify-between">
+            <span class="font-bold text-[#888]">Elena R.</span>
+            <span></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= FREQUENTLY ASKED QUESTIONS ================= -->
+  <div class="border-b border-[#1F1F1F] py-16 sm:py-24">
+    <div class="max-w-[1000px] mx-auto px-4 sm:px-6">
+      
+      <div class="mb-12">
+        <span class="text-xs font-semibold tracking-widest text-[#888] uppercase block mb-1">HELP &amp; INFO</span>
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight uppercase">FREQUENTLY ASKED QUESTIONS</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="group border border-[#1F1F1F] bg-[#0D0D0D] p-6 [&_summary::-webkit-details-marker]:none">
+          <summary class="flex items-center justify-between cursor-pointer text-sm font-bold uppercase tracking-wider text-white">
+            <span>HOW DO THE SIZES FIT?</span>
+            <span class="transition group-open:rotate-180 text-[#888]">&darr;</span>
+          </summary>
+          <p class="mt-4 text-xs text-[#888] leading-relaxed border-t border-[#1F1F1F] pt-4">
+            Most of our pieces feature a boxy, relaxed oversized fit. If you prefer a regular tailored fit, we recommend ordering one size down from your usual size. Check our size guide for detailed measurements.
+          </p>
+        </details>
+
+        <details class="group border border-[#1F1F1F] bg-[#0D0D0D] p-6 [&_summary::-webkit-details-marker]:none">
+          <summary class="flex items-center justify-between cursor-pointer text-sm font-bold uppercase tracking-wider text-white">
+            <span>WHAT IS YOUR SHIPPING POLICY?</span>
+            <span class="transition group-open:rotate-180 text-[#888]">&darr;</span>
+          </summary>
+          <p class="mt-4 text-xs text-[#888] leading-relaxed border-t border-[#1F1F1F] pt-4">
+            We offer free worldwide express shipping on all orders over $150. Domestic orders arrive within 2-4 business days, while international orders typically take 5-7 business days.
+          </p>
+        </details>
+
+        <details class="group border border-[#1F1F1F] bg-[#0D0D0D] p-6 [&_summary::-webkit-details-marker]:none">
+          <summary class="flex items-center justify-between cursor-pointer text-sm font-bold uppercase tracking-wider text-white">
+            <span>HOW DO I PROCESS A RETURN OR EXCHANGE?</span>
+            <span class="transition group-open:rotate-180 text-[#888]">&darr;</span>
+          </summary>
+          <p class="mt-4 text-xs text-[#888] leading-relaxed border-t border-[#1F1F1F] pt-4">
+            Returns are accepted within 30 days of delivery. Items must be unworn, unwashed, and in their original packaging. Visit our returns portal with your order number to initiate a return label.
+          </p>
+        </details>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= VALUE PROPOSITIONS ================= -->
+  <div class="border-b border-[#1F1F1F] py-16 bg-[#080808]">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+        <div>
+          <h4 class="font-bold text-sm tracking-wider uppercase mb-2">FREE WORLDWIDE SHIPPING</h4>
+          <p class="text-xs text-[#888] leading-relaxed">Available on all standard orders over $150 with full tracking provided.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm tracking-wider uppercase mb-2">EASY 30-DAY RETURNS</h4>
+          <p class="text-xs text-[#888] leading-relaxed">Hassle-free exchanges and returns within 30 days of purchase.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm tracking-wider uppercase mb-2">PREMIUM QUALITY GUARANTEE</h4>
+          <p class="text-xs text-[#888] leading-relaxed">Crafted with high-grade fabrics built for style, comfort, and longevity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= NEWSLETTER SECTION ================= -->
+  <div class="py-16 sm:py-24 bg-[#0A0A0A] border-b border-[#1F1F1F]">
+    <div class="max-w-[700px] mx-auto px-4 text-center">
+      <span class="text-xs font-semibold tracking-widest text-[#888] uppercase block mb-2">STAY CONNECTED</span>
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight uppercase text-white mb-4">JOIN THE CLUB</h2>
+      <p class="text-xs sm:text-sm text-[#888] max-w-md mx-auto mb-8 leading-relaxed">
+        Sign up for exclusive early access to product launches, special sales, and member discounts.
+      </p>
+      
+      <form onsubmit="event.preventDefault();" class="flex flex-col sm:flex-row gap-0 max-w-md mx-auto border border-[#222]">
+        <input type="email" placeholder="Enter your email address..." class="bg-[#111] text-white text-xs px-4 py-4 focus:outline-none w-full border-b sm:border-b-0 sm:border-r border-[#222] placeholder-[#555]">
+        <button type="submit" class="text-xs tracking-widest bg-white text-black font-bold px-8 py-4 hover:bg-neutral-200 transition-colors uppercase whitespace-nowrap">
+          JOIN
+        </button>
+      </form>
+    </div>
+  </div>
+
+</section>

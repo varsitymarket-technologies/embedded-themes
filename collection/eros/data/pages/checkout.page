@@ -1,0 +1,127 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$_SESSION['eros'] = $_SESSION['eros'] ?? [
+    'customer' => ['name' => '', 'email' => '', 'phone' => '', 'address' => '', 'city' => '', 'state' => '', 'zip' => ''],
+    'cart' => $_SESSION['eros']['cart'] ?? [],
+    'orders' => $_SESSION['eros']['orders'] ?? [],
+];
+
+$store = &$_SESSION['eros'];
+$cart = $store['cart'];
+$customer = $store['customer'];
+$subtotal = 0.0;
+$shipping = 120.0;
+foreach ($cart as $item) {
+    $subtotal += ((float)($item['price'] ?? 0)) * ((int)($item['qty'] ?? 1));
+}
+
+$paymentMethod = 'card';
+$confirmation = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $customer = [
+        'name' => trim((string)($_POST['name'] ?? '')),
+        'email' => trim((string)($_POST['email'] ?? '')),
+        'phone' => trim((string)($_POST['phone'] ?? '')),
+        'address' => trim((string)($_POST['address'] ?? '')),
+        'city' => trim((string)($_POST['city'] ?? '')),
+        'state' => trim((string)($_POST['state'] ?? '')),
+        'zip' => trim((string)($_POST['zip'] ?? '')),
+    ];
+
+    $paymentMethod = trim((string)($_POST['payment_method'] ?? 'card'));
+    $orderNumber = 'ER-' . strtoupper(bin2hex(random_bytes(3)));
+    $order = [
+        'order_number' => $orderNumber,
+        'payment_method' => $paymentMethod,
+        'customer' => $customer,
+        'items' => $cart,
+        'subtotal' => $subtotal,
+        'shipping' => $shipping,
+        'total' => $subtotal + $shipping,
+        'status' => 'processing',
+        'created_at' => date('Y-m-d H:i:s'),
+    ];
+
+    $store['customer'] = $customer;
+    $store['orders'][] = $order;
+    $store['last_order'] = $order;
+    $store['checkout_status'] = 'completed';
+    setcookie('eros_customer_email', $customer['email'], time() + (86400 * 30), '/');
+    setcookie('eros_last_order', $orderNumber, time() + (86400 * 30), '/');
+    $confirmation = $order;
+}
+?>
+<section class="py-16 sm:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303] overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <div class="lg:col-span-4 p-8 sm:p-12 border-b lg:border-b-0 lg:border-r border-[#1A1A1A] bg-[#0A0A0A]">
+          <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-5 block">[ CHECKOUT / INTAKE ]</span>
+          <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter leading-[0.92] uppercase">
+            SECURE<br>CHECKOUT
+          </h1>
+          <p class="font-mono text-[11px] text-[#888] leading-7 lowercase mt-6">
+            complete your order with a session-backed checkout flow and saved customer details.
+          </p>
+          <a href="<!-- #!/engine/node/ page('cart') -->" class="inline-block mt-8 btn-outline text-xs uppercase tracking-widest font-semibold py-4 px-8">BACK TO CART</a>
+        </div>
+        <div class="lg:col-span-8 p-8 sm:p-12 lg:p-16">
+          <?php if ($confirmation): ?>
+            <div class="mb-8 border border-[#1A1A1A] bg-[#0A0A0A] p-5">
+              <p class="font-mono text-[10px] tracking-widest text-[#666] mb-2">ORDER RECORDED</p>
+              <div class="text-lg text-white font-bold"><?= htmlspecialchars($confirmation['order_number']) ?></div>
+              <div class="text-[11px] text-[#888] mt-2">status: <?= htmlspecialchars($confirmation['status']) ?></div>
+            </div>
+          <?php endif; ?>
+
+          <form method="post" class="space-y-10">
+            <div class="space-y-6 border border-[#1A1A1A] p-6 sm:p-8 bg-[#030303]">
+              <div class="border-b border-[#1A1A1A] pb-4">
+                <p class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-2">[ SHIPPING ]</p>
+                <h2 class="text-2xl font-bold uppercase tracking-tight">Delivery Details</h2>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input name="name" value="<?= htmlspecialchars($customer['name']) ?>" placeholder="FULL NAME" class="w-full bg-transparent border border-[#1A1A1A] p-4 font-mono text-[11px] focus:outline-none focus:border-white">
+                <input name="email" value="<?= htmlspecialchars($customer['email']) ?>" placeholder="EMAIL ADDRESS" class="w-full bg-transparent border border-[#1A1A1A] p-4 font-mono text-[11px] focus:outline-none focus:border-white">
+                <input name="phone" value="<?= htmlspecialchars($customer['phone']) ?>" placeholder="PHONE NUMBER" class="w-full bg-transparent border border-[#1A1A1A] p-4 font-mono text-[11px] focus:outline-none focus:border-white md:col-span-2">
+                <input name="address" value="<?= htmlspecialchars($customer['address']) ?>" placeholder="STREET ADDRESS" class="w-full bg-transparent border border-[#1A1A1A] p-4 font-mono text-[11px] focus:outline-none focus:border-white md:col-span-2">
+                <input name="city" value="<?= htmlspecialchars($customer['city']) ?>" placeholder="CITY" class="w-full bg-transparent border border-[#1A1A1A] p-4 font-mono text-[11px] focus:outline-none focus:border-white">
+                <input name="state" value="<?= htmlspecialchars($customer['state']) ?>" placeholder="STATE / PROVINCE" class="w-full bg-transparent border border-[#1A1A1A] p-4 font-mono text-[11px] focus:outline-none focus:border-white">
+                <input name="zip" value="<?= htmlspecialchars($customer['zip']) ?>" placeholder="POSTAL CODE" class="w-full bg-transparent border border-[#1A1A1A] p-4 font-mono text-[11px] focus:outline-none focus:border-white md:col-span-2">
+              </div>
+            </div>
+
+            <div class="space-y-6 border border-[#1A1A1A] p-6 sm:p-8 bg-[#030303]">
+              <div class="border-b border-[#1A1A1A] pb-4">
+                <p class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-2">[ PAYMENT ]</p>
+                <h2 class="text-2xl font-bold uppercase tracking-tight">Payment Method</h2>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-[11px] font-mono tracking-widest">
+                <label class="border border-[#1A1A1A] p-4 flex items-center gap-3 bg-[#0A0A0A] cursor-pointer">
+                  <input type="radio" name="payment_method" value="card" <?= $paymentMethod === 'card' ? 'checked' : '' ?>>
+                  <span>CARD GATEWAY</span>
+                </label>
+                <label class="border border-[#1A1A1A] p-4 flex items-center gap-3 bg-[#0A0A0A] cursor-pointer">
+                  <input type="radio" name="payment_method" value="eft" <?= $paymentMethod === 'eft' ? 'checked' : '' ?>>
+                  <span>INSTANT EFT</span>
+                </label>
+                <label class="border border-[#1A1A1A] p-4 flex items-center gap-3 bg-[#0A0A0A] cursor-pointer">
+                  <input type="radio" name="payment_method" value="wallet" <?= $paymentMethod === 'wallet' ? 'checked' : '' ?>>
+                  <span>DIGITAL WALLET</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-4 btn-invert font-mono text-[11px] tracking-widest border border-transparent">
+              PAY <?= number_format($subtotal + $shipping, 2) ?> ZAR
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

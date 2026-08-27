@@ -1,0 +1,33 @@
+<section id="view-product" class="view-section max-w-[1400px] mx-auto px-4 sm:px-6 py-12 active">
+  <div id="product-detail-target" class="flex flex-col lg:flex-row border border-[#1A1A1A]">
+    <div class="w-full lg:w-1/2 aspect-[3/4] lg:aspect-auto bg-[#0A0A0A] border-b lg:border-b-0 lg:border-r border-[#1A1A1A] relative">
+      <div class="absolute top-4 left-4 z-10 font-mono text-[10px] text-[#666] tracking-widest uppercase">ASSET - PRODUCT</div>
+      <img src="https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=1200&auto=format&fit=crop" alt="Product" class="w-full h-full object-cover grayscale opacity-80">
+    </div>
+    <div class="w-full lg:w-1/2 p-8 sm:p-12 xl:p-16 flex flex-col bg-[#030303]">
+      <div class="mb-12">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tighter uppercase mb-4 leading-none">SELECT AN ITEM</h1>
+        <p class="font-mono text-xl text-white tracking-widest">API / SPA RENDERED</p>
+      </div>
+      <div class="font-mono text-[11px] text-[#888] leading-relaxed lowercase mb-12 flex-grow">
+        use the archive grid to open a live product record.
+      </div>
+      <div class="space-y-6">
+        <div class="grid grid-cols-2 gap-4 border-t border-b border-[#1A1A1A] py-4">
+          <div>
+            <span class="font-mono text-[9px] text-[#666] block mb-1">DESIGNATION</span>
+            <span class="font-mono text-[10px] text-white tracking-widest">INFORMATION PENDING</span>
+          </div>
+          <div>
+            <span class="font-mono text-[9px] text-[#666] block mb-1">AVAILABILITY</span>
+            <span class="font-mono text-[10px] text-white tracking-widest">IN STOCK</span>
+          </div>
+        </div>
+        <button onclick="app.ui.triggerToast('OPEN PRODUCT FROM ARCHIVE')" class="w-full py-5 btn-invert font-mono text-[11px] tracking-widest border border-transparent flex justify-center items-center gap-3">
+          <span>APPEND TO MANIFEST</span>
+          <i data-lucide="plus" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

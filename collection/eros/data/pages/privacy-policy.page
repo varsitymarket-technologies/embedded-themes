@@ -1,0 +1,57 @@
+<section class="py-16 sm:py-20">
+  <div class="max-w-[1000px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303] overflow-hidden">
+      <!-- Header Section -->
+      <div class="p-8 sm:p-12 border-b border-[#1A1A1A] bg-[#0A0A0A]">
+        <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-4 block">[ LEGAL / PRIVACY ]</span>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter uppercase text-white">PRIVACY POLICY</h1>
+      </div>
+
+      <!-- Main Content -->
+      <div class="p-8 sm:p-12 lg:p-16 font-mono text-[11px] text-[#888] leading-7 lowercase space-y-8">
+
+        <!-- Section 01 -->
+        <div class="space-y-3">
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 01. data collection</span>
+          <p>we collect only the information needed to process orders, manage accounts, and support customer service.</p>
+          <p>this includes your name, shipping address, billing address, payment confirmation, and email address when you place an order or subscribe to updates.</p>
+        </div>
+
+        <div class="border-t border-[#1A1A1A] pt-8 space-y-3">
+          <!-- Section 02 -->
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 02. usage & security</span>
+          <p>we do not sell personal information, and we keep your data secure using standard industry practices.</p>
+          <p>your payment details are encrypted using ssl technology and handled directly by tier-1 payment gateways. we never store raw credit card numbers on our local servers.</p>
+        </div>
+
+        <div class="border-t border-[#1A1A1A] pt-8 space-y-3">
+          <!-- Section 03 -->
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 03. third-party services</span>
+          <p>we share your data strictly with essential service partners necessary to run our store—including logistics providers, payment processors, and automated email services.</p>
+          <p>these third parties have access to your personal information solely to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+        </div>
+
+        <div class="border-t border-[#1A1A1A] pt-8 space-y-3">
+          <!-- Section 04 -->
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 04. cookies & tracking</span>
+          <p>we use essential cookies to maintain cart sessions, remember user preferences, and analyze site performance.</p>
+          <p>you can disable cookies through your web browser settings, though doing so may prevent proper functionality during product drops or checkout operations.</p>
+        </div>
+
+        <div class="border-t border-[#1A1A1A] pt-8 space-y-3">
+          <!-- Section 05 -->
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 05. user rights & contact</span>
+          <p>you retain the right to request access to, correction of, or complete deletion of your personal data stored within our system at any time.</p>
+          <p>for privacy-related inquiries or data requests, contact our support terminal at privacy@animehood.com.</p>
+        </div>
+
+        <!-- Footer stamp inside card -->
+        <div class="border-t border-[#1A1A1A] pt-8 flex items-center justify-between text-[12px] text-[#444] uppercase tracking-widest">
+          <span>last updated: [2026.08.01]</span>
+          <span>ver. 2.0.4</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

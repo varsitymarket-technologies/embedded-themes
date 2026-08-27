@@ -1,0 +1,32 @@
+<?php $query = trim($_GET['q'] ?? ''); ?>
+<section class="py-16 sm:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303] overflow-hidden">
+      <div class="p-8 sm:p-12 border-b border-[#1A1A1A] bg-[#0A0A0A]">
+        <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-4 block">[ SEARCH / INDEX ]</span>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter uppercase">QUERY THE ARCHIVE</h1>
+      </div>
+      <div class="p-8 sm:p-12 lg:p-16">
+    <form method="GET" action="<!-- #!/engine/node/ page('search') -->" class="mb-8">
+          <input type="text" name="q" value="<?= htmlspecialchars($query) ?>" placeholder="Search products..." class="w-full bg-transparent px-4 py-4 shopify-input text-white uppercase tracking-widest">
+        </form>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1A1A1A] border border-[#1A1A1A]">
+          <?php if ($query === ''): ?>
+            <div class="bg-[#030303] p-8 md:col-span-2 lg:col-span-4">
+              <p class="text-[#888] lowercase leading-relaxed">enter a search term to get started.</p>
+            </div>
+          <?php else: ?>
+            <!-- #!/engine/node/
+            $q = trim($_GET['q'] ?? '');
+            if (!empty($q)) {
+                $all = api()->async_products();
+                $res = array_filter($all, fn($p) => stripos($p['name'], $q) !== false || stripos($p['description'] ?? '', $q) !== false);
+                app()->create_shop_ui(array_values($res));
+            }
+            -->
+          <?php endif; ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

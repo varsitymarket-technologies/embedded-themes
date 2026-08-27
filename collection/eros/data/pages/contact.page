@@ -1,0 +1,34 @@
+<section class="py-16 sm:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303] overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <div class="lg:col-span-4 p-8 sm:p-12 border-b lg:border-b-0 lg:border-r border-[#1A1A1A] bg-[#0A0A0A]">
+          <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-5 block">[ CONTACT / NODE ]</span>
+          <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter leading-[0.92] uppercase">
+            SEND A<br>TRANSMISSION
+          </h1>
+          <p class="font-mono text-[11px] text-[#888] leading-7 lowercase mt-6">
+            questions about an order, shipping, or the archive can be sent here.
+          </p>
+        </div>
+        <div class="lg:col-span-8 p-8 sm:p-12 lg:p-16">
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#1A1A1A] border border-[#1A1A1A]">
+            <input type="text" placeholder="Full Name" class="md:col-span-1 bg-[#030303] px-4 py-4 shopify-input">
+            <input type="email" placeholder="Email Address" class="md:col-span-1 bg-[#030303] px-4 py-4 shopify-input">
+            <input type="text" placeholder="Order Number (Optional)" class="md:col-span-1 bg-[#030303] px-4 py-4 shopify-input">
+            <select class="md:col-span-1 bg-[#030303] px-4 py-4 shopify-input">
+              <option>General Inquiry</option>
+              <option>Orders & Shipping</option>
+              <option>Returns & Exchanges</option>
+              <option>Wholesale & Press</option>
+            </select>
+            <textarea rows="7" placeholder="How can we help?" class="md:col-span-2 bg-[#030303] px-4 py-4 shopify-input"></textarea>
+            <div class="md:col-span-2 p-4 bg-[#0A0A0A] border-t border-[#1A1A1A] flex justify-end">
+              <button class="py-4 px-8 btn-invert font-mono text-[11px] tracking-widest border border-transparent">SEND MESSAGE</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$orders = $_SESSION['eros']['orders'] ?? [];
+?>
+<section class="py-16 sm:py-20">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303] overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <div class="lg:col-span-4 p-8 sm:p-12 border-b lg:border-b-0 lg:border-r border-[#1A1A1A] bg-[#0A0A0A]">
+          <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-5 block">[ ORDERS / TRACKING ]</span>
+          <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter leading-[0.92] uppercase">
+            ORDER<br>HISTORY
+          </h1>
+          <p class="font-mono text-[11px] text-[#888] leading-7 lowercase mt-6">
+            review your recent purchases and shipping status from the current session.
+          </p>
+        </div>
+        <div class="lg:col-span-8 p-8 sm:p-12 lg:p-16">
+          <div class="space-y-4">
+            <?php if (empty($orders)): ?>
+              <div class="border border-[#1A1A1A] bg-[#030303] p-6 text-[#888] font-mono text-[11px] tracking-widest">
+                no orders recorded yet. complete checkout to populate this section.
+              </div>
+            <?php else: ?>
+              <?php foreach (array_reverse($orders) as $order): ?>
+                <div class="border border-[#1A1A1A] bg-[#030303] p-6 sm:p-8">
+                  <div class="flex justify-between items-start gap-6 mb-4">
+                    <div>
+                      <p class="font-semibold tracking-wide text-white"><?= htmlspecialchars($order['order_number'] ?? 'ORDER') ?></p>
+                      <p class="font-mono text-[10px] text-[#666] mt-1"><?= htmlspecialchars($order['created_at'] ?? '') ?></p>
+                    </div>
+                    <span class="text-[10px] uppercase font-mono tracking-widest px-3 py-1 border border-[#333] text-[#bbb]"><?= htmlspecialchars($order['status'] ?? 'processing') ?></span>
+                  </div>
+                  <p class="font-mono text-[10px] text-[#888] tracking-widest">TOTAL: <?= number_format((float)($order['total'] ?? 0), 2) ?> ZAR</p>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
