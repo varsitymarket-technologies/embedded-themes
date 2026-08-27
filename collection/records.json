@@ -49,7 +49,7 @@
     ]
   },
   "pvt.thoughts": {
-    "hash": "v1.0.0.2",
+    "hash": "v1.0.2.2",
     "files": [
       "interface",
       "autofill.json",
@@ -74,6 +74,18 @@
       "data/pages/search.page",
       "data/pages/shop.page",
       "data/pages/signup.page",
+      "data/pages/cookie-policy.page",
+      "data/pages/gift-card.page",
+      "data/pages/orders.page",
+      "data/pages/sale.page",
+      "data/pages/privacy-policy.page",
+      "data/pages/return-policy.page",
+      "data/pages/search.page",
+      "data/pages/shipping-policy.page",
+      "data/pages/size-guide.page",
+      "data/pages/track-order.page",
+      "data/pages/wishlist.page",
+      "data/pages/terms-of-use.page",
       "data/body.php",
       "data/head.php",
       "data/navbar.card",
