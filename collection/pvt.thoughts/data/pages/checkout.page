@@ -1,0 +1,148 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$_SESSION['store'] = $_SESSION['store'] ?? [
+    'customer' => ['name' => '', 'email' => '', 'phone' => '', 'address' => '', 'city' => '', 'state' => '', 'zip' => ''],
+    'cart' => [],
+    'orders' => [],
+];
+
+$store = &$_SESSION['store'];
+$cart = $store['cart'];
+$customer = $store['customer'];
+$shipping = 150.00;
+$subtotal = 0.00;
+
+foreach ($cart as $item) {
+    $subtotal += ((float)($item['price'] ?? 0)) * ((int)($item['qty'] ?? 1));
+}
+
+$paymentMethod = 'card';
+$orderSuccess = false;
+$orderNumber = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $customer = [
+        'name' => trim((string)($_POST['full_name'] ?? '')),
+        'email' => trim((string)($_POST['email'] ?? '')),
+        'phone' => trim((string)($_POST['phone'] ?? '')),
+        'address' => trim((string)($_POST['address'] ?? '')),
+        'city' => trim((string)($_POST['city'] ?? '')),
+        'state' => trim((string)($_POST['state'] ?? '')),
+        'zip' => trim((string)($_POST['zip'] ?? '')),
+    ];
+
+    $paymentMethod = trim((string)($_POST['payment_method'] ?? 'card'));
+    $paymentReference = 'pay_' . strtoupper(bin2hex(random_bytes(4)));
+    $orderNumber = 'ORD-' . strtoupper(bin2hex(random_bytes(3)));
+
+    $order = [
+        'order_number' => $orderNumber,
+        'payment_reference' => $paymentReference,
+        'payment_method' => $paymentMethod,
+        'customer' => $customer,
+        'items' => $cart,
+        'subtotal' => $subtotal,
+        'shipping' => $shipping,
+        'total' => $subtotal + $shipping,
+        'status' => 'processing',
+        'created_at' => date('Y-m-d H:i:s'),
+    ];
+
+    $store['customer'] = $customer;
+    $store['orders'][] = $order;
+    $store['last_order'] = $order;
+    $store['checkout_status'] = 'completed';
+
+    setcookie('pvt_customer_email', $customer['email'], time() + (86400 * 30), '/');
+    setcookie('pvt_last_order', $orderNumber, time() + (86400 * 30), '/');
+    $orderSuccess = true;
+}
+?>
+<main class="checkout-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem; max-width: 1120px;">
+        <div class="card-machined policy-card" style="padding: 2rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: end;">
+                <div>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle);">Checkout</div>
+                    <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin: 0.25rem 0;">Payment Terminal</h1>
+                    <p style="color: var(--text-subtle); max-width: 44rem;">Complete your order using a secure payment method. This page stores customer and order state in PHP session data and lightweight cookies.</p>
+                </div>
+                <a href="?page=cart" class="btn btn-outline">Return to Cart</a>
+            </div>
+        </div>
+
+        <?php if ($orderSuccess): ?>
+            <div class="card-machined policy-card" style="padding: 1.25rem; margin-bottom: 1.5rem; border: 1px solid var(--acid);">
+                <strong>Payment received.</strong> Your order <strong><?= htmlspecialchars($orderNumber) ?></strong> is being prepared for fulfillment.
+            </div>
+        <?php endif; ?>
+
+        <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.9fr); gap: 1.5rem; align-items: start;">
+            <form method="post" class="card-machined policy-card" style="padding: 2rem; display: grid; gap: 1.25rem;">
+                <div>
+                    <h2 style="margin-bottom: 0.75rem;">Shipping Details</h2>
+                    <div style="display: grid; gap: 0.85rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                        <input name="full_name" value="<?= htmlspecialchars($customer['name']) ?>" type="text" placeholder="Full name" style="padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+                        <input name="email" value="<?= htmlspecialchars($customer['email']) ?>" type="email" placeholder="Email address" style="padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+                        <input name="phone" value="<?= htmlspecialchars($customer['phone']) ?>" type="text" placeholder="Phone number" style="padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+                        <input name="address" value="<?= htmlspecialchars($customer['address']) ?>" type="text" placeholder="Street address" style="padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+                        <input name="city" value="<?= htmlspecialchars($customer['city']) ?>" type="text" placeholder="City" style="padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+                        <input name="state" value="<?= htmlspecialchars($customer['state']) ?>" type="text" placeholder="Province / State" style="padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+                        <input name="zip" value="<?= htmlspecialchars($customer['zip']) ?>" type="text" placeholder="Postal code" style="padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+                    </div>
+                </div>
+
+                <div>
+                    <h2 style="margin-bottom: 0.75rem;">Payment Method</h2>
+                    <div style="display: grid; gap: 0.75rem;">
+                        <label style="display: flex; gap: 0.75rem; align-items: center; padding: 1rem; border: 1px solid var(--border-medium); background: var(--bg-card-subtle);">
+                            <input type="radio" name="payment_method" value="card" <?= $paymentMethod === 'card' ? 'checked' : '' ?>>
+                            <span>Card / Gateway</span>
+                        </label>
+                        <label style="display: flex; gap: 0.75rem; align-items: center; padding: 1rem; border: 1px solid var(--border-medium); background: var(--bg-card-subtle);">
+                            <input type="radio" name="payment_method" value="eft" <?= $paymentMethod === 'eft' ? 'checked' : '' ?>>
+                            <span>Instant EFT</span>
+                        </label>
+                        <label style="display: flex; gap: 0.75rem; align-items: center; padding: 1rem; border: 1px solid var(--border-medium); background: var(--bg-card-subtle);">
+                            <input type="radio" name="payment_method" value="wallet" <?= $paymentMethod === 'wallet' ? 'checked' : '' ?>>
+                            <span>Digital Wallet</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-acid" style="justify-content: center;">Pay <?= number_format($subtotal + $shipping, 2) ?> ZAR</button>
+            </form>
+
+            <aside class="card-machined policy-card" style="padding: 2rem; position: sticky; top: 2rem;">
+                <h2 style="margin-bottom: 1rem;">Order Summary</h2>
+                <div style="display: grid; gap: 0.85rem; margin-bottom: 1rem;">
+                    <?php if (empty($cart)): ?>
+                        <div style="padding: 1rem; border: 1px dashed var(--border-medium); color: var(--text-subtle);">Your cart is empty. Add products before checkout.</div>
+                    <?php else: ?>
+                        <?php foreach ($cart as $item): ?>
+                            <?php
+                            $qty = (int)($item['qty'] ?? 1);
+                            $price = (float)($item['price'] ?? 0);
+                            ?>
+                            <div style="display: flex; justify-content: space-between; gap: 1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border-light);">
+                                <div>
+                                    <div style="font-weight: 700;"><?= htmlspecialchars((string)($item['title'] ?? $item['name'] ?? 'Item')) ?></div>
+                                    <div style="font-size: 0.75rem; color: var(--text-subtle);">Qty <?= $qty ?></div>
+                                </div>
+                                <div style="font-weight: 700;"><?= number_format($price * $qty, 2) ?> ZAR</div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <div style="display: grid; gap: 0.5rem; border-top: 1px solid var(--border-light); padding-top: 1rem; font-size: 0.875rem;">
+                    <div style="display: flex; justify-content: space-between;"><span>Subtotal</span><span><?= number_format($subtotal, 2) ?> ZAR</span></div>
+                    <div style="display: flex; justify-content: space-between;"><span>Shipping</span><span><?= number_format($shipping, 2) ?> ZAR</span></div>
+                    <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1rem;"><span>Total</span><span><?= number_format($subtotal + $shipping, 2) ?> ZAR</span></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>

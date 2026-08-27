@@ -1,0 +1,32 @@
+<?php
+$cat = trim((string)($_GET['cat'] ?? ($GLOBALS['cat'] ?? '')));
+$products = api()->async_products();
+
+if ($cat !== '') {
+    $products = array_values(array_filter($products, function ($item) use ($cat) {
+        $itemCat = strtolower(trim((string)($item['category'] ?? $item['category_name'] ?? '')));
+        return $itemCat === strtolower($cat);
+    }));
+}
+?>
+<section id="view-shop" class="view-section active">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+        <div class="card-machined policy-card" style="padding: 2rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: end;">
+                <div>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle);">Catalog</div>
+                    <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin: 0.25rem 0;"><?= $cat !== '' ? htmlspecialchars(strtoupper($cat)) : 'Shop All' ?></h1>
+                </div>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <a class="btn btn-outline" href="?page=collection">Collections</a>
+                    <a class="btn btn-acid" href="?page=cart">Open Cart</a>
+                </div>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+            <!-- #!/engine/node/
+            app()->create_shop_ui($products);
+            -->
+        </div>
+    </div>
+</section>

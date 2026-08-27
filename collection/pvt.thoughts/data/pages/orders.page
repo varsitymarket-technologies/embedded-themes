@@ -1,0 +1,35 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$orders = $_SESSION['store']['orders'] ?? [];
+?>
+<main class="orders-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem; max-width: 1120px;">
+        <div class="card-machined policy-card" style="padding: 2rem; margin-bottom: 1.5rem;">
+            <h1 style="margin-bottom: 0.5rem;">Orders</h1>
+            <p style="color: var(--text-subtle);">Recent purchases and payment status from the current PHP session.</p>
+        </div>
+
+        <div style="display: grid; gap: 1rem;">
+            <?php if (empty($orders)): ?>
+                <div class="card-machined policy-card" style="padding: 1.5rem; color: var(--text-subtle);">No orders yet. Once checkout is completed, the order will appear here.</div>
+            <?php else: ?>
+                <?php foreach (array_reverse($orders) as $order): ?>
+                    <div class="card-machined policy-card" style="padding: 1.5rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+                        <div>
+                            <div style="font-weight: 800; margin-bottom: 0.25rem;"><?= htmlspecialchars($order['order_number'] ?? 'ORD-UNKNOWN') ?></div>
+                            <div style="font-size: 0.85rem; color: var(--text-subtle);"><?= htmlspecialchars($order['created_at'] ?? '') ?></div>
+                            <div style="font-size: 0.85rem; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.5rem;"><?= htmlspecialchars($order['payment_method'] ?? 'card') ?></div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 800;"><?= number_format((float)($order['total'] ?? 0), 2) ?> ZAR</div>
+                            <div style="font-size: 0.75rem; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.25rem;"><?= htmlspecialchars($order['status'] ?? 'processing') ?></div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</main>

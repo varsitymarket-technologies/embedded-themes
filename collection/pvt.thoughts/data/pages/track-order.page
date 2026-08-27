@@ -1,0 +1,8 @@
+<main class="policy-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem; max-width: 720px;">
+        <div class="policy-card card-machined" style="padding: 2rem;">
+            <h1 style="margin-bottom: 1rem;">Track Order</h1>
+            <input type="text" placeholder="Order number or tracking code" style="width: 100%; padding: 1rem 1.1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+        </div>
+    </div>
+</main>

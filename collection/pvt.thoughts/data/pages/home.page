@@ -1,0 +1,3 @@
+<!-- #!/engine/node/
+app()->create_category_ui(api()->async_categories());
+-->

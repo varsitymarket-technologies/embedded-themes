@@ -1,0 +1,15 @@
+<main class="cart-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+        <div class="policy-card card-machined" style="padding: 2rem;">
+            <h1 style="margin-bottom: 1rem;">Your Cart</h1>
+            <div style="display: grid; gap: 1rem;">
+                <div class="card-machined" style="padding: 1rem; border: 1px solid var(--border-medium);">Core Logo Hoodie - R899.00</div>
+                <div class="card-machined" style="padding: 1rem; border: 1px solid var(--border-medium);">Heavyweight Tee - R399.00</div>
+            </div>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                <a class="btn btn-outline" href="?page=shop">Continue Shopping</a>
+                <a class="btn btn-acid" href="?page=checkout">Checkout</a>
+            </div>
+        </div>
+    </div>
+</main>

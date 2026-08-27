@@ -1,0 +1,14 @@
+<?php $categories = api()->async_categories(); ?>
+<main class="collection-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+        <div class="policy-card card-machined" style="padding: 2rem; margin-bottom: 1.5rem;">
+            <h1 style="margin-bottom: 0.5rem;">Collections</h1>
+            <p style="color: var(--text-subtle);">Browse curated capsules, seasonal edits, and limited releases.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+            <!-- #!/engine/node/
+            app()->create_category_ui($categories);
+            -->
+        </div>
+    </div>
+</main>

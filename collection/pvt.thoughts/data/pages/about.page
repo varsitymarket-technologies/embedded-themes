@@ -1,0 +1,8 @@
+<main class="about-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem; max-width: 960px;">
+        <div class="policy-card card-machined" style="padding: 2rem;">
+            <h1 style="margin-bottom: 1rem;">About the Store</h1>
+            <p style="color: var(--text-subtle); line-height: 1.7;">This storefront template is designed for a clean, minimal ecommerce brand with a focused product story, editorial pacing, and strong conversion paths.</p>
+        </div>
+    </div>
+</main>

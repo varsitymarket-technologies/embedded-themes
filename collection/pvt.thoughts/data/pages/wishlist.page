@@ -1,0 +1,8 @@
+<main class="wishlist-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+        <div class="policy-card card-machined" style="padding: 2rem;">
+            <h1 style="margin-bottom: 1rem;">Wishlist</h1>
+            <p style="color: var(--text-subtle);">Save favorite products for later and return when you're ready to buy.</p>
+        </div>
+    </div>
+</main>

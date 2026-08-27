@@ -1,0 +1,11 @@
+<main class="auth-section">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem; max-width: 540px;">
+        <div class="policy-card card-machined" style="padding: 2rem;">
+            <h1 style="margin-bottom: 1rem;">Create Account</h1>
+            <input type="text" placeholder="Full name" style="width: 100%; margin-bottom: 0.75rem; padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+            <input type="email" placeholder="Email address" style="width: 100%; margin-bottom: 0.75rem; padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+            <input type="password" placeholder="Password" style="width: 100%; margin-bottom: 1rem; padding: 0.9rem 1rem; background: var(--bg-card-subtle); border: 1px solid var(--border-medium); color: var(--text-main);">
+            <a class="btn btn-acid" href="?page=account">Join Now</a>
+        </div>
+    </div>
+</main>
