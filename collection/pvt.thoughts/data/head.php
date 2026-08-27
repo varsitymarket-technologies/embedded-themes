@@ -89,6 +89,34 @@
             position: relative;
         }
 
+        /* Product media containment */
+        .product-media-shell {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-card-subtle);
+            border: 1px solid var(--border-medium);
+        }
+
+        .product-media-shell img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .product-media-shell--portrait {
+            aspect-ratio: 3 / 4;
+        }
+
+        .product-media-shell--square {
+            aspect-ratio: 1 / 1;
+        }
+
+        .product-media-shell--wide {
+            aspect-ratio: 4 / 3;
+        }
+
         /* Interactive Buttons */
         .btn {
             display: inline-flex;

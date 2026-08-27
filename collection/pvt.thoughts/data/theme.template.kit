@@ -10,9 +10,9 @@ function template()
               <div class="absolute top-4 left-4 z-10 font-mono text-[12px] bg-black border border-[#333] px-2 py-1 text-[#666]">
                 (#item_id)
               </div>
-              <div class="aspect-[3/4] w-full overflow-hidden bg-[#0A0A0A]">
+              <div class="product-media-shell product-media-shell--portrait">
                 <a href="<!-- #!/engine/node/ page(\'product\') -->/(#item_id)" class="block w-full h-full">
-                  <img src="(#item_image)" alt="(#item_name)" class="w-full h-full object-cover grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                  <img src="(#item_image)" alt="(#item_name)" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
                 </a>
               </div>
               <div class="p-4 border-t border-[#1A1A1A] flex flex-col flex-grow justify-between gap-4">
@@ -36,8 +36,8 @@ function template()
             $product_template = '
             <article class="group bg-[#030303] border border-[#1A1A1A] hover:bg-[#0A0A0A] transition-colors overflow-hidden">
               <a href="<!-- #!/engine/node/ page(\'product\') -->/(#item_id)" class="block">
-                <div class="aspect-[3/4] overflow-hidden bg-[#0A0A0A]">
-                  <img src="(#item_image)" alt="(#item_name)" class="w-full h-full object-cover grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                <div class="product-media-shell product-media-shell--portrait">
+                  <img src="(#item_image)" alt="(#item_name)" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
                 </div>
                 <div class="p-4 border-t border-[#1A1A1A]">
                   <h3 class="font-bold text-sm tracking-tight leading-snug text-white">(#item_name)</h3>
@@ -56,8 +56,8 @@ function template()
         {
             $category_template = '
             <a href="<!-- #!/engine/node/ page(\'shop\') -->?cat=(#cat_name)" class="group bg-[#030303] hover:bg-[#0A0A0A] transition-colors border border-[#1A1A1A] overflow-hidden">
-              <div class="aspect-[4/5] overflow-hidden bg-[#0A0A0A]">
-                <img src="(#cat_image)" alt="(#cat_name)" class="w-full h-full object-cover grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+              <div class="product-media-shell product-media-shell--wide">
+                <img src="(#cat_image)" alt="(#cat_name)" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
               </div>
               <div class="p-5 border-t border-[#1A1A1A]">
                 <h3 class="text-lg font-semibold tracking-wide text-white mb-1">(#cat_name)</h3>
@@ -74,8 +74,8 @@ function template()
         {
             $product_template = '
             <section class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-                <div class="bg-gray-100 aspect-square overflow-hidden sticky top-20">
-                    <img src="(#item_image)" alt="(#item_name)" class="w-full h-full object-cover">
+                <div class="product-media-shell product-media-shell--square sticky top-20">
+                    <img src="(#item_image)" alt="(#item_name)">
                 </div>
                 <div class="flex flex-col justify-center">
                     <p class="text-xs uppercase tracking-wider text-gray-600 font-semibold mb-3">(#item_category)</p>
