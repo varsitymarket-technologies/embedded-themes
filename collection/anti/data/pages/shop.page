@@ -1,0 +1,35 @@
+<?php
+$cat = trim((string)($_GET['cat'] ?? ($GLOBALS['cat'] ?? '')));
+$products = api()->async_products();
+
+if ($cat !== '') {
+    $products = array_values(array_filter($products, function ($item) use ($cat) {
+        $itemCat = strtolower(trim((string)($item['category'] ?? $item['category_name'] ?? '')));
+        return $itemCat === strtolower($cat);
+    }));
+}
+?>
+<section id="view-shop" class="view-section max-w-[1400px] mx-auto px-4 sm:px-6 py-16 active">
+  <div class="border border-[#1A1A1A] bg-[#030303]">
+    <div class="p-6 sm:p-8 border-b border-[#1A1A1A] flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+      <div>
+        <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-3 block">[ ARCHIVE / SHOP ]</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-widest"><?= $cat !== '' ? htmlspecialchars(strtoupper($cat)) : 'CATALOG GRID' ?></h2>
+        <p id="catalog-count-string" class="font-mono text-[10px] text-[#666] mt-2 tracking-widest"></p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="font-mono text-[10px] text-[#666]">SORT:</span>
+        <select id="catalog-sort" onchange="app.store.sortCatalog(this.value)" class="font-mono text-[10px] bg-transparent text-white border border-[#1A1A1A] p-2 focus:outline-none focus:border-white cursor-pointer">
+          <option value="featured" class="bg-black">STANDARD</option>
+          <option value="price-low" class="bg-black">PRICE [ASC]</option>
+          <option value="price-high" class="bg-black">PRICE [DESC]</option>
+        </select>
+      </div>
+    </div>
+    <div id="shop-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#1A1A1A]">
+      <!-- #!/engine/node/
+        app()->create_shop_ui($products);
+      -->
+    </div>
+  </div>
+</section>

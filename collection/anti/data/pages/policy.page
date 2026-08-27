@@ -1,0 +1,31 @@
+<section class="py-16 sm:py-20">
+  <div class="max-w-[1000px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303] overflow-hidden">
+      <div class="p-8 sm:p-12 border-b border-[#1A1A1A] bg-[#0A0A0A]">
+        <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-4 block">[ LEGAL / POLICY ]</span>
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter uppercase text-white">RETURN POLICY</h1>
+      </div>
+      <div class="p-8 sm:p-12 lg:p-16 font-mono text-[11px] text-[#888] leading-7 lowercase space-y-8">
+        <div class="space-y-3">
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 01. eligibility</span>
+          <p>returns are accepted within 14 days of delivery for unused items in original condition.</p>
+          <p>items must be unworn, unwashed, and include original packaging and tags.</p>
+        </div>
+        <div class="border-t border-[#1A1A1A] pt-8 space-y-3">
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 02. process</span>
+          <p>to request a return, contact support with your order number and reason for the return.</p>
+          <p>approved returns should be shipped back using a tracked method.</p>
+        </div>
+        <div class="border-t border-[#1A1A1A] pt-8 space-y-3">
+          <span class="text-[#fff] block font-bold tracking-widest uppercase">// 03. refunds</span>
+          <p>refunds are processed after inspection of the returned item.</p>
+          <p>original shipping fees are non-refundable unless the item arrived damaged or incorrect.</p>
+        </div>
+        <div class="border-t border-[#1A1A1A] pt-8 flex items-center justify-between text-[12px] text-[#444] uppercase tracking-widest">
+          <span>last updated: [2026.08.08]</span>
+          <span>ver. 2.0.5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,5 @@
+    <div id="view-404" class="pt-40 pb-40 text-center">
+        <h1 class="text-9xl font-black">404</h1>
+        <p class="text-zinc-400">Nothing here.</p><a href="/shop"
+            class="mt-6 inline-block bg-white text-black px-8 py-3 rounded-full">RETURN HOME</a>
+    </div>

@@ -1,0 +1,21 @@
+<section class="py-16 sm:py-20">
+  <div class="max-w-[900px] mx-auto px-4 sm:px-6">
+    <div class="border border-[#1A1A1A] bg-[#030303] overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <div class="lg:col-span-5 p-8 sm:p-12 border-b lg:border-b-0 lg:border-r border-[#1A1A1A] bg-[#0A0A0A]">
+          <span class="font-mono text-[10px] tracking-[0.35em] text-[#666] mb-5 block">[ AUTH / LOGIN ]</span>
+          <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter leading-[0.92] uppercase">
+            SIGN IN
+          </h1>
+        </div>
+        <div class="lg:col-span-7 p-8 sm:p-12 lg:p-16">
+          <form class="space-y-4">
+            <input type="email" placeholder="Email" class="w-full px-4 py-4 shopify-input bg-[#030303]">
+            <input type="password" placeholder="Password" class="w-full px-4 py-4 shopify-input bg-[#030303]">
+            <button class="w-full py-4 px-6 btn-invert font-mono text-[11px] tracking-widest border border-transparent">LOGIN</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

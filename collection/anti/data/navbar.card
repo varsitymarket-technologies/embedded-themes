@@ -1,0 +1,55 @@
+<!-- #/engine/navbar/encode/:BEGIN -->
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <a href="<!-- #!/engine/node/ page('shop') -->">
+                <img src="./index_files/logo.png" alt="ANTI" style="max-width: 2.5rem; width:100%;">
+            </a>
+            <div class="flex items-center gap-6">
+                <button onclick="navigate(&#39;search&#39;)" class="hover:text-white/70"><svg width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg></button>
+                <button onclick="openMenu()" class="hover:text-white/70"><svg width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 5h16"></path>
+                        <path d="M4 12h16"></path>
+                        <path d="M4 19h16"></path>
+                    </svg></button>
+                <button onclick="toggleCart()" class="relative"><svg width="22" height="22" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="8" cy="21" r="1"></circle>
+                        <circle cx="19" cy="21" r="1"></circle>
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12">
+                        </path>
+                    </svg><span id="cart-dot"
+                        class="absolute -top-2 -right-3 text-xs font-bold bg-white text-black rounded-full w-5 h-5 inline-flex items-center justify-center">0</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="myNav" class="menu-overlay" style="width: 0%;">
+        <a class="closebtn" onclick="closeMenu()">×</a>
+        <div class="overlay-content">
+
+            <img onclick="reload_page(&#39;#&#39;)" src="./index_files/logo.png" alt="ANTI"
+                style="width:20vh; height:auto; margin:auto; ">
+            <a></a>
+
+            <a href="<!-- #!/engine/node/ page('shop') -->" onclick="closeMenu(); navigate(&#39;shop&#39;)"
+                class="nav-link block hover:text-white">SHOP</a>
+            <a href="<!-- #!/engine/node/ page('collection') -->" onclick="closeMenu(); navigate(&#39;categories&#39;)"
+                class="nav-link block hover:text-white">CATEGORIES</a>
+            <a href="<!-- #!/engine/node/ page('about') -->" onclick="closeMenu(); navigate(&#39;stories&#39;)"
+                class="nav-link block hover:text-white">STORIES</a>
+            <a href="<!-- #!/engine/node/ page('account') -->" onclick="closeMenu(); handleAccountClick()"
+                class="nav-link block hover:text-white">ACCOUNT</a>
+            <a href="<!-- #!/engine/node/ page('contact') -->" onclick="closeMenu(); navigate(&#39;support&#39;)"
+                class="nav-link block hover:text-white">SUPPORT</a>
+            <p class="text-[10px] tracking-widest mt-20 text-zinc-600">Powered by Varsity Market Technologies</p>
+        </div>
+    </div>
+<!-- #/engine/navbar/encode/:END; -->

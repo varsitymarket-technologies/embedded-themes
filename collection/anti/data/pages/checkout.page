@@ -1,0 +1,8 @@
+<section class="py-24">
+  <div class="container mx-auto px-4 max-w-3xl text-center">
+    <p class="font-mono text-[10px] tracking-widest text-[#666] mb-4">[ CHECKOUT ROUTE ]</p>
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tighter mb-4">COMPLETE YOUR ORDER</h1>
+    <p class="text-[#888] lowercase leading-relaxed mb-8">use the bag drawer to start checkout and finish the purchase in a single flow.</p>
+    <a href="/shop" class="inline-block btn-invert text-xs uppercase tracking-widest font-semibold py-4 px-8">BACK TO ARCHIVE</a>
+  </div>
+</section>

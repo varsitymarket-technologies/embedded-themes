@@ -1,0 +1,17 @@
+<div id="view-faq" class="view pt-32 pb-32 px-6 max-w-3xl mx-auto hidden">
+  <h1 class="text-5xl font-black mb-12">FREQUENTLY ASKED QUESTIONS</h1>
+  <div class="space-y-6">
+    <div class="border border-white/10 p-8 rounded-2xl">
+      <h3 class="text-xl font-bold">RETURNS &amp; EXCHANGES?</h3>
+      <p class="text-zinc-400 mt-2">14 days, unworn with original tags. Final sale on discounted items.</p>
+    </div>
+    <div class="border border-white/10 p-8 rounded-2xl">
+      <h3 class="text-xl font-bold">SHIPPING TIMEFRAME?</h3>
+      <p class="text-zinc-400 mt-2">Express worldwide 2-4 business days. Free over R2000.</p>
+    </div>
+    <div class="border border-white/10 p-8 rounded-2xl">
+      <h3 class="text-xl font-bold">SIZE GUIDE?</h3>
+      <p class="text-zinc-400 mt-2">Oversized fit — we recommend your usual size for relaxed silhouette.</p>
+    </div>
+  </div>
+</div>

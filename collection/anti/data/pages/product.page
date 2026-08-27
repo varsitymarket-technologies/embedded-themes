@@ -1,0 +1,8 @@
+<?php
+$product_id = $GLOBALS['product_id'] ?? 1;
+$product = api()->async_single_products($product_id);
+?>
+
+<!-- #!/engine/node/
+app()->create_product_ui($product);
+-->

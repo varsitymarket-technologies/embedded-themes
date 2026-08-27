@@ -1,0 +1,8 @@
+<section class="py-24">
+  <div class="container mx-auto px-4 max-w-3xl text-center">
+    <p class="font-mono text-[10px] tracking-widest text-[#666] mb-4">[ CART DRAWER ACTIVE ]</p>
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tighter mb-4">BAG ACCESS VIA OVERLAY</h1>
+    <p class="text-[#888] lowercase leading-relaxed mb-8">open the bag from the navbar to review items, adjust quantity, or continue to checkout.</p>
+    <a href="/shop" class="inline-block btn-outline text-xs uppercase tracking-widest font-semibold py-4 px-8">RETURN TO ARCHIVE</a>
+  </div>
+</section>

@@ -1,1111 +1,742 @@
+
+<!-- #/engine/head/encode/:BEGIN -->
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
 
+    #   TITLE   : PVTT Application Interface
+    #   DESC    : This is the interface for the PVTT Application, which is a collection of tools and features designed to enhance user experience and provide additional functionality. The interface is designed to be user-friendly and intuitive, allowing users to easily navigate and access the various features of the application.
+    #   PROPRIETOR: VARSITYMARKET_TECHNOLOGIES
+    #   VERSION : v2.1.1.1
+    #   AUTHOR  : LEVIDOC AGENCY  
+    #   RELEASE : 2026/07/18
+    #   CATEGORY: ONLINE STORE
+
+-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Theme Collection | Varsity Market</title>
-    <meta name="description" content="Browse our marketplace to find the perfect products for your needs.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Thoughts</title>
+    
+    <!-- Unified Typography & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
     <style>
-        *,
-        *::before,
-        *::after {
+        /* --------------------------------------------------
+         * Design Tokens & CSS Variables (Strict Rules Enforced)
+         * -------------------------------------------------- */
+        :root {
+            /* Palette: High-Contrast Monochromatic & Acid Accent */
+            --bg-page: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --bg-card-subtle: #FAFAFA;
+            
+            --border-light: #E4E7EC;
+            --border-medium: #D0D5DD;
+
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --text-subtle: #94A3B8;
+
+            --acid: #CCFF00;
+            --acid-hover: #B8E600;
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-machined: 0 1px 0 #FFFFFF inset, 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        /* --------------------------------------------------
+         * Base & Reset
+         * -------------------------------------------------- */
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        :root {
-            --bg: #0b0b0b;
-            --panel: #141414;
-            --panel-2: #101010;
-            --line: #262626;
-            --line-2: #333;
-            --text: #f3f3f3;
-            --muted: #a3a3a3;
-            --soft: #737373;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: var(--font-sans);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            letter-spacing: -0.022em;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        .shell {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .hero-section {
-            min-height: calc(100vh - 73px);
-            display: grid;
-            place-items: center;
-            padding: 56px 24px 40px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 20px 28px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: .04em;
-            text-transform: uppercase;
-        }
-
-        .brand img {
-            width: 34px;
-            height: 34px;
-        }
-
-        .nav-meta {
-            font-size: 12.5px;
-            color: var(--muted);
-            text-align: right;
-        }
-
-        .hero-inner {
-            width: 100%;
-            max-width: 1120px;
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
-            gap: 24px;
-            align-items: center;
-        }
-
-        .hero-slider {
+        /* Machined Card Component (Smooth Borders, No Gradients/Blur) */
+        .card-machined {
+            background: var(--bg-card);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-machined);
             position: relative;
-            border: 1px solid var(--line);
-            background: var(--panel);
-            border-radius: 24px;
+        }
+
+        /* Product media containment */
+        .product-media-shell {
+            position: relative;
             overflow: hidden;
-            min-height: 620px;
+            background: var(--bg-card-subtle);
+            border: 1px solid var(--border-medium);
         }
 
-        .slides {
-            position: relative;
-            min-height: 620px;
+        .product-media-shell img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
-        .slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity .45s ease;
-            display: grid;
-            align-items: end;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
+        .product-media-shell--portrait {
+            aspect-ratio: 3 / 4;
         }
 
-        .slide.active {
-            opacity: 1;
+        .product-media-shell--square {
+            aspect-ratio: 1 / 1;
         }
 
-        .slide::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(11, 11, 11, .58);
+        .product-media-shell--wide {
+            aspect-ratio: 4 / 3;
         }
 
-        .slide-content {
-            position: relative;
-            z-index: 1;
-            padding: 26px;
-            max-width: 38rem;
-        }
-
-        .slide-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 12px;
-            border: 1px solid rgba(255, 255, 255, .14);
-            background: rgba(11, 11, 11, .54);
-            color: #e5e5e5;
-            font-size: 12px;
-            border-radius: 999px;
-        }
-
-        .slide-title {
-            margin-top: 14px;
-            font-size: clamp(30px, 4.3vw, 58px);
-            line-height: .96;
-            letter-spacing: -.05em;
-            max-width: 10ch;
-        }
-
-        .slide-text {
-            margin-top: 14px;
-            color: #d0d0d0;
-            max-width: 34rem;
-            line-height: 1.8;
-            font-size: 14.5px;
-        }
-
-        .slider-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 16px 18px;
-            border-top: 1px solid var(--line);
-            background: #0f0f0f;
-        }
-
-        .slider-dots {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .slider-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 999px;
-            border: 1px solid #5a5a5a;
-            background: transparent;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        .slider-dot.active {
-            background: #f3f3f3;
-            border-color: #f3f3f3;
-        }
-
-        .slider-controls {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .slider-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--line-2);
-            background: var(--panel);
-            color: var(--text);
-            cursor: pointer;
-        }
-
-        .slider-btn:hover {
-            border-color: #4a4a4a;
-            background: #181818;
-        }
-
-        .copy {
-            padding-right: 12px;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 12px;
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            color: var(--muted);
-            font-size: 12px;
-            margin-bottom: 18px;
-        }
-
-        .dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: #d9d9d9;
-        }
-
-        h1 {
-            font-size: clamp(44px, 7vw, 86px);
-            line-height: .94;
-            letter-spacing: -.055em;
-            max-width: 11ch;
-        }
-
-        .sub {
-            margin-top: 18px;
-            max-width: 54rem;
-            font-size: clamp(16px, 1.8vw, 19px);
-            line-height: 1.8;
-            color: var(--muted);
-        }
-
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 28px;
-        }
-
+        /* Interactive Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 14px 20px;
-            border-radius: 12px;
-            border: 1px solid var(--line-2);
-            background: var(--panel);
-            color: var(--text);
-            font-size: 14px;
-            font-weight: 700;
-            transition: transform .18s ease, border-color .18s ease, background .18s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            border-color: #4a4a4a;
-            background: #181818;
-        }
-
-        .btn.primary {
-            background: #f3f3f3;
-            color: #0b0b0b;
-            border-color: #f3f3f3;
-        }
-
-        .btn.primary:hover {
-            background: #e6e6e6;
-            border-color: #e6e6e6;
-        }
-
-        .note {
-            margin-top: 14px;
-            font-size: 12.5px;
-            color: var(--soft);
-        }
-
-        .panel {
-            border: 1px solid var(--line);
-            background: var(--panel);
-            border-radius: 22px;
-            padding: 24px;
-        }
-
-        .site-count {
-            display: grid;
-            gap: 14px;
-        }
-
-        .count-box {
-            border: 1px solid var(--line);
-            background: var(--panel-2);
-            border-radius: 18px;
-            padding: 20px;
-        }
-
-        .count-number {
-            font-size: clamp(40px, 6vw, 72px);
-            line-height: 1;
-            font-weight: 800;
-            letter-spacing: -.05em;
-        }
-
-        .count-label {
-            margin-top: 8px;
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .free-box {
-            padding: 18px 20px;
-            border: 1px solid var(--line);
-            border-radius: 18px;
-            background: #111;
-        }
-
-        .free-box h2 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .free-box p {
-            color: var(--muted);
-            line-height: 1.7;
-            font-size: 14px;
-        }
-
-        .mini-list {
-            list-style: none;
-            display: grid;
-            gap: 10px;
-            margin-top: 18px;
-        }
-
-        .mini-list li {
-            padding-top: 10px;
-            border-top: 1px solid var(--line);
-            color: var(--soft);
-            font-size: 13px;
-        }
-
-        .footer {
-            border-top: 1px solid var(--line);
-            padding: 20px 28px 28px;
-            color: var(--soft);
-            font-size: 12.5px;
-        }
-
-        @media (max-width: 900px) {
-            nav {
-                padding: 18px 20px;
-            }
-
-            .hero-inner,
-            .hero-inner>* {
-                grid-template-columns: 1fr;
-            }
-
-            .copy {
-                padding-right: 0;
-            }
-
-            .hero-section,
-            .hero-slider {
-                min-height: auto;
-            }
-
-            .slides {
-                min-height: 460px;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                justify-content: center;
-                width: 100%;
-            }
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 48px 40px;
-            display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr 1fr;
-            gap: 40px;
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .footer-brand p {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.65;
-            margin-top: 12px;
-            max-width: 220px
-        }
-
-        .footer-col h4 {
-            font-size: 12px;
+            justify-content: center;
+            gap: 0.5rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: .08em;
-            color: var(--subtle);
-            margin-bottom: 14px
+            font-size: 0.875rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--radius-sm);
+            transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid transparent;
+            white-space: nowrap;
         }
 
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 9px
+        .btn-acid {
+            background-color: var(--acid);
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
+            box-shadow: 2px 2px 0px var(--text-main);
         }
 
-        .footer-col a {
-            font-size: 13.5px;
-            color: var(--muted);
-            transition: color .15s
+        .btn-acid:hover {
+            background-color: var(--acid-hover);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px var(--text-main);
         }
 
-        .footer-col a:hover {
-            color: var(--text)
+        .btn-acid:active {
+            transform: translate(0px, 0px);
+            box-shadow: 0px 0px 0px var(--text-main);
         }
 
-        .footer-bottom {
-            border-top: 1px solid var(--border);
-            padding: 20px 40px;
+        .btn-outline {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-medium);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-main);
+            background-color: var(--bg-card-subtle);
+        }
+
+        /* --------------------------------------------------
+         * Header / Navigation
+         * -------------------------------------------------- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--bg-page);
+            border-bottom: 1px solid var(--border-medium);
+        }
+
+        .nav-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 1100px;
-            margin: 0 auto
+            height: 4.5rem;
         }
 
-        .footer-bottom span {
-            font-size: 12.5px;
-            color: var(--subtle)
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 800;
+            font-size: 1.125rem;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -0.03em;
         }
 
-
-        /* REVEAL */
-        .reveal {
-            opacity: 0;
-            transform: translateY(18px);
-            transition: opacity .55s ease, transform .55s ease
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            background: var(--text-main);
+            color: var(--acid);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0)
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
         }
 
-        /* RESPONSIVE */
-        @media(max-width:900px) {
-            nav {
-                padding: 0 20px
-            }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: color 0.15s ease;
+        }
 
-            .nav-links {
-                display: none
-            }
+        .nav-link:hover {
+            color: var(--text-main);
+        }
 
-            .features-grid {
-                grid-template-columns: 1fr 1fr
-            }
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-main);
+        }
 
-            .steps-layout {
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 4.5rem 0 0 0;
+            background: var(--bg-page);
+            padding: 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--border-medium);
+            z-index: 49;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* --------------------------------------------------
+         * Policy Page Layout
+         * -------------------------------------------------- */
+        .policy-section {
+            padding: 4rem 0 6rem 0;
+        }
+
+        .policy-header {
+            margin-bottom: 3rem;
+        }
+
+        .policy-title {
+            font-size: clamp(2.25rem, 4vw, 3.25rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .policy-meta {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* Sidebar Navigation */
+        .policy-sidebar {
+            padding: 1.5rem;
+            position: sticky;
+            top: 6.5rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-subtle);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+            list-style: none;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 0.625rem 0.875rem;
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.15s ease;
+        }
+
+        .sidebar-link:hover {
+            background-color: var(--bg-card-subtle);
+            color: var(--text-main);
+        }
+
+        /* Content Sections */
+        .policy-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .policy-card {
+            padding: 2.25rem;
+        }
+
+        .section-heading {
+            font-size: 1.375rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-heading i {
+            color: var(--text-main);
+        }
+
+        .policy-text {
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .policy-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .policy-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .policy-list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+        }
+
+        .policy-list-item i {
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+            color: var(--text-main);
+        }
+
+        /* --------------------------------------------------
+         * Footer
+         * -------------------------------------------------- */
+        footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-medium);
+            padding: 4rem 0 2rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            max-width: 280px;
+        }
+
+        .footer-column-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            transition: color 0.15s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.8125rem;
+            color: var(--text-subtle);
+        }
+
+        /* --------------------------------------------------
+         * Media Queries
+         * -------------------------------------------------- */
+        @media (max-width: 992px) {
+            .policy-grid {
                 grid-template-columns: 1fr;
-                gap: 36px
             }
 
-            .steps-visual {
-                display: none
+            .policy-sidebar {
+                position: static;
             }
 
-            .founders-grid {
-                grid-template-columns: 1fr
-            }
-
-            .donate-cards {
-                grid-template-columns: repeat(3, 1fr)
-            }
-
-            .counter-inner {
-                grid-template-columns: 1fr 1fr
-            }
-
-            footer {
-                grid-template-columns: 1fr 1fr
+            .footer-grid {
+                grid-template-columns: 1fr repeat(2, 1fr);
             }
         }
 
-        @media(max-width:600px) {
-            .features-grid {
-                grid-template-columns: 1fr
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions {
+                display: none;
             }
 
-            .counter-inner {
-                grid-template-columns: 1fr
+            .mobile-toggle {
+                display: block;
             }
 
-            .donate-cards {
-                grid-template-columns: 1fr
-            }
-
-            .donate-section {
-                padding: 40px 24px
-            }
-
-            .cta-band {
-                padding: 48px 24px;
-                margin: 0 16px 64px
-            }
-
-            .section {
-                padding: 72px 24px
-            }
-
-            footer {
-                grid-template-columns: 1fr
+            .footer-grid {
+                grid-template-columns: 1fr;
             }
 
             .footer-bottom {
                 flex-direction: column;
-                gap: 8px;
-                text-align: center
-            }
-        }
-
-
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&display=swap');
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #050505;
-            background-image: none !important;
-            color: white;
-        }
-
-        .solid-header {
-            background: #000000;
-            border-bottom: 1px solid #222222;
-        }
-
-        .solid-card {
-            background: #111111;
-            border: 1px solid #222222;
-            border-radius: 4px;
-            transition: border-color 0.15s ease;
-        }
-
-        .solid-card:hover {
-            border-color: #a855f7;
-        }
-
-        .solid-search {
-            background: #111111;
-            border: 1px solid #222222;
-            transition: border-color 0.15s ease;
-        }
-
-        .solid-search:focus-within {
-            border-color: #a855f7;
-            outline: none;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="shell">
-        <nav>
-            <div class="brand">
-                <img src="/assets/favicon.png" alt="Marketplace">
-                <span></span>
-            </div>
-            <div class="nav-meta">
-
-                <div class="flex items-center gap-4">
-
-                    <button onclick="openmenu()"
-                        class="md:view text-gray-300 hover:text-white focus:outline-none bg-transparent border-none">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
-        <section class="hero-section" style="border-top: 1px solid var(--line);">
-            <div style="text-align: center; display: block; margin: auto; max-width: 100%;">
-                <h1
-                    style="width:100%; margin:auto; display:block; padding:0; font-size: clamp(15vw, 20vw, 19px); font-weight: bolder;">
-                    Template Collections</h1>
-                <p class="sub" style="width:100%; margin:auto; display:block; padding:0;">
-                    Browse and deploy enterprise-grade store layouts. Designed for performance, accessibility, and high conversion.
-                </p>
-            </div>
-        </section>
-
-
-
-        <div class="container mx-auto px-6 py-12">
-            <div class="flex flex-col md:flex-row gap-4 mb-10 items-center">
-                <div class="relative w-full md:w-1/2">
-                    <input type="text" placeholder="Search templates..."
-                        class="solid-search px-6 py-3 w-full text-white placeholder-gray-500 focus:outline-none transition rounded-none">
-                    <svg class="absolute right-4 top-3.5 h-5 w-5 text-[#888888]" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </div>
-                <div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 hide-scroll">
-                    <button
-                        class="px-5 py-2 min-w-max bg-[#a855f7] text-white border border-[#a855f7] text-sm font-medium hover:bg-[#9333ea] transition rounded-none">All
-                        Templates</button>
-                    <button
-                        class="px-5 py-2 min-w-max bg-[#111111] text-[#888888] border border-[#222222] text-sm font-medium hover:border-[#444444] hover:text-white transition rounded-none">E-Commerce</button>
-                    <button
-                        class="px-5 py-2 min-w-max bg-[#111111] text-[#888888] border border-[#222222] text-sm font-medium hover:border-[#444444] hover:text-white transition rounded-none">Portfolio</button>
-                </div>
-            </div>
-
-            <div id="themes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Theme cards will be injected here dynamically via JS -->
-                <div class="col-span-full flex justify-center py-12 text-gray-500">
-                    Loading templates...
-                </div>
-            </div>
-        </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const container = document.getElementById('themes-container');
-
-                function humanize(str) {
-                    return str.split('.').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                }
-
-                fetch('records.json')
-                    .then(response => {
-                        if (!response.ok) throw new Error('Failed to load templates');
-                        return response.json();
-                    })
-                    .then(data => {
-                        container.innerHTML = ''; // Clear loading text
-
-                        Object.keys(data).forEach((themeKey, index) => {
-                            const theme = data[themeKey];
-                            const title = humanize(themeKey);
-                            const hasPoster = theme.files && theme.files.includes('poster.png');
-                            const posterUrl = hasPoster ? `./${themeKey}/poster.png` : 'https://placehold.co/600x400/1a1a1a/444444?text=No+Preview';
-
-                            // Pick random tags for aesthetics since no metadata exists
-                            const tags = ["E-Commerce", "Portfolio", "Minimal", "Agency", "Dark Mode"];
-                            // just deterministically pick 2 based on string length of key to keep it consistent
-                            const tagIndex1 = themeKey.length % tags.length;
-                            const tagIndex2 = (themeKey.length + 3) % tags.length;
-                            const selectedTags = [...new Set([tags[tagIndex1], tags[tagIndex2]])];
-
-                            const cardHTML = `
-                            <div class="solid-card flex flex-col h-full overflow-hidden group">
-                                <div class="relative overflow-hidden w-full bg-[#1a1a1a]" style="padding-top: 60%;">
-                                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url(${posterUrl}); opacity: 0.8;"></div>
-                                    <div class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-[#111111] to-transparent"></div>
-                                    <div class="absolute top-4 right-4"><span class="text-[10px] font-bold bg-[#222222] text-white px-3 py-1 border border-[#333333]">${theme.hash || 'v1.0'}</span></div>
-                                </div>
-                                <div class="p-6 relative z-10 flex-grow flex flex-col justify-between -mt-4">
-                                    <div>
-                                        <h3 class="font-bold text-2xl text-white mb-2 tracking-tight">${title}</h3>
-                                        <p class="text-sm text-[#888888] mb-6 line-clamp-2 leading-relaxed font-light">Experience unmatched flexibility and stunning aesthetics engineered directly for the modern web layout.</p>
-                                    </div>
-                                    <div class="flex items-center justify-between mt-auto">
-                                        <div class="flex space-x-2">
-                                            ${selectedTags.map(tag => `<span class="text-[11px] font-medium text-[#888888] bg-[#111111] px-3 py-1 rounded-sm border border-[#222222]">${tag}</span>`).join('')}
-                                        </div>
-                                        <a href="javascript:void(0)" onclick="openPreview('./${themeKey}/', '${title}')" class="text-[#a855f7] hover:text-white text-sm font-semibold transition-colors flex items-center gap-1">Open <span>→</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                            container.insertAdjacentHTML('beforeend', cardHTML);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching records:', error);
-                        container.innerHTML = `<div class="col-span-full py-12 text-center text-red-400">Failed to load templates. Please try again later.</div>`;
-                    });
-            });
-        </script>
-
-
-        <!-- Theme Preview Modal -->
-        <style>
-            .theme-preview-modal {
-                position: fixed;
-                inset: 0;
-                z-index: 1000;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
-                display: none;
-                /* hidden by default */
-                flex-direction: column;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-
-            .theme-preview-modal.active {
-                display: flex;
-                opacity: 1;
-                animation: modalFadeIn 0.3s ease forwards;
-            }
-
-            @keyframes modalFadeIn {
-                from {
-                    opacity: 0;
-                    transform: scale(0.98);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-            }
-
-            .tpm-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem 2rem;
-                background: #000;
-                border-bottom: 1px solid #333;
-            }
-
-            .tpm-title {
-                color: white;
-                font-family: 'Outfit', sans-serif;
-                font-weight: 700;
-                font-size: 1.25rem;
-            }
-
-            .tpm-controls {
-                display: flex;
                 gap: 1rem;
-                align-items: center;
+                align-items: flex-start;
             }
-
-            .tpm-device-btn {
-                background: transparent;
-                border: 1px solid #333;
-                color: #888;
-                padding: 0.5rem 1rem;
-                border-radius: 4px;
-                cursor: pointer;
-                font-family: 'Outfit', sans-serif;
-                font-size: 0.875rem;
-                transition: all 0.2s;
-            }
-
-            .tpm-device-btn:hover {
-                border-color: #666;
-                color: white;
-            }
-
-            .tpm-device-btn.active {
-                background: #a855f7;
-                border-color: #a855f7;
-                color: white;
-            }
-
-            .tpm-close {
-                background: #333;
-                border: none;
-                color: white;
-                padding: 0.5rem 1rem;
-                border-radius: 4px;
-                cursor: pointer;
-                font-family: 'Outfit', sans-serif;
-                font-weight: 600;
-                margin-left: 1rem;
-                transition: background 0.2s;
-            }
-
-            .tpm-close:hover {
-                background: #ff4757;
-            }
-
-            .tpm-iframe-container {
-                flex: 1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 2rem;
-                overflow: hidden;
-            }
-
-            .tpm-iframe-wrapper {
-                width: 100%;
-                height: 100%;
-                background: #000;
-                border-radius: 8px;
-                overflow: hidden;
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            }
-
-            .tpm-iframe-wrapper iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-                background: #fff;
-            }
-
-            /* Device Modes */
-            .tpm-mode-desktop {
-                width: 100%;
-                height: 100%;
-            }
-
-            .tpm-mode-tablet {
-                width: 768px;
-                height: 1024px;
-                max-height: 100%;
-            }
-
-            .tpm-mode-mobile {
-                width: 375px;
-                height: 812px;
-                max-height: 100%;
-            }
-
-            @media (max-width: 768px) {
-                .tpm-device-btn {
-                    display: none;
-                }
-            }
-        </style>
-
-        <div id="themePreviewModal" class="theme-preview-modal">
-            <div class="tpm-header">
-                <div class="tpm-title" id="tpmTitle">Theme Preview</div>
-                <div class="tpm-controls">
-                    <button class="tpm-device-btn active" onclick="setDeviceMode('desktop')"
-                        id="btnDesktop">Desktop</button>
-                    <button class="tpm-device-btn" onclick="setDeviceMode('tablet')" id="btnTablet">Tablet</button>
-                    <button class="tpm-device-btn" onclick="setDeviceMode('mobile')" id="btnMobile">Mobile</button>
-                    <button class="tpm-close" onclick="closePreview()">Close</button>
-                </div>
-            </div>
-            <div class="tpm-iframe-container">
-                <div id="tpmIframeWrapper" class="tpm-iframe-wrapper tpm-mode-desktop">
-                    <iframe id="tpmIframe" src=""></iframe>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            function openPreview(url, title) {
-                const modal = document.getElementById('themePreviewModal');
-                const iframe = document.getElementById('tpmIframe');
-                const titleEl = document.getElementById('tpmTitle');
-
-                iframe.src = url;
-                titleEl.textContent = title + ' Preview';
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closePreview() {
-                const modal = document.getElementById('themePreviewModal');
-                const iframe = document.getElementById('tpmIframe');
-
-                modal.classList.remove('active');
-                setTimeout(() => {
-                    iframe.src = '';
-                }, 300);
-                document.body.style.overflow = '';
-            }
-
-            function setDeviceMode(mode) {
-                const wrapper = document.getElementById('tpmIframeWrapper');
-                wrapper.className = 'tpm-iframe-wrapper tpm-mode-' + mode;
-
-                document.getElementById('btnDesktop').classList.remove('active');
-                document.getElementById('btnTablet').classList.remove('active');
-                document.getElementById('btnMobile').classList.remove('active');
-
-                if (mode === 'desktop') document.getElementById('btnDesktop').classList.add('active');
-                if (mode === 'tablet') document.getElementById('btnTablet').classList.add('active');
-                if (mode === 'mobile') document.getElementById('btnMobile').classList.add('active');
-            }
-        </script>
-
-        <div>
-            <!-- FOOTER -->
-            <footer>
-                <div class="footer-brand">
-                    <div class="nav-logo">
-                        <img style="max-width:4rem" src="/assets/favicon.png" alt="VM Embedded">
-                    </div>
-                    <p>Helping your business thrive online with our e-commerce micro-services. Join our community of
-                        entrepreneurs.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="https://varsitymarket.co.za/pages/vm-embedded-sites.html">Embedded Webstore</a>
-                        </li>
-                        <li><a href="https://varsitymarket.co.za/pages/vm-marketplace.html">Marketplace</a></li>
-                        <li><a href="https://varsitymarket.co.za/pages/products.html">Pricing</a></li>
-                        <li><a href="#features">Features</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="https://varsitymarket.co.za/pages/devs-guide">Developer Guide</a></li>
-                        <li><a href="https://varsitymarket.co.za/pages/learn-program">Learn &amp; Train</a></li>
-                        <li><a href="https://varsitymarket.co.za/pages/affiliate-program">Affiliate Program</a></li>
-                        <li><a href="https://varsitymarket.co.za/pages/adventures">Our Adventures</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="https://varsitymarket.co.za/pages/about.html">Our Story</a></li>
-                        <li><a href="https://varsitymarket.co.za/pages/contact-us">Contact</a></li>
-                        <li><a href="https://varsitymarket.co.za/pages/support">Help Center</a></li>
-                        <li><a href="https://varsitymarket.co.za/pages/account.html">Portal</a></li>
-                    </ul>
-                </div>
-            </footer>
-            <div class="footer-bottom">
-                <span>© 2026 Varsity Market Technologies. All rights reserved.</span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile menu overlay -->
-    <style>
-        .menu-overlay {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 100;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.96);
-            overflow-x: hidden;
-            transition: 0.5s;
-            max-width: 100%;
-        }
-
-        .menu-overlay a {
-            padding: 8px;
-            text-decoration: none;
-            font-size: 2vh;
-            color: #cfcfcf;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .overlay-content {
-            position: relative;
-            top: 5%;
-            width: 100%;
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .closebtn {
-            font-size: 3rem !important;
-            display: flex !important;
-            margin: 10px !important;
-            padding: 0;
-            flex-direction: row-reverse !important;
-        }
-
-        .sesedesedwsedwdd {
-            text-align: start;
-            margin: 0.6rem 0 0 3rem;
         }
     </style>
+</head>
+<!-- #/engine/head/encode/:END; -->
+<!-- 
+    #   SCRIPTS_CHECK : pvt.body.php
+-->
 
-    <div id="myNav" class="menu-overlay" style="width: 0%;">
-        <a class="closebtn" onclick="close_menu();">×</a>
-        <div class="overlay-content">
-            <img onclick="window.location.href='/'" src="/assets/favicon.png"
-                style="width:20vh; height:auto; margin:auto;">
-            <a onclick="window.location.href='/'" class="sesedesedwsedwdd">Home Page</a>
-            <a onclick="window.location.href='/create/'" class="sesedesedwsedwdd">Create A Theme</a>
-            <a onclick="window.location.href='/publish/'" class="sesedesedwsedwdd">Publish My Theme</a>
-            <a onclick="window.location.href='/collection/'" class="sesedesedwsedwdd">Theme Library</a>
-            <a onclick="window.location.href='/market/'" class="sesedesedwsedwdd text-purple-400">Marketplace</a>
-            <p style="font-size:9px; padding: 2rem 0px 2rem 0px; margin-top: 4rem;">Powered by VARSITYMARKET <span
-                    style="font-size: 8px; font-weight: 800;">technologies</span></p>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <!-- #/engine/navbar/encode/:BEGIN -->
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="?page=home" class="logo">
+                <img src="https://hastings-ego.github.io/pvt/assets/logo-white.png" style="filter: invert(1); max-width: 4rem; ">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="/?page=about" class="nav-link">About</a></li>
+                <li><a href="/?page=shop" class="nav-link">Shop</a></li>
+                <li><a href="/?page=collection" class="nav-link">Collection</a></li>
+                <li><a href="/?page=contact" class="nav-link">Contact</a></li>
+
+            <div class="nav-actions" style="display: flex; gap: 0.75rem;">
+                <a href="/?page=cart" class="btn btn-outline"><i data-lucide="shopping-bag" size="16"></i> Cart</a>
+                <a href="/?page=signup" class="btn btn-acid">Sign In</a>
+            </div>
+
+
+            </ul>
+
+            <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">
+                <i data-lucide="menu"></i>
+            </button>
         </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/?page=about" class="nav-link">About</a>
+        <a href="/?page=shop" class="nav-link">Shop</a>
+        <a href="/?page=collection" class="nav-link">Collection</a>
+        <a href="/?page=contact" class="nav-link">Contact</a>
+        <hr style="border: none; border-top: 1px solid var(--border-medium);">
+        <a href="/?page=cart" class="btn btn-outline" style="width: 100%;">Cart </a>
+        <a href="/?page=signup" class="btn btn-acid" style="width: 100%;">Sign In</a>
     </div>
 
+<!-- #/engine/navbar/encode/:END; -->
+
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow pt-32">
+        <!-- #/engine/body/encode/:BEGIN -->
+<section id="view-shop" class="view-section active">
+    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
+        <div class="card-machined policy-card" style="padding: 2rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: end;">
+                <div>
+                    <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle);">Catalog</div>
+                    <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin: 0.25rem 0;">Shop All</h1>
+                </div>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <a class="btn btn-outline" href="?page=collection">Collections</a>
+                    <a class="btn btn-acid" href="?page=cart">Open Cart</a>
+                </div>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+            
+            <article class="group bg-[#030303] cursor-pointer hover:bg-[#0A0A0A] transition-colors relative flex flex-col h-full">
+              <div class="absolute top-4 left-4 z-10 font-mono text-[12px] bg-black border border-[#333] px-2 py-1 text-[#666]">
+                6
+              </div>
+              <div class="product-media-shell product-media-shell--portrait">
+                <a href="<!-- #!/engine/node/ page('product') -->/6" class="block w-full h-full">
+                  <img src="https://mercha.co.za/wp-content/uploads/2025/07/Underdog-114-1000x1259.webp" alt="Underdog Hoodie" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                </a>
+              </div>
+              <div class="p-4 border-t border-[#1A1A1A] flex flex-col flex-grow justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-sm tracking-tight leading-snug text-white">Underdog Hoodie</h3>
+                  <p class="font-mono text-[12px] text-[#666] tracking-widest mt-1"></p>
+                </div>
+                <div class="font-mono text-[11px] text-white">
+                  699.99
+                </div>
+              </div>
+            </article>
+            <article class="group bg-[#030303] cursor-pointer hover:bg-[#0A0A0A] transition-colors relative flex flex-col h-full">
+              <div class="absolute top-4 left-4 z-10 font-mono text-[12px] bg-black border border-[#333] px-2 py-1 text-[#666]">
+                5
+              </div>
+              <div class="product-media-shell product-media-shell--portrait">
+                <a href="<!-- #!/engine/node/ page('product') -->/5" class="block w-full h-full">
+                  <img src="https://mercha.co.za/wp-content/uploads/2025/09/Mocks-_B-Tee-Back-1000x1259.png" alt="HEATSKRS OVRSZD TEE" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                </a>
+              </div>
+              <div class="p-4 border-t border-[#1A1A1A] flex flex-col flex-grow justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-sm tracking-tight leading-snug text-white">HEATSKRS OVRSZD TEE</h3>
+                  <p class="font-mono text-[12px] text-[#666] tracking-widest mt-1"></p>
+                </div>
+                <div class="font-mono text-[11px] text-white">
+                  499
+                </div>
+              </div>
+            </article>
+            <article class="group bg-[#030303] cursor-pointer hover:bg-[#0A0A0A] transition-colors relative flex flex-col h-full">
+              <div class="absolute top-4 left-4 z-10 font-mono text-[12px] bg-black border border-[#333] px-2 py-1 text-[#666]">
+                4
+              </div>
+              <div class="product-media-shell product-media-shell--portrait">
+                <a href="<!-- #!/engine/node/ page('product') -->/4" class="block w-full h-full">
+                  <img src="https://mercha.co.za/wp-content/uploads/2025/08/Shine-Black-Hoodie_back_1721644978-1000x1260.webp" alt="SHINE O’ CLOCK Hoodie" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                </a>
+              </div>
+              <div class="p-4 border-t border-[#1A1A1A] flex flex-col flex-grow justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-sm tracking-tight leading-snug text-white">SHINE O’ CLOCK Hoodie</h3>
+                  <p class="font-mono text-[12px] text-[#666] tracking-widest mt-1"></p>
+                </div>
+                <div class="font-mono text-[11px] text-white">
+                  699.99
+                </div>
+              </div>
+            </article>
+            <article class="group bg-[#030303] cursor-pointer hover:bg-[#0A0A0A] transition-colors relative flex flex-col h-full">
+              <div class="absolute top-4 left-4 z-10 font-mono text-[12px] bg-black border border-[#333] px-2 py-1 text-[#666]">
+                3
+              </div>
+              <div class="product-media-shell product-media-shell--portrait">
+                <a href="<!-- #!/engine/node/ page('product') -->/3" class="block w-full h-full">
+                  <img src="https://mercha.co.za/wp-content/uploads/2025/09/Mocks-_Hoodie-Back-1000x1259.png" alt="HEATSKRS HOODIE" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                </a>
+              </div>
+              <div class="p-4 border-t border-[#1A1A1A] flex flex-col flex-grow justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-sm tracking-tight leading-snug text-white">HEATSKRS HOODIE</h3>
+                  <p class="font-mono text-[12px] text-[#666] tracking-widest mt-1"></p>
+                </div>
+                <div class="font-mono text-[11px] text-white">
+                  799
+                </div>
+              </div>
+            </article>
+            <article class="group bg-[#030303] cursor-pointer hover:bg-[#0A0A0A] transition-colors relative flex flex-col h-full">
+              <div class="absolute top-4 left-4 z-10 font-mono text-[12px] bg-black border border-[#333] px-2 py-1 text-[#666]">
+                2
+              </div>
+              <div class="product-media-shell product-media-shell--portrait">
+                <a href="<!-- #!/engine/node/ page('product') -->/2" class="block w-full h-full">
+                  <img src="https://mercha.co.za/wp-content/uploads/2025/07/Mocks-94-1000x1259.webp" alt="Deadlines SLVLSS Tee" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                </a>
+              </div>
+              <div class="p-4 border-t border-[#1A1A1A] flex flex-col flex-grow justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-sm tracking-tight leading-snug text-white">Deadlines SLVLSS Tee</h3>
+                  <p class="font-mono text-[12px] text-[#666] tracking-widest mt-1"></p>
+                </div>
+                <div class="font-mono text-[11px] text-white">
+                  399.99
+                </div>
+              </div>
+            </article>
+            <article class="group bg-[#030303] cursor-pointer hover:bg-[#0A0A0A] transition-colors relative flex flex-col h-full">
+              <div class="absolute top-4 left-4 z-10 font-mono text-[12px] bg-black border border-[#333] px-2 py-1 text-[#666]">
+                1
+              </div>
+              <div class="product-media-shell product-media-shell--portrait">
+                <a href="<!-- #!/engine/node/ page('product') -->/1" class="block w-full h-full">
+                  <img src="https://mercha.co.za/wp-content/uploads/2025/08/Mocks-134-1000x1259.png" alt="TBHBG 220GSM OVRSZD TEE" class="grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                </a>
+              </div>
+              <div class="p-4 border-t border-[#1A1A1A] flex flex-col flex-grow justify-between gap-4">
+                <div>
+                  <h3 class="font-bold text-sm tracking-tight leading-snug text-white">TBHBG 220GSM OVRSZD TEE</h3>
+                  <p class="font-mono text-[12px] text-[#666] tracking-widest mt-1"></p>
+                </div>
+                <div class="font-mono text-[11px] text-white">
+                  499.99
+                </div>
+              </div>
+            </article>        </div>
+    </div>
+</section>
+<!-- #/engine/body/encode/:END; -->
+
+    </main>
+
+
+    <!-- Multi-Column Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="?page=home" class="logo">
+                        <img src="https://hastings-ego.github.io/pvt/assets/logo-white.png" style="filter: invert(1); max-width: 4rem; ">
+                    </a>
+                    <p>Independent streetwear label. Precision apparel engineered for minimal design setups.</p>
+                </div>
+
+                <div>
+                    <h3 class="footer-column-title">Store</h3>
+                    <ul class="footer-links">
+                        <li><a href="?page=shop">Shop</a></li>
+                        <li><a href="?page=about">About</a></li>
+                        <li><a href="?page=collection">Collection</a></li>
+                        <li><a href="?page=sale">Specials</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-column-title">More Pages</h3>
+                    <ul class="footer-links">
+                        <li><a href="?page=blog">Blog</a></li>
+                        <li><a href="?page=contact">Contact</a></li>
+                        <li><a href="?page=search">Quick Search</a></li>
+                        <li><a href="?page=order">Orders</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-column-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="?page=privacy-policy">Privacy Policy</a></li>
+                        <li><a href="?page=terms-of-use">Terms of Service</a></li>
+                        <li><a href="?page=faq">Frequently Asked Questions </a></li>
+                        <li><a href="?page=track-order">Track Order </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 PVTT Inc. All rights reserved.</div>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="#" class="nav-link">Instagram</a>
+                    <a href="#" class="nav-link">Discord</a>
+                    <a href="#" class="nav-link">X / Twitter</a>
+                </div>
+                <br>
+                <div>Powered by Varsitymarket Technologies.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
     <script>
-        function openmenu() { document.getElementById('myNav').style.width = '100%'; }
-        function close_menu() { document.getElementById('myNav').style.width = '0%'; }
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Nav Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
     </script>
 
-    <script>
-        const slides = Array.from(document.querySelectorAll('.slide'));
-        const dots = Array.from(document.querySelectorAll('.slider-dot'));
-        const prevBtn = document.getElementById('prevSlide');
-        const nextBtn = document.getElementById('nextSlide');
-        let currentSlide = 0;
-        let sliderTimer = null;
 
-        function showSlide(index) {
-            currentSlide = (index + slides.length) % slides.length;
-            slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
-        }
-
-        function startAutoPlay() {
-            stopAutoPlay();
-            sliderTimer = window.setInterval(() => showSlide(currentSlide + 1), 6000);
-        }
-
-        function stopAutoPlay() {
-            if (sliderTimer) {
-                window.clearInterval(sliderTimer);
-                sliderTimer = null;
-            }
-        }
-
-        dots.forEach((dot) => {
-            dot.addEventListener('click', () => {
-                showSlide(parseInt(dot.dataset.go, 10));
-                startAutoPlay();
-            });
-        });
-
-        prevBtn.addEventListener('click', () => {
-            showSlide(currentSlide - 1);
-            startAutoPlay();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            showSlide(currentSlide + 1);
-            startAutoPlay();
-        });
-
-        const slider = document.getElementById('details');
-        slider.addEventListener('mouseenter', stopAutoPlay);
-        slider.addEventListener('mouseleave', startAutoPlay);
-        slider.addEventListener('focusin', stopAutoPlay);
-        slider.addEventListener('focusout', startAutoPlay);
-
-        showSlide(0);
-        startAutoPlay();
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module"
-        src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
-        integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ=="
-        data-cf-beacon='{"version":"2024.11.0","token":"32b0fe6229024602a7df3ba9db65f932","r":1}'
-        crossorigin="anonymous"></script>
+<script src="https://beta-embedded.varsitymarket.co.za/track/vm.analytics.js" data-store-id='97' defer=''></script> 
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"32b0fe6229024602a7df3ba9db65f932","r":1}' crossorigin="anonymous"></script>
 </body>
-
 </html>
-
-</head>
